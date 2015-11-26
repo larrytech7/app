@@ -1,0 +1,2 @@
+[10-Nov-2015 23:31:52 UTC] PHP Warning:  require(/home/icetechalpha/public_html/icepay/../bootstrap/autoload.php): failed to open stream: No such file or directory in /home/icetechalpha/public_html/icepay/index.php on line 21
+[10-Nov-2015 23:31:52 UTC] PHP Fatal error:  require(): Failed opening required '/home/icetechalpha/public_html/icepay/../bootstrap/autoload.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/icetechalpha/public_html/icepay/index.php on line 21
