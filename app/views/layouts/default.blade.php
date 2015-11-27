@@ -18,6 +18,7 @@
     <!-- Bootstrap/material Core CSS -->
     <link rel="stylesheet" href="{{URL::to('public/css')}}/bootstrap.min.css" />
     <link type="text/css" href="{{URL::to('public/css')}}/bootstrap-responsive.min.css" rel="stylesheet" />
+
     <link type="text/css" href="{{URL::to('public/css')}}/materialize.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{URL::to('public/css')}}/jquery-ui.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
@@ -69,18 +70,10 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container navbar-inner">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header " >
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @if(Auth::check()==NULL)
+        <div class=" navbar-inner">
+             @if(Auth::check()==NULL)
                 <a class="brand-logo" href="{{URL::route('home')}}">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="100"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="110"/>
                 </a>
                 @endif
                 @if(Auth::check())
@@ -88,8 +81,16 @@
                     <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="100"/>
                 </a>
                 @endif
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <div class="navbar-form navbar-right">
@@ -110,12 +111,11 @@
                         {{Form::token()}}
                     
                 {{Form::close()}}
-                   <!--<small id="error" >Enter Username and Password</small> -->
                    @endif
                    @if(Auth::check())
                    <a href="{{URL::route('dashboard.change-password')}}" class="waves-effect waves-teal btn-flat btn-success"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
                    <a href="{{URL::route('logout')}}" class="waves-effect waves-teal btn-flat btn-danger"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                    Logout </a><!--{{ Auth::user()->username }}-->
+                    Logout </a>
                    @endif
                 </div>
             </div>

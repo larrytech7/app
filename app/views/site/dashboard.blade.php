@@ -79,7 +79,6 @@
                         
                         <!--<a href="{{URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
                         <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-
                             <span class="glyphicon glyphicon-user"></span>
                         </a>
                         <a href="" class="btn btn-primary btn-fab btn-raised ">
@@ -116,18 +115,18 @@
               <h4>Make Payment</h4>
               {{Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form'))}}
                   <div class="row">
-                      <div class="input-field col s3">
+                      <div class="input-field col s4">
                               <i class="material-icons prefix blue-text lighten-4">person</i>
                               <input type="text" id="number" name="number" required />
                                 <label for="number">Receiver(Name/number)</label>
                               <input type = "hidden" name = "testmode" value = "1" />
                       </div>
-                      <div class=" input-field col s3">
+                      <div class=" input-field col s4">
                             <i class="material-icons prefix blue-text lighten-4">attach_money</i>
                             <input type="number" id="amount" name="amount" min="10" required />
                             <label for="number"> Amount to send</label>
                       </div>
-                      <div class="input-field col s3" id="currency">
+                      <div class="input-field col s4" id="currency">
                             <select class="" name="currency">
                                 <option selected="selected" value="USD">USD - US Dollars</option>
                                 <option value="EUR">EUR - Euros</option>
@@ -135,15 +134,29 @@
                             </select>
                             <label>Currency</label>
                       </div>
-                      <div class="input-field col s3">
+                      
+                  </div>
+                  <div class="row">
+                        <div class="input-field col s4">
                             <select class="icons pmode" name="mode" id="mode">
                                 <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
                                 <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
                                 <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
                             </select>
-                            <label>Payment Provider</label>
-                      </div>
-                      
+                            <label>Sender Payment Provider</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <select class="icons target" name="target" id="target">
+                                <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
+                                <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
+                                <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
+                            </select>
+                            <label>Receiver Provider</label>
+                        </div>
+                        <div class="col s4">
+                            <button type="submit" class="btn-flat btn-primary waves-effect waves-white">Continue</button>
+                            <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>&nbsp;&nbsp;
+                        </div>
                   </div>
                   <div class="row">
                     <div class="col s6 black-text">
@@ -152,18 +165,18 @@
                     <div id="stp">
                         <input type="hidden" name="merchantAccount" value="larryakah" />
                         <input type="hidden" name="item_id" value="STP Hybrid Transfer" />
-                        <input type="hidden" name="confirm_url" value="http://devpay.iceteck.com/dashboard/stpconfirm" />
+                        <input type="hidden" name="confirm_url" value="{{URL::route('dashboard')}}/stpconfirm" />
                         <input type="hidden" name="testmode" value="on" />
-                        <input type="hidden" name="notify_url" value="http://devpay.iceteck.com/dashboard/stpnotif" />
-                        <input type="hidden" name="return_url" value="http://devpay.iceteck.com/dashboard" />
-                        <input type="hidden" name="cancel_url" value="http://devpay.iceteck.com/dashboard" />
+                        <input type="hidden" name="notify_url" value="{{URL::route('dashboard')}}/stpnotif" />
+                        <input type="hidden" name="return_url" value="{{URL::route('dashboard')}}" />
+                        <input type="hidden" name="cancel_url" value="{{URL::route('dashboard')}}/cancel" />
                     </div>
+                    
                   </div>
               
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn-flat btn-primary waves-effect waves-white">Continue</button>
-                <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>&nbsp;&nbsp;                
+                   
             </div>
             {{Form::token()}}
             {{Form::close()}}

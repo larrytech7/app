@@ -105,5 +105,13 @@ class StpayController extends BaseController {
             // invalid payment; the payment has been altered
         }   
       }
+      /**
+       * 
+       */
+       public function cancelTransaction(){
+        
+            return Redirect::route('dashboard')
+			             	->with('alertError', 'STP Transaction cancelled by user');
+       } 
 
 }

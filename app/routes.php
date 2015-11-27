@@ -197,5 +197,10 @@ Route::group(array('before' => 'auth'), function(){
 		'as' => 'stpconfirm',
 		'uses' => 'StpayController@confirmPayment'
 	));
+    //cancel url
+    Route::get('dashboard/cancel', array(
+		'as' => 'stpcancel',
+		'uses' => 'StpayController@cancelTransaction'
+	));
 
 });

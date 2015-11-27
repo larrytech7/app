@@ -9,7 +9,7 @@
     <button id="vidpause" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">pause</i></button>
 </div>
 <div class="row center" style="margin-bottom: 28%;">
-    <p class="center-align"><h2 class="white-text"> Easily pay or send money accross the world.</h2></p>
+    <p class="center-align"><h2 class="white-text"> Make payments or send money accross the world.</h2></p>
     <p><h5 class="white-text">You now possess the power to pay freelancers more conviniently than ever before.</h5></p>
     <p></p>
     <br />
