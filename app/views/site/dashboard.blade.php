@@ -148,7 +148,7 @@
                                 <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
                                 <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
                             </select>
-                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is your account that would be debited during the transfer.">info</i>Sender Provider</label>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div>
                         <div class="input-field col s4">
                             <select class="icons target" name="target" id="target">
@@ -158,7 +158,7 @@
                                 <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
                                 <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
                             </select>
-                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive the money.">info</i>Receiver Provider</label>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive the money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
                         </div>
                         <div class="col s4">
                             <button type="submit" class="btn-flat btn-primary waves-effect waves-white"><i class="material-icons right">send</i>Continue</button>

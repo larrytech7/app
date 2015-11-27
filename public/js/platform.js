@@ -1,5 +1,7 @@
 var stp_init_url = 'https://solidtrustpay.com/handle_accver.php';
 var pp_init_url = 'payment';
+var ew_init_url = 'eway';
+var sk_init_url = 'skrill';
 
 $(document).ready(function(){
     $('.pmode').change(function(){
@@ -18,9 +20,14 @@ $(document).ready(function(){
         } */
         if(mode == 'pp')
             $('form.payment').attr('action',pp_init_url)
-        else if(mode == 'stp')
-            $('form.payment').attr('action', stp_init_url)       
- 
+        if(mode == 'stp')
+            $('form.payment').attr('action', stp_init_url)
+        if(mode == 'ew')       
+            $('form.payment').attr('action', ew_init_url)
+        if(mode == 'mm')       
+            $('form.payment').attr('action', 'mobilemoney')
+        if(mode == 'sk')       
+            $('form.payment').attr('action', sk_init_url)
     })
 
 })

@@ -204,3 +204,25 @@ Route::group(array('before' => 'auth'), function(){
 	));
 
 });
+
+Route::group(array('before' => 'auth'), function(){
+	/*
+	| Eway Routes
+	*/
+	Route::any('dashboard/eway', array(
+	    'as' => 'ewaypay',
+	    'uses' => 'EwayController@makePayment',
+	));
+
+	// handles confirm requests fro eway transactions
+	Route::get('dashboard/ewayconfirm', array(
+		'as' => 'ewayconfirm',
+		'uses' => 'EwayController@confirmPayment'
+	));
+    //cancel url
+    Route::get('dashboard/ewaycancel', array(
+		'as' => 'ewaycancel',
+		'uses' => 'EwayController@cancelTransaction'
+	));
+
+});
