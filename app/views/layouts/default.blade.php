@@ -167,6 +167,9 @@
             interval: 8000,
             height : 300
         });
+        $('.tooltiped').tooltip({delay: 50,
+                                position: 'right',
+                                tooltip: 'New tootlip'});
     });
     </script>
      @if(Session::has('alertMessage'))

@@ -23,6 +23,16 @@ class PaymentController extends BaseController {
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
+    private function getReceiverType($v){
+        if($v == 'pp')
+            return 'PayPal';
+        else if($v == 'stp')
+            return 'Solitd Trust Pay';
+        else if($v == 'sk' )
+            return 'Skrill';
+        else if($v == 'mm')
+            return 'Mobile Money';
+    }
 
     public function postPayment() {
 
@@ -33,8 +43,9 @@ class PaymentController extends BaseController {
         $currency   = Input::get('currency');*/
 
         $mmnumber      = Input::get('number');
-        $amounttosend     = Input::get('amount');
+        $amounttosend  = Input::get('amount');
         $currency   = Input::get('currency');
+        $desc       = $this->getReceiverType(Input::get('target'));
 
         $charges = new PlatformCharges($amounttosend, $currency);
 
@@ -43,7 +54,7 @@ class PaymentController extends BaseController {
 
     $item_1 = new Item();
     $item_1->setName('Money Transfer') // item name
-            ->setDescription("Send money to a mobile Money User")
+            ->setDescription("Send money to a $desc User")
 	        ->setCurrency('USD')
 	        ->setQuantity(1)
 	        ->setPrice((int)$charges->getDueAmountForPayPalToMobileMoney()); // unit price
@@ -77,9 +88,13 @@ class PaymentController extends BaseController {
         if (\Config::get('app.debug')) {
             echo "Exception: " . $ex->getMessage() . PHP_EOL;
             $err_data = json_decode($ex->getData(), true);
+            return Redirect::route('dashboard')
+                        ->with('alertError', 'Connection error. $err_data');
             exit;
         } else {
-            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
+            return Redirect::route('dashboard')
+                        ->with('alertError', 'Connection error occured. Please try again later.');
+//            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
         }
     }
 

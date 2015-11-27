@@ -4,22 +4,14 @@
 <!-- Heading Row -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="col-md-6">
-                    <img src="{{URL::to('images')}}/mm.jpg" alt="" class="img-responsive img-rounded">
-                </div>
-                <div class="col-md-6">
-                    <img src="{{URL::to('images')}}/pp.jpg" alt="" class="img-responsive img-rounded">
-                </div> 
-                <!-- <img src="{{URL::to('images')}}/paypal.jpg"> -->
             </div>
-            <!-- /.col-md-12 -->
         </div> <br />
 
         <!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">
                     <div class="media-body">
-                              <h3 class="media-heading">Transaction History</h3>
+                              <h3 class="media-heading"><a href="{{URL::route('dashboard')}}"><i class="material-icons small blue-text">home</i></a>Transaction History</h3>
                                <br />
                               <table class="table table-condensed table-hover" >
                               <tr class="table-bordered">
@@ -64,7 +56,7 @@
             <div class="col-md-4">
                 <div class="flip-card active-card full-card" >
                         <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="{{URL::to('images')}}/user.jpg"/></a>
+                            <a href=""><img class=" img-circle text-center" src="{{URL::to('public/images')}}/user.jpg"/></a>
                         </div>
                         
                         <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">

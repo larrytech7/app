@@ -67,6 +67,9 @@
                     </a>|
                     <a href="#" class="btn waves-effect waves-red btn-flat">
                             <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
+                    </a>|
+                    <a href="#" class="btn waves-effect waves-red btn-flat">
+                            <i class="material-icons left teal-text lighten-1">settings</i>Options
                     </a>
                 </div>
             </div>
@@ -142,19 +145,23 @@
                                 <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
                                 <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
                                 <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
+                                <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
+                                <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
                             </select>
-                            <label>Sender Payment Provider</label>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is your account that would be debited during the transfer.">info</i>Sender Provider</label>
                         </div>
                         <div class="input-field col s4">
                             <select class="icons target" name="target" id="target">
                                 <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
                                 <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
                                 <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
+                                <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
+                                <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
                             </select>
-                            <label>Receiver Provider</label>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive the money.">info</i>Receiver Provider</label>
                         </div>
                         <div class="col s4">
-                            <button type="submit" class="btn-flat btn-primary waves-effect waves-white">Continue</button>
+                            <button type="submit" class="btn-flat btn-primary waves-effect waves-white"><i class="material-icons right">send</i>Continue</button>
                             <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>&nbsp;&nbsp;
                         </div>
                   </div>
@@ -173,13 +180,9 @@
                     </div>
                     
                   </div>
-              
-            </div>
-            <div class="modal-footer">
-                   
-            </div>
-            {{Form::token()}}
+              {{Form::token()}}
             {{Form::close()}}
+            </div>
           </div>
  <!-- end modal -->
         <!-- modal for mobile money to paypal transaction -->
