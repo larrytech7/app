@@ -54,7 +54,7 @@ class EwayController extends BaseController {
                     'Street1' => 'Level 5',
                     'Country' => 'au',
                     'Mobile' => '09 889 6542',
-                    'Email' => 'demo@example.org'
+                    'Email' => 'icep603@gmail.com'
                 ],
                 'Items' => [
                     [
@@ -68,13 +68,14 @@ class EwayController extends BaseController {
                 ],
                 'Options' => [
                     [
-                        'ReceipientAccountType' => $desc,
+                        'ReceipientAccountType' => 'M',//$desc,
                     ]
                 ],
                 'Payment' => [
                     'TotalAmount' => 1000, //$amounttosend,
-                    'CurrencyCode' => 'USD',//$currency
+                    'CurrencyCode' => 'AUD',//$currency
                 ],
+                'Method' => 'ProcessPayment',
                 'RedirectUrl' => URL::route('dashboard').'/ewayconfirm',
                 'CancelUrl' => URL::route('dashboard').'/ewaycancel',
                 'PartnerID' => EwayController::$_EWAY_CUSTOMER_ID,
@@ -85,15 +86,16 @@ class EwayController extends BaseController {
                 'Language' => 'EN',
                 'CustomView' => 'BootstrapCyborg',
                 'VerifyCustomerEmail' => true,
-                'CustomerReadOnly' => true
+                'CustomerReadOnly' => false
             ];
             try{
                 $response = $this->client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
+                var_dump($response);
+//                echo $response->SharedPaymentUrl;
                 //sleep(20);
             }catch(Exception $ex){
                 return Redirect::route('dashboard')
 			             	->with('alertError', 'Debug Error: '.$ex->getMessage());
-                die();
             }
             //manage response
             

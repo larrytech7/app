@@ -1,6 +1,6 @@
 var stp_init_url = 'https://solidtrustpay.com/handle_accver.php';
 var pp_init_url = 'payment';
-var ew_init_url = 'eway';
+var ew_init_url = 'dashboard/eway';
 var sk_init_url = 'skrill';
 
 $(document).ready(function(){
