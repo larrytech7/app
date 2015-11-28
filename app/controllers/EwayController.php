@@ -52,7 +52,7 @@ class EwayController extends BaseController {
                 'Customer' => [
                     'FirstName' => 'John',
                     'Street1' => 'Level 5',
-                    'Country' => 'au',
+                    'Country' => 'cm',
                     'Mobile' => '09 889 6542',
                     'Email' => 'icep603@gmail.com'
                 ],
@@ -79,9 +79,9 @@ class EwayController extends BaseController {
                 'RedirectUrl' => URL::route('dashboard').'/ewayconfirm',
                 'CancelUrl' => URL::route('dashboard').'/ewaycancel',
                 'PartnerID' => EwayController::$_EWAY_CUSTOMER_ID,
-                'TransactionType' => \Eway\Rapid\Enum\TransactionType::PURCHASE,
+                'TransactionType' => \Eway\Rapid\Enum\TransactionType::MOTO,
                 'Capture' => true,
-                'LogoUrl' => URL::to('public/images').'/logo.png',
+                'LogoUrl' => 'http://devpay.iceteck.com/public/images/logo.png',
                 'HeaderText' => 'Izepay Money Transfer',
                 'Language' => 'EN',
                 'CustomView' => 'BootstrapCyborg',
