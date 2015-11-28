@@ -3,7 +3,7 @@
 @section('content')
 <!-- Heading Row -->
 <div class="row">
-    <video autoplay loop poster="{{URL::to('public/images')}}/icepay.JPG" id="bgvid">
+    <video autoplay loop poster="{{URL::to('public/images')}}/logo.png" id="bgvid">
         <source src="{{URL::to('public/video')}}/mouse2.mp4" type="video/mp4">
     </video>
     <button id="vidpause" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">pause</i></button>
