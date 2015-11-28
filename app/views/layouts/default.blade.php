@@ -128,12 +128,13 @@
     <div class="container">
         
         @yield('content')
-        <div class="divider"></div>
+        <div class="divider grey"></div>
         
         <!-- Footer -->
-        <footer>
-        <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
-        <p>&copy; {{ date('Y') }} IceTeck, Inc.</p>
+        <footer class="page-footer grey lighten-3">
+            
+            <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
+            <p>&copy; {{ date('Y') }} IceTeck, Inc.</p>
       </footer>
         
     </div>
