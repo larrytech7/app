@@ -13,6 +13,8 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 
+require_once('PaymentUtil.php');
+
 class PaymentController extends BaseController {
 
     private $_api_context;
@@ -23,99 +25,85 @@ class PaymentController extends BaseController {
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
-    private function getReceiverType($v){
-        if($v == 'pp')
-            return 'PayPal';
-        else if($v == 'stp')
-            return 'Solitd Trust Pay';
-        else if($v == 'sk' )
-            return 'Skrill';
-        else if($v == 'mm')
-            return 'Mobile Money';
-    }
-
+    
     public function postPayment() {
 
         $name = 'Transaction';
-      
-        /*$mmnumber      = Input::get('number');
-        $amounttosend     = Input::get('amount');
-        $currency   = Input::get('currency');*/
 
         $mmnumber      = Input::get('number');
         $amounttosend  = Input::get('amount');
         $currency   = Input::get('currency');
-        $desc       = $this->getReceiverType(Input::get('target'));
+        $type       = Input::get('target'); //destination/receipient's payment Provider.
 
-        $charges = new PlatformCharges($amounttosend, $currency);
+        $charges = new PlatformCharges($amounttosend, $currency, $type);
+        $desc    = $charges->getReceiverType($type);
 
-    $payer = new Payer();
-    $payer->setPaymentMethod('paypal');//paypal
-
-    $item_1 = new Item();
-    $item_1->setName('Money Transfer') // item name
-            ->setDescription("Send money to a $desc User")
-	        ->setCurrency('USD')
-	        ->setQuantity(1)
-	        ->setPrice((int)$charges->getDueAmountForPayPalToMobileMoney()); // unit price
-
-	// add item to list
-    $item_list = new ItemList();
-    $item_list->setItems(array($item_1));
-
-    $amount = new Amount();
-    $amount->setCurrency('USD')
-           ->setTotal((int)$charges->getDueAmountForPayPalToMobileMoney());
-
-    $transaction = new Transaction();
-    $transaction->setAmount($amount)
-		        ->setItemList($item_list)
-		        ->setDescription('Send money To a Mobile Money User');
-
-    $redirect_urls = new RedirectUrls();
-    $redirect_urls->setReturnUrl(URL::route('payment-status'))
-		          ->setCancelUrl(URL::route('payment-status'));
-
-    $payment = new Payment();
-    $payment->setIntent('sale')
-	        ->setPayer($payer)
-	        ->setRedirectUrls($redirect_urls)
-	        ->setTransactions(array($transaction));
-
-	try {
-        $payment->create($this->_api_context);
-    } catch (\PayPal\Exception\PPConnectionException $ex) {
-        if (\Config::get('app.debug')) {
-            echo "Exception: " . $ex->getMessage() . PHP_EOL;
-            $err_data = json_decode($ex->getData(), true);
-            return Redirect::route('dashboard')
-                        ->with('alertError', 'Connection error. $err_data');
-            exit;
-        } else {
-            return Redirect::route('dashboard')
-                        ->with('alertError', 'Connection error occured. Please try again later.');
-//            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');//paypal
+    
+        $item_1 = new Item();
+        $item_1->setName('Money Transfer') // item name
+                ->setDescription("Send money to a $desc User")
+    	        ->setCurrency('USD')
+    	        ->setQuantity(1)
+    	        ->setPrice((int)$charges->getDueAmount('pp', $type)); // unit price)
+    
+    	// add item to list
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+    
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+               ->setTotal((int)$charges->getDueAmount('pp', $type));
+    
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+    		        ->setItemList($item_list)
+    		        ->setDescription('Send money To a Mobile Money User');
+    
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment-status'))
+    		          ->setCancelUrl(URL::route('payment-status'));
+    
+        $payment = new Payment();
+        $payment->setIntent('sale')
+    	        ->setPayer($payer)
+    	        ->setRedirectUrls($redirect_urls)
+    	        ->setTransactions(array($transaction));
+    
+    	try {
+            $payment->create($this->_api_context);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                $err_data = json_decode($ex->getData(), true);
+                return Redirect::route('dashboard')
+                            ->with('alertError', 'Connection error. $err_data');
+                exit;
+            } else {
+                return Redirect::route('dashboard')
+                            ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
+    //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
+            }
         }
-    }
-
-    foreach($payment->getLinks() as $link) {
-        if($link->getRel() == 'approval_url') {
-            $redirect_url = $link->getHref();
-            break;
+    
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
         }
-    }
-
-    // add payment ID to session
-    Session::put('paypal_payment_id', $payment->getId());
-
-    if(isset($redirect_url)) {
-        // redirect to paypal
-        return Redirect::away($redirect_url);
-    }
-
-    return  "Error!!!!";/*Redirect::route('original.route')
-        ->with('error', 'Unknown error occurred'); */
-
+    
+        // add payment ID to session
+        Session::put('paypal_payment_id', $payment->getId());
+    
+        if(isset($redirect_url)) {
+            // redirect to paypal
+            return Redirect::away($redirect_url);
+        }
+    
+        return  "Error!!!!";/*Redirect::route('original.route')
+            ->with('error', 'Unknown error occurred'); */
     }
 
 
@@ -237,70 +225,4 @@ class PaymentController extends BaseController {
 
         return View::make('site.transaction')->with($data)->with('title', 'IcePay - Dashboard - Transactions');
     }
-}
-class PlatformCharges{
-
-    private $currency;
-    private $amount;
-    private $charge;
-
-    //initialize platform charges
-    public function __construct($amount, $currency){
-        $this->currency = $currency;
-        $this->amount = $this->convertCurrency($currency, 'USD', $amount);
-    }
-
-    //TODO:: Tarrifs here need to be revised and match the actual charge tarrifs
-    public function getDueAmountForPayPalToMobileMoney(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-
-    public function getDueAmountForMobileMoneyToPayPal(){
-
-    }
-
-    public function convertCurrency($fromCurrency, $toCurrency, $amount){
-         if($fromCurrency == $toCurrency ){
-                return $amount;
-            }
-
-         if($fromCurrency == 'USD' && $toCurrency == 'EUR'){
-               return $amount * 0.90 ;
-            }else if($fromCurrency == 'EUR' && $toCurrency == 'USD'){
-                return $amount / 0.90 ;
-                
-            }else if($fromCurrency == 'GBP' && $toCurrency == 'USD'){
-                return $amount * 1.51 ;
-            
-            }else if($fromCurrency == 'USD' && $toCurrency == 'GBP'){
-                return $amount / 1.51 ;
-            
-            }else if($fromCurrency == 'XAF' && $toCurrency == 'USD'){
-                return $amount / 588.86 ;
-            
-            }else if($fromCurrency == 'USD' && $toCurrency == 'XAF'){
-                return $amount * 588.86 ;
-            
-            }else if($fromCurrency == 'EUR' && $toCurrency == 'XAF'){
-                return $amount / 655.66 ;
-            }
-            else
-                return $amount;
-    }
-
 }
