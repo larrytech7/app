@@ -11,6 +11,24 @@
                 Sending money to and from Africa has never been easier until Izepay arrived. We built this product so that Africa can trade better and faster with the rest of the world.
                 We have harnessed the latest technologies to develop top level simple products for the good of the African Continent.</p>
         </div>
+        <!-- Team profile -->
+        <div class="row">
+            <div class="col s4">
+                <img class="circle" width="150" height="160" src="{{URL::to('public/images')}}/ceo.jpg"/>
+                <a href="http://google.com/+LarryAkah" target="_blank"><h3 class="teal-text lighten-1">Larry Akah H N</h3></a>
+                <h4>Founder, CEO</h4>
+            </div>
+            <div class="col s4">
+                <img class="circle" width="150" height="160" src="{{URL::to('public/images')}}/cto.JPG"/>
+                <a href="https://plus.google.com/116058943353822698948" target="_blank"><h3 class="teal-text lighten-1">Rocard Fonkeng</h3></a>
+                <h4>CTO</h4>
+            </div>
+            <div class="col s4">
+                <img class="circle" width="150" height="160" src="{{URL::to('public/images')}}/gravatar.jpg"/>
+                <h3 class="teal-text lighten-1">Amandine Nguietchan S</h3>
+                <h4>Accounting and Marketting </h4>
+            </div>
+        </div>
         <div class="row">
                     <div class="col s12 center" id="contact">
                       <i class="large material-icons green-text">perm_phone_msg</i>
