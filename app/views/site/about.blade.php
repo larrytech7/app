@@ -15,18 +15,18 @@
         <div class="row">
             <div class="col s4">
                 <img class="circle" width="150" height="160" src="{{URL::to('public/images')}}/ceo.jpg"/>
-                <a href="http://google.com/+LarryAkah" target="_blank"><h3 class="teal-text lighten-1">Larry Akah H N</h3></a>
-                <h4>Founder, CEO</h4>
+                <a href="http://google.com/+LarryAkah" target="_blank"><h5 class="teal-text lighten-1">Larry Akah H N</h5></a>
+                Founder, CEO
             </div>
             <div class="col s4">
                 <img class="circle" width="150" height="160" src="{{URL::to('public/images')}}/cto.JPG"/>
-                <a href="https://plus.google.com/116058943353822698948" target="_blank"><h3 class="teal-text lighten-1">Rocard Fonkeng</h3></a>
-                <h4>CTO</h4>
+                <a href="https://plus.google.com/116058943353822698948" target="_blank"><h5 class="teal-text lighten-1">Rocard Fonkeng</h5></a>
+                CTO
             </div>
             <div class="col s4">
                 <img class="circle" width="150" height="160" src="{{URL::to('public/images')}}/gravatar.jpg"/>
-                <h3 class="teal-text lighten-1">Amandine Nguietchan S</h3>
-                <h4>Accounting and Marketting </h4>
+                <h5 class="teal-text lighten-1">Amandine Nguietchan S</h5>
+                Accounting and Marketting
             </div>
         </div>
         <div class="row">
