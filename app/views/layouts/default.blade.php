@@ -143,8 +143,6 @@
     <!-- jQuery -->
     <script type="text/javascript" src="{{URL::to('public/js')}}/jquery.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/jquery-ui.js"></script>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <!-- Bootstrap/Materialize Core JavaScript -->
     <script  type="text/javascript" src="{{URL::to('public/js')}}/bootstrap.min.js"></script>
