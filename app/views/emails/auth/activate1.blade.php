@@ -268,7 +268,7 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 																			
 												<h5 class="">Contact Info:</h5>												
 												<p>Phone: <strong>+237 677247206</strong><br/>
-                Email: <strong><a href="emailto:service@iceteck.com">service@iceteck.com</a></strong></p>
+                Email: <strong><a href="mailto:service@iceteck.com">service@iceteck.com</a></strong></p>
                 
 											</td>
 										</tr>

@@ -7,6 +7,7 @@ use PayPal\Api\Details;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
+use PayPal\Api\PayerInfo;
 use PayPal\Api\Payment;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\ExecutePayment;
@@ -40,6 +41,13 @@ class PaymentController extends BaseController {
 
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');//paypal
+        
+        //TODO:: try to deduce the receiver type (email or number) and set the payerinfo data correctly for consistency
+        $payerInfo = new PayerInfo();
+        $payerInfo->setFirstName($mmnumber); //used to represent the receiver name/number/email
+        $payerInfo->setLastName('Paypal to '.$desc); //used to pass the transaction type in the request
+        
+        $payer->setPayerInfo($payerInfo);
     
         $item_1 = new Item();
         $item_1->setName('Money Transfer') // item name
@@ -102,11 +110,10 @@ class PaymentController extends BaseController {
             return Redirect::away($redirect_url);
         }
     
-        return  "Error!!!!";/*Redirect::route('original.route')
-            ->with('error', 'Unknown error occurred'); */
+        return  "Error!!!!";
     }
 
-
+    //results from the request processed by PayPal
     public function getPaymentStatus() {
     // Get the payment ID before session clear
     $payment_id = Session::get('paypal_payment_id');
@@ -145,39 +152,51 @@ class PaymentController extends BaseController {
                         ->with('alertMessage', 'Transaction Successful');
                         */
         $transaction_json  = json_decode($result->getTransactions()[0], TRUE);
+        //get Payer details
         $payer['email'] = $result->getPayer()->getPayerInfo()->getEmail();
         $payer['phone'] = $result->getPayer()->getPayerInfo()->getPhone();
         $payer['name'] = $result->getPayer()->getPayerInfo()->getFirstName().$result->getPayer()->getPayerInfo()->getLastName()
         .$result->getPayer()->getPayerInfo()->getMiddleName();
+        //retrieve transaction destination user NOT our business account, set before transaction request was sent to paypal
+        
 
         $transaction = new IcePayTransaction();
         $transaction->user_id = Auth::user()->id;
-        $transaction->tid = $result->getId();
-        $transaction->sender_email = $payer['email'];
-        $transaction->receiver_email = 'icepay@gmail.com';
+        $transaction->tid = $result->getId(); //transaction id or transaction bordereaux
+        $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
+        $transaction->receiver_email = $result->getPayer()->getPayerInfo()->getFirstName(); //receiver's email or number
         $transaction->type = $transaction_json['related_resources'][0]['sale']['payment_mode'];
         $transaction->status = $transaction_json['related_resources'][0]['sale']['state'];
-        $transaction->amount = $transaction_json['amount']['total'];
+        $transaction->amount = $transaction_json['amount']['total']; //total amount deducted and transferred
         $transaction->save();
-
+        
+        $email = Auth::user()->email;//$payer['email'];
+        $username = Auth::user()->username;
+        
+        //send transaction email to sender confirming transactions in a much professional way.
+        	Mail::send('emails.auth.transactionemail', array('tdate' => date('Y-m-d H:i:s'),
+                                                            'tid' => $result->getId(),
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>$result->getPayer()->getPayerInfo()->getFirstName(),
+                                                               'receiver_number'=>$result->getPayer()->getPayerInfo()->getFirstName(),
+                                                               'status'=>'PENDING',
+                                                               'amount'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
+                                                               'charge'=>'0.0 USD',
+                                                               'total'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
+                                                               'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
+                                                               , function($message) use ($email, $username){
+		      			$message->to($email, $username)->subject('Transaction Receipt');
+			     	});
+        
         return Redirect::route('dashboard')
                         ->with('alertMessage', 'Transaction Successful');
-
-    /*echo 'Payment ID = '.$result->getId().' <br/>';
-    print_r($payer);echo '<br/>';
-    echo '<pre> Amount = '.$transaction_json['amount']['total'].'<br/>Type = '
-        .$transaction_json['related_resources'][0]['sale']['payment_mode']. 
-    '<br/>status = '.$transaction_json['related_resources'][0]['sale']['state'].'</pre>';exit;
-    */
-   // echo '<pre>';var_dump($result->transactions[0]);echo '</pre>';exit; // DEBUG RESULT, remove it later
-
 
     if ($result->getState() == 'approved') { // payment made
         return Redirect::route('original.route')
             ->with('success', 'Payment success');
     }
-    return "Error!!!";/*Redirect::route('original.route')
-        ->with('error', 'Payment failed'); */
+    return "Error!!!";
     }
 
     //function to simulate mobile money
