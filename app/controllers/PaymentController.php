@@ -174,7 +174,7 @@ class PaymentController extends BaseController {
         $username = Auth::user()->username;
         
         //send transaction email to sender confirming transactions in a much professional way.
-        	Mail::send('emails.auth.transactionemail', array('tdate' => date('Y-m-d H:i:s'),
+        	Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date('Y-m-d H:i:s'),
                                                             'tid' => $result->getId(),
                                                                'sender_email'=>Auth::user()->email,
                                                                'sender_number'=>Auth::user()->number,

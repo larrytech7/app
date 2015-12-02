@@ -42,6 +42,7 @@ class PlatformCharges{
      * @return the total amount(floating point value) to be charged the sender by his payment provider
      */ 
     public function getDueAmount($originProvider, $destProvider){
+            return 5.0;
         if($originProvider == 'ew' && $destProvider == 'pp')
             return $this->getDueAmountForEwayToPayPal();
         else if($originProvider == 'ew' && $destProvider == 'stp')
