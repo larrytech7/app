@@ -152,11 +152,7 @@
     <script src="{{URL::to('public/js')}}/materialize.min.js"></script>
     <script src="{{URL::to('public/js')}}/init.js"></script>
     <script src="{{URL::to('public/js')}}/platform.js"></script>
-    <script>
-      $(function() {
-        $( "#accordion" ).accordion();
-      });
-    </script>
+    
     <script>
     $(document).ready(function(){
         $('.modal-trigger').leanModal();

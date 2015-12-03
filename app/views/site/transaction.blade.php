@@ -41,7 +41,7 @@
                                   <td>{{ $transaction->type }}</td>
                                   <td>{{ $transaction->sender_email }}</td>
                                   <td>{{ $transaction->status }}</td>
-                                  <td>{{ $transaction->amount }}</td>
+                                  <td>{{ $transaction->amount .' '.$transaction->currency}}</td>
                                   <td>{{ $transaction->receiver_email }}</td>
                                 </tr>
                                 @endforeach

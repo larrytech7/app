@@ -54,7 +54,7 @@ class PaymentController extends BaseController {
                 ->setDescription("Send money to a $desc User")
     	        ->setCurrency('USD')
     	        ->setQuantity(1)
-    	        ->setPrice((int)$charges->getDueAmount('pp', $type)); // unit price)
+    	        ->setPrice($charges->getDueAmount('pp', $type)); // unit price)
     
     	// add item to list
         $item_list = new ItemList();
@@ -62,7 +62,7 @@ class PaymentController extends BaseController {
     
         $amount = new Amount();
         $amount->setCurrency('USD')
-               ->setTotal((int)$charges->getDueAmount('pp', $type));
+               ->setTotal($charges->getDueAmount('pp', $type));
     
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -166,8 +166,9 @@ class PaymentController extends BaseController {
         $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
         $transaction->receiver_email = $result->getPayer()->getPayerInfo()->getFirstName(); //receiver's email or number
         $transaction->type = $transaction_json['related_resources'][0]['sale']['payment_mode'];
-        $transaction->status = $transaction_json['related_resources'][0]['sale']['state'];
+        $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
         $transaction->amount = $transaction_json['amount']['total']; //total amount deducted and transferred
+        $transaction->currency = $transaction_json['amount']['currency'];
         $transaction->save();
         
         $email = Auth::user()->email;//$payer['email'];
@@ -208,11 +209,12 @@ class PaymentController extends BaseController {
         $transaction = new IcePayTransaction();
         $transaction->user_id = Auth::user()->id;
         $transaction->tid = $transaction_id;
-        $transaction->sender_email = $email;
-        $transaction->receiver_email = 'icepay@gmail.com';
+        $transaction->sender_email = Auth::user()->email;
+        $transaction->receiver_email = $email;
         $transaction->type = 'MM_TRANSFER';
-        $transaction->status = 'completed';
+        $transaction->status = 'pending';
         $transaction->amount = $amounttosend;
+        $transaction->currency = 'XAF';
         $transaction->save();
 
         return Redirect::route('dashboard')
@@ -242,6 +244,6 @@ class PaymentController extends BaseController {
         $data['user'] = User::find(Auth::user()->id);
         $data['transactions'] = IcePayTransaction::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
-        return View::make('site.transaction')->with($data)->with('title', 'IcePay - Dashboard - Transactions');
+        return View::make('site.transaction')->with($data)->with('title', 'IzePay - Transactions');
     }
 }
