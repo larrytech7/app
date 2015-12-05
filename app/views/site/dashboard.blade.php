@@ -1,21 +1,6 @@
 @extends('layouts.default')
 
 @section('content')
-<!-- Heading Row -->
-    <!--
-        <div class="row">
-            <div class="col s12">
-                <div class="col-md-6">
-                    <img src="{{URL::to('public/images')}}/mm.jpg" alt="" class="responsive-img">
-                </div>
-                <div class="col-md-6">
-                    <img src="{{URL::to('public/images')}}/pp.jpg" alt="" class="responsive-img">
-                </div> 
-                
-            </div>
-           
-        </div> <br />
--->
         <!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">
@@ -57,18 +42,20 @@
             </div> <!-- End slider -->
             <div class=" blue lighten-1">
                     <a class="waves-effect waves-teal btn-flat btn modal-trigger" href="#modal1" >
-                            <i class="material-icons left green-text darken-5">payment</i>Make Payment
+                            <i class="material-icons left green-text darken-5">payment</i>New Transaction
                     </a>|
+                    <!--
                     <a href="#" class="waves-effect waves-blue btn-flat btn" data-toggle="modal" data-target="#mm2pp">
                           <i class="material-icons left red-text lighten-1">send</i>Send Money
                     </a>|
+                    -->
                     <a href="{{URL::route('dashboard.transaction')}}" class="waves-effect waves-green btn-flat btn">
                             <i class="material-icons left brown-text lighten-1">assignment</i>History
                     </a>|
                     <a href="#" class="btn waves-effect waves-red btn-flat">
                             <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
                     </a>|
-                    <a href="#" class="btn waves-effect waves-red btn-flat">
+                    <a href="#" class="btn waves-effect waves-red btn-flat dropdown-button" data-activates="optionsmenu">
                             <i class="material-icons left teal-text lighten-1">settings</i>Options
                     </a>
                 </div>
@@ -91,9 +78,6 @@
                             <h3>{{$user->username}}</h3>                            
                         </div>                        
                  </div>
-                 <div class="card-panel grey lighten-4 responsive">
-                    <aside>&QUOT;You spend wisely when you know what you want.&QUOT;</aside>- Larry Akah
-                </div>
             </div>
             <!-- /.col-md-4 -->
         </div>
@@ -107,6 +91,9 @@
                 
             </div>
             <div class="col s4">
+                 <div class="card-panel grey lighten-4 responsive">
+                    <aside>&QUOT;With hybrid transfers, everybody can play the game.&QUOT;</aside>- Larry Akah
+                </div>
                 <div class="card-panel grey lighten-4 responsive">
                               <h5>Adverts</h5>
                 </div>
@@ -121,7 +108,7 @@
                       <div class="input-field col s4">
                               <i class="material-icons prefix blue-text lighten-4">person</i>
                               <input type="text" id="number" name="number" required />
-                                <label for="number">Receiver(Name/number)</label>
+                                <label for="number">Receiver(name,number,email)</label>
                               <input type = "hidden" name = "testmode" value = "1" />
                       </div>
                       <div class=" input-field col s4">
@@ -134,6 +121,11 @@
                                 <option selected="selected" value="USD">USD - US Dollars</option>
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
+                                <option value="XAF"> FCFA - Franc CFA</option>
+                                <option value="ZAR">South African Rand</option>
+                                <option value="AUD">AUD - Australlian </option>
+                                <option value="CAD">CAD - Canadian </option>
+                                <option value="JPY">Japanese Yen</option>
                             </select>
                             <label>Currency</label>
                       </div>
@@ -151,8 +143,9 @@
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div>
                         <div class="input-field col s4">
-                            <select class="icons target" name="target" id="target">
-                                <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
+                            <select class="icons target" name="target" id="target" required="required">
+                                <option value="" disabled selected >Select Receiver Platform</option>
+                                <option value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
                                 <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
                                 <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
                                 <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
@@ -177,6 +170,8 @@
                         <input type="hidden" name="notify_url" value="{{URL::route('dashboard')}}/stpnotif" />
                         <input type="hidden" name="return_url" value="{{URL::route('dashboard')}}" />
                         <input type="hidden" name="cancel_url" value="{{URL::route('dashboard')}}/cancel" />
+                        <input type="hidden" name="user1" value="xx" id="user1" /> <!-- receiver emial, number etc set by js -->
+                        <input type="hidden" name="user2" value="xx" id="user2" /><!-- receiver's payment system-->
                     </div>
                     
                   </div>
@@ -267,6 +262,11 @@
               </div>
               {{Form::token()}}
               {{Form::close()}}
+              <ul id="optionsmenu" class="dropdown-content">
+                  <li><a href="#!">Developers</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#!">Settings</a></li>
+            </ul>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->

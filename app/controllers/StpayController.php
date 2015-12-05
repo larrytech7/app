@@ -61,7 +61,8 @@ class StpayController extends BaseController {
                             'memo'=>Input::get('memo'),
                             'payerAccount'=>Input::get('payerAccount'),
                             'tr_id'=>Input::get('tr_id'), //transaction id, used for tracking transactions
-                            'status'=>Input::get('status'));
+                            'status'=>Input::get('status'),
+                            'paymentReceiver'=>Input::get('user1'));
                             
         print_r($notification);
         //transaction verification and authentication scheme
@@ -79,7 +80,9 @@ class StpayController extends BaseController {
         
      }
      /**
-      * manage confirm requests from STP API server
+      * Manage confirm requests from STP API server
+      * Confirm payment was actually made and effective.
+      * Notify platform admin to proceed with payment to the receiver from the appropriate platform
       */ 
       public function confirmPayment(){
         $payment = array('stp_transact_status'=>Input::get('merchantAccount'),

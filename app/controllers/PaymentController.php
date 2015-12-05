@@ -34,7 +34,12 @@ class PaymentController extends BaseController {
         $mmnumber      = Input::get('number');
         $amounttosend  = Input::get('amount');
         $currency   = Input::get('currency');
-        $type       = Input::get('target'); //destination/receipient's payment Provider.
+        $type       = Input::get('target'); //destination/receipient's payment Provider
+        if($type == 'pp'){
+            return Redirect::route('dashboard')
+                    ->with('alertError', 'You need to select different payment system for sender and receiver');
+           // exit();
+        }
 
         $charges = new PlatformCharges($amounttosend, $currency, $type);
         $desc    = $charges->getReceiverType($type);
@@ -202,7 +207,7 @@ class PaymentController extends BaseController {
 
     //function to simulate mobile money
     public function postTransfer(){
-        $email      = Input::get('email');
+        $email      = Input::get('number');
         $amounttosend     = Input::get('amount');
         $transaction_id       = str_random(10);
 
