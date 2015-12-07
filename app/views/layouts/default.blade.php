@@ -57,6 +57,11 @@
         transition: 1s opacity;
     }
     .stopfade { opacity: .5; }
+   #target > ul {
+    height: 200px;
+    overflow-y: scroll;
+    }
+    .dropdown-content {max-height:200px;}
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

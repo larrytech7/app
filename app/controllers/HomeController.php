@@ -16,7 +16,7 @@ class HomeController extends BaseController {
 		}
 
 		return View::make('site.home')
-				->with('title', 'Izepay - Simple Web and mobile payment platform');
+				->with('title', 'Izepay - Simplifying cross platform money transfer and payments');
 	}
 
 }

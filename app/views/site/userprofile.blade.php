@@ -49,19 +49,48 @@
                     <a class="waves-effect waves-teal btn-flat btn modal-trigger" href="#modal1" >
                             <i class="material-icons left green-text darken-5">payment</i>Make Payment
                     </a>|
-                    <a href="#" class="waves-effect waves-blue btn-flat btn" data-toggle="modal" data-target="#mm2pp">
-                          <i class="material-icons left red-text lighten-1">send</i>Send Money
-                    </a>|
                     <a href="{{URL::route('dashboard.transaction')}}" class="waves-effect waves-green btn-flat btn">
                             <i class="material-icons left brown-text lighten-1">assignment</i>History
                     </a>|
                     <a href="#" class="btn waves-effect waves-red btn-flat">
                             <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
                     </a>|
-                    <a href="#" class="btn waves-effect waves-red btn-flat">
+                    <a href="#" class="btn waves-effect waves-red btn-flat dropdown-button" data-activates="optionsmenu">
                             <i class="material-icons left teal-text lighten-1">settings</i>Options
                     </a>
-                </div>
+            </div>
+                            <p><h2>How it works </h2></p>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="{{URL::to('public/images')}}/one.png" alt="View invoices" class="responsive-img"/>
+                            </h2>
+                            <h5 class="center">Send money/payment</h5>
+                            <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
+                        </div>
+                   </div>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="{{URL::to('public/images')}}/two.png" alt="View invoices" class="responsive-img"/>
+                            </h2>
+                            <h5 class="center">Select Portal</h5>
+                            <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
+                        </div>
+                   </div>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="responsive-img"/>
+                            </h2>
+                            <h5 class="center">Continue transaction</h5>
+                            <p class="light center-align">Once redirected to your payment provider, login and validate the transaction.</p>
+                        </div>
+                   </div>
+               <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.
+               You may also check in the history here to make sure your transaction has been recorded with us.
+               </p>
+               <br />
 
             </div>
             <!-- /.col-md-8 -->
@@ -123,21 +152,22 @@
                   <div class="row">
                         <div class="input-field col s4">
                             <select class="icons pmode" name="mode" id="mode">
-                                <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
-                                <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
-                                <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
-                                <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
+                                <option selected="selected" value="pp" class="left circle">PayPal</option>
+                                <option value="stp" class="left circle">Solid Trust Pay</option>
+                                <option value="sk" class="left circle">Skrill</option>
+                                <option value="mm" class="left circle">Mobile Money</option>
+                                <option value="ew" class="left circle">eWay</option>
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div>
                         <div class="input-field col s4">
-                            <select class="icons target" name="target" id="target">
-                                <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
-                                <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
-                                <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
-                                <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
+                            <select class="icons target" name="target" id="target" required>
+                                <option value="" disabled selected >Select Receiver Platform</option>
+                                <option value="pp" class="left circle">PayPal</option>
+                                <option value="stp" class="left circle">Solid Trust Pay</option>
+                                <option value="sk" class="left circle">Skrill</option>
+                                <option value="mm" class="left circle">Mobile Money</option>
+                                <option value="ew" class="left circle">eWay</option>
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive the money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
                         </div>
@@ -158,11 +188,19 @@
                         <input type="hidden" name="notify_url" value="{{URL::route('dashboard')}}/stpnotif" />
                         <input type="hidden" name="return_url" value="{{URL::route('dashboard')}}" />
                         <input type="hidden" name="cancel_url" value="{{URL::route('dashboard')}}/cancel" />
+                        <input type="hidden" name="user1" value="xx" id="user1" /> <!-- receiver emial, number etc set by js -->
+                        <input type="hidden" name="user2" value="xx" id="user2" /><!-- receiver's payment system-->
+                        
                     </div>
                     
                   </div>
               {{Form::token()}}
             {{Form::close()}}
+            <ul id="optionsmenu" class="dropdown-content">
+                  <li><a href="#!">Developers</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#!">Settings</a></li>
+            </ul>
             </div>
           </div>
  <!-- end modal -->

@@ -8,7 +8,7 @@ $(document).ready(function(){
         mode = $(this).val()
         //input validity
         if($('#number').val().length <= 0)
-            Materialize.toast('Please Enter your receiver\'s username to continue', 5000, 'red-text');
+            Materialize.toast('Please Enter your receiver to continue', 5000, 'red-text');
         if(mode == $('.target').val())
             Materialize.toast('Use a different Payment System. Payment providers need to be different', 5000, 'red-text')
        

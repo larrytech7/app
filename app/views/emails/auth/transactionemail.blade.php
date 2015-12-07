@@ -10,12 +10,12 @@
 		<style type="text/css" rel="stylesheet">
 		body{
   text-align : center;
-  margin:0;
+  margin:5px;
   padding :0;
   font-family: "HelveticaNeueThin";
   color: #fff;
   font-size: 20px;
-  background:#000;
+  background:teal;
   
 }
 
@@ -30,53 +30,74 @@
 	</head>
 	<body>
         <div class="container container-fluid">
+        <p style="text-align: center;">
+            <a href="{{URL::route('home')}}" class="center" target="_blank">
+	           <img class="circle" src="{{URL::to('public/images')}}/logo.png" width="250" height="180"/>
+            </a>
+       </p>
+       <p style="text-align: center;">
+            <h1 style="text-decoration: underline; text-decoration-style: wave; text-justify: auto;">Transaction Receipt</h1>
+       </p>
+       <hr style="text-color: black"/>
+       <p>
+            <span>Transaction date: {{$tdate}}</span>
+            <br />
+            <table>
+                <th>
+                    <td><h3>Participant Info</h3></td>
+                </th>
+                <tr>
+                    <td>Receipient Email</td>
+                    <td>{{$receiver_email}}</td>
+                </tr>
+                <tr>
+                    <td>Receipient Phone </td>
+                    <td> {{$receiver_number}} </td>
+                </tr>
+            </table>
+            <table>
+                <th>
+                    <td><h3>Transaction Info</h3></td>
+                </th>
+                <tr>
+                    <td>Transaction ID</td>
+                    <td>{{$tid}}</td>
+                </tr>
+                <tr>
+                    <td>STATUS </td>
+                    <td style="color: red;"> {{$status}} </td>
+                </tr>
+                <tr>
+                    <td>AMOUNT</td>
+                    <td>{{$amount}}</td>
+                </tr>
+                <tr>
+                    <td>CHARGE </td>
+                    <td>{{$charge}}</td>
+                </tr>
+                <tr>
+                    <td>TOTAL</td>
+                    <td>{{$total}}</td>
+                </tr>
+                <tr>
+                    <td>MODE</td>
+                    <td>{{$mode}}</td>
+                </tr>
+            </table>
+       </p>
+       <hr />
+       <p>When your transaction completes, you wll be notified. Please do well to contact us if your transaction is not confirmed under 24 hours. Our customer service is readily available to assist you</p>
+       <span style="color: blueviolet;">Thanks for using our services. We hope you keep enjoying it while we keep bringing you the best eperience.</span>
+       
             <div class="row">
                 <!-- Main content for the receipt card-->
-                <div class="card-panel teal lighten-2">
-                    <div class="card-title">
-                        <a href="{{URL::route('home')}}" class="center" target="_blank">
-							<img class="circle" src="{{URL::to('public/images')}}/logo.png" width="250" height="180"/>
-                        </a>
-                        <h4 class="center-align">Transaction receipt</h4>
-                    </div>
-                    <div class="divider grey lighten-3"></div>
-                    
-                        <div class="row center">
-                            <div class="col s6">
-                                <p><i class="material-icons black-text">today</i>Transaction Date: {{$tdate}}</p>
-                                Sender <br />
-								<div class="divider"></div>
-                                <p><i class="material-icons black-text ">email</i>Email: {{$sender_email}}</p>
-								<div class="divider"></div>
-                                <p><i class="material-icons black-text ">phone</i>Number: {{$sender_number}}</p>
-                            </div>
-                            <div class="col s6">
-								<p><i class="material-icons black-text">turned_in</i>Transaction ID: {{$tid}} </p>
-                                Receiver<br />
-								<div class="divider"></div>
-                                <p><i class="material-icons black-text ">email</i>Email: {{$receiver_email}}</p>
-                                <div class="divider"></div>
-								<p><i class="material-icons black-text ">phone</i>Number: {{$receiver_number}}</p>
-                            </div>
-                        </div>
-                        <div class="row center ">
-                                <p><i class="material-icons black-text ">trending_up</i> STATUS &nbsp;&nbsp;<span> {{$status}}</span></p>
-                                <p><i class="material-icons black-text ">attach_money</i> AMOUNT &nbsp;&nbsp;<span>{{$amount}}</span></p>
-                                <p><i class="material-icons black-text ">attach_money</i> CHARGE &nbsp;&nbsp;<span>{{$charge}}</span></p>
-                                <p><i class="material-icons black-text ">functions</i> TOTAL &nbsp;&nbsp;<span>{{$total}}</span></p>
-                                <p><i class="material-icons black-text ">merge_type</i>MODE &nbsp;&nbsp;<span>{{$mode}}</span></p>                           
-                        </div>
-                </div>
                 <div class="footer footer-div">
-                    <i class="material-icons">copyright</i> {{date('Y')}} Izepay, Inc <br />
-                    <a href="{{URL::to('terms')}}">Terms</a> |
+                    <span>&COPY;</span> {{date('Y')}} Izepay, Inc <br />
+                    <a href="{{URL::to('terms')}}">Terms &AMP; Conditions</a> |
                     <a href="{{URL::to('privacy')}}">Privacy Policy</a>
                 </div>
             </div>
         </div>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		 <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
    
 	</body>
 </html>

@@ -3,15 +3,6 @@
 @section('content')
 <!-- Heading Row -->
         <div class="row">
-            <div class="col-lg-12">
-                <div class="col-md-6">
-                    <img src="{{URL::to('images')}}/mm.jpg" alt="" class="img-responsive img-rounded">
-                </div>
-                <div class="col-md-6">
-                    <img src="{{URL::to('images')}}/pp.jpg" alt="" class="img-responsive img-rounded">
-                </div> 
-                <!-- <img src="{{URL::to('images')}}/paypal.jpg"> -->
-            </div>
             <!-- /.col-md-12 -->
         </div> <br />
 

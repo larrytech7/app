@@ -71,9 +71,6 @@
                         <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
                             <span class="glyphicon glyphicon-user"></span>
                         </a>
-                        <a href="" class="btn btn-primary btn-fab btn-raised ">
-                            <span class="glyphicon glyphicon-stats"></span>&nbsp; 
-                        </a>
                         <div class="well">
                             <h3>{{$user->username}}</h3>                            
                         </div>                        
@@ -85,8 +82,41 @@
         <!-- options row -->
         <div class="row">
             <div class="col s8">
+                <p><h2>How it works </h2></p>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="{{URL::to('public/images')}}/one.png" alt="View invoices" class="responsive-img"/>
+                            </h2>
+                            <h5 class="center">Send money/payment</h5>
+                            <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
+                        </div>
+                   </div>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="{{URL::to('public/images')}}/two.png" alt="View invoices" class="responsive-img"/>
+                            </h2>
+                            <h5 class="center">Select Portal</h5>
+                            <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
+                        </div>
+                   </div>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="responsive-img"/>
+                            </h2>
+                            <h5 class="center">Continue transaction</h5>
+                            <p class="light center-align">Once redirected to your payment provider, login and validate the transaction.</p>
+                        </div>
+                   </div>
+               <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.
+               You may also check in the history here to make sure your transaction has been recorded with us.
+               </p>
+               <br />
+               
                 <div class="card-panel grey lighten-4 responsive">
-                              <h5>No Promotions Yet.</h5>
+                    <h5>No Promotions Yet.</h5>
                 </div>
                 
             </div>
@@ -133,23 +163,23 @@
                   </div>
                   <div class="row">
                         <div class="input-field col s4">
-                            <select class="icons pmode" name="mode" id="mode">
-                                <option selected="selected" value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
-                                <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
-                                <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
-                                <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
+                            <select class=" pmode" name="mode" id="mode">
+                                <option selected="selected" value="pp" class="left circle">PayPal</option>
+                                <option value="stp" class="left circle">Solid Trust Pay</option>
+                                <option value="sk" class="left circle">Skrill</option>
+                                <option value="mm" class="left circle">Mobile Money</option>
+                                <option value="ew" class="left circle">eWay</option>
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div>
                         <div class="input-field col s4">
-                            <select class="icons target" name="target" id="target" required="required">
+                            <select class="target" name="target" id="target" required="required">
                                 <option value="" disabled selected >Select Receiver Platform</option>
-                                <option value="pp" data-icon="{{URL::to('public/images')}}/ic_pp.jpg" class="left circle">PayPal</option>
-                                <option value="stp" data-icon="{{URL::to('public/images')}}/ic_stp.JPG" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Skrill</option>
-                                <option value="mm" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">Mobile Money</option>
-                                <option value="ew" data-icon="{{URL::to('public/images')}}/ic_sk.jpg" class="left circle">eWay</option>
+                                <option value="pp" class="left circle">PayPal</option>
+                                <option value="stp" class="left circle">Solid Trust Pay</option>
+                                <option value="sk" class="left circle">Skrill</option>
+                                <option value="mm" class="left circle">Mobile Money</option>
+                                <option value="ew" class="left circle">eWay</option>
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive the money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
                         </div>

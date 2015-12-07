@@ -10,6 +10,7 @@
             <!-- <div class="module module-login span4 offset4"> -->
 
                 <h3 id="pad">Modify Password</h3>
+                <img src="{{URL::to('public/images')}}/logo.png" width="250" height="160" alt="Izepay Logo" class="center-align"/>
                     @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade in" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

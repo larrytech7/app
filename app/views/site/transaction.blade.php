@@ -62,9 +62,6 @@
                         <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
                             <span class="glyphicon glyphicon-user"></span>
                         </a>
-                        <a href="" class="btn btn-primary btn-fab btn-raised ">
-                            <span class="glyphicon glyphicon-stats"></span>&nbsp; 
-                        </a>
                         <div class="well">
                             <h3>{{$user->username}}</h3>                            
                         </div>                        

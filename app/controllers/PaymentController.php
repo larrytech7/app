@@ -138,7 +138,7 @@ class PaymentController extends BaseController {
     if (empty($payer_id) || empty($token)) 
     {
         return Redirect::route('dashboard')
-                        ->with('alertError', 'Transaction aborted');
+                        ->with('alertError', 'Paypal Transaction aborted');
     }
 
     $payment = Payment::get($payment_id, $this->_api_context);
