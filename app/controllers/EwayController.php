@@ -62,28 +62,32 @@ class EwayController extends BaseController {
                 'Options' => [
                     [
                         'ReceipientAccountType' => $desc,//$desc,
+                    ],
+                    [
+                        'Receiver'  =>  $receiver
                     ]
                 ],
                 'Payment' => [
-                    'TotalAmount' => $charges->getDueAmount('ew', $destinationProvider), //$amounttosend,
-                    'CurrencyCode' => 'USD',//$currency
+                    'TotalAmount' => $charges->getDueAmount('ew', $destinationProvider) * 100, //$amounttosend,
+                    'CurrencyCode' => $currency
                 ],
                 'Method' => 'ProcessPayment',
                 'RedirectUrl' => URL::route('dashboard').'/ewayconfirm',
                 'CancelUrl' => URL::route('dashboard').'/ewaycancel',
                 'PartnerID' => EwayController::$_EWAY_CUSTOMER_ID,
-                'TransactionType' => \Eway\Rapid\Enum\TransactionType::MOTO, //normally would be PURCHASE
+                'TransactionType' => \Eway\Rapid\Enum\TransactionType::PURCHASE, //normally would be PURCHASE. Modes are MOTO, Recurring
                 'Capture' => true,
-                'LogoUrl' => 'http://devpay.iceteck.com/public/images/logo.png',
+                'LogoUrl' => 'https://izepay.iceteck.com/public/images/logo.png',
                 'HeaderText' => 'Izepay Money Transfer',
                 'Language' => 'EN',
-                'CustomView' => 'BootstrapCyborg',
+                'CustomView' => 'BootstrapCyborg', //Bootstrap, BootstrapAmelia, BootstrapCerulean, BootstrapCosmo, BootstrapCyborg, BootstrapFlatly, BootstrapJournal, BootstrapReadable, BootstrapSimplex, BootstrapSlate, BootstrapSpacelab, BootstrapUnited
                 'VerifyCustomerEmail' => true,
+                'Capture'       => true,
                 'CustomerReadOnly' => false
             ];
             try{
                 $response = $this->client->createTransaction(\Eway\Rapid\Enum\ApiMethod::RESPONSIVE_SHARED, $transaction);
-                var_dump($response);
+                //var_dump($response);
 //                echo $response->SharedPaymentUrl;
                 //sleep(20);
             }catch(Exception $ex){

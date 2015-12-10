@@ -52,7 +52,7 @@
                     <a href="{{URL::route('dashboard.transaction')}}" class="waves-effect waves-green btn-flat btn">
                             <i class="material-icons left brown-text lighten-1">assignment</i>History
                     </a>|
-                    <a href="#" class="btn waves-effect waves-red btn-flat">
+                    <a href="#" class="btn waves-effect waves-red btn-flat" >
                             <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
                     </a>|
                     <a href="#" class="btn waves-effect waves-red btn-flat dropdown-button" data-activates="optionsmenu">
@@ -143,7 +143,7 @@
                       </div>
                       <div class=" input-field col s4">
                             <i class="material-icons prefix blue-text lighten-4">attach_money</i>
-                            <input type="number" id="amount" name="amount" min="10" required />
+                            <input type="number" id="amount" name="amount" min="1" required />
                             <label for="number"> Amount to send</label>
                       </div>
                       <div class="input-field col s4" id="currency">
@@ -293,9 +293,9 @@
               {{Form::token()}}
               {{Form::close()}}
               <ul id="optionsmenu" class="dropdown-content">
-                  <li><a href="#!">Developers</a></li>
+                  <li><a href="#" onclick="javascript:Materialize.toast('Not available. Coming soon', 5000, 'red-text', '')">Developers</a></li>
                   <li class="divider"></li>
-                  <li><a href="#!">Settings</a></li>
+                  <li><a href="#" onclick="javascript:Materialize.toast('Not available. Coming soon', 5000, 'red-text', '')">Settings</a></li>
             </ul>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->

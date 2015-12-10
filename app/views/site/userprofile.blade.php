@@ -136,7 +136,7 @@
                       </div>
                       <div class=" input-field col s4">
                             <i class="material-icons prefix blue-text lighten-4">attach_money</i>
-                            <input type="number" id="amount" name="amount" min="10" required />
+                            <input type="number" id="amount" name="amount" min="1" required />
                             <label for="number"> Amount to send</label>
                       </div>
                       <div class="input-field col s4" id="currency">

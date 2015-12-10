@@ -244,7 +244,11 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 		<td class="container" bgcolor="#FFFFFF">
 
 			<div class="content">
-				<h2 style="color:skyblue" >IzePay</h2><br><br>
+				<p style="text-align: center;">
+                    <a href="{{URL::route('home')}}" class="center" target="_blank">
+        	           <img class="circle" src="{{URL::to('public/images')}}/logo.png" width="250" height="180"/>
+                    </a>
+                </p>
 			<table>
 				<tr>
 					<td>
@@ -255,7 +259,9 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 						<p class="callout">
 							 <a href="{{ $link }}">ACTIVATE HERE! &raquo;</a>
 						</p><!-- /Callout Panel -->					
-												
+						<p>
+                            Please ignore if you didn't signup to use our service. Thanks
+                        </p>				
 						<!-- social & contact -->
 						<table class="social" width="100%">
 							<tr>
@@ -302,8 +308,8 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 				<tr>
 					<td align="center">
 						<p>
-							<a href="http://www.izepay.iceteck.com/terms">Terms</a> |
-							<a href="http://www.izepay.iceteck.com/privacy">Privacy</a>
+							<a href="https://www.izepay.iceteck.com/terms">Terms</a> |
+							<a href="https://www.izepay.iceteck.com/privacy">Privacy</a>
 						</p>
 					</td>
 				</tr>
