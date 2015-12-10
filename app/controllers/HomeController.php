@@ -14,9 +14,13 @@ class HomeController extends BaseController {
 				->with('user', $user)
 				->with('title', 'IzePay - User Dashboard');
 		}
+        $videos = array('m2.mp4','m3.mp4','m4.mp4','m5.mp4','mouse2.mp4');
+        $position = rand(0,4);
+        $video_url = URL::to('public/video').'/'.$videos[$position];
 
 		return View::make('site.home')
-				->with('title', 'Izepay - Simplifying cross platform money transfer and payments');
+				->with('title', 'Izepay - Simplifying cross platform money transfer and payments')
+                ->with('video_url', $video_url);
 	}
 
 }
