@@ -47,7 +47,7 @@ function convert(){
            beforeSend:  function(xhr){
             
            },
-           url      : 'https://izepay.iceteck.com/dashboard/cnv',
+           url      : 'http://localhost/app/dashboard/cnv',
            cache    : false,
            type     : 'GET',    
            data     : {

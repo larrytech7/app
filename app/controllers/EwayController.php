@@ -76,6 +76,9 @@ class EwayController extends BaseController {
                     [
                         'Value'  => $currency, // currency used to make the transfer when sending to the receipient
                     ],
+                    [
+                        'Value'  =>(0.01 * $amounttosend)
+                    ]
                 ],
                 'Payment' => [
                     'TotalAmount' => $charges->getDueAmount('ew', $destinationProvider) * 100, //$amounttosend,
@@ -140,7 +143,7 @@ class EwayController extends BaseController {
                 $transaction->receiver_email = $transactionResponse->Options[1]['Value']; //receiver's email or number
                 $transaction->type = 'EWAY_'.$transactionResponse->Options[0]['Value'];
                 $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
-                $transaction->amount = $transactionResponse->TotalAmount; //total amount deducted and transferred
+                $transaction->amount = $transactionResponse->TotalAmount / 100; //total amount deducted and transferred
                 $transaction->currency = $transactionResponse->Options[2]['Value'];
                 $transaction->save();
                 
@@ -151,13 +154,13 @@ class EwayController extends BaseController {
                                                             'tid' => $transactionResponse->TransactionID,
                                                                'sender_email'=>Auth::user()->email,
                                                                'sender_number'=>Auth::user()->number,
-                                                               'receiver_email'=>$transactionResponse->Options[1]['Value'],
-                                                               'receiver_number'=>$transactionResponse->Options[1]['Value'],
+                                                               'receiver_email'=>$transaction->receiver_email,
+                                                               'receiver_number'=>$transaction->receiver_email,
                                                                'status'=>'PENDING',
-                                                               'amount'=>$transactionResponse->TotalAmount. ' '.$transactionResponse->Options[2]['Value'],
-                                                               'charge'=>'0.00 '.$transactionResponse->Options[2]['Value'],
-                                                               'total'=>$transactionResponse->TotalAmount. ' '.$transactionResponse->Options[2]['Value'],
-                                                               'mode'=>'EWAY_'.$transactionResponse->Options[0]['Value'])
+                                                               'amount'=> ($transaction->amount - $transactionResponse->Options[3]['Value'] ) .' '.$transaction->currency,
+                                                               'charge'=>$transactionResponse->Options[3]['Value'].' '.$transaction->currency,
+                                                               'total'=>$transaction->amount . ' '.$transaction->currency,
+                                                               'mode'=>$transaction->type)
                                                                , function($message) use ($email, $username){
 		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});

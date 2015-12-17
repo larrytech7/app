@@ -13,6 +13,7 @@ class PlatformCharges{
     private $amount;
     private $charge;
     private $destProvider;
+    private $ewamount;
 
     //initialize platform charges
     /**
@@ -23,6 +24,7 @@ class PlatformCharges{
      */ 
     public function __construct($amount, $currency, $destinationProvider){
         $this->currency = $currency;
+        $this->ewamount = $amount;
         $this->amount = $this->convertCurrency($currency, 'USD', $amount);
         $this->destProvider = $destinationProvider;
     }
@@ -49,27 +51,15 @@ class PlatformCharges{
      */ 
     public function getDueAmount($originProvider, $destProvider){
             //return 5.0;
-        if($originProvider == 'ew' && $destProvider == 'pp')
-            return $this->getDueAmountForEwayToPayPal();
-        else if($originProvider == 'ew' && $destProvider == 'stp')
-            return $this->getDueAmountForEwayToStp();
-        else if($originProvider == 'ew' && $destProvider == 'sk' )
-            return $this->getDueAmountForEwayToSkrill();
-        else if($originProvider == 'pp' && $destProvider == 'mm')
-            return $this->getDueAmountForPayPalToMobileMoney();
-        else if($originProvider == 'pp' && $destProvider ==  'ew')
-            return $this->getDueAmountForPayPalToEway();
-        else if($originProvider == 'pp' && $destProvider ==  'sk')
-            return $this->getDueAmountForPayPalToSkrill();
-        else if($originProvider == 'pp' && $destProvider ==  'stp')
-            return $this->getDueAmountForPayPalToStp();
-        else if($originProvider == 'mm' && $destProvider ==  'ew')
-            return $this->getDueAmountForMobileMoneyToEway();
-        else if($originProvider == 'mm' && $destProvider ==  'pp')
-            return $this->getDueAmountForMobileMoneyToPayPal();
-        else if($originProvider == 'mm' && $destProvider ==  'sk')
-            return $this->getDueAmountForMobileMoneyToSkrill();
-        else if($originProvider == 'stp' && $destProvider ==  'ew')
+        if($originProvider == 'ew') //am average charge of 1% has to be applied here
+            return ( $this->ewamount + (0.01 * $this->ewamount) );
+        else if($originProvider == 'pp')
+            return 0;//TODO:
+        else if($originProvider == 'mm')
+            return 0;//TODO:
+        else if($originProvider == 'sk')
+            return 0; //TODO:
+        else if($originProvider == 'stp')
             return 0; //TODO:
         else
             return 0;    
@@ -77,85 +67,6 @@ class PlatformCharges{
     //TODO:: Tarrifs here need to be revised and match the actual charge tarrifs
     //apply paypal to mobile money charges
     private function getDueAmountForPayPalToMobileMoney(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-    
-    //apply eway to STP charges
-    private function getDueAmountForEwayToStp(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-    
-    //apply eway to mobile money charges
-    private function getDueAmountForEwayToMobileMoney(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-    
-    //apply eway to Skrill charges
-    private function getDueAmountForEwayToSkrill(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-    //apply eway to paypal charges
-    private function getDueAmountForEwayToPayPal(){
             
                 if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
                     return $this->amount ;    
@@ -232,21 +143,6 @@ class PlatformCharges{
                 }else{
                     return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
                 }
-    } 
-
-    //apply charges for transfers from mobile money to paypal
-    private function getDueAmountForMobileMoneyToPayPal(){
-        return 0;
-    }
-    
-    //apply charges for transfers from mobile money to paypal
-    private function getDueAmountForMobileMoneyToSkrill(){
-        return 0;
-    }
-    
-    //apply charges for transfers from mobile money to paypal
-    private function getDueAmountForMobileMoneyToEway(){
-        return 0;
     }
 
     public function convertCurrency($fromCurrency, $toCurrency, $amount){
