@@ -87,7 +87,7 @@
        </p>
        <hr />
        <p>When your transaction completes, you wll be notified. Please do well to contact us if your transaction is not confirmed under 24 hours. Our customer service is readily available to assist you</p>
-       <span style="color: blueviolet;">Thanks for using our services. We hope you keep enjoying it while we keep bringing you the best eperience.</span>
+       <span style="color: blueviolet;">Thanks for using our services. We hope you keep enjoying it while we keep bringing you the best experience.</span>
        
             <div class="row">
                 <!-- Main content for the receipt card-->

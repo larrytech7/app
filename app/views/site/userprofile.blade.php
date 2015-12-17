@@ -116,6 +116,47 @@
                             </div>
                         </div>
                     <br />
+                    <div class="card col s12">
+                    
+                    <table class="table table-bordered">
+                        <thead><h4>Transfer Limits</h4></thead>
+                        <th>
+                            <td>FROM</td>
+                            <td>TO</td>
+                            <td>AMOUNT</td>
+                        </th>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Mobile Money</td>
+                            <td>500000 FCFA</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>PayPal</td>
+                            <td>$ 5000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Skrill</td>
+                            <td>$ 5000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Solid Trust Pay</td>
+                            <td>$ 10000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Eway</td>
+                            <td>$ 5000</td>
+                        </tr>
+                    </table>
+                 </div>
                 </div> 
                 
             </div>
@@ -197,9 +238,9 @@
               {{Form::token()}}
             {{Form::close()}}
             <ul id="optionsmenu" class="dropdown-content">
-                  <li><a href="#!">Developers</a></li>
+                  <li><a class="opt"href="#!">Developers</a></li>
                   <li class="divider"></li>
-                  <li><a href="#!">Settings</a></li>
+                  <li><a class="opt"href="#!">Settings</a></li>
             </ul>
             </div>
           </div>

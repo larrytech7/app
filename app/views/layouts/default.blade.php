@@ -59,6 +59,7 @@
     .stopfade { opacity: .5; }
    #target > ul {
     height: 200px;
+    width: 80px;
     overflow-y: scroll;
     }
     .dropdown-content {max-height:200px;}
@@ -100,13 +101,13 @@
 
                 <div class="navbar-form navbar-right">
                     @if(Auth::check()==NULL)
-                        <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login">Login</a>
-                        <a href="#signup" class="waves-effect waves-teal btn-flat blue white-text">Signup</a>
+                        <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
+                        <a href="#signup" class="waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     @endif
                    
                     @if(Auth::check())
-                    <a href="{{URL::route('dashboard.change-password')}}" class="waves-effect waves-teal btn-flat btn-success"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
-                    <a href="{{URL::route('logout')}}" class="waves-effect waves-teal btn-flat btn-danger"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                    <a href="{{URL::route('dashboard.change-password')}}" class="waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{{URL::route('logout')}}" class="waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
                     Logout </a>
                     @endif
                 </div>
@@ -240,6 +241,15 @@
             }
           });
         });
+        
+        function ver_pass(){
+            oripass = $('#password').val();
+            verpass = $('#confirm_password').val();
+            if(oripass == verpass)
+                Materialize.toast('Passwords match', 2000, 'green-text','');
+            else
+                Materialize.toast('Passwords Do not match', 3000, 'red-text', '');
+        }
   </script>
 
 </body>

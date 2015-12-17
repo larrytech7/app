@@ -35,6 +35,7 @@ class PaymentController extends BaseController {
         $amounttosend  = Input::get('amount');
         $currency   = Input::get('currency');
         $type       = Input::get('target'); //destination/receipient's payment Provider
+        Session::set('destProvider', $type);
         if($type == 'pp'){
             return Redirect::route('dashboard')
                     ->with('alertError', 'You need to select different payment system for sender and receiver');
@@ -98,6 +99,9 @@ class PaymentController extends BaseController {
                             ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
     //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
             }
+        }catch(Exception $ex){
+            return Redirect::route('dashboard')
+                            ->with('alertError', 'Error! '.$ex->getMessage());
         }
     
         foreach($payment->getLinks() as $link) {
@@ -162,6 +166,7 @@ class PaymentController extends BaseController {
         $payer['phone'] = $result->getPayer()->getPayerInfo()->getPhone();
         $payer['name'] = $result->getPayer()->getPayerInfo()->getFirstName().$result->getPayer()->getPayerInfo()->getLastName()
         .$result->getPayer()->getPayerInfo()->getMiddleName();
+        
         //retrieve transaction destination user NOT our business account, set before transaction request was sent to paypal
         
 
@@ -170,7 +175,7 @@ class PaymentController extends BaseController {
         $transaction->tid = $result->getId(); //transaction id or transaction bordereaux
         $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
         $transaction->receiver_email = $result->getPayer()->getPayerInfo()->getFirstName(); //receiver's email or number
-        $transaction->type = $transaction_json['related_resources'][0]['sale']['payment_mode'];
+        $transaction->type = 'PAYPAL_TO_'.Session::get('destProvider').'_'.$transaction_json['related_resources'][0]['sale']['payment_mode'];
         $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
         $transaction->amount = $transaction_json['amount']['total']; //total amount deducted and transferred
         $transaction->currency = $transaction_json['amount']['currency'];
@@ -188,7 +193,7 @@ class PaymentController extends BaseController {
                                                                'receiver_number'=>$result->getPayer()->getPayerInfo()->getFirstName(),
                                                                'status'=>'PENDING',
                                                                'amount'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
-                                                               'charge'=>'0.0 USD',
+                                                               'charge'=>'0.0 '.$transaction_json['amount']['currency'],
                                                                'total'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
                                                                'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
                                                                , function($message) use ($email, $username){
@@ -200,7 +205,7 @@ class PaymentController extends BaseController {
 
     if ($result->getState() == 'approved') { // payment made
         return Redirect::route('original.route')
-            ->with('success', 'Payment success');
+            ->with('success', 'Payment successful');
     }
     return "Error!!!";
     }

@@ -2,7 +2,8 @@
 /**
  * @author Larry Akah
  * @date date("Y-m-d")
- * This is the Eway Controller for handling and controlling eway operations
+ * This is the Eway Controller for handling and controlling eway operations.
+ * This controller is used to process credit cards, visa and mastercards
  */  
  require_once(__DIR__.'/../../vendor/eway/eway-rapid-php/include_eway.php');
  use Eway\Rapid\Client;
@@ -14,9 +15,11 @@ class EwayController extends BaseController {
     public static $_EWAY_API_KEY = 'F9802CmaYXtFa1S+wEw/+cOuWQNN+kUDZOdiEp3zFa9PUHyAVl8xTnEygC0iBvNriI4A1F';
     public static $_EWAY_ACCOUNT_PASS = 'Creationfox7!';
     public static $_EWAY_API_URL = 'https://sandbox.myeway.com.au/'; //for sandbox. Make sure to check live settings for live mode
+    public static $_EWAY_API_URL_LIVE = 'https://sandbox.myeway.com.au/';
     public static $_EWAY_USERNAME = 'larryakah@gmail.com.sand';
     public static $_EWAY_CUSTOMER_ID = '91778763';
     public static $_EWAY_ACCESS_CODE_URL = 'https://api.sandbox.ewaypayments.com/AccessCodesShared'; //live: https://api.ewaypayments.com/AccessCodesShared
+    public static $_EWAY_ACCESS_CODE_URL_LIVE = 'https://api.ewaypayments.com/AccessCodesShared';
     private $client;
     
     //constructor
@@ -45,26 +48,29 @@ class EwayController extends BaseController {
                 'Customer' => [
                     'FirstName' => Auth::user()->name,
                     'Street1' => 'Level 5',
-                    'Country' => 'cm',
+                    'Country' => 'US',
                     'Mobile' => Auth::user()->number,
                     'Email' => Auth::user()->email
                 ],
                 'Items' => [
                     [
                         'SKU' => mt_rand(),
-                        'Description' => 'Hybrid Transfer to '.$desc.' Account user',
+                        'Description' => 'Hybrid Transfer to '.$desc.' user',
                         'Quantity' => 1,
                         'UnitCost' => $charges->getDueAmount('ew', $destinationProvider),
-                        'Tax' => 100,
+                        'Tax' => 100, //$1 applied as charge to every transaction irrespective of the amount transfered
                         // Total is calculated automatically
                     ]
                 ],
                 'Options' => [
                     [
-                        'ReceipientAccountType' => $desc,//$desc,
+                        'ReceipientAccountType' => $desc,//Receipient's payement system
                     ],
                     [
-                        'Receiver'  =>  $receiver
+                        'Receiver'  =>  $receiver //receiver's details to which to make the due transfer
+                    ],
+                    [
+                        'currency'  => $currency // currency used to make the transfer when sending to the receipient
                     ]
                 ],
                 'Payment' => [
@@ -111,16 +117,49 @@ class EwayController extends BaseController {
       * manage confirm requests from EWAY API server
       */ 
       public function confirmPayment(){
-        $response = $this->client->queryTransaction('44DD7aVwPYUPemGRf7pcWxyX2FJS-0Wk7xr9iE7Vatk_5vJimEbHveGSqX52B00QsBXqbLh9mGZxMHcjThQ_ITsCZ3JxKOY88WOVsFTLPrGtHRkK0E9ZDVh_Wz326QZlNlwx2');
+        $response = $this->client->queryTransaction(Input::get('AccessCode'));
         $transactionResponse = $response->Transactions[0];
 
         if ($transactionResponse->TransactionStatus) {
-            echo 'Payment successful! ID: '.$transactionResponse->TransactionID;
+            //echo 'Payment successful! ID: '.$transactionResponse->TransactionID;
+            
+                $transaction = new IcePayTransaction();
+                $transaction->user_id = Auth::user()->id;
+                $transaction->tid = $transactionResponse->TransactionID; //transaction id or transaction bordereaux
+                $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
+                $transaction->receiver_email = $transactionResponse->Options[0]->Receiver; //receiver's email or number
+                $transaction->type = 'EWAY_'.$transactionResponse->Options[1]->ReceipientAccountType;
+                $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
+                $transaction->amount = $transactionResponse->TotalAmount; //total amount deducted and transferred
+                $transaction->currency = $transactionResponse->Options[2]->currency;
+                $transaction->save();
+                
+                $email = Auth::user()->email;//$payer['email'];
+                $username = Auth::user()->username;
+            
+            Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date('Y-m-d H:i:s'),
+                                                            'tid' => $transactionResponse->TransactionID,
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>$transactionResponse->Options[0]->Receiver,
+                                                               'receiver_number'=>$transactionResponse->Options[0]->Receiver,
+                                                               'status'=>'PENDING',
+                                                               'amount'=>$transactionResponse->TotalAmount. ' '.$transactionResponse->Options[2]->currency,
+                                                               'charge'=>'0.0 '.$transactionResponse->Options[2]->currency,
+                                                               'total'=>$transactionResponse->TotalAmount. ' '.$transactionResponse->Options[2]->currency,
+                                                               'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
+                                                               , function($message) use ($email, $username){
+		      			$message->to($email, $username)->subject('Transaction Receipt');
+			     	});
+         return Redirect::route('dashboard')
+			             	->with('alertMessage', 'EWAY Transaction Successful');
         } else {
-            $errors = split(', ', $transactionResponse->ResponseMessage);
+            $errors = str_split($transactionResponse->ResponseMessage); //previously splitte the string at the ', ' points
             foreach ($errors as $error) {
-                echo "Payment failed: ".\Eway\Rapid::getMessage($error)."<br>";
+                $errmsg .= "Payment failed: ".\Eway\Rapid::getMessage($error)."<br>";
             }
+             return Redirect::route('dashboard')
+			             	->with('alertError', $errmsg);
         }
       }
       /**

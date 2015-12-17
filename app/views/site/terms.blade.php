@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Heading Row -->
-        <div class="row ">
+        <div class="row " style="margin: 10px; text-align: justify;">
             <h1 class="center-align">Service &QUOT;Terms of Use&QUOT;</h1>
            <p>Last updated: September 14, 2015</p>
 

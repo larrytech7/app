@@ -1,4 +1,5 @@
 <?php
+include_once('PaymentUtil.php');
 
 class DashboardController extends BaseController {
 	
@@ -59,6 +60,16 @@ class DashboardController extends BaseController {
             return View::make('site.terms')
                     ->with('title', 'IzePay - Terms and Conditions');            
         }
+    }
+    
+    public function convert(){
+        $from = Input::get('from');
+        $to = Input::get('to');
+        $amount = (double) Input::get('amount');
+        
+        $converter = new PlatformCharges($amount, $from, $to);
+//        echo round($converter->convertCurrency($from, $to, $amount), 2) .' '.$to ;
+        echo round($converter->convertCurrency($from, $to, $amount), 3) .' '.$to ;
     }
 
 }

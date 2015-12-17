@@ -57,29 +57,8 @@
                             <i class="material-icons left teal-text lighten-1">settings</i>Options
                     </a>
                 </div>
-            </div>
-            <!-- /.col-md-8 -->
-            <div class="col-md-4">
-                <div class="flip-card active-card full-card" >
-                        <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
-                        </div>
-                        
-                        <!--<a href="<?php echo URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
-                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                        <div class="well">
-                            <h3><?php echo $user->username; ?></h3>                            
-                        </div>                        
-                 </div>
-            </div>
-            <!-- /.col-md-4 -->
-        </div>
-        <!-- /.row -->
-        <!-- options row -->
-        <div class="row">
-            <div class="col s8">
+                <!-- How it works -->
+                <div class="">
                 <p><h2>How it works </h2></p>
                    <div class="col s12 m4">
                         <div class="icon-block">
@@ -113,19 +92,112 @@
                </p>
                <br />
                
-                <div class="card-panel grey lighten-4 responsive">
-                    <h5>No Promotions Yet.</h5>
-                </div>
+            </div>
+            </div>
+            <!-- /.col-md-8 -->
+            <div class="col-md-4">
+                <div class="flip-card active-card full-card" >
+                        <div class="pcard label-info">
+                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
+                        </div>
+                        
+                        <!--<a href="<?php echo URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
+                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                        <div class="well">
+                            <h3><?php echo $user->username; ?></h3>
+                            <p class="red-text"><b>NOTE:</b> TO SEND MONEY USING YOUR VISA CARD, MASTERCARD OR ANY OTHER CREDIT CARD, SELECT &QUOT;EWAY&QUOT; AS YOUR PAYMENT PROVIDER. SUCH TRANSACTIONS WILL BE PROCESSED USING &QUOT;AUD&QUOT; AS THE CURRENCY.</p>                            
+                        </div>                        
+                 </div>
+                 <div id="currencyconvert" >
+                    <p class="align-center"><h4>Currency Converter</h4></p>
+                    <div class="input-field col s6">
+                            <select class="" name="from" id="from">
+                                <option selected="selected" value="USD">USD - US Dollars</option>
+                                <option value="EUR">EUR - Euros</option>
+                                <option value="GBP">GBP - Bristish Pounds</option>
+                                <option value="XAF">FCFA - Franc CFA</option>
+                                <option value="ZAR">South African Rand</option>
+                                <option value="AUD">AUD - Australlian </option>
+                                <option value="CAD">CAD - Canadian </option>
+                                <option value="JPY">Japanese Yen</option>
+                            </select>
+                            <label for="from">FROM</label>
+                      </div>
+                      <div class="input-field col s6">
+                            <select class="" name="to" id="to">
+                                <option selected="selected" value="USD">USD - US Dollars</option>
+                                <option value="EUR">EUR - Euros</option>
+                                <option value="GBP">GBP - Bristish Pounds</option>
+                                <option value="XAF">FCFA - Franc CFA</option>
+                                <option value="ZAR">South African Rand</option>
+                                <option value="AUD">AUD - Australlian </option>
+                                <option value="CAD">CAD - Canadian </option>
+                                <option value="JPY">Japanese Yen</option>
+                            </select>
+                            <label for="to">TO</label>
+                      </div>
+                      <span class="result blue-text"></span>
+                      <div class="input-field col s12">
+                        <i class="material-icons prefix blue-text">attach_money</i>
+                        <input type="number" name="amountc" id="amountc" onkeyup="convert()" min="1"/>
+                        <label for="amountc">Amount to Convert</label>
+                      </div>
+                 </div>
+                 <div class="card col s12">
+                    
+                    <table class="table table-bordered">
+                        <thead><h4>Transfer Limits</h4></thead>
+                        <th>
+                            <td>FROM</td>
+                            <td>TO</td>
+                            <td>AMOUNT</td>
+                        </th>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Mobile Money</td>
+                            <td>500000 FCFA</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>PayPal</td>
+                            <td>$ 5000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Skrill</td>
+                            <td>$ 5000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Solid Trust Pay</td>
+                            <td>$ 10000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>*</td>
+                            <td>Eway</td>
+                            <td>$ 5000</td>
+                        </tr>
+                    </table>
+                 </div>
                 
             </div>
-            <div class="col s4">
-                 <div class="card-panel grey lighten-4 responsive">
-                    <aside>&QUOT;With hybrid transfers, everybody can play the game.&QUOT;</aside>- Larry Akah
-                </div>
-                <div class="card-panel grey lighten-4 responsive">
-                              <h5>Adverts</h5>
-                </div>
-            </div>
+            <!-- /.col-md-4 -->
+        </div>
+        <!-- /.row -->
+        <!-- options row -->
+        <div class="row">
+                <ul id="optionsmenu" class="dropdown-content">
+                  <li><a class="opt" href="#!">Developers</a></li>
+                  <li class="divider"></li>
+                  <li><a class="opt" href="#!">Settings</a></li>
+                </ul>
         </div>
  <!-- apyment Modal Structure -->
           <div id="modal1" class="modal bottom-sheet">
@@ -162,7 +234,7 @@
                   </div>
                   <div class="row">
                         <div class="input-field col s4">
-                            <select class=" pmode" name="mode" id="mode">
+                            <select class="pmode" name="mode" id="mode">
                                 <option selected="selected" value="pp" class="left circle">PayPal</option>
                                 <option value="stp" class="left circle">Solid Trust Pay</option>
                                 <option value="sk" class="left circle">Skrill</option>
@@ -199,8 +271,8 @@
                         <input type="hidden" name="notify_url" value="<?php echo URL::route('dashboard'); ?>/stpnotif" />
                         <input type="hidden" name="return_url" value="<?php echo URL::route('dashboard'); ?>" />
                         <input type="hidden" name="cancel_url" value="<?php echo URL::route('dashboard'); ?>/cancel" />
-                        <input type="hidden" name="user1" value="xx" id="user1" /> <!-- receiver emial, number etc set by js -->
-                        <input type="hidden" name="user2" value="xx" id="user2" /><!-- receiver's payment system-->
+                        <input type="hidden" name="user1" value="xx" id="user1" /> <!-- receiver email, number etc set by js -->
+                        <input type="hidden" name="user2" value="xx" id="user2" /><!-- receiver's payment provider -->
                     </div>
                     
                   </div>
@@ -211,101 +283,6 @@
             </div>
           </div>
  <!-- end modal -->
-        <!-- modal for mobile money to paypal transaction -->
-        <div class="modal fade" id="mm2pp">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Mobile Money To Paypal Transfer</h4>
-              </div>
-              <div class="modal-body">
-                <?php echo Form::open(array('url'=>'transfer', 'class'=>'form-horizontal', 'role'=>'form')); ?>
 
-                  <div class="row">
-                      <div class="col-xs-6">
-                          <div class="input-group">
-                              <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                              <input type="email" id="email" name="email" class="form-control" placeholder="recipient paypal email" required>
-                          </div>
-                      </div>
-                      <div class="col-xs-6">
-                          <div class="input-group">
-                              <input type="number" id="amount" name="amount" min="5000" class="form-control" placeholder="Amount " required>
-                              <span class="input-group-addon">FCFA</span>
-                          </div>
-                      </div>
-                      
-                  </div>
-              
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Continue</button>
-              </div>
-              <?php echo Form::token(); ?>
-
-              <?php echo Form::close(); ?>
-
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-        <!-- modal for paypal to mobile money -->
-        <div class="modal fade" id="pp2mm">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Paypal To Mobile Money</h4>
-              </div>
-              <div class="modal-body">
-                <?php echo Form::open(array('url'=>'payment', 'class'=>'form-horizontal', 'role'=>'form')); ?>
-
-                  <div class="row">
-                      <div class="input-field col s6">
-                              <i class="material-icons prefix blue-text lighten-4">phone</i>
-                              <input type="number" id="number" name="number" min="600000000" required>
-                                <label for="number">Receiver Phone number</label>
-                      </div>
-                      <div class=" input-field col s6">
-                            <i class="material-icons prefix blue-text lighten-4">attach_money</i>
-                            <input type="number" id="amount" name="amount" min="10" required />
-                            <label for="number"> Amount to send</label>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="input-field col s6" id="currency">
-                          <!-- <label for="name">Country</label> -->
-                            <select class="" name="currency">
-                                <option selected="selected" value="USD">USD - US Dollars</option>
-                                <option value="EUR">EUR - Euros</option>
-                                <option value="GBP">GBP - Bristish Pounds</option>
-                            </select>
-                            <label>Currency</label>
-                    </div>
-                    <div class="col s6 black-text">
-                        Your account will be debited including the applicable Tax and platform charges as reflected on your paypal.                        
-                    </div>
-                      
-                  </div>
-              
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Continue</button>
-              </div>
-              <?php echo Form::token(); ?>
-
-              <?php echo Form::close(); ?>
-
-              <ul id="optionsmenu" class="dropdown-content">
-                  <li><a href="#" onclick="javascript:Materialize.toast('Not available. Coming soon', 5000, 'red-text', '')">Developers</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#" onclick="javascript:Materialize.toast('Not available. Coming soon', 5000, 'red-text', '')">Settings</a></li>
-            </ul>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

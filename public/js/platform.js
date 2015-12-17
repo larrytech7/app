@@ -16,8 +16,8 @@ $(document).ready(function(){
             $('form.payment').attr('action',pp_init_url)
         if(mode == 'stp'){
             $('form.payment').attr('action', stp_init_url)
-            $('#user2').val($('.target').val())
-            alert($('.target').val())
+          //  $('input#user2').val($('.target').val())
+            //alert($('.target').val())
         }
         if(mode == 'ew')       
             $('form.payment').attr('action', ew_init_url)
@@ -37,4 +37,36 @@ $(document).ready(function(){
             $('#user2').val($(this).val())
         
     })
+    $('a.opt').click(function(event){
+        event.preventDefault();
+        Materialize.toast('Not available. Coming soon', 5000, 'red-text')
+    })
 })
+function convert(){
+        $.ajax({
+           beforeSend:  function(xhr){
+            
+           },
+           url      : 'http://localhost/app/dashboard/cnv',
+           cache    : false,
+           type     : 'GET',    
+           data     : {
+                'from'  : $('#from').val(),
+                'to'    : $('#to').val(),
+                'amount': $('#amountc').val()
+           },
+           success  : function(result, status){
+                if(status){
+                    $('.result').html(result);
+                }else{
+                    Materialize.toast('Error: '+result+' .'+status, 5000, 'red-text', ''); 
+                    console.log(result);                   
+                }
+           },
+           error    : function(status, error){
+                    Materialize.toast('Error: '+error+' .'+status, 5000, 'red-text', '');
+                    console.log(JSON.stringify(error))
+           },
+               
+        });
+    }

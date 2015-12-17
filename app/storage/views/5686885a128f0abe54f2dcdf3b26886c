@@ -24,7 +24,7 @@
                   <div class="icon-block">
                     <h2 class="center green-text"><i class="material-icons large">flash_on</i></h2>
                     <h5 class="center">More opportunity</h5>
-                    <p class="light">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
+                    <p class="light center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
                   </div>
                 </div>
         
@@ -33,7 +33,7 @@
                     <h2 class="center blue-text"><i class="material-icons large">group</i></h2>
                     <h5 class="center">Smart Experience</h5>
         
-                    <p class="light">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
+                    <p class="light center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
                   </div>
                 </div>
         
@@ -42,13 +42,13 @@
                     <h2 class="center red-text lighten-5"><i class="material-icons large">settings</i></h2>
                     <h5 class="center">Developer zone</h5>
         
-                    <p >Extend your e-commerce target market in simple steps by integrating our services.</p>
+                    <p class="center-align">Extend your e-commerce target market in simple steps by integrating our services.</p>
                   </div>
                 </div>
               </div>
                 <div class="row">
                     <div class="col s12 center" id="contact">
-                      <i class="large material-icons green-text">perm_phone_msg</i>
+                      <i class="large material-icons blue-text">perm_phone_msg</i>
                       <h4>Contact Us</h4>
                       <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b>Inc.</span> @ &nbsp;ActivSpaces</p>
                       <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix blue-text lighten-5">phone</i>
-                        <input id="number" name="number" type="number" min="700000000"class="validate" required/>
+                        <input id="number" name="number" type="number" min="600000000"class="validate" required/>
                         <label for="number">Phone number</label>
                          <span class="badge alert-danger"><?php echo $errors->first('number'); ?></span>
                     </div>
@@ -88,15 +88,15 @@
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix blue-text lighten-4">lock</i>
-                        <input id="confirm_password" name="confirm_password" type="password" class="validate" required/>
+                        <input id="confirm_password" name="confirm_password" type="password" class="validate" onchange="ver_pass()" required/>
                         <label for="confirm_password">Confirm Password</label>
                          <span class="badge alert-danger"><?php echo $errors->first('confirm_password'); ?></span>
                     </div>
                 
                 <div class="input-field col s12">
-                    <i class="material-icons prefix blue-text lighten-4">place</i>
-                            <select name="country" required>
-                                <option value="" disabled selected>Select Country</option>
+                    <i class="material-icons prefix blue-text lighten-4" style="margin-right: 15px;">place</i>
+                            <select name="country" id="country" required>
+                                <option value="" disabled selected> Country</option>
                                 <option value="Cameroon" >Cameroon</option>
                                 <option value="Nigeria" >Nigeria</option>
                                 <option value="Chad" >Chad</option>
@@ -114,27 +114,28 @@
                                 <option value="China" >China</option>
                                 <option value="Canada" >Canada</option>
                                 <option value="Switzerland" >Switzerland</option>
-                                <option value="UAE" >UAE</option>
+                                <option value="United Arab Emirates" >UAE</option>
                                 <option value="South Korea" >South Korea</option>
                             </select>
+                            <label for="country">Select your country</label>
                             <span class="badge alert-danger"><?php echo $errors->first('country'); ?></span>
-                            
+                </div>
+                    
+                    <div class="input-field col s12">
                             <input type="checkbox" id="nletter" name="newsletter"/>
                             <label for="nletter" class="text-primary">Receive offers and newsletters</label>
                             
                             <input type="checkbox" id="terms" name="terms"/>
                             <label for="terms" class="text-primary">Agree to terms and Conditions</label><br />
                             <span class="badge alert-danger"><?php echo $errors->first('terms'); ?></span>
-                </div>
-                    
-                    <div class="input-field col s12">
-                      
                     </div>
-                    <p class="center-align">
-                            <button class="waves-effect waves-light btn-flat btn-primary" type="submit" name="action">Create My Account
+                    <div class="input-field col s12">
+                        <p class="center-align">
+                            <button class="waves-effect waves-light btn-flat blue" type="submit" name="action">Create My Account
                                 <i class="material-icons right">send</i>
                             </button>
                         </p>
+                    </div>
                     <?php echo Form::token(); ?>
 
                     

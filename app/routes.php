@@ -56,6 +56,11 @@ Route::group(array('before' => 'auth'), function(){
 	'uses' => 'DashboardController@viewUserProfile'
 
 	));
+    //currency conversion
+    Route::get('dashboard/cnv', array(
+	'as' => 'cnv',
+	'uses' => 'DashboardController@convert'
+	));
 
 	/*
 	| CSRF protection group

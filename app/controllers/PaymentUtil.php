@@ -15,6 +15,12 @@ class PlatformCharges{
     private $destProvider;
 
     //initialize platform charges
+    /**
+     * Initialise class
+     * @param $amount: The amount to calculate charges upon
+     * @param $currency: The sender's currency
+     * @param $destinationProvider: The receiver's intended currency
+     */ 
     public function __construct($amount, $currency, $destinationProvider){
         $this->currency = $currency;
         $this->amount = $this->convertCurrency($currency, 'USD', $amount);
@@ -242,8 +248,6 @@ class PlatformCharges{
     private function getDueAmountForMobileMoneyToEway(){
         return 0;
     }
-    
-
 
     public function convertCurrency($fromCurrency, $toCurrency, $amount){
          if($fromCurrency == $toCurrency ){
@@ -251,24 +255,124 @@ class PlatformCharges{
             }
 
          if($fromCurrency == 'USD' && $toCurrency == 'EUR'){
-               return $amount * 0.90 ;
+               return $amount / 0.90 ;
             }else if($fromCurrency == 'EUR' && $toCurrency == 'USD'){
-                return $amount / 0.90 ;
+                return $amount * 0.90 ;
                 
+            }else if($fromCurrency == 'EUR' && $toCurrency == 'XAF'){
+                return $amount * 655.00 ;
+            }else if($fromCurrency == 'EUR' && $toCurrency == 'ZAR'){
+                return $amount * 655.00 ;
+            }else if($fromCurrency == 'EUR' && $toCurrency == 'AUD'){
+                return $amount * 655.00 ;
+            }else if($fromCurrency == 'EUR' && $toCurrency == 'JPY'){
+                return $amount / 655.00 ;
+            }else if($fromCurrency == 'EUR' && $toCurrency == 'CAD'){
+                return $amount * 655.00 ;
+            }else if($fromCurrency == 'EUR' && $toCurrency == 'GBP'){
+                return $amount * 655.00 ;
             }else if($fromCurrency == 'GBP' && $toCurrency == 'USD'){
+                return $amount * 1.51 ;
+            
+            }else if($fromCurrency == 'GBP' && $toCurrency == 'XAF'){
+                return $amount * 810 ;
+            
+            }else if($fromCurrency == 'GBP' && $toCurrency == 'EUR'){
+                return $amount * 1.51 ;
+            
+            }else if($fromCurrency == 'GBP' && $toCurrency == 'JPY'){
+                return $amount * 1.51 ;
+            
+            }else if($fromCurrency == 'GBP' && $toCurrency == 'AUD'){
+                return $amount * 1.51 ;
+            
+            }else if($fromCurrency == 'GBP' && $toCurrency == 'ZAR'){
+                return $amount * 1.51 ;
+            
+            }else if($fromCurrency == 'GBP' && $toCurrency == 'CAD'){
                 return $amount * 1.51 ;
             
             }else if($fromCurrency == 'USD' && $toCurrency == 'GBP'){
                 return $amount / 1.51 ;
             
-            }else if($fromCurrency == 'XAF' && $toCurrency == 'USD'){
-                return $amount / 588.86 ;
+            }else if($fromCurrency == 'USD' && $toCurrency == 'JPY'){
+                return $amount / 1.51 ;
+            
+            }else if($fromCurrency == 'USD' && $toCurrency == 'AUD'){
+                return $amount / 1.51 ;
+            
+            }else if($fromCurrency == 'USD' && $toCurrency == 'CAD'){
+                return $amount / 1.51 ;
+            
+            }else if($fromCurrency == 'USD' && $toCurrency == 'ZAR'){
+                return $amount / 1.51 ;
             
             }else if($fromCurrency == 'USD' && $toCurrency == 'XAF'){
-                return $amount * 588.86 ;
+                return $amount * 580.00 ;
             
-            }else if($fromCurrency == 'EUR' && $toCurrency == 'XAF'){
-                return $amount / 655.66 ;
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'GBP'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'EUR'){
+                return $amount / 810.00 ;
+            
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'CAD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'AUD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'JPY'){
+                return $amount / 655.00 ;
+            
+            }else if($fromCurrency == 'XAF' && $toCurrency == 'ZAR'){
+                return $amount / 890.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'ZAR' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'GBP'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'EUR'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'USD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'CAD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'AUD'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'ZAR'){
+                return $amount / 580.00 ;
+            
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'JPY'){
+                return $amount / 580.00 ;
+            
             }
             else
                 return $amount;

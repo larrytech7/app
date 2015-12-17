@@ -2,7 +2,7 @@
 /**
  * @author Larry Akah
  * @date date("Y-m-d")
- * This is the Solid Trust Pay Controller for handling and controlling MM operations
+ * This is the MOBILE MONEY Controller for handling and controlling MM operations
  */  
 class MobilemoneyController extends BaseController {
     

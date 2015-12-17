@@ -62,9 +62,10 @@ class StpayController extends BaseController {
                             'payerAccount'=>Input::get('payerAccount'),
                             'tr_id'=>Input::get('tr_id'), //transaction id, used for tracking transactions
                             'status'=>Input::get('status'),
-                            'paymentReceiver'=>Input::get('user1'));
+                            'paymentReceiver'=>Input::get('user1'),
+                            'paymentProvider'=>Input::get('user2'));
                             
-        print_r($notification);
+        //print_r($notification);
         //transaction verification and authentication scheme
         $secondary_password = 'Creationfox7!';
         $secondary_password = md5($secondary_password.'s+E_a*');  //encryption for db
@@ -73,9 +74,28 @@ class StpayController extends BaseController {
 
         if ($hash_received == $_POST['hash']) {
         // valid payment
+                
+             Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date("Y-m-d H:i:s"),
+                                                            'tid' => $notification['tr_id'],
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>$notification['paymentReceiver'],
+                                                               'receiver_number'=>$notification['paymentReceiver'],
+                                                               'status'=>'PENDING',
+                                                               'amount'=>$notification['amount'],
+                                                               'charge'=>'0.0 USD',
+                                                               'total'=>$notification['amount'].' ',
+                                                               'mode'=>'STP to '.$notification['paymentProvider'])
+                                                               , function($message) use ($email, $username){
+		      			$message->to($email, $username)->subject('Transaction Receipt');
+			     	});
+         return Redirect::route('dashboard')
+        	               ->with('alertMessage', 'STP Notification. Transaction successful');
         }
         else {
             // invalid payment; the payment has been altered
+            return Redirect::route('dashboard')
+           	                ->with('alertError', 'Notification. Invalid Payment. The payment may have been altered. Please try again');
         }    
         
      }
@@ -92,7 +112,9 @@ class StpayController extends BaseController {
                             'item_id'=>Input::get('item_id'),
                             'email'=>Input::get('email'),
                             'memo'=>Input::get('memo'),
-                            'tr_id'=>Input::get('tr_id'));
+                            'tr_id'=>Input::get('tr_id'),
+                            'receiver'=>Input::get('user1'),
+                            'provider'=>Input::get('user2'));
                             
         print_r($payment);
          //transaction verification and authentication scheme
@@ -103,16 +125,45 @@ class StpayController extends BaseController {
 
         if ($hash_received == $_POST['hash']) {
         // valid payment
+        
+                $transaction = new IcePayTransaction();
+                $transaction->user_id = Auth::user()->id;
+                $transaction->tid = $payment['tr_id']; //transaction id or transaction bordereaux
+                $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
+                $transaction->receiver_email = $payment['receiver']; //receiver's email or number
+                $transaction->type = 'STP to '.$payment['provider'];
+                $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
+                $transaction->amount = $payment['amount']; //total amount deducted and transferred
+                $transaction->currency = '';
+                $transaction->save();
+            Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => $payment['date'],
+                                                            'tid' => $payment['tr_id'],
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>'TEST',
+                                                               'receiver_number'=>$payment['receiver'],
+                                                               'status'=>'PENDING',
+                                                               'amount'=>$payment['amount'],
+                                                               'charge'=>'0.0 USD',
+                                                               'total'=>$payment['amount'].' ',
+                                                               'mode'=>'STP to '.$payment['provider'])
+                                                               , function($message) use ($email, $username){
+		      			$message->to($email, $username)->subject('Transaction Receipt');
+			     	});
+         return Redirect::route('dashboard')
+        	               ->with('alertMessage', 'STP Transaction successful');
         }
         else {
             // invalid payment; the payment has been altered
+            return Redirect::route('dashboard')
+           	                ->with('alertError', 'Invalid Payment. The payment may have been altered. Please try again');
         }   
       }
       /**
-       * 
+       * Called when user cancels the transcaction from the STP transactions page.
        */
        public function cancelTransaction(){
-        
+       
             return Redirect::route('dashboard')
 			             	->with('alertError', 'STP Transaction cancelled by user');
        } 
