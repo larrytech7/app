@@ -67,11 +67,11 @@ class EwayController extends BaseController {
                         'ReceipientAccountType' => $desc,//Receipient's payement system
                     ],
                     [
-                        'Receiver'  =>  $receiver //receiver's details to which to make the due transfer
+                        'Receiver'  =>  $receiver, //receiver's details to which to make the due transfer
                     ],
                     [
-                        'currency'  => $currency // currency used to make the transfer when sending to the receipient
-                    ]
+                        'currency'  => $currency, // currency used to make the transfer when sending to the receipient
+                    ],
                 ],
                 'Payment' => [
                     'TotalAmount' => $charges->getDueAmount('ew', $destinationProvider) * 100, //$amounttosend,
