@@ -122,7 +122,9 @@ class EwayController extends BaseController {
 
         if ($transactionResponse->TransactionStatus) {
             //echo 'Payment successful! ID: '.$transactionResponse->TransactionID;
-            
+            var_dump($transactionResponse->Options
+            );
+            /*
                 $transaction = new IcePayTransaction();
                 $transaction->user_id = Auth::user()->id;
                 $transaction->tid = $transactionResponse->TransactionID; //transaction id or transaction bordereaux
@@ -153,6 +155,7 @@ class EwayController extends BaseController {
 			     	});
          return Redirect::route('dashboard')
 			             	->with('alertMessage', 'EWAY Transaction Successful');
+                            */
         } else {
             $errors = str_split($transactionResponse->ResponseMessage); //previously splitte the string at the ', ' points
             foreach ($errors as $error) {
