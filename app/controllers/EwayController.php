@@ -21,13 +21,14 @@ class EwayController extends BaseController {
     public static $_EWAY_ACCESS_CODE_URL = 'https://api.sandbox.ewaypayments.com/AccessCodesShared'; //live: https://api.ewaypayments.com/AccessCodesShared
     public static $_EWAY_ACCESS_CODE_URL_LIVE = 'https://api.ewaypayments.com/AccessCodesShared';
     private $client;
+    private $tparams;
     
     //constructor
     public function __construct(){
 
         $apiEndpoint = Client::MODE_SANDBOX; // Use \Eway\Rapid\Client::MODE_PRODUCTION when you go live
         $this->client = \Eway\Rapid::createClient(EwayController::$_EWAY_API_KEY, EwayController::$_EWAY_API_PASSWORD, $apiEndpoint);
-        $this->client = array('ReceipientAccountType'=>'',
+        $this->tparams = array('ReceipientAccountType'=>'',
                                 'Receiver'=>'',
                                 'currency'=>'');
     }
@@ -47,9 +48,9 @@ class EwayController extends BaseController {
         $desc       = $charges->getReceiverType($destinationProvider);
         $user = User::find(Auth::user()->id);
         //set transaction mode parameters
-        $this->client['ReceipientAccountType'] = $desc;
-        $this->client['Receiver'] = $receiver;
-        $this->client['currency'] = $currency;
+        $this->tparams['ReceipientAccountType'] = $desc;
+        $this->tparams['Receiver'] = $receiver;
+        $this->tparams['currency'] = $currency;
         
         $transaction = [
                 'Customer' => [
@@ -71,13 +72,13 @@ class EwayController extends BaseController {
                 ],
                 'Options' => [
                     [
-                        'ReceipientAccountType' => $desc,//Receipient's payement system
+                        'Value' => 'Option1'//$desc,//Receipient's payement system
                     ],
                     [
-                        'Receiver'  =>  $receiver, //receiver's details to which to make the due transfer
+                        'Value'  =>  'Option2'//$receiver, //receiver's details to which to make the due transfer
                     ],
                     [
-                        'currency'  => $currency, // currency used to make the transfer when sending to the receipient
+                        'Value'  => 'Option3'//$currency, // currency used to make the transfer when sending to the receipient
                     ],
                 ],
                 'Payment' => [
@@ -129,7 +130,7 @@ class EwayController extends BaseController {
 
         if ($transactionResponse->TransactionStatus) {
             //echo 'Payment successful! ID: '.$transactionResponse->TransactionID;
-            var_dump($this->client
+            var_dump($transactionResponse->Options
             );
             /*
                 $transaction = new IcePayTransaction();
