@@ -197,7 +197,7 @@ class PaymentController extends BaseController {
                                                                'total'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
                                                                'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
                                                                , function($message) use ($email, $username){
-		      			$message->to($email, $username)->subject('Transaction Receipt');
+		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});
         
         return Redirect::route('dashboard')

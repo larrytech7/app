@@ -121,9 +121,7 @@
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF">FCFA - Franc CFA</option>
                                 <option value="ZAR">South African Rand</option>
-                                <option value="AUD">AUD - Australlian </option>
-                                <option value="CAD">CAD - Canadian </option>
-                                <option value="JPY">Japanese Yen</option>
+                                <option value="AUD">AUD - Australlian </option> <!-- CAD  and JPY conversions coming soon! -->
                             </select>
                             <label for="from">FROM</label>
                       </div>
