@@ -27,6 +27,9 @@ class EwayController extends BaseController {
 
         $apiEndpoint = Client::MODE_SANDBOX; // Use \Eway\Rapid\Client::MODE_PRODUCTION when you go live
         $this->client = \Eway\Rapid::createClient(EwayController::$_EWAY_API_KEY, EwayController::$_EWAY_API_PASSWORD, $apiEndpoint);
+        $this->client = array('ReceipientAccountType'=>'',
+                                'Receiver'=>'',
+                                'currency'=>'');
     }
     
 	/**
@@ -43,6 +46,10 @@ class EwayController extends BaseController {
         $charges    = new PlatformCharges($amounttosend, $currency, $destinationProvider);
         $desc       = $charges->getReceiverType($destinationProvider);
         $user = User::find(Auth::user()->id);
+        //set transaction mode parameters
+        $this->client['ReceipientAccountType'] = $desc;
+        $this->client['Receiver'] = $receiver;
+        $this->client['currency'] = $currency;
         
         $transaction = [
                 'Customer' => [
@@ -86,7 +93,7 @@ class EwayController extends BaseController {
                 'LogoUrl' => 'https://izepay.iceteck.com/public/images/logo.png',
                 'HeaderText' => 'Izepay Money Transfer',
                 'Language' => 'EN',
-                'CustomView' => 'BootstrapCyborg', //Bootstrap, BootstrapAmelia, BootstrapCerulean, BootstrapCosmo, BootstrapCyborg, BootstrapFlatly, BootstrapJournal, BootstrapReadable, BootstrapSimplex, BootstrapSlate, BootstrapSpacelab, BootstrapUnited
+                'CustomView' => 'BootstrapCerulean', //Bootstrap, BootstrapAmelia, BootstrapCerulean, BootstrapCosmo, BootstrapCyborg, BootstrapFlatly, BootstrapJournal, BootstrapReadable, BootstrapSimplex, BootstrapSlate, BootstrapSpacelab, BootstrapUnited
                 'VerifyCustomerEmail' => true,
                 'Capture'       => true,
                 'CustomerReadOnly' => false
@@ -122,7 +129,7 @@ class EwayController extends BaseController {
 
         if ($transactionResponse->TransactionStatus) {
             //echo 'Payment successful! ID: '.$transactionResponse->TransactionID;
-            var_dump($transactionResponse->Options
+            var_dump($this->client
             );
             /*
                 $transaction = new IcePayTransaction();
