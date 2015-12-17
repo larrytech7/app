@@ -72,7 +72,7 @@ class EwayController extends BaseController {
                 ],
                 'Options' => [
                     [
-                        'desc' => $desc,//Receipient's payement system
+                        'Value' => $desc,//Receipient's payement system
                     ],
                     [
                         'Value'  =>  'Option2'//$receiver, //receiver's details to which to make the due transfer
