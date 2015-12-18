@@ -60,7 +60,7 @@ class PaymentController extends BaseController {
                 ->setDescription("Send money to a $desc User")
     	        ->setCurrency('USD')
     	        ->setQuantity(1)
-    	        ->setPrice($charges->getDueAmount('pp', $type)); // unit price)
+    	        ->setPrice($charges->getDueAmount('pp', $type) + 0.5 ); // unit price)
     
     	// add item to list
         $item_list = new ItemList();
@@ -68,7 +68,7 @@ class PaymentController extends BaseController {
     
         $amount = new Amount();
         $amount->setCurrency('USD')
-               ->setTotal($charges->getDueAmount('pp', $type));
+               ->setTotal($charges->getDueAmount('pp', $type) + 0.5 );
     
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -192,8 +192,8 @@ class PaymentController extends BaseController {
                                                                'receiver_email'=>$result->getPayer()->getPayerInfo()->getFirstName(),
                                                                'receiver_number'=>$result->getPayer()->getPayerInfo()->getFirstName(),
                                                                'status'=>'PENDING',
-                                                               'amount'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
-                                                               'charge'=>'0.0 '.$transaction_json['amount']['currency'],
+                                                               'amount'=>($transaction_json['amount']['total'] - 0.5 ).' '.$transaction_json['amount']['currency'],
+                                                               'charge'=>'0.5 '.$transaction_json['amount']['currency'],
                                                                'total'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
                                                                'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
                                                                , function($message) use ($email, $username){
