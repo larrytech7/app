@@ -32,6 +32,15 @@
     <link href="<?php echo URL::to('public/css'); ?>/material-wfont.min.css" rel="stylesheet"/>
 
     <style>
+    body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
     video#bgvid { 
         position: absolute;
         top: 50%;

@@ -51,7 +51,7 @@ class PlatformCharges{
      */ 
     public function getDueAmount($originProvider, $destProvider){
             //return 5.0;
-        if($originProvider == 'ew') //am average charge of 1% has to be applied here
+        if($originProvider == 'ew') //am average charge of $0.5 has to be applied here
             return ( $this->ewamount + (0.01 * $this->ewamount) );
         else if($originProvider == 'pp')
             return $this->amount;//TODO:
@@ -64,87 +64,7 @@ class PlatformCharges{
         else
             return 0;    
     }
-    //TODO:: Tarrifs here need to be revised and match the actual charge tarrifs
-    //apply paypal to mobile money charges
-    private function getDueAmountForPayPalToMobileMoney(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
     
-    //apply charges when sending from Paypal to Eway
-    private function getDueAmountForPayPalToEway(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-    
-    //apply charges when sending from Paypal to STP
-    private function getDueAmountForPayPalToStp(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-    
-    //apply charges when sending from Paypal to Skrill
-    private function getDueAmountForPayPalToSkrill(){
-            
-                if($this->amount >= 5.0 && $this->amount <= 10.0 ){ //free of charge
-                    return $this->amount ;    
-                }else if($this->amount > 10.0 && $this->amount <= 20.0 ){ //
-                    return $this->amount + (0.01 * $this->amount);    
-                }else if($this->amount > 20.0 && $this->amount <= 50.0 ){ //
-                    return $this->amount + (0.03 * $this->amount);    
-                }else if($this->amount > 50.0 && $this->amount <= 100.0 ){ //
-                    return $this->amount + (0.05 * $this->amount);    
-                }else if($this->amount > 100.0 && $this->amount <= 200.0 ){ //
-                    return $this->amount + (0.08 * $this->amount);   
-                }else if($this->amount > 200.0 && $this->amount <= 500.0 ){ //
-                    return $this->amount + (0.15 * $this->amount);    
-                }else{
-                    return $this->amount + (0.20 * $this->amount) ; //charge 1/8 of the transfer sum
-                }
-    }
-
     public function convertCurrency($fromCurrency, $toCurrency, $amount){
          if($fromCurrency == $toCurrency ){
                 return $amount;
@@ -260,8 +180,8 @@ class PlatformCharges{
             }else if($fromCurrency == 'AUD' && $toCurrency == 'CAD'){
                 return $amount * 0.80 ;
             
-            }else if($fromCurrency == 'AUD' && $toCurrency == 'AUD'){
-                return $amount / 580.00 ;
+            }else if($fromCurrency == 'AUD' && $toCurrency == 'XAF'){
+                return $amount / 500.00 ;
             
             }else if($fromCurrency == 'AUD' && $toCurrency == 'ZAR'){
                 return $amount / 10.50 ;

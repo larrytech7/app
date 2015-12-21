@@ -11,7 +11,7 @@ class DashboardController extends BaseController {
 			
 			return View::make('site.dashboard')
 				->with('user', $user)
-				->with('title', 'IcePay - User Dashboard');
+				->with('title', 'IzePay - User Dashboard');
 		//} else {
 			//return Redirect::route('home');
 		//}
