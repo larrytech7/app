@@ -61,7 +61,7 @@ class EwayController extends BaseController {
                         'SKU' => mt_rand(),
                         'Description' => 'Hybrid Transfer from EWAY to '.$desc.' user',
                         'Quantity' => 1,
-                        'UnitCost' => $charges->getDueAmount('ew', $destinationProvider),
+                        'UnitCost' => $charges->convertCurrency($currency, 'AUD',$charges->getDueAmount('ew', $destinationProvider)),
                         'Tax' => 100, //$1 applied as charge to every transaction irrespective of the amount transfered
                         // Total is calculated automatically
                     ]
@@ -74,15 +74,15 @@ class EwayController extends BaseController {
                         'Value'  =>  $receiver, //receiver's details to which to make the due transfer
                     ],
                     [
-                        'Value'  => $currency, // currency used to make the transfer when sending to the receipient
+                        'Value'  => 'AUD', // currency used to make the transfer when sending to the receipient
                     ],
                     [
                         'Value'  =>(0.01 * $amounttosend)
                     ]
                 ],
                 'Payment' => [
-                    'TotalAmount' => $charges->getDueAmount('ew', $destinationProvider) * 100, //$amounttosend,
-                    'CurrencyCode' => $currency
+                    'TotalAmount' => $charges->convertCurrency($currency, 'AUD',$charges->getDueAmount('ew', $destinationProvider)) * 100, //$amounttosend,
+                    'CurrencyCode' => 'AUD'
                 ],
                 'Method' => 'ProcessPayment',
                 'RedirectUrl' => URL::route('dashboard').'/ewayconfirm',
@@ -162,7 +162,7 @@ class EwayController extends BaseController {
                                                                'total'=>$transaction->amount . ' '.$transaction->currency,
                                                                'mode'=>$transaction->type)
                                                                , function($message) use ($email, $username){
-		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
+		      			$message->to(array($email,'larryakah@gmail.com','service@iceteck.com', 'rocardpp@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});
          return Redirect::route('dashboard')
 			             	->with('alertMessage', 'EWAY Transaction Successful');
