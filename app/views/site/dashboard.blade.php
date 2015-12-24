@@ -232,8 +232,42 @@
                                 <option value="sk" class="left circle">Skrill</option>
                                 <option value="mm" class="left circle">Mobile Money</option>
                                 <option value="ew" class="left circle">eWay</option>
+                                <option value="cc" class="">Credit/Debit Card</option>
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
+                        </div>
+                        <div class=" creditcard">
+                            <div class="input-field col s9">
+                                <i class="material-icons prefix blue-text lighten-4">credit_card</i>
+                                <input type="number" id="cardnumber" name="cardnumber" min="1"/>
+                                <label for="cardnumber">Card Number</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <select class="cctype" name="cctype" id="cctype">
+                                    <option selected="selected" value="Visa" class="left circle">VISA</option>
+                                    <option value="Mastercard" class="left circle">MASTERCARD</option>
+                                    <option value="Discover" class="left circle">Discover</option>
+                                    <option value="Maestro" class="left circle">Maestro</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix blue-text lighten-4">today</i>
+                                <input type="month" id="expire" name="expire" />
+                                <label for="expire">Expiry Date</label>
+                            </div>
+                            
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix blue-text lighten-4">account_circle</i>
+                                <input type="text" id="fname" name="fname" />
+                                <label for="fname">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix blue-text lighten-4">account_circle</i>
+                                <input type="text" id="lname" name="lname" />
+                                <label for="lname">Last Name</label>
+                            </div>
+                            
+                            
                         </div>
                   </div>
                   <div class="col s12 m6">
@@ -258,7 +292,7 @@
                                 <option value="mm" class="left circle">Mobile Money</option>
                                 <option value="ew" class="left circle">eWay</option>
                             </select>
-                            <label><i class="material-icons grey-text tooltiped" data-position="left" data-delay="50" data-tooltip="This is the account through which the receiver can receive money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
                      </div>
                      <div class="right">
                         <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>
