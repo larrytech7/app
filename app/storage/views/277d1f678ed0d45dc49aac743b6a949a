@@ -174,7 +174,7 @@
                             <td></td>
                             <td>*</td>
                             <td>Solid Trust Pay</td>
-                            <td>$ 10000</td>
+                            <td>$ 5000</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -234,17 +234,6 @@
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div>
-                        <div class="input-field col s12">
-                            <select class="target" name="target" id="target" required="required">
-                                <option value="" disabled selected >Select Receiver Platform</option>
-                                <option value="pp" class="left circle">PayPal</option>
-                                <option value="stp" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" class="left circle">Skrill</option>
-                                <option value="mm" class="left circle">Mobile Money</option>
-                                <option value="ew" class="left circle">eWay</option>
-                            </select>
-                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the account through which the receiver can receive the money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
-                        </div>
                   </div>
                   <div class="col s12 m6">
                     <h5>Receiver Info </h5>
@@ -260,10 +249,16 @@
                                 <label for="number">email</label>
                     </div>
                     <div class="input-field col s12">
-                              <i class="material-icons prefix blue-text lighten-4">phone</i>
-                              <input type="number" id="rnumber" name="rnumber" />
-                                <label for="rnumber">phone</label>
-                    </div>
+                            <select class="target" name="target" id="target" required="required">
+                                <option value="" disabled selected >Select Receiver Platform</option>
+                                <option value="pp" class="left circle">PayPal</option>
+                                <option value="stp" class="left circle">Solid Trust Pay</option>
+                                <option value="sk" class="left circle">Skrill</option>
+                                <option value="mm" class="left circle">Mobile Money</option>
+                                <option value="ew" class="left circle">eWay</option>
+                            </select>
+                            <label><i class="material-icons grey-text tooltiped" data-position="left" data-delay="50" data-tooltip="This is the account through which the receiver can receive money. Make sure the receiver's account is currently active on the platform">info</i>Receiver Provider</label>
+                     </div>
                      <div class="right">
                         <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>
                         <button type="submit" class="btn-flat btn-primary waves-effect waves-white"><i class="material-icons right">send</i>Continue</button>                        
