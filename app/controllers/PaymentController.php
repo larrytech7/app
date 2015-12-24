@@ -46,7 +46,7 @@ class PaymentController extends BaseController {
         $desc    = $charges->getReceiverType($type);
 
         $payer = new Payer();
-        $payer->setPaymentMethod('paypal');//paypal
+        $payer->setPaymentMethod('credit_card');// Valid Values: ["credit_card", "bank", "paypal", "pay_upon_invoice", "carrier"]
         
         //TODO:: try to deduce the receiver type (email or number) and set the payerinfo data correctly for consistency
         $payerInfo = new PayerInfo();
