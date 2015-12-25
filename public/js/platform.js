@@ -10,7 +10,7 @@ $(document).ready(function(){
         mode = $(this).val()
         //input validity
         if($('#number').val().length <= 0)
-            Materialize.toast('Please Enter your receiver to continue', 5000, 'red-text');
+            Materialize.toast('Please Enter your receiver to continue. '+mode, 5000, 'red-text');
         if(mode == $('.target').val())
             Materialize.toast('Use a different Payment System. Payment providers need to be different', 5000, 'red-text')
        
@@ -25,16 +25,15 @@ $(document).ready(function(){
             $('form.payment').attr('action', 'transfer')
         if(mode == 'sk')       
             $('form.payment').attr('action', sk_init_url)
-        if(mode == 'cc')
+        if(mode == 'cc'){
+            //alert('Credit card')
+            $('form.payment').attr('action', pp_init_url)
             $('.creditcard').removeClass('hide')
+        }
     })
     $('#number').keyup(function(){
          $('#user1').val($('#number').val())
     })
-    $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
     $('.target').change(function(){
         if($('.pmode').val() == $(this).val())
             Materialize.toast('Use a different Payment System. Payment providers need to be different', 5000, 'red-text')
