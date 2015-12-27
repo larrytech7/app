@@ -108,8 +108,9 @@
                             <span class="glyphicon glyphicon-user"></span>
                         </a>
                         <div class="well">
-                            <h3>{{$user->username}}</h3>
+                            <h3>{{$user->username}}</h3><!-- 
                             <p class="red-text"><b>NOTE:</b> TO SEND MONEY USING YOUR VISA CARD, MASTERCARD OR ANY OTHER CREDIT CARD, SELECT &QUOT;<b>EWAY</b>&QUOT; AS YOUR PAYMENT PROVIDER AND YOUR AMOUNT WILL BE CONVERTED TO &QUOT;<b>AUD</b>&QUOT;</p>                            
+                            -->
                         </div>                        
                  </div>
                  <div id="currencyconvert" >

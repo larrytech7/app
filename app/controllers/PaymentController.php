@@ -82,11 +82,22 @@ class PaymentController extends BaseController {
             $amount = new Amount();
             $amount->setCurrency('USD')
                    ->setTotal($charges->getDueAmount('pp', $type) + 0.5 );
-               
+            //set item
+            $item_1 = new Item();
+            $item_1->setName('Money Transfer') // item name
+                ->setDescription("Send money to a $desc User")
+    	        ->setCurrency('USD')
+    	        ->setQuantity(1)
+    	        ->setPrice($charges->getDueAmount('pp', $type) + 0.5 ); // unit price)
+    
+        	// add item to list
+            $item_list = new ItemList();
+            $item_list->setItems(array($item_1));
             //set Transaction
             $transaction = new Transaction();
             $transaction->setAmount($amount)
-                        ->setDescription('Send money To a $desc User');
+                        ->setItemList($item_list)
+                        ->setDescription("Send money To a $desc User");
                     
             //set transacion list
             
@@ -105,23 +116,41 @@ class PaymentController extends BaseController {
             //launch paypal processing request
             try {
                 $payment->create($this->_api_context);
+                foreach($payment->getLinks() as $link) {
+                    if($link->getRel() == 'approval_url') {
+                        $redirect_url = $link->getHref();
+                        break;
+                    }
+                }
+                // add payment ID to session
+                Session::put('paypal_payment_id', $payment->getId());
+        
+                if(isset($redirect_url)) {
+                    // redirect to paypal
+                    return Redirect::away($redirect_url);
+                }else{
+                    print_r($payment->getLinks());
+//                    return  "Error! No redirect URL!!!";
+                }
             } catch (\PayPal\Exception\PPConnectionException $ex) {
-                    if (\Config::get('app.debug')) {
-                        echo "Exception: " . $ex->getMessage() . PHP_EOL;
-                        $err_data = json_decode($ex->getData(), true);
-                        return Redirect::route('dashboard')
-                                    ->with('alertError', 'Connection error. $err_data');
-                        exit;
-                    } else {
-                        return Redirect::route('dashboard')
-                            ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
-            }
-            }/*
-            catch(Exception $ex){
+                if (\Config::get('app.debug')) {
+                    echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                    $err_data = json_decode($ex->getData(), true);
                     return Redirect::route('dashboard')
-                            ->with('alertError', 'Error! '.$ex->getMessage());
+                                ->with('alertError', 'Connection error. $err_data');
+                    exit;
+                } else {
+                    return Redirect::route('dashboard')
+                                ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
+        //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
+                }
+            }catch(Exception $ex){
+                return Redirect::route('dashboard')
+                                ->with('alertError', 'Error! '.$ex->getMessage());
             }
-            */
+    
+            return  "Error!!!!";
+            
         }
         //end credit card processing
 
