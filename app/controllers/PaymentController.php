@@ -228,22 +228,6 @@ class PaymentController extends BaseController {
                             ->with('alertError', 'Error! '.$ex->getMessage());
         }
     
-        foreach($payment->getLinks() as $link) {
-            if($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-    
-        // add payment ID to session
-        Session::put('paypal_payment_id', $payment->getId());
-    
-        if(isset($redirect_url)) {
-            // redirect to paypal
-            return Redirect::away($redirect_url);
-        }
-    
-        return  "Error!!!!";
     }
 
     //results from the request processed by PayPal
