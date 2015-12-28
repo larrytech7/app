@@ -5,6 +5,7 @@ var sk_init_url = 'skrill';
 var cc_init_url = 'creditc';
 
 $(document).ready(function(){
+    $('ul.tabs').tabs();
     $('.pmode').change(function(){
         $('.creditcard').addClass('hide')
         mode = $(this).val()

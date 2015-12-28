@@ -195,7 +195,7 @@
         <!-- options row -->
         <div class="row">
                 <ul id="optionsmenu" class="dropdown-content">
-                  <li><a class="opt" href="#!">Developers</a></li>
+                  <li><a href="{{URL::route('developer')}}">Developer</a></li>
                   <li class="divider"></li>
                   <li><a class="opt" href="#!">Settings</a></li>
                 </ul>

@@ -87,13 +87,13 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
-                <a class="brand-logo" href="{{URL::route('home')}}" style="margin-bottom: 5px;">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="110"/>
+                <a class="brand-logo" href="{{URL::route('home')}}">
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 200px;height: 150px"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="100"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 200px;height: 150px"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -175,7 +175,6 @@
     <script type="text/javascript" src="{{URL::to('public/js')}}/jquery-ui.js"></script>
 
     <!-- Bootstrap/Materialize Core JavaScript -->
-    <script  type="text/javascript" src="{{URL::to('public/js')}}/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/flipper.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/md-js.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/card-depth.js"></script>

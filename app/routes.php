@@ -56,6 +56,12 @@ Route::group(array('before' => 'auth'), function(){
 	'uses' => 'DashboardController@viewUserProfile'
 
 	));
+    
+    Route::get('dashboard/developer', array(
+	'as' => 'developer',
+	'uses' => 'DashboardController@devzone'
+
+	));
     //currency conversion
     Route::get('dashboard/cnv', array(
 	'as' => 'cnv',
