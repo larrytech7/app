@@ -14,8 +14,33 @@
 Route::get('/', array(
 	'as' => 'home',
 	'uses' => 'HomeController@home'
-
 ));
+//Merchant/Developer API routes
+
+Route::group(array('before' => 'auth'), function(){
+    Route::any('sandbox/api/merchantapi', array(
+    	'as' => 'sandbox/api/merchantapi',
+    	'uses' => 'DeveloperController@loginMerchant'
+    ));
+	/*
+	| Manage Checkout
+	*/
+	Route::any('sandbox/api/merchantapi/checkout', array(
+	    'as' => 'sandbox/api/merchantapi/checkout',
+	    'uses' => 'DeveloperController@checkoutMerchant',
+	));
+	// handles confirm requests from payment provider
+	Route::post('sandbox/api/merchantapi/confirm', array(
+		'as' => 'sandbox/api/merchantapi/confirm',
+		'uses' => 'DeveloperController@confirmCheckout'
+	));
+    //handle login route
+    Route::post('sandbox/api/merchantapi/login', array(
+		'as' => 'sandbox/api/merchantapi/login',
+		'uses' => 'DeveloperController@doLogin'
+	));
+
+});
 /*
 | Route to static pages
 */
@@ -67,6 +92,11 @@ Route::group(array('before' => 'auth'), function(){
 	'as' => 'cnv',
 	'uses' => 'DashboardController@convert'
 	));
+    //create a new developer/merchant account
+    Route::post('merchant', array(
+	'as' => 'merchant',
+	'uses' => 'DeveloperController@createDeveloper'
+	));
 
 	/*
 	| CSRF protection group
@@ -82,8 +112,6 @@ Route::group(array('before' => 'auth'), function(){
 		));
 
 	});
-
-
 
 	/*
 	| Change password (GET)

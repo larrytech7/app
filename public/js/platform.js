@@ -50,7 +50,8 @@ $(document).ready(function(){
 function convert(){
         $.ajax({
            beforeSend:  function(xhr){
-            
+                $('.cloader').addClass('active')
+                $('.cloader').removeClass('hide')
            },
            url      : 'https://izepay.iceteck.com/dashboard/cnv',
            cache    : false,
@@ -67,10 +68,14 @@ function convert(){
                     Materialize.toast('Error: '+result+' .'+status, 5000, 'red-text', ''); 
                     console.log(result);                   
                 }
+                $('.cloader').removeClass('active')
+                $('.cloader').addClass('hide')
            },
            error    : function(status, error){
                     Materialize.toast('Error: '+error+' .'+status, 5000, 'red-text', '');
                     console.log(JSON.stringify(error))
+                    $('.cloader').removeClass('active')
+                    $('.cloader').addClass('hide')
            },
                
         });

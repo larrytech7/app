@@ -68,11 +68,13 @@ class DashboardController extends BaseController {
     //developper/merchant functionality
     public function devzone(){
  			
-             $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
+        $data['developers'] = Developer::where('dev_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 			
-			return View::make('dev.developer')
-				->with('user', $user)
-				->with('title', 'IzePay - Merchant|Developer');
+        return View::make('dev.developer')
+                    ->with($data)
+				    ->with('user', $user)
+				    ->with('title', 'HyboPay - Merchant|Developer');
     }
 
 }

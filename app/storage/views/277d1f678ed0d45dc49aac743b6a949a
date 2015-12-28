@@ -138,6 +138,17 @@
                             <label for="to">TO</label>
                       </div>
                       <span class="result blue-text"></span>
+                      <div class="preloader-wrapper small cloader hide">
+                        <div class="spinner-layer spinner-green-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div><div class="gap-patch">
+                            <div class="circle"></div>
+                          </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                      </div>
                       <div class="input-field col s12">
                         <i class="material-icons prefix blue-text">attach_money</i>
                         <input type="number" name="amountc" id="amountc" onkeyup="convert()" min="1"/>
