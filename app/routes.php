@@ -16,12 +16,11 @@ Route::get('/', array(
 	'uses' => 'HomeController@home'
 ));
 //Merchant/Developer API routes
-
-Route::group(array('before' => 'auth'), function(){
-    Route::any('sandbox/api/merchantapi', array(
+Route::any('sandbox/api/merchantapi', array(
     	'as' => 'sandbox/api/merchantapi',
     	'uses' => 'DeveloperController@loginMerchant'
     ));
+//Route::group(array('before' => 'auth'), function(){
 	/*
 	| Manage Checkout
 	*/
@@ -40,7 +39,7 @@ Route::group(array('before' => 'auth'), function(){
 		'uses' => 'DeveloperController@doLogin'
 	));
 
-});
+//});
 /*
 | Route to static pages
 */

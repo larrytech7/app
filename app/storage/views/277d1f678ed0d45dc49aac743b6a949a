@@ -2,6 +2,35 @@
         <!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">
+                <div class="col s12 m3 ">
+                    <div class="collection">
+                        <a class="collection-item blue active" href="<?php echo URL::route('home'); ?>">
+                            <i class="material-icons left ">home</i>Home
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="#modal1" >
+                            <i class="material-icons left green-text darken-5">payment</i>New Transaction
+                        </a>
+                        <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="collection-item blue-text">
+                            <i class="material-icons left brown-text lighten-1">assignment</i>History
+                        </a>
+                        <a href="#" class="opt collection-item blue-text" >
+                            <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
+                        </a>
+                        <a href="#" class="collection-item blue-text" >
+                            <i class="material-icons left teal-text lighten-1">settings</i>Settings
+                        </a>
+                        <a class="collection-item blue-text" href="<?php echo URL::route('developer'); ?>">
+                            <i class="material-icons left">supervisor_account</i> Accounts
+                        </a>
+                        <a href="#apidocs" class="opt collection-item blue-text">
+                            <i class="material-icons left">inbox</i>API Docs
+                        </a>
+                        <a href="#support" class="opt collection-item blue-text ">
+                            <i class=" material-icons left">forum</i>API Support
+                        </a>
+                    </div>
+                </div>
+                <div class="col s12 m9">
                 <div class="slider demoslider"> <!-- Start slider -->
                 <ul class="slides">
                     <li>
@@ -9,22 +38,22 @@
                         <div class="caption center-align">
                             <h3 class="black-text">Make a Payment</h3>
                             <h5 class="">Pay freelancers or remote collaborators easily in few clicks.</h5>
-                            <p class="col s10 m10 l12 "> Click &laquo;Make payment&raquo; Below</p>
+                            <p class="col s10 m10 l12 "> Click &laquo;New Transaction&raquo; </p>
                         </div>
                     </li>
                     <li>
                         <img src="<?php echo URL::to('public/images'); ?>/sendmoney.jpg" alt="send money between accounts" class="responsive-img"/>
                         <div class="caption center-align">
                             <h3 class="black-text">Send Money</h3>
-                            <h5 class="">Send money to areas supporting any platforms we integrate.</h5>
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;Send money&raquo; Below</p>
+                            <h5 class="">Send money to areas between different platforms we integrate.</h5>
+                            <p class="col s10 m10 l12 black-text"> Click &laquo;New Transaction&raquo;</p>
                         </div>
                     </li>
                     <li>
                         <img src="<?php echo URL::to('public/images'); ?>/transaction_history.jpg" alt="View Transaction history" class="responsive-img"/>
                         <div class="caption right-align">
                             <h3 class="teal-text">Transaction History</h3>
-                            <h5 class="teal-text">We keep track of your account transactions.</h5>                   
+                            <h5 class="teal-text">Properly organized history.</h5>                   
                             <p class="col s10 m10 l12 black-text"> Click &laquo;History&raquo; to view your latest transactions.</p>
                         </div>
                     </li>
@@ -32,31 +61,13 @@
                         <img src="<?php echo URL::to('public/images'); ?>/invoice.jpg" alt="View invoices" class="responsive-img"/>
                         <div class="caption left-align">
                             <h3 class="black-text">Invoices</h3>
-                            <h5 class="black-text">Your invoices all in one place. Stay most organised.</h5>                            
+                            <h5 class="black-text">Create invoices as easy as possible.</h5>                            
                             <p class="col s10 m10 l12 black-text "> Click &laquo;Invoices&raquo; to view them</p>
                         </div>
                     </li>
                 </ul>
             </div> <!-- End slider -->
-            <div class=" blue lighten-1">
-                    <a class="waves-effect waves-teal btn-flat btn modal-trigger" href="#modal1" >
-                            <i class="material-icons left green-text darken-5">payment</i>New Transaction
-                    </a>|
-                    <!--
-                    <a href="#" class="waves-effect waves-blue btn-flat btn" data-toggle="modal" data-target="#mm2pp">
-                          <i class="material-icons left red-text lighten-1">send</i>Send Money
-                    </a>|
-                    -->
-                    <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="waves-effect waves-green btn-flat btn">
-                            <i class="material-icons left brown-text lighten-1">assignment</i>History
-                    </a>|
-                    <a href="#" class="btn waves-effect waves-red btn-flat" >
-                            <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
-                    </a>|
-                    <a href="#" class="btn waves-effect waves-red btn-flat dropdown-button" data-activates="optionsmenu">
-                            <i class="material-icons left teal-text lighten-1">settings</i>Options
-                    </a>
-                </div>
+            </div>
                 <!-- How it works -->
                 <div class="">
                 <p><h2>How it works </h2></p>

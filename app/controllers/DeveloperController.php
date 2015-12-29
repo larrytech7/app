@@ -68,10 +68,17 @@ class DeveloperController extends BaseController {
     
     //function to process merchant checkout
     public function checkoutMerchant(){
-        
-        var_dump(Session::get('data'));
-        Session::forget('data');
-         
+        try{
+            //$data = Session::get('data');
+            echo Input::get('me');
+            
+            //var_dump(Session::get('data'));
+            //Session::forget('data');
+            //Session::flush();
+        }catch(Exception $x){
+            return Redirect::route('sandbox/api/merchantapi')
+                        ->with('alertError', 'You must login to proceed');
+        }
     }
     
     //show login to authenticate a client during merchant checkout
@@ -122,9 +129,13 @@ class DeveloperController extends BaseController {
                     Input::get('cdata1'),
                     Input::get('cdata2')
                );
-                Session::put('data', $data);
-				return Redirect::route('sandbox/api/merchantapi/checkout')
-						->with('alertMessage', 'Logged In')
+               $client     = User::find(Auth::user()->id); //the client making the payment
+               $merchant = Developer::where('dev_key', '=',$data['data'][0])->get(); //the merchant to whom to make payment to
+            
+                //Session::put('data', $data);
+				//return Redirect::action('url')->withInput();
+                
+                return Redirect::away('https://solidtrustpay.com/handle.php')
                         ->withInput();
 			} else{
 				return Redirect::route('sandbox/api/merchantapi')

@@ -27,12 +27,21 @@
                             <input type="password" name="password" class="form-control" placeholder="Password" required="required" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <select name="payprovider" id="paymode">
+                                <option value="pp">PayPal</option>
+                                <option value="mm">MobileMoney</option>
+                                <option value="stp">Solid TrustPay</option>
+                            </select>
+                            <label for="paymode">Choose your payment method</label>
+                        </div>
+                    </div>
                     <div>
                         <input type="hidden" name="apikey" value="{{Input::get('apikey')}}"/>
                         <input type="hidden" name="currency" value="{{Input::get('currency')}}"/>
                         <input type="hidden" name="amount" value="{{Input::get('amount')}}"/>
                         <input type="hidden" name="return_url" value="{{Input::get('return_url')}}" />
-                        <input type="hidden" name="payprovider" value="{{Input::get('payprovider')}}"/>
                         <input type="hidden" name="cdata1" value="{{Input::get('cdata1')}}"/>
                         <input type="hidden" name="cdata2" value="{{Input::get('cdata2')}}"/>
                     </div>
