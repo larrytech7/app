@@ -30,9 +30,9 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <select name="payprovider" id="paymode">
-                                <option value="pp">PayPal</option>
-                                <option value="mm">MobileMoney</option>
-                                <option value="stp">Solid TrustPay</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="mobilemoney">MobileMoney</option>
+                                <option value="solidtrustpay">Solid TrustPay</option>
                             </select>
                             <label for="paymode">Choose your payment method</label>
                         </div>

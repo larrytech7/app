@@ -22,7 +22,7 @@
                             <i class="material-icons left teal-text lighten-1">settings</i>Settings
                         </a>
                         <a class="collection-item blue-text" href="{{URL::route('developer')}}">
-                            <i class="material-icons left">supervisor_account</i> Accounts
+                            <i class="material-icons left">business</i> Merchant
                         </a>
                         <a href="#apidocs" class="opt collection-item blue-text">
                             <i class="material-icons left">inbox</i>API Docs

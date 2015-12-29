@@ -15,6 +15,15 @@
             <br />
             <br />
             <a href="#signup" class="center-align waves-effect waves-teal btn-flat btn-large blue white-text"><i class="material-icons">person_pin</i>&nbsp;Signup freely </a>
+            <form action="{{URL::to('sandbox/api/merchantapi')}}" method="post" name="merchant_form">
+                        <input type="hidden" name="apikey" value="xxxxx"/>
+                        <input type="hidden" name="currency" value="USD"/>
+                        <input type="hidden" name="amount" value="20"/>
+                        <input type="hidden" name="return_url" value="http://mysite.com/checkout" />
+                        <input type="hidden" name="cdata1" value="xxxxx"/>
+                        <input type="hidden" name="cdata2" value="xxxxx"/>
+                        <input type="image" src="{{URL::to('public/images/hybopay_checkout.png')}}" width="150" height="80"/>
+                    </form>
         </div>
         <div class="row">
             <div class="col s12 m8 l8"> 

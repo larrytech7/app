@@ -107,7 +107,7 @@ class DeveloperController extends BaseController {
 		);
 
 		if ($validator->fails()) {
-			return Redirect::route('get-login')
+			return Redirect::route('sandbox/api/merchantapi')
 					->withErrors($validator)
 					->withInput();
 		} else{
@@ -131,10 +131,58 @@ class DeveloperController extends BaseController {
                );
                $client     = User::find(Auth::user()->id); //the client making the payment
                $merchant = Developer::where('dev_key', '=',$data['data'][0])->get(); //the merchant to whom to make payment to
-            
+                
+               if($data['data'][4] == 'solidtrustpay'){
+                    $url = 'https://solidtrustpay.com/handle_accver.php';
+                    $fields = array(
+                                            'merchantAccount'   => 'larryakah',
+                                            'item_id'           => 'Item Purchase: '.$data['data'][5],
+                                            'amount'            => $data['data'][2],
+                                            'currency'          => $data['data'][1],
+                                            'confirm_url'       => URL::route('dashboard').'/stpconfirm',
+                                            'testmode'          => 'on',
+                                            'user1'             => 'larryakah@gmail.com',
+                                            'user2'             => 'larryakah@gmail.com',
+                                            'return_url'        => URL::route('dashboard'),
+                                            'notify_url'        => URL::route('dashboard'),
+                                            'cancel_url'        => URL::route('dashboard')
+                                    );
+               
+                    $context = stream_context_create(array(
+                            'http' => array(
+                                'Content-Type'=>'application/x-form-urlencoded',
+                                'method'=>'POST',
+                                'content'=>http_build_query($fields)
+                            )
+                    ));
+                    echo file_get_contents($url, null, $context);
+               /*   
+                    //url-ify the data for the POST
+                    $fields_string = '';
+                    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+                    rtrim($fields_string, '&');
+                    
+                    //open connection
+                    $ch = curl_init();
+                    
+                    //set the url, number of POST vars, POST data
+                    curl_setopt($ch,CURLOPT_URL, $url);
+                    curl_setopt($ch,CURLOPT_POST, count($fields));
+                    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+                   // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    
+                    //execute post
+                    $result = curl_exec($ch);
+                    var_dump($result);
+                    return Redirect::away($url)
+                        ->withInput();
+               */
+                    //close connection
+                   // curl_close($ch);
+                }//end solid trust pay payment method
                 //Session::put('data', $data);
 				//return Redirect::action('url')->withInput();
-                
+                else
                 return Redirect::away('https://solidtrustpay.com/handle.php')
                         ->withInput();
 			} else{
@@ -143,8 +191,8 @@ class DeveloperController extends BaseController {
 			}
 		}
 
-		return Redirect::route('sandbox/api/merchantapi')
-				->with('alertError', 'There was a problem loging you in.');
+	//	return Redirect::route('sandbox/api/merchantapi')
+		//		->with('alertError', 'There was a problem loging you in.');
     }
     
     public function confirmCheckout(){

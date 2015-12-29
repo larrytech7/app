@@ -15,7 +15,7 @@ Route::get('/', array(
 	'as' => 'home',
 	'uses' => 'HomeController@home'
 ));
-//Merchant/Developer API routes
+//----------------------------------------------------------Merchant/Developer API routes--------------------------------
 Route::any('sandbox/api/merchantapi', array(
     	'as' => 'sandbox/api/merchantapi',
     	'uses' => 'DeveloperController@loginMerchant'
@@ -40,6 +40,7 @@ Route::any('sandbox/api/merchantapi', array(
 	));
 
 //});
+//--------------------------------------------------------------- End merchant Routes -------------------------------------
 /*
 | Route to static pages
 */

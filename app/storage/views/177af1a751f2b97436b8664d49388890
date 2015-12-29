@@ -192,7 +192,7 @@
         $('.loading').hide();
         $('.slider').slider({
             interval: 8000,
-            height : 300
+            height : 350
         });
         $(".dropdown-button").dropdown();
         $('.tooltiped').tooltip({delay: 50,

@@ -23,7 +23,7 @@
                             <i class="material-icons left teal-text lighten-1">settings</i>Settings
                         </a>
                         <a class="active collection-item blue" href="{{URL::route('developer')}}">
-                            <i class="material-icons left">supervisor_account</i> Accounts
+                            <i class="material-icons left">business</i> Merchant
                         </a>
                         <a href="#apidocs" class="collection-item blue-text">
                             <i class="material-icons left">inbox</i>API Docs
@@ -57,15 +57,6 @@
                                 </tr>
                         @endforeach
                     </table>
-                    <form action="{{URL::to('sandbox/api/merchantapi')}}" method="post" name="merchant_form">
-                        <input type="hidden" name="apikey" value="xxxxx"/>
-                        <input type="hidden" name="currency" value="USD"/>
-                        <input type="hidden" name="amount" value="20"/>
-                        <input type="hidden" name="return_url" value="http://mysite.com/checkout" />
-                        <input type="hidden" name="cdata1" value="xxxxx"/>
-                        <input type="hidden" name="cdata2" value="xxxxx"/>
-                        <input type="image" src="{{URL::to('public/images/hybopay_checkout.png')}}" width="150" height="80"/>
-                    </form>
                 </div>
             </div>
             <!-- /.col-md-8 -->
