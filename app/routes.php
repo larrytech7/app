@@ -18,25 +18,30 @@ Route::get('/', array(
 //----------------------------------------------------------Merchant/Developer API routes--------------------------------
 Route::any('sandbox/api/merchantapi', array(
     	'as' => 'sandbox/api/merchantapi',
-    	'uses' => 'DeveloperController@loginMerchant'
+    	'uses' => 'DeveloperController@purchase'
     ));
 //Route::group(array('before' => 'auth'), function(){
 	/*
-	| Manage Checkout
+	| Manage Checkout. Global point of access for various payment methods
 	*/
 	Route::any('sandbox/api/merchantapi/checkout', array(
 	    'as' => 'sandbox/api/merchantapi/checkout',
 	    'uses' => 'DeveloperController@checkoutMerchant',
 	));
-	// handles confirm requests from payment provider
-	Route::post('sandbox/api/merchantapi/confirm', array(
-		'as' => 'sandbox/api/merchantapi/confirm',
-		'uses' => 'DeveloperController@confirmCheckout'
+	// handles cancel requests from STP payment provider
+	Route::any('sandbox/api/merchantapi/cancelstppurchase', array(
+		'as' => 'sandbox/api/merchantapi/cancelstppurchase',
+		'uses' => 'DeveloperController@cancelStpPurchase'
+	));
+    // handles confirm requests from STP payment provider
+	Route::any('sandbox/api/merchantapi/confirmstppurchase', array(
+		'as' => 'sandbox/api/merchantapi/confirmstppurchase',
+		'uses' => 'DeveloperController@cancelStpPurchase'
 	));
     //handle login route
     Route::post('sandbox/api/merchantapi/login', array(
 		'as' => 'sandbox/api/merchantapi/login',
-		'uses' => 'DeveloperController@doLogin'
+		'uses' => 'DeveloperController@doPurchase'
 	));
 
 //});

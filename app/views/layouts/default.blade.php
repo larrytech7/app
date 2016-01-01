@@ -199,12 +199,12 @@
     </script>
      @if(Session::has('alertMessage'))
             <div class="row">
-                <script> Materialize.toast("{{Session::get('alertMessage')}}", 5000, 'green-text')</script>
+                <script> Materialize.toast("{{Session::get('alertMessage')}} <i class='material-icons right'>done_all</i>", 5000, 'green-text')</script>
             </div>
         @endif
         @if(Session::has('alertError'))
             <div class="col-lg-12 alert alert-danger alert-dismissible fade in" role="alert">
-                <script> Materialize.toast("{{Session::get('alertError')}}", 5000, 'red-text')</script>
+                <script> Materialize.toast("{{Session::get('alertError')}} <i class='material-icons right'>clear</i>", 5000, 'red-text')</script>
             </div>
         @endif
     <script>
@@ -219,7 +219,7 @@
     try{
         vid.addEventListener('ended', function() {
             // only functional if "loop" is removed 
-             vid.pause();
+            vid.pause();
         	// to capture IE10
         	vidFade();
         });
@@ -241,6 +241,7 @@
               var target = $(this.hash);
               target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
               if (target.length) {
+                if($(this).attr('href') == '#signup')
                 $('html,body').animate({
                   scrollTop: target.offset().top
                 }, 1000);
@@ -254,9 +255,9 @@
             oripass = $('#password').val();
             verpass = $('#confirm_password').val();
             if(oripass == verpass)
-                Materialize.toast('Passwords match', 2000, 'green-text','');
+                Materialize.toast('Passwords match <i class="material-icons right">done_all</i>', 2000, 'green-text','');
             else
-                Materialize.toast('Passwords Do not match', 3000, 'red-text', '');
+                Materialize.toast('Passwords Do not match <i class="material-icons right">clear</i>', 3000, 'red-text', '');
         }
   </script>
 

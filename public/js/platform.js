@@ -32,6 +32,10 @@ $(document).ready(function(){
             $('.creditcard').removeClass('hide')
         }
     })
+    $('a.stpay').click(function(){
+                event.preventDefault();
+                $('form.dostpay').submit();
+            });
     $('#number').keyup(function(){
          $('#user1').val($('#number').val())
     })

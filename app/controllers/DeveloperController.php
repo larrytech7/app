@@ -81,8 +81,8 @@ class DeveloperController extends BaseController {
         }
     }
     
-    //show login to authenticate a client during merchant checkout
-    public function loginMerchant(){
+    //show various payment methods so as to allow users seelct a payment method
+    public function purchase(){
        $data = array(
             Input::get('apikey'),
             Input::get('currency'),
@@ -92,13 +92,13 @@ class DeveloperController extends BaseController {
             Input::get('cdata1'),
             Input::get('cdata2')
        );
-        return View::make('merchant.login')
+        return View::make('merchant.purchase')
                     ->with('data', $data)
-                    ->with('title', 'HyboPay - Authenticate');
+                    ->with('title', 'HyboPay - Purchase Method');
     }
     
     //handle client login for purchase operation
-    public function doLogin(){
+    public function doPurchase(){
         $validator = Validator::make(Input::all(),
 			array(
 				'username'	=> 'required|alpha_dash|min:4',
@@ -194,9 +194,67 @@ class DeveloperController extends BaseController {
 	//	return Redirect::route('sandbox/api/merchantapi')
 		//		->with('alertError', 'There was a problem loging you in.');
     }
-    
-    public function confirmCheckout(){
+    //stp purchase confirmed by user
+    public function confirmStpPurchase(){
+        $payment = array('stp_transact_status'=>Input::get('merchantAccount'),
+                            'date'=>Input::get('date'),
+                            'amount'=>Input::get('amount'), //actual amount transferred to account
+                            'member'=>Input::get('member'),
+                            'item_id'=>Input::get('item_id'),
+                            'email'=>Input::get('email'),
+                            'memo'=>Input::get('memo'),
+                            'tr_id'=>Input::get('tr_id'),
+                            'receiver'=>Input::get('user1'),
+                            'provider'=>Input::get('user2'));
+                            
+        print_r($payment);
+         //transaction verification and authentication scheme
+        $secondary_password = 'Creationfox7!';
+        $secondary_password = md5($secondary_password.'s+E_a*');  //encryption for db
+        $hash_received = MD5($_POST['tr_id'].":".MD5($secondary_password).":".$_POST['amount']."
+        :".$_POST['merchantAccount'].":".$_POST['payerAccount']);
+
+        if ($hash_received == $_POST['hash']) {
+        // valid payment
         
+                $transaction = new IcePayTransaction();
+                $transaction->user_id = Auth::user()->id;
+                $transaction->tid = $payment['tr_id']; //transaction id or transaction bordereaux
+                $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
+                $transaction->receiver_email = $payment['receiver']; //receiver's email or number
+                $transaction->type = 'STP to '.$payment['provider'];
+                $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
+                $transaction->amount = $payment['amount']; //total amount deducted and transferred
+                $transaction->currency = '';
+                $transaction->save();
+            Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => $payment['date'],
+                                                            'tid' => $payment['tr_id'],
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>'TEST',
+                                                               'receiver_number'=>$payment['receiver'],
+                                                               'status'=>'PENDING',
+                                                               'amount'=>$payment['amount'],
+                                                               'charge'=>'0.0 USD',
+                                                               'total'=>$payment['amount'].' ',
+                                                               'mode'=>'STP to '.$payment['provider'])
+                                                               , function($message) use ($email, $username){
+		      			$message->to($email, $username)->subject('Transaction Receipt');
+			     	});
+         return Redirect::route('dashboard')
+        	               ->with('alertMessage', 'STP Transaction successful');
+        }
+        else {
+            // invalid payment; the payment has been altered
+            return Redirect::route('dashboard')
+           	                ->with('alertError', 'Invalid Payment. The payment may have been altered. Please try again');
+        }
+    }
+    //stp purchase cancelled by user
+    public function cancelStpPurchase(){
+        var_dump(Input::get());
+        //return Redirect::away(Input::get('user1'))
+		//	             	->withInput('alertError', 'STP Transaction cancelled by user');
     }
 
 }

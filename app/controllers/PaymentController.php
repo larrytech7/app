@@ -37,7 +37,7 @@ class PaymentController extends BaseController {
         $amounttosend  = Input::get('amount');
         $currency   = Input::get('currency');
         $type       = Input::get('target'); //destination/receipient's payment Provider
-        $cvv        = Input::get('cvv');
+        $cno        = Input::get('cardnumber');
         
         $charges = new PlatformCharges($amounttosend, $currency, $type);
         $desc    = $charges->getReceiverType($type);
@@ -50,7 +50,7 @@ class PaymentController extends BaseController {
                     ->with('alertError', 'You need to select different payment system for sender and receiver');
            // exit();
         }
-        if(isset($cvv)){
+        if(isset($cno) && !empty($cno)){
             //Credit card is being used. Process credit card
             $cc_number  = Input::get('cardnumber');
             $cc_cvv     = Input::get('cvv');
@@ -146,7 +146,7 @@ class PaymentController extends BaseController {
                 }
             }catch(Exception $ex){
                 return Redirect::route('dashboard')
-                                ->with('alertError', 'Error! '.$ex->getMessage());
+                                ->with('alertError', 'CC Processing Error! '.$ex->getMessage());
             }
     
             return  "Error!!!!";

@@ -19,7 +19,7 @@
                         <input type="hidden" name="apikey" value="xxxxx"/>
                         <input type="hidden" name="currency" value="USD"/>
                         <input type="hidden" name="amount" value="20"/>
-                        <input type="hidden" name="return_url" value="http://mysite.com/checkout" />
+                        <input type="hidden" name="return_url" value="https://iceteck.com" />
                         <input type="hidden" name="cdata1" value="xxxxx"/>
                         <input type="hidden" name="cdata2" value="xxxxx"/>
                         <input type="image" src="{{URL::to('public/images/hybopay_checkout.png')}}" width="150" height="80"/>
