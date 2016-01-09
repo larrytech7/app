@@ -67,14 +67,21 @@ class DeveloperController extends BaseController {
 	}
     
     //function to process merchant checkout
-    public function checkoutMerchant(){
+    public function checkout(){
         try{
             //$data = Session::get('data');
-            echo Input::get('me');
+            $chktype = Input::get('method'); //valid expected values are paypal or mobilemoney
+            switch($chktype){
+                case 'paypal':
+                    //call paypal method
+                    echo $chktype;
+                    break;
+                case 'mobilemoney':
+                    //call mobilemoney method
+                    
+                    break;
+            }
             
-            //var_dump(Session::get('data'));
-            //Session::forget('data');
-            //Session::flush();
         }catch(Exception $x){
             return Redirect::route('sandbox/api/merchantapi')
                         ->with('alertError', 'You must login to proceed');

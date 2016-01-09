@@ -18,7 +18,20 @@
                           <p>
                              Purchase this item with your paypal Account.
                           </p>
-                          <a href="#!" class="secondary-content"><i class="material-icons">done_all</i></a>
+                          {{Form::open(array('url'=>URL::to('sandbox/api/merchantapi/paypal'), 'class'=>'form-horizontal paypal', 'role'=>'form'))}}
+                            <div id="stp">
+                                <input type="hidden" name="merchantAccount" value="larryakah" />
+                                <input type="hidden" name="apikey" value="{{Input::get('apikey')}}"/>
+                                <input type="hidden" name="amount" value="{{Input::get('amount')}}"/>
+                                <input type="hidden" name="currency" value="{{Input::get('currency')}}"/>
+                                <input type="hidden" name="item_id" value="HyboPay purchase with Solid Trust Pay" />
+                                <input type="hidden" name="confirm_url" value="{{URL::route('dashboard')}}/stpconfirm" />
+                                <input type="hidden" name="testmode" value="on" />
+                                <input type="hidden" name="method" value="paypal"/>
+                            </div>
+                          <a href="#!" class="secondary-content paypal" ><i class="material-icons">done_all</i></a>
+                          {{Form::token()}}
+                        {{Form::close()}}
                         </li>
                         <li class="collection-item avatar">
                           <img src="{{URL::to('public/images')}}/stp_icon.png" alt="" class="circle" />

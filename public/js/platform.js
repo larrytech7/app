@@ -36,6 +36,14 @@ $(document).ready(function(){
                 event.preventDefault();
                 $('form.dostpay').submit();
             });
+    $('a.paypal').click(function(){
+                event.preventDefault();
+                $('form.paypal').submit();
+            });
+    $('a.mobile').click(function(){
+                event.preventDefault();
+                $('form.mobile').submit();
+            });
     $('#number').keyup(function(){
          $('#user1').val($('#number').val())
     })

@@ -88,12 +88,12 @@
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
                 <a class="brand-logo" href="{{URL::route('home')}}">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 200px;height: 150px"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 180px;height: 90px; margin-top:5px"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 200px;height: 150px"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 180px;height: 80px;margin-top:5px"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -136,7 +136,7 @@
         <footer class="page-footer grey lighten-3">
             
             <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
-            <p>&copy; {{ date('Y') }} IceTeck, Inc.</p>
+            <p>&copy; {{ date('Y') }} IceTeck.</p>
       </footer>
           <!-- Login -->
       <div id="login" class="modal">
@@ -227,14 +227,15 @@
         pauseButton.addEventListener("click", function() {
             vid.classList.toggle("stopfade");
         	if (vid.paused) {
-        vid.play();
-        		pauseButton.innerHTML = "Pause";
+                vid.play();
+        		pauseButton.innerHTML = '<i class="material-icons">pause</i>'; //pause
         	} else {
                 vid.pause();
-                pauseButton.innerHTML = "Paused";
+                pauseButton.innerHTML = '<i class="material-icons">play_arrow</i>';//paused
         	}
         })
         }catch(err){}
+        //click scroll functionality
         $(function() {
           $('a[href*=#]:not([href=#])').click(function() {
             if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {

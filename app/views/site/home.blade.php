@@ -3,7 +3,7 @@
 @section('content')
 <!-- Heading Row -->
         <div class="row">
-            <video autoplay poster="{{URL::to('public/images')}}/logo.png" id="bgvid">
+            <video autoplay loop poster="{{URL::to('public/images')}}/logo.png" id="bgvid">
                 <source src="{{$video_url}}" type="video/mp4" />
             </video>
             <button id="vidpause" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">pause</i></button>
@@ -23,7 +23,7 @@
                         <input type="hidden" name="cdata1" value="xxxxx"/>
                         <input type="hidden" name="cdata2" value="xxxxx"/>
                         <input type="image" src="{{URL::to('public/images/hybopay_checkout.png')}}" width="150" height="80"/>
-                    </form>
+            </form>
         </div>
         <div class="row">
             <div class="col s12 m8 l8"> 
@@ -57,15 +57,40 @@
                   </div>
                 </div>
               </div>
-                <div class="row">
-                    <div class="col s12 center" id="contact">
-                      <i class="large material-icons blue-text">perm_phone_msg</i>
-                      <h4>Contact Us</h4>
-                      <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b>Inc.</span> @ &nbsp;ActivSpaces</p>
-                      <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
-                      <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@iceteck.com</a> </p>
-                    </div>
-              </div>    
+                <div>
+                    <div class="slider"> <!-- Start slider -->
+                        <ul class="slides testimonials">
+                            <li>
+                                <img src="{{URL::to('public/images')}}/payments.jpg" alt="Payment via mobilemoney" class="responsive-img"/>
+                                <div class="caption center-align">
+                                    <h3 class="black-text">Commentator</h3>
+                                    <h5 class="">Comment body</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="{{URL::to('public/images')}}/sendmoney.jpg" alt="send money between accounts" class="responsive-img"/>
+                                <div class="caption center-align">
+                                    <h3 class="black-text">Commentator</h3>
+                                    <h5 class="">Comment body</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="{{URL::to('public/images')}}/transaction_history.jpg" alt="View Transaction history" class="responsive-img"/>
+                                <div class="caption right-align">
+                                    <h3 class="black-text">Commentator</h3>
+                                    <h5 class="">Comment body</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="{{URL::to('public/images')}}/invoice.jpg" alt="View invoices" class="responsive-img"/>
+                                <div class="caption left-align">
+                                    <h3 class="black-text">Commentator</h3>
+                                    <h5 class="">Comment body</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div> <!-- End slider -->
+                </div>    
             </div>
             <!-- /.col-md-8 -->
             <div class="col well s12 m4 l4" id="signup">
@@ -110,10 +135,8 @@
                                 <option value="Cameroon" >Cameroon</option>
                                 <option value="Nigeria" >Nigeria</option>
                                 <option value="Chad" >Chad</option>
-                                <option value="Congo" >Congo</option>
                                 <option value="South Africa">South Africa</option>
                                 <option value="Ghana" >Ghana</option>
-                                <option value="Equatorial Guinea" >Equatorial Guinea</option>
                                 <option value="Senegal" >Senegal</option>
                                 <option value="Kenya" >Kenya</option>
                                 <option value="Uganda" >Uganda</option>
@@ -121,7 +144,7 @@
                                 <option value="USA" >USA</option>
                                 <option value="UK" >UK</option>
                                 <option value="France" >France</option>
-                                <option value="China" >China</option>
+                                <option value="Germany">Germany</option>
                                 <option value="Canada" >Canada</option>
                                 <option value="Switzerland" >Switzerland</option>
                                 <option value="United Arab Emirates" >UAE</option>
@@ -154,9 +177,13 @@
             <!-- /.col-md-4 -->
         </div>
         <div class="row">
-            <!-- 
-            <iframe width="420" height="315" src="https://www.youtube.com/embed/tIshM30mYdU" frameborder="0" allowfullscreen></iframe>
-            -->
+            <div class="col s12 center" id="contact">
+                <i class="large material-icons blue-text">perm_phone_msg</i>
+                <h4>Contact Us</h4>
+                <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b></span> @ &nbsp;ActivSpaces</p>
+                <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
+                <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@iceteck.com</a> </p>
+            </div>
         </div>
         <!-- /.row -->
       

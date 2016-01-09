@@ -20,14 +20,16 @@ Route::any('sandbox/api/merchantapi', array(
     	'as' => 'sandbox/api/merchantapi',
     	'uses' => 'DeveloperController@purchase'
     ));
-//Route::group(array('before' => 'auth'), function(){
-	/*
-	| Manage Checkout. Global point of access for various payment methods
-	*/
-	Route::any('sandbox/api/merchantapi/checkout', array(
-	    'as' => 'sandbox/api/merchantapi/checkout',
-	    'uses' => 'DeveloperController@checkoutMerchant',
-	));
+    //checkout with paypal
+Route::any('sandbox/api/merchantapi/paypal', array(
+    	'as' => 'sandbox/api/merchantapi/paypal',
+    	'uses' => 'DeveloperController@checkout'
+    ));
+    //checkout with mobile money (MTN)
+Route::any('sandbox/api/merchantapi/mobilemoney', array(
+    	'as' => 'sandbox/api/merchantapi/mobilemoney',
+    	'uses' => 'DeveloperController@checkout'
+    ));
 	// handles cancel requests from STP payment provider
 	Route::any('sandbox/api/merchantapi/cancelstppurchase', array(
 		'as' => 'sandbox/api/merchantapi/cancelstppurchase',
