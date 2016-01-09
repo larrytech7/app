@@ -29,65 +29,60 @@
                     <h5 class="center-align">Money transfer/payments made simple in Africa and the world at large.</h5>                   
                 </div>
                 <div class="row">
-                <div class="col s12 m4">
-                  <div class="icon-block">
-                    <h2 class="center green-text"><i class="material-icons large">flash_on</i></h2>
-                    <h5 class="center">More opportunity</h5>
-                    <p class="light center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
-                  </div>
-                </div>
-        
-                <div class="col s12 m4">
-                  <div class="icon-block">
-                    <h2 class="center blue-text"><i class="material-icons large">group</i></h2>
-                    <h5 class="center">Smart Experience</h5>
-        
-                    <p class="light center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
-                  </div>
-                </div>
-        
-                <div class="col s12 m4">
-                  <div class="icon-block">
-                    <h2 class="center red-text lighten-5"><i class="material-icons large">settings</i></h2>
-                    <h5 class="center">Developer zone</h5>
-        
-                    <p class="center-align">Extend your e-commerce target market in simple steps by integrating our services.</p>
-                  </div>
-                </div>
+                    <div class="col s12 m4">
+                      <div class="icon-block">
+                        <h2 class="center green-text"><i class="material-icons large">flash_on</i></h2>
+                        <h5 class="center">Speed</h5>
+                        <p class="light center-align">Transactions are effectuated with speed and accuracy once properly authenticated.</p>
+                      </div>
+                    </div>
+            
+                    <div class="col s12 m4">
+                      <div class="icon-block">
+                        <h2 class="center blue-text"><i class="material-icons large">trending_up</i></h2>
+                        <h5 class="center">Efficiency</h5>
+            
+                        <p class="light center-align">Your transactions are handled efficiently by our various giant providers and partners.</p>
+                      </div>
+                    </div>
+            
+                    <div class="col s12 m4">
+                      <div class="icon-block">
+                        <h2 class="center red-text lighten-5"><i class="material-icons large">dashboard</i></h2>
+                        <h5 class="center">Robustness</h5>
+            
+                        <p class="center-align">We run on the very best web engines to provide and ensure a consistent experience.</p>
+                      </div>
+                    </div>
+              </div>
+                <div class="row">
+                    <div class="col s12 m4">
+                      <div class="icon-block">
+                        <h2 class="center green-text"><i class="material-icons large">call_split</i></h2>
+                        <h5 class="center">Opportunity & Potential</h5>
+                        <p class="light center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
+                      </div>
+                    </div>
+            
+                    <div class="col s12 m4">
+                      <div class="icon-block">
+                        <h2 class="center blue-text"><i class="material-icons large">extension</i></h2>
+                        <h5 class="center">Smart Experience</h5>
+            
+                        <p class="light center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
+                      </div>
+                    </div>
+            
+                    <div class="col s12 m4">
+                      <div class="icon-block">
+                        <h2 class="center red-text lighten-5"><i class="material-icons large">developer_mode</i></h2>
+                        <h5 class="center">Developer zone</h5>
+            
+                        <p class="center-align">Extend your e-commerce target market in simple steps by integrating our services.</p>
+                      </div>
+                    </div>
               </div>
                 <div>
-                    <div class="slider"> <!-- Start slider -->
-                        <ul class="slides testimonials">
-                            <li>
-                                <img src="<?php echo URL::to('public/images'); ?>/payments.jpg" alt="Payment via mobilemoney" class="responsive-img"/>
-                                <div class="caption center-align">
-                                    <h3 class="black-text">Commentator</h3>
-                                    <h5 class="">Comment body</h5>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="<?php echo URL::to('public/images'); ?>/sendmoney.jpg" alt="send money between accounts" class="responsive-img"/>
-                                <div class="caption center-align">
-                                    <h3 class="black-text">Commentator</h3>
-                                    <h5 class="">Comment body</h5>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="<?php echo URL::to('public/images'); ?>/transaction_history.jpg" alt="View Transaction history" class="responsive-img"/>
-                                <div class="caption right-align">
-                                    <h3 class="black-text">Commentator</h3>
-                                    <h5 class="">Comment body</h5>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="<?php echo URL::to('public/images'); ?>/invoice.jpg" alt="View invoices" class="responsive-img"/>
-                                <div class="caption left-align">
-                                    <h3 class="black-text">Commentator</h3>
-                                    <h5 class="">Comment body</h5>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> <!-- End slider -->
                 </div>    
             </div>
             <!-- /.col-md-8 -->
@@ -128,7 +123,6 @@
                     </div>
                 
                 <div class="input-field col s12">
-                    <i class="material-icons prefix blue-text lighten-4" style="margin-right: 15px;">place</i>
                             <select name="country" id="country" required>
                                 <option value="" disabled selected> Country</option>
                                 <option value="Cameroon" >Cameroon</option>
@@ -147,7 +141,7 @@
                                 <option value="Canada" >Canada</option>
                                 <option value="South Korea" >South Korea</option>
                             </select>
-                            <label for="country">Select your country</label>
+                            <label for="country"><i class="material-icons blue-text lighten-4 left" style="margin-right: 15px;">place</i>Select your country</label>
                             <span class="badge alert-danger"><?php echo $errors->first('country'); ?></span>
                 </div>
                     
