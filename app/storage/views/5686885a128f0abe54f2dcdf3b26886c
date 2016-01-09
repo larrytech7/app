@@ -133,20 +133,18 @@
                                 <option value="" disabled selected> Country</option>
                                 <option value="Cameroon" >Cameroon</option>
                                 <option value="Nigeria" >Nigeria</option>
-                                <option value="Chad" >Chad</option>
                                 <option value="South Africa">South Africa</option>
-                                <option value="Ghana" >Ghana</option>
+                                <option value="Ivory Coast" >Ivory Coast</option>
                                 <option value="Senegal" >Senegal</option>
-                                <option value="Kenya" >Kenya</option>
+<!--                                <option value="Kenya" >Kenya</option>
                                 <option value="Uganda" >Uganda</option>
-                                
+                                <option value="Ghana">Ghana</option>
+-->                                
                                 <option value="USA" >USA</option>
                                 <option value="UK" >UK</option>
                                 <option value="France" >France</option>
                                 <option value="Germany">Germany</option>
                                 <option value="Canada" >Canada</option>
-                                <option value="Switzerland" >Switzerland</option>
-                                <option value="United Arab Emirates" >UAE</option>
                                 <option value="South Korea" >South Korea</option>
                             </select>
                             <label for="country">Select your country</label>
@@ -163,7 +161,7 @@
                     </div>
                     <div class="input-field col s12">
                         <p class="center-align">
-                            <button class="waves-effect waves-light btn-flat blue" type="submit" name="action">Create My Account
+                            <button class="sup waves-effect waves-light btn-flat blue white-text" type="submit" name="action">Create My Account
                                 <i class="material-icons right">send</i>
                             </button>
                         </p>

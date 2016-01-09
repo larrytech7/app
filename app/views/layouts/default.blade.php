@@ -122,7 +122,7 @@
                     @endif
                    
                     @if(Auth::check())
-                    <a href="{{URL::route('dashboard.change-password')}}" class="waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{{URL::route('dashboard.change-password')}}" class="sup waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
                     <a href="{{URL::route('logout')}}" class="sup waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
                     Logout </a>
                     @endif
