@@ -14,9 +14,9 @@
             <p></p>
             <br />
             <br />
-            <a href="#signup" class="center-align waves-effect waves-teal btn-flat btn-large blue white-text"><i class="material-icons">person_pin</i>&nbsp;Signup freely </a>
+            <a href="#signup" class="sup center-align waves-effect waves-teal btn-flat btn-large  white-text"><i class="material-icons left">person_pin</i>&nbsp;Signup freely </a>
             <form action="{{URL::to('sandbox/api/merchantapi')}}" method="post" name="merchant_form">
-                        <input type="hidden" name="apikey" value="xxxxx"/>
+                        <input type="hidden" name="apikey" value="28ba9d34654575596871e94e99b4d511d6a8665a"/>
                         <input type="hidden" name="currency" value="USD"/>
                         <input type="hidden" name="amount" value="20"/>
                         <input type="hidden" name="return_url" value="https://iceteck.com" />

@@ -1,7 +1,32 @@
 <?php
 
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\PayerInfo;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
+use PayPal\Api\CreditCard;
+use PayPal\Api\FundingInstrument;
+
+require_once('PaymentUtil.php');
+
 class DeveloperController extends BaseController {
 	
+    public function __construct() {
+        // setup PayPal api context
+        $paypal_conf = Config::get('paypal');
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
+        $this->_api_context->setConfig($paypal_conf['settings']);
+    }
+    
 	public function createDeveloper(){
 	   
 		$validator = Validator::make(Input::all(),
@@ -65,28 +90,6 @@ class DeveloperController extends BaseController {
 		return Redirect::route('home')
 				->with('alertMessage', 'We could not activate your account. Try again later.');
 	}
-    
-    //function to process merchant checkout
-    public function checkout(){
-        try{
-            //$data = Session::get('data');
-            $chktype = Input::get('method'); //valid expected values are paypal or mobilemoney
-            switch($chktype){
-                case 'paypal':
-                    //call paypal method
-                    echo $chktype;
-                    break;
-                case 'mobilemoney':
-                    //call mobilemoney method
-                    
-                    break;
-            }
-            
-        }catch(Exception $x){
-            return Redirect::route('sandbox/api/merchantapi')
-                        ->with('alertError', 'You must login to proceed');
-        }
-    }
     
     //show various payment methods so as to allow users seelct a payment method
     public function purchase(){
@@ -262,6 +265,134 @@ class DeveloperController extends BaseController {
         var_dump(Input::get());
         //return Redirect::away(Input::get('user1'))
 		//	             	->withInput('alertError', 'STP Transaction cancelled by user');
+    }
+    //pay with paypal method
+        public function payWithPaypal() {
+        //purchase parameters
+        $mmnumber      = Input::get('number');
+        $apikey         = Input::get('apikey');
+        $amounttosend  = Input::get('amount');
+        $currency      = Input::get('currency');
+        $item          = Input::get('item_name');
+        $cancel_url    = Input::get('cancel_url');
+        $confirm_url   = Input::get('confirm_url');
+       // $cno        = Input::get('cardnumber');
+        $developers = Developer::where('dev_key', '=',$apikey)
+                                ->where('dev_status', '=', 1)
+                                ->limit(1)
+                                ->get();
+        if($developers != null){
+            foreach($developers as $developer){
+                $mmnumber = $developer->dev_email.' | '.$developer->dev_number.' | '.$developer->dev_username;
+                $type   = $developer->dev_paymentprovider;
+             //   echo $mmnumber;
+              //  echo '<BR/>'.$type;
+            }
+        }else{
+            Redirect::away($cancel_url);
+        }
+        
+        $charges = new PlatformCharges($amounttosend, $currency, $type);
+//        $desc    = $charges->getReceiverType($type);
+        
+        Session::set('destProvider', $type);
+        Session::set('destination', $mmnumber);
+
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');// Valid Values: ["credit_card", "bank", "paypal", "pay_upon_invoice", "carrier"]
+        
+        //TODO:: try to deduce the receiver type (email or number) and set the payerinfo data correctly for consistency
+        $payerInfo = new PayerInfo();
+        $payerInfo->setFirstName($mmnumber); //used to represent the receiver name/number/email
+        $payerInfo->setLastName('Item: '); //used to pass the transaction type in the request
+        
+        $payer->setPayerInfo($payerInfo);
+    
+        $item_1 = new Item();
+        $item_1->setName('Item purchase') // item name
+                ->setDescription("Purchase made for $item")
+    	        ->setCurrency('USD')
+    	        ->setQuantity(1)
+    	        ->setPrice($charges->getDueAmount('pp', $type) + 0.5 ); // unit price
+    
+    	// add item to list
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+    
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+               ->setTotal($charges->getDueAmount('pp', $type) + 0.5 );
+    
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+    		        ->setItemList($item_list)
+    		        ->setDescription('Payment for $item');
+    
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment-status'))
+    		          ->setCancelUrl(URL::route('payment-status'));
+    
+        $payment = new Payment();
+        $payment->setIntent('sale')
+    	        ->setPayer($payer)
+    	        ->setRedirectUrls($redirect_urls)
+    	        ->setTransactions(array($transaction));
+    
+    	try {
+                $payment->create($this->_api_context);
+                 foreach($payment->getLinks() as $link) {
+                if($link->getRel() == 'approval_url') {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
+            }
+            // add payment ID to session
+            Session::put('paypal_payment_id', $payment->getId());
+        
+            if(isset($redirect_url)) {
+                // redirect to paypal
+                return Redirect::away($redirect_url);
+            }
+    
+            return  "Error!!!!";
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                $err_data = json_decode($ex->getData(), true);
+                return Redirect::route('dashboard')
+                            ->with('alertError', 'Connection error. $err_data');
+                exit;
+            } else {
+                return Redirect::route('dashboard')
+                            ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
+    //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
+            }
+        }catch(Exception $ex){
+            return Redirect::away($cancel_url)
+                            ->with('alertError', 'Error! '.$ex->getMessage());
+        }
+    }
+    
+    //function to process merchant checkout
+    public function checkout(){
+        try{
+            //$data = Session::get('data');
+            $chktype = Input::get('method'); //valid expected values are paypal or mobilemoney
+            switch($chktype){
+                case 'paypal':
+                    //call paypal method
+                    $this->payWithPaypal();
+                    break;
+                case 'mobilemoney':
+                    //call mobilemoney method
+                    
+                    break;
+            }
+            
+        }catch(Exception $x){
+            return Redirect::route('sandbox/api/merchantapi')
+                        ->with('alertError', ''.$x->getMessage());
+        }
     }
 
 }

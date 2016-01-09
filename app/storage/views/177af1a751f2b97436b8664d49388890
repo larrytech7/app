@@ -37,7 +37,14 @@
     min-height: 100vh;
     flex-direction: column;
   }
-
+  .sup{
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border-radius:25px;
+        border:medium solid #2196F3;
+        overflow: hidden;
+        outline:blue;
+    }
   main {
     flex: 1 0 auto;
   }
@@ -111,12 +118,12 @@
                 <div class="navbar-form navbar-right">
                     <?php if(Auth::check()==NULL): ?>
                         <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
-                        <a href="#signup" class="waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
+                        <a href="#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     <?php endif; ?>
                    
                     <?php if(Auth::check()): ?>
                     <a href="<?php echo URL::route('dashboard.change-password'); ?>" class="waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
-                    <a href="<?php echo URL::route('logout'); ?>" class="waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                    <a href="<?php echo URL::route('logout'); ?>" class="sup waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
                     Logout </a>
                     <?php endif; ?>
                 </div>
