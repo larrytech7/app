@@ -339,6 +339,8 @@ class DeveloperController extends BaseController {
     	        ->setTransactions(array($transaction));
     
     	try {
+    	  //     var_dump($payment);
+               
                 $payment->create($this->_api_context);
                  foreach($payment->getLinks() as $link) {
                 if($link->getRel() == 'approval_url') {
@@ -359,11 +361,11 @@ class DeveloperController extends BaseController {
             if (\Config::get('app.debug')) {
                 echo "Exception: " . $ex->getMessage() . PHP_EOL;
                 $err_data = json_decode($ex->getData(), true);
-                return Redirect::route('dashboard')
+                return Redirect::route($cancel_url)
                             ->with('alertError', 'Connection error. $err_data');
                 exit;
             } else {
-                return Redirect::route('dashboard')
+                return Redirect::route($cancel_url)
                             ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
     //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
             }

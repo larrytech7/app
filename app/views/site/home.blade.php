@@ -14,7 +14,7 @@
             <p></p>
             <br />
             <br />
-            <a href="#signup" class="sup center-align waves-effect waves-teal btn-flat btn-large  white-text"><i class="material-icons left">person_pin</i>&nbsp;Signup freely </a>
+            <a href="#signup" class="sup center-align waves-effect waves-blue btn-flat btn-large  white-text"><i class="material-icons left">person_pin</i>&nbsp;Signup freely </a>
             <form action="{{URL::to('sandbox/api/merchantapi')}}" method="post" name="merchant_form">
                         <input type="hidden" name="apikey" value="28ba9d34654575596871e94e99b4d511d6a8665a"/>
                         <input type="hidden" name="currency" value="USD"/>
@@ -35,7 +35,7 @@
                       <div class="icon-block">
                         <h2 class="center green-text"><i class="material-icons large">flash_on</i></h2>
                         <h5 class="center">Speed</h5>
-                        <p class="light center-align">Transactions are effectuated with speed and accuracy once properly authenticated.</p>
+                        <p class="center-align">Transactions are effectuated with speed and accuracy once properly authenticated.</p>
                       </div>
                     </div>
             
@@ -44,7 +44,7 @@
                         <h2 class="center blue-text"><i class="material-icons large">trending_up</i></h2>
                         <h5 class="center">Efficiency</h5>
             
-                        <p class="light center-align">Your transactions are handled efficiently by our various giant providers and partners.</p>
+                        <p class="center-align">Your transactions are handled efficiently by our various giant providers and partners.</p>
                       </div>
                     </div>
             
@@ -62,7 +62,7 @@
                       <div class="icon-block">
                         <h2 class="center green-text"><i class="material-icons large">call_split</i></h2>
                         <h5 class="center">Opportunity & Potential</h5>
-                        <p class="light center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
+                        <p class="center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
                       </div>
                     </div>
             
@@ -71,7 +71,7 @@
                         <h2 class="center blue-text"><i class="material-icons large">extension</i></h2>
                         <h5 class="center">Smart Experience</h5>
             
-                        <p class="light center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
+                        <p class="center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
                       </div>
                     </div>
             
@@ -123,7 +123,7 @@
                          <span class="badge alert-danger">{{ $errors->first('confirm_password') }}</span>
                     </div>
                 
-                <div class="input-field col s12">
+                    <div class="input-field col s12">
                             <select name="country" id="country" required>
                                 <option value="" disabled selected> Country</option>
                                 <option value="Cameroon" >Cameroon</option>
@@ -144,7 +144,7 @@
                             </select>
                             <label for="country"><i class="material-icons blue-text lighten-4 left" style="margin-right: 15px;">place</i>Select your country</label>
                             <span class="badge alert-danger">{{ $errors->first('country') }}</span>
-                </div>
+                    </div>
                     
                     <div class="input-field col s12">
                             <input type="checkbox" id="nletter" name="newsletter"/>
