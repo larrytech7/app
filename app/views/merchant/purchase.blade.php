@@ -24,8 +24,8 @@
                                 <input type="hidden" name="apikey" value="{{Input::get('apikey')}}"/>
                                 <input type="hidden" name="amount" value="{{Input::get('amount')}}"/>
                                 <input type="hidden" name="currency" value="{{Input::get('currency')}}"/>
-                                <input type="hidden" name="cancel_url" value="{{URL::route('sandbox/api/merchantapi')}}" />
-                                <input type="hidden" name="confirm_url" value="{{URL::route('sandbox/api/merchantapi')}}" />
+                                <input type="hidden" name="cancel_url" value="https://mysite.com/cancel" />
+                                <input type="hidden" name="confirm_url" value="https://mysite.com/confirm" />
                                 <input type="hidden" name="item_name" value="candy" />
                                 <input type="hidden" name="method" value="paypal"/>
                             </div>

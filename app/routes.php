@@ -21,9 +21,17 @@ Route::any('sandbox/api/merchantapi', array(
     	'uses' => 'DeveloperController@purchase'
     ));
     //checkout with paypal
-Route::any('sandbox/api/merchantapi/paypal', array(
+Route::post('sandbox/api/merchantapi/paypal', array(
     	'as' => 'sandbox/api/merchantapi/paypal',
     	'uses' => 'DeveloperController@checkout'
+    ));
+Route::any('api/merchantapi/paypalconfirm', array(
+    	'as' => 'api/merchantapi/paypalconfirm',
+    	'uses' => 'DeveloperController@ppconfirm'
+    ));
+Route::any('api/merchantapi/paypalcancel', array(
+    	'as' => 'api/merchantapi/paypalcancel',
+    	'uses' => 'DeveloperController@ppcancel'
     ));
     //checkout with mobile money (MTN)
 Route::any('sandbox/api/merchantapi/mobilemoney', array(

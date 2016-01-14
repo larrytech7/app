@@ -308,12 +308,14 @@ class PaymentController extends BaseController {
 		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});
         
-        return Redirect::route('dashboard')
-                        ->with('alertMessage', 'Transaction Successful');
+//        return Redirect::route('dashboard')
+//                        ->with('alertMessage', 'Transaction Successful');
 
     if ($result->getState() == 'approved') { // payment made
-        return Redirect::route('original.route')
-            ->with('success', 'Payment successful');
+         return Redirect::route('dashboard')
+                        ->with('alertMessage', 'Transaction Successful');
+ //       return Redirect::route('original.route')
+   //         ->with('success', 'Payment successful');
     }
     return "Error!!!";
     }

@@ -226,7 +226,6 @@ class DeveloperController extends BaseController {
 
         if ($hash_received == $_POST['hash']) {
         // valid payment
-        
                 $transaction = new IcePayTransaction();
                 $transaction->user_id = Auth::user()->id;
                 $transaction->tid = $payment['tr_id']; //transaction id or transaction bordereaux
@@ -267,7 +266,7 @@ class DeveloperController extends BaseController {
 		//	             	->withInput('alertError', 'STP Transaction cancelled by user');
     }
     //pay with paypal method
-        public function payWithPaypal() {
+    public function payWithPaypal() {
         //purchase parameters
         $mmnumber      = Input::get('number');
         $apikey         = Input::get('apikey');
@@ -329,8 +328,8 @@ class DeveloperController extends BaseController {
     		        ->setDescription('Payment for $item');
     
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('payment-status'))
-    		          ->setCancelUrl(URL::route('payment-status'));
+        $redirect_urls->setReturnUrl(URL::route('api/merchantapi/paypalconfirm'))
+    		          ->setCancelUrl(URL::route('api/merchantapi/paypalcancel'));
     
         $payment = new Payment();
         $payment->setIntent('sale')
@@ -339,8 +338,6 @@ class DeveloperController extends BaseController {
     	        ->setTransactions(array($transaction));
     
     	try {
-    	  //     var_dump($payment);
-               
                 $payment->create($this->_api_context);
                  foreach($payment->getLinks() as $link) {
                 if($link->getRel() == 'approval_url') {
@@ -348,15 +345,14 @@ class DeveloperController extends BaseController {
                     break;
                 }
             }
+         //   var_dump($payment->getLinks());
+         //   var_dump($redirect_url);
             // add payment ID to session
             Session::put('paypal_payment_id', $payment->getId());
+            header('Location: '.$redirect_url);
+            exit;
+//            return isset($redirect_url)?Redirect::away($redirect_url): "Error!!Paypal Checkout error";
         
-            if(isset($redirect_url)) {
-                // redirect to paypal
-                return Redirect::away($redirect_url);
-            }
-    
-            return  "Error!!!!";
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 echo "Exception: " . $ex->getMessage() . PHP_EOL;
@@ -370,9 +366,97 @@ class DeveloperController extends BaseController {
     //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
             }
         }catch(Exception $ex){
-            return Redirect::away($cancel_url)
+            return Redirect::route($cancel_url)
                             ->with('alertError', 'Error! '.$ex->getMessage());
         }
+    }
+    
+    //handle confirm requests
+    public function ppconfirm(){
+        echo 'Transaction confirmed';
+        // Get the payment ID before session clear
+        $payment_id = Session::get('paypal_payment_id');
+    
+        // clear the session payment ID
+        Session::forget('paypal_payment_id');
+    
+        // Get the Payer id and token
+        $payer_id = Input::get('PayerID');
+        $token = Input::get('token');
+        // If any of the two is empty, payment was not made
+        if (empty($payer_id) || empty($token)) 
+        {
+            return Redirect::route('home')
+                            ->with('alertError', 'Paypal Transaction aborted');
+        }
+        if($payment_id == null){
+                    return Redirect::route('home')
+                        ->with('alertError', 'Transaction Cancelled');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+    
+        // PaymentExecution object includes information necessary 
+        // to execute a PayPal account payment. 
+        // The payer_id is added to the request query parameters
+        // when the user is redirected from paypal back to your site
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+    
+        //Execute the payment
+        $result = $payment->execute($execution, $this->_api_context);
+        $transaction_json  = json_decode($result->getTransactions()[0], TRUE);
+        //get Payer details
+        $payer['email'] = $result->getPayer()->getPayerInfo()->getEmail();
+        $payer['phone'] = $result->getPayer()->getPayerInfo()->getPhone();
+        $payer['name'] = $result->getPayer()->getPayerInfo()->getFirstName().$result->getPayer()->getPayerInfo()->getLastName()
+        .$result->getPayer()->getPayerInfo()->getMiddleName();
+        
+        //retrieve transaction destination user NOT our business account, set before transaction request was sent to paypal
+        
+
+        $transaction = new IcePayTransaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->tid = $result->getId(); //transaction id or transaction bordereaux
+        $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
+        $transaction->receiver_email = Session::get('destination'); //receiver's email or number)
+        $transaction->type = 'PAYPAL_TO_'.Session::get('destProvider').'_'.$transaction_json['related_resources'][0]['sale']['payment_mode'];
+        $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
+        $transaction->amount = $transaction_json['amount']['total']; //total amount deducted and transferred
+        $transaction->currency = $transaction_json['amount']['currency'];
+        $transaction->save();
+        
+        $email = Auth::user()->email;//$payer['email'];
+        $username = Auth::user()->username;
+        
+        //send transaction email to sender confirming transactions in a much professional way.
+        	Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date('Y-m-d H:i:s'),
+                                                            'tid' => $result->getId(),
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>$result->getPayer()->getPayerInfo()->getFirstName(),
+                                                               'receiver_number'=>$result->getPayer()->getPayerInfo()->getFirstName(),
+                                                               'status'=>'PENDING',
+                                                               'amount'=>($transaction_json['amount']['total'] - 0.5 ).' '.$transaction_json['amount']['currency'],
+                                                               'charge'=>'0.5 '.$transaction_json['amount']['currency'],
+                                                               'total'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
+                                                               'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
+                                                               , function($message) use ($email, $username){
+		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
+			     	});
+        
+        return Redirect::route('dashboard')
+                        ->with('alertMessage', 'Transaction Successful');
+
+        if ($result->getState() == 'approved') { // payment made
+            return Redirect::route('original.route')
+                ->with('success', 'Payment successful');
+        }
+        return "Error!!!";
+    }
+    
+    //handle cancelled requests
+    public function ppcancel(){
+            echo 'Transaction cancelled';
     }
     
     //function to process merchant checkout
