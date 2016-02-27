@@ -5,17 +5,11 @@ class DashboardController extends BaseController {
 	
 	public function dashboard(){
 
-		//if (Auth::check()) {
-
 			$user = User::find(Auth::user()->id);
 			
 			return View::make('site.dashboard')
 				->with('user', $user)
-				->with('title', 'IcePay - User Dashboard');
-		//} else {
-			//return Redirect::route('home');
-		//}
-		
+				->with('title', 'IzePay - User Dashboard');
 	}
 
 	public function viewUserProfile(){
@@ -70,6 +64,17 @@ class DashboardController extends BaseController {
         $converter = new PlatformCharges($amount, $from, $to);
 //        echo round($converter->convertCurrency($from, $to, $amount), 2) .' '.$to ;
         echo round($converter->convertCurrency($from, $to, $amount), 3) .' '.$to ;
+    }
+    //developper/merchant functionality
+    public function devzone(){
+ 			
+        $user = User::find(Auth::user()->id);
+        $data['developers'] = Developer::where('dev_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+			
+        return View::make('dev.developer')
+                    ->with($data)
+				    ->with('user', $user)
+				    ->with('title', 'HyboPay - Merchant|Developer');
     }
 
 }

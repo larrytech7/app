@@ -32,6 +32,22 @@
     <link href="{{URL::to('public/css')}}/material-wfont.min.css" rel="stylesheet"/>
 
     <style>
+    body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .sup{
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border-radius:25px;
+        border:medium solid #2196F3;
+        overflow: hidden;
+        outline:blue;
+    }
+  main {
+    flex: 1 0 auto;
+  }
     video#bgvid { 
         position: absolute;
         top: 50%;
@@ -78,13 +94,13 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
-                <a class="brand-logo" href="{{URL::route('home')}}" style="margin-bottom: 5px;">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="110"/>
+                <a class="brand-logo" href="{{URL::route('home')}}">
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 180px;height: 90px; margin-top:5px"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" width="230" height="100"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 180px;height: 80px;margin-top:5px"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -102,12 +118,12 @@
                 <div class="navbar-form navbar-right">
                     @if(Auth::check()==NULL)
                         <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
-                        <a href="#signup" class="waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
+                        <a href="#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     @endif
                    
                     @if(Auth::check())
-                    <a href="{{URL::route('dashboard.change-password')}}" class="waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
-                    <a href="{{URL::route('logout')}}" class="waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                    <a href="{{URL::route('dashboard.change-password')}}" class="sup waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{{URL::route('logout')}}" class="sup waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
                     Logout </a>
                     @endif
                 </div>
@@ -127,7 +143,7 @@
         <footer class="page-footer grey lighten-3">
             
             <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
-            <p>&copy; {{ date('Y') }} IceTeck, Inc.</p>
+            <p>&copy; {{ date('Y') }} IceTeck.</p>
       </footer>
           <!-- Login -->
       <div id="login" class="modal">
@@ -166,7 +182,6 @@
     <script type="text/javascript" src="{{URL::to('public/js')}}/jquery-ui.js"></script>
 
     <!-- Bootstrap/Materialize Core JavaScript -->
-    <script  type="text/javascript" src="{{URL::to('public/js')}}/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/flipper.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/md-js.js"></script>
     <script type="text/javascript" src="{{URL::to('public/js')}}/card-depth.js"></script>
@@ -181,7 +196,7 @@
         $('.loading').hide();
         $('.slider').slider({
             interval: 8000,
-            height : 300
+            height : 350
         });
         $(".dropdown-button").dropdown();
         $('.tooltiped').tooltip({delay: 50,
@@ -191,12 +206,12 @@
     </script>
      @if(Session::has('alertMessage'))
             <div class="row">
-                <script> Materialize.toast("{{Session::get('alertMessage')}}", 5000, 'green-text')</script>
+                <script> Materialize.toast("{{Session::get('alertMessage')}} <i class='material-icons right'>done_all</i>", 5000, 'green-text')</script>
             </div>
         @endif
         @if(Session::has('alertError'))
             <div class="col-lg-12 alert alert-danger alert-dismissible fade in" role="alert">
-                <script> Materialize.toast("{{Session::get('alertError')}}", 5000, 'red-text')</script>
+                <script> Materialize.toast("{{Session::get('alertError')}} <i class='material-icons right'>clear</i>", 5000, 'red-text')</script>
             </div>
         @endif
     <script>
@@ -211,7 +226,7 @@
     try{
         vid.addEventListener('ended', function() {
             // only functional if "loop" is removed 
-             vid.pause();
+            vid.pause();
         	// to capture IE10
         	vidFade();
         });
@@ -219,20 +234,22 @@
         pauseButton.addEventListener("click", function() {
             vid.classList.toggle("stopfade");
         	if (vid.paused) {
-        vid.play();
-        		pauseButton.innerHTML = "Pause";
+                vid.play();
+        		pauseButton.innerHTML = '<i class="material-icons">pause</i>'; //pause
         	} else {
                 vid.pause();
-                pauseButton.innerHTML = "Paused";
+                pauseButton.innerHTML = '<i class="material-icons">play_arrow</i>';//paused
         	}
         })
         }catch(err){}
+        //click scroll functionality
         $(function() {
           $('a[href*=#]:not([href=#])').click(function() {
             if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
               var target = $(this.hash);
               target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
               if (target.length) {
+                if($(this).attr('href') == '#signup')
                 $('html,body').animate({
                   scrollTop: target.offset().top
                 }, 1000);
@@ -246,9 +263,9 @@
             oripass = $('#password').val();
             verpass = $('#confirm_password').val();
             if(oripass == verpass)
-                Materialize.toast('Passwords match', 2000, 'green-text','');
+                Materialize.toast('Passwords match <i class="material-icons right">done_all</i>', 2000, 'green-text','');
             else
-                Materialize.toast('Passwords Do not match', 3000, 'red-text', '');
+                Materialize.toast('Passwords Do not match <i class="material-icons right">clear</i>', 3000, 'red-text', '');
         }
   </script>
 

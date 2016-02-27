@@ -2,12 +2,13 @@
 
 @section('content')
         <!-- Heading Row -->
+        
         <div class="row">
             <div class="col-md-8">
                 <div class="col s12 m3 ">
                     <div class="collection">
-                        <a class="collection-item blue active" href="{{URL::route('home')}}">
-                            <i class="material-icons left ">home</i>Home
+                        <a class="collection-item blue-text" href="{{URL::route('home')}}">
+                            <i class="material-icons left blue-text">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
                             <i class="material-icons left green-text darken-5">payment</i>New Transaction
@@ -15,97 +16,48 @@
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left brown-text lighten-1">assignment</i>History
                         </a>
-                        <a href="#" class="opt collection-item blue-text" >
+                        <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left teal-text lighten-1">settings</i>Settings
                         </a>
-                        <a class="collection-item blue-text" href="{{URL::route('developer')}}">
+                        <a class="active collection-item blue" href="{{URL::route('developer')}}">
                             <i class="material-icons left">business</i> Merchant
                         </a>
-                        <a href="#apidocs" class="opt collection-item blue-text">
+                        <a href="#apidocs" class="collection-item blue-text">
                             <i class="material-icons left">inbox</i>API Docs
                         </a>
-                        <a href="#support" class="opt collection-item blue-text ">
-                            <i class=" material-icons left">forum</i>API Support
+                        <a href="#support" class="collection-item blue-text ">
+                            <i class="material-icons left">forum</i>API Support
                         </a>
                     </div>
                 </div>
                 <div class="col s12 m9">
-                <div class="slider demoslider"> <!-- Start slider -->
-                <ul class="slides">
-                    <li>
-                        <img src="{{URL::to('public/images')}}/payments.jpg" alt="Payment via mobilemoney" class="responsive-img"/>
-                        <div class="caption center-align">
-                            <h3 class="black-text">Make a Payment</h3>
-                            <h5 class="">Pay freelancers or remote collaborators easily in few clicks.</h5>
-                            <p class="col s10 m10 l12 "> Click &laquo;New Transaction&raquo; </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="{{URL::to('public/images')}}/sendmoney.jpg" alt="send money between accounts" class="responsive-img"/>
-                        <div class="caption center-align">
-                            <h3 class="black-text">Send Money</h3>
-                            <h5 class="">Send money to areas between different platforms we integrate.</h5>
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;New Transaction&raquo;</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="{{URL::to('public/images')}}/transaction_history.jpg" alt="View Transaction history" class="responsive-img"/>
-                        <div class="caption right-align">
-                            <h3 class="teal-text">Transaction History</h3>
-                            <h5 class="teal-text">Properly organized history.</h5>                   
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;History&raquo; to view your latest transactions.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="{{URL::to('public/images')}}/invoice.jpg" alt="View invoices" class="responsive-img"/>
-                        <div class="caption left-align">
-                            <h3 class="black-text">Invoices</h3>
-                            <h5 class="black-text">Create invoices as easy as possible.</h5>                            
-                            <p class="col s10 m10 l12 black-text "> Click &laquo;Invoices&raquo; to view them</p>
-                        </div>
-                    </li>
-                </ul>
-            </div> <!-- End slider -->
-            </div>
-                <!-- How it works -->
-                <div class="">
-                <p><h2>How it works </h2></p>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/one.png" alt="View invoices" class="responsive-img"/>
-                            </h2>
-                            <h5 class="center">Send money/payment</h5>
-                            <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
-                        </div>
-                   </div>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/two.png" alt="View invoices" class="responsive-img"/>
-                            </h2>
-                            <h5 class="center">Select Portal</h5>
-                            <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
-                        </div>
-                   </div>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="responsive-img"/>
-                            </h2>
-                            <h5 class="center">Continue transaction</h5>
-                            <p class="light center-align">Once redirected to your payment provider, login and validate the transaction.</p>
-                        </div>
-                   </div>
-               <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.
-               You may also check in the history here to make sure your transaction has been recorded with us.
-               </p>
-               <br />
-               
-            </div>
+                    Accounts <span><a class="modal-trigger" href="#merchantaccount"><i class="material-icons">add_circle</i> New Account</a></span>
+                    
+                    <table class="table table-condensed table-hover">
+                                <th>Username</th>
+                                <th>Payment Provider</th>
+                                <th>API_KEY</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                        @foreach($developers as $developer)
+                              <tr>
+                                
+                                  <td>{{ $developer->dev_username }}</td>
+                                  <td>{{ $developer->dev_paymentprovider }}</td>
+                                  <td>{{ $developer->dev_key }}</td>
+                                  <td>{{ $developer->status == 0? 'sandbox':'live' }}</td>
+                                  <td>
+                                    <a href="{{ URL::route('developer').'?ac=rm&id='.$developer->dev_key }}" class="red-text" title="Delete account"><i class="material-icons">delete</i></a>
+                                    <a href="{{ URL::route('developer').'?ac=st&id='.$developer->dev_key }}" class="green-text" title="Activate or Deactivate account" ><i class="material-icons">swap_horiz</i></a>
+                                    <a href="{{ URL::route('developer').'?ac=gen&id='.$developer->dev_key }}" class="blue-text" title="Generate Payment Button"><i class="material-icons">autorenew</i></a>
+                                  </td>
+                                </tr>
+                        @endforeach
+                    </table>
+                </div>
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
@@ -214,14 +166,51 @@
             <!-- /.col-md-4 -->
         </div>
         <!-- /.row -->
-        <!-- options row -->
-        <div class="row">
-                <ul id="optionsmenu" class="dropdown-content">
-                  <li><a href="{{URL::route('developer')}}">Developer</a></li>
-                  <li class="divider"></li>
-                  <li><a class="opt" href="#!">Settings</a></li>
-                </ul>
-        </div>
+       
+ <!-- new merchant account Modal Structure -->
+          <div id="merchantaccount" class="modal ">
+            <div class="modal-content">
+              <h4>New Merchant Account</h4>
+              {{Form::open(array('url'=>'merchant', 'class'=>'form-horizontal merchant', 'role'=>'form'))}}
+                  
+                  <div class="col s6 center-align">
+                      <div class=" input-field col s12">
+                            <i class="material-icons prefix blue-text lighten-4">account_circle</i>
+                            <input type="text" id="merchantname" name="dev_username" required />
+                            <label for="merchantname"> Merchant username</label>
+                            <span class="alert-danger">{{ $errors->first('dev_username') }}</span>
+                      </div>
+                      <div class=" input-field col s12">
+                            <i class="material-icons prefix blue-text lighten-4">phone</i>
+                            <input type="tel" id="merchantphone" name="dev_phone" required />
+                            <label for="merchantphone"> Phone number (international)</label>
+                            <span class="alert-danger">{{ $errors->first('dev_phone') }}</span>
+                      </div>
+                      <div class=" input-field col s12">
+                            <i class="material-icons prefix blue-text lighten-4">email</i>
+                            <input type="email" id="merchantemail" name="dev_email" required />
+                            <label for="merchantemail"> Email</label>
+                            <span class="alert-danger">{{ $errors->first('dev_email') }}</span>
+                      </div>
+                        <div class="input-field col s12">
+                            <select name="merhantprovider" id="merhantprovider">
+                                <option selected="selected" value="paypal" class="left circle">PayPal</option>
+                                <option value="solidtrustpay" class="left circle">Solid Trust Pay</option>
+                                <option value="mobilemoney" class="left circle">Mobile Money</option>
+                            </select>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="The Payment provider to deposit funds in. Enter the corresponding phone, email or username to be used above.">info</i>Merchant Provider</label>
+                        </div>
+                      <div class="center-align">
+                        <button class="btn-flat btn-primary waves-effect waves-white" type="submit"> Create</button>
+                       <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Cancel</button>
+                        {{Form::token()}}
+                        {{Form::close()}}                    
+                      </div>
+                  </div>
+                  
+            </div>
+          </div>
+ <!-- end modal -->
  <!-- apyment Modal Structure -->
           <div id="modal1" class="modal ">
             <div class="modal-content">
@@ -345,10 +334,7 @@
                         Your account will be debited including the applicable Tax and platform charges as reflected on your Provider's account.                        
                     </div>
                   </div>
-             
             </div>
-           
           </div>
- <!-- end modal -->
-
+          
 @stop

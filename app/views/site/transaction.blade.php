@@ -1,12 +1,6 @@
 @extends('layouts.default')
 
 @section('content')
-<!-- Heading Row -->
-        <div class="row">
-            <div class="col-lg-12">
-            </div>
-        </div> <br />
-
         <!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">

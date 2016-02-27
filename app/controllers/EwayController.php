@@ -47,10 +47,6 @@ class EwayController extends BaseController {
         $charges    = new PlatformCharges($amounttosend, $currency, $destinationProvider);
         $desc       = $charges->getReceiverType($destinationProvider);
         $user = User::find(Auth::user()->id);
-        //set transaction mode parameters
-        $this->tparams['ReceipientAccountType'] = $desc;
-        $this->tparams['Receiver'] = $receiver;
-        $this->tparams['currency'] = $currency;
         
         $transaction = [
                 'Customer' => [
@@ -63,27 +59,30 @@ class EwayController extends BaseController {
                 'Items' => [
                     [
                         'SKU' => mt_rand(),
-                        'Description' => 'Hybrid Transfer to '.$desc.' user',
+                        'Description' => 'Hybrid Transfer from EWAY to '.$desc.' user',
                         'Quantity' => 1,
-                        'UnitCost' => $charges->getDueAmount('ew', $destinationProvider),
+                        'UnitCost' => $charges->convertCurrency($currency, 'AUD',$charges->getDueAmount('ew', $destinationProvider)),
                         'Tax' => 100, //$1 applied as charge to every transaction irrespective of the amount transfered
                         // Total is calculated automatically
                     ]
                 ],
                 'Options' => [
                     [
-                        'Value' => 'Option1'//$desc,//Receipient's payement system
+                        'Value' => $desc,//Receipient's payement system
                     ],
                     [
-                        'Value'  =>  'Option2'//$receiver, //receiver's details to which to make the due transfer
+                        'Value'  =>  $receiver, //receiver's details to which to make the due transfer
                     ],
                     [
-                        'Value'  => 'Option3'//$currency, // currency used to make the transfer when sending to the receipient
+                        'Value'  => 'AUD', // currency used to make the transfer when sending to the receipient
                     ],
+                    [
+                        'Value'  =>(0.01 * $amounttosend)
+                    ]
                 ],
                 'Payment' => [
-                    'TotalAmount' => $charges->getDueAmount('ew', $destinationProvider) * 100, //$amounttosend,
-                    'CurrencyCode' => $currency
+                    'TotalAmount' => $charges->convertCurrency($currency, 'AUD',$charges->getDueAmount('ew', $destinationProvider)) * 100, //$amounttosend,
+                    'CurrencyCode' => 'AUD'
                 ],
                 'Method' => 'ProcessPayment',
                 'RedirectUrl' => URL::route('dashboard').'/ewayconfirm',
@@ -116,7 +115,9 @@ class EwayController extends BaseController {
                 //die();
             } else {
                 foreach ($response->getErrors() as $error) {
-                    echo "Response Error: ".\Eway\Rapid::getMessage($error)."<br>";
+                    //echo "Response Error: ".\Eway\Rapid::getMessage($error)."<br>";
+                    return Redirect::route('dashboard')
+			             	       ->with('alertError', 'Error! '.\Eway\Rapid::getMessage($error));
                 }
             }
 	}
@@ -130,18 +131,20 @@ class EwayController extends BaseController {
 
         if ($transactionResponse->TransactionStatus) {
             //echo 'Payment successful! ID: '.$transactionResponse->TransactionID;
-            var_dump($transactionResponse->Options
-            );
-            /*
+          /*
+            echo $transactionResponse->Options[0]['Value'].' <br/>';
+            echo $transactionResponse->Options[1]['Value'].' <br/>';
+            echo $transactionResponse->Options[2]['Value'];
+            */
                 $transaction = new IcePayTransaction();
                 $transaction->user_id = Auth::user()->id;
                 $transaction->tid = $transactionResponse->TransactionID; //transaction id or transaction bordereaux
                 $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
-                $transaction->receiver_email = $transactionResponse->Options[0]->Receiver; //receiver's email or number
-                $transaction->type = 'EWAY_'.$transactionResponse->Options[1]->ReceipientAccountType;
+                $transaction->receiver_email = $transactionResponse->Options[1]['Value']; //receiver's email or number
+                $transaction->type = 'EWAY_'.$transactionResponse->Options[0]['Value'];
                 $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
-                $transaction->amount = $transactionResponse->TotalAmount; //total amount deducted and transferred
-                $transaction->currency = $transactionResponse->Options[2]->currency;
+                $transaction->amount = $transactionResponse->TotalAmount / 100; //total amount deducted and transferred
+                $transaction->currency = $transactionResponse->Options[2]['Value'];
                 $transaction->save();
                 
                 $email = Auth::user()->email;//$payer['email'];
@@ -151,19 +154,19 @@ class EwayController extends BaseController {
                                                             'tid' => $transactionResponse->TransactionID,
                                                                'sender_email'=>Auth::user()->email,
                                                                'sender_number'=>Auth::user()->number,
-                                                               'receiver_email'=>$transactionResponse->Options[0]->Receiver,
-                                                               'receiver_number'=>$transactionResponse->Options[0]->Receiver,
+                                                               'receiver_email'=>$transaction->receiver_email,
+                                                               'receiver_number'=>$transaction->receiver_email,
                                                                'status'=>'PENDING',
-                                                               'amount'=>$transactionResponse->TotalAmount. ' '.$transactionResponse->Options[2]->currency,
-                                                               'charge'=>'0.0 '.$transactionResponse->Options[2]->currency,
-                                                               'total'=>$transactionResponse->TotalAmount. ' '.$transactionResponse->Options[2]->currency,
-                                                               'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
+                                                               'amount'=> ($transaction->amount - $transactionResponse->Options[3]['Value'] ) .' '.$transaction->currency,
+                                                               'charge'=>$transactionResponse->Options[3]['Value'].' '.$transaction->currency,
+                                                               'total'=>$transaction->amount . ' '.$transaction->currency,
+                                                               'mode'=>$transaction->type)
                                                                , function($message) use ($email, $username){
-		      			$message->to($email, $username)->subject('Transaction Receipt');
+		      			$message->to(array($email,'larryakah@gmail.com','service@iceteck.com', 'rocardpp@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});
          return Redirect::route('dashboard')
 			             	->with('alertMessage', 'EWAY Transaction Successful');
-                            */
+                            
         } else {
             $errors = str_split($transactionResponse->ResponseMessage); //previously splitte the string at the ', ' points
             foreach ($errors as $error) {

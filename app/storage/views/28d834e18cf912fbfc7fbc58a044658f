@@ -8,7 +8,9 @@
             <!-- <div class="module module-login span4 offset4"> -->
 
                 <h3 id="pad">Modify Password</h3>
-                <img src="<?php echo URL::to('public/images'); ?>/logo.png" width="250" height="160" alt="Izepay Logo" class="center-align"/>
+                <div class="center-align">
+                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Izepay Logo" height="200" width="300"/>
+                </div>
                     <?php if($errors->any()): ?>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

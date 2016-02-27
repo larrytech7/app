@@ -13,6 +13,8 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+use PayPal\Api\CreditCard;
+use PayPal\Api\FundingInstrument;
 
 require_once('PaymentUtil.php');
 
@@ -35,18 +37,125 @@ class PaymentController extends BaseController {
         $amounttosend  = Input::get('amount');
         $currency   = Input::get('currency');
         $type       = Input::get('target'); //destination/receipient's payment Provider
+        $cno        = Input::get('cardnumber');
+        
+        $charges = new PlatformCharges($amounttosend, $currency, $type);
+        $desc    = $charges->getReceiverType($type);
+        
         Session::set('destProvider', $type);
+        Session::set('destination', $mmnumber);
+        
         if($type == 'pp'){
             return Redirect::route('dashboard')
                     ->with('alertError', 'You need to select different payment system for sender and receiver');
            // exit();
         }
-
-        $charges = new PlatformCharges($amounttosend, $currency, $type);
-        $desc    = $charges->getReceiverType($type);
+        if(isset($cno) && !empty($cno)){
+            //Credit card is being used. Process credit card
+            $cc_number  = Input::get('cardnumber');
+            $cc_cvv     = Input::get('cvv');
+            $cc_exdate  = Input::get('expire');
+            $cc_fname   = Input::get('fname');
+            $cc_lname   = Input::get('lname');
+            $cc_type    = Input::get('cctype');
+            
+            //set credit card info
+            $ccard = new CreditCard();
+            $ccard->setType($cc_type);
+            $ccard->setNumber($cc_number);
+            $ccard->setCvv2($cc_cvv); $date = explode('-', $cc_exdate);
+            $ccard->setExpireMonth($date[1]);
+            $ccard->setExpireYear($date[0]);
+            $ccard->setFirstName($cc_fname);
+            $ccard->setLastName($cc_lname);
+            //set funding Instrument
+            $fundingInstrument = new FundingInstrument();
+            $fundingInstrument->setCreditCard($ccard);
+            //set funding instrument list
+            
+            //set payer info
+            $payer = new Payer();
+            $payer->setFundingInstruments(array($fundingInstrument));
+            $payer->setPaymentMethod('credit_card');
+            
+            //set amount and currency
+            $amount = new Amount();
+            $amount->setCurrency('USD')
+                   ->setTotal($charges->getDueAmount('pp', $type) + 0.5 );
+            //set item
+            $item_1 = new Item();
+            $item_1->setName('Money Transfer') // item name
+                ->setDescription("Send money to a $desc User")
+    	        ->setCurrency('USD')
+    	        ->setQuantity(1)
+    	        ->setPrice($charges->getDueAmount('pp', $type) + 0.5 ); // unit price)
+    
+        	// add item to list
+            $item_list = new ItemList();
+            $item_list->setItems(array($item_1));
+            //set Transaction
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                        ->setItemList($item_list)
+                        ->setDescription("Send money To a $desc User");
+                    
+            //set transacion list
+            
+            //redirect urls
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::route('payment-status'))
+    		              ->setCancelUrl(URL::route('payment-status'));
+                      
+            //set payment
+            $payment = new Payment();
+            $payment->setIntent('sale')
+    	        ->setPayer($payer)
+    	        ->setRedirectUrls($redirect_urls)
+    	        ->setTransactions(array($transaction));
+                
+            //launch paypal processing request
+            try {
+                $payment->create($this->_api_context);
+                foreach($payment->getLinks() as $link) {
+                    if($link->getRel() == 'approval_url') {
+                        $redirect_url = $link->getHref();
+                        break;
+                    }
+                }
+                // add payment ID to session
+                Session::put('paypal_payment_id', $payment->getId());
+        
+                if(isset($redirect_url)) {
+                    // redirect to paypal
+                    return Redirect::away($redirect_url);
+                }else{
+                    print_r($payment->getLinks());
+//                    return  "Error! No redirect URL!!!";
+                }
+            } catch (\PayPal\Exception\PPConnectionException $ex) {
+                if (\Config::get('app.debug')) {
+                    echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                    $err_data = json_decode($ex->getData(), true);
+                    return Redirect::route('dashboard')
+                                ->with('alertError', 'Connection error. $err_data');
+                    exit;
+                } else {
+                    return Redirect::route('dashboard')
+                                ->with('alertError', 'Connection error occured. Please try again later. '.$ex->getMessage());
+        //            die('Some error occurred, sorry for the inconvenience. Our team has been notified to correct this error.');
+                }
+            }catch(Exception $ex){
+                return Redirect::route('dashboard')
+                                ->with('alertError', 'CC Processing Error! '.$ex->getMessage());
+            }
+    
+            return  "Error!!!!";
+            
+        }
+        //end credit card processing
 
         $payer = new Payer();
-        $payer->setPaymentMethod('paypal');//paypal
+        $payer->setPaymentMethod('paypal');// Valid Values: ["credit_card", "bank", "paypal", "pay_upon_invoice", "carrier"]
         
         //TODO:: try to deduce the receiver type (email or number) and set the payerinfo data correctly for consistency
         $payerInfo = new PayerInfo();
@@ -60,7 +169,7 @@ class PaymentController extends BaseController {
                 ->setDescription("Send money to a $desc User")
     	        ->setCurrency('USD')
     	        ->setQuantity(1)
-    	        ->setPrice($charges->getDueAmount('pp', $type)); // unit price)
+    	        ->setPrice($charges->getDueAmount('pp', $type) + 0.5 ); // unit price)
     
     	// add item to list
         $item_list = new ItemList();
@@ -68,7 +177,7 @@ class PaymentController extends BaseController {
     
         $amount = new Amount();
         $amount->setCurrency('USD')
-               ->setTotal($charges->getDueAmount('pp', $type));
+               ->setTotal($charges->getDueAmount('pp', $type) + 0.5 );
     
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -86,7 +195,22 @@ class PaymentController extends BaseController {
     	        ->setTransactions(array($transaction));
     
     	try {
-            $payment->create($this->_api_context);
+                $payment->create($this->_api_context);
+                 foreach($payment->getLinks() as $link) {
+                if($link->getRel() == 'approval_url') {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
+            }
+            // add payment ID to session
+            Session::put('paypal_payment_id', $payment->getId());
+        
+            if(isset($redirect_url)) {
+                // redirect to paypal
+                return Redirect::away($redirect_url);
+            }
+    
+            return  "Error!!!!";
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 echo "Exception: " . $ex->getMessage() . PHP_EOL;
@@ -104,22 +228,6 @@ class PaymentController extends BaseController {
                             ->with('alertError', 'Error! '.$ex->getMessage());
         }
     
-        foreach($payment->getLinks() as $link) {
-            if($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-    
-        // add payment ID to session
-        Session::put('paypal_payment_id', $payment->getId());
-    
-        if(isset($redirect_url)) {
-            // redirect to paypal
-            return Redirect::away($redirect_url);
-        }
-    
-        return  "Error!!!!";
     }
 
     //results from the request processed by PayPal
@@ -174,7 +282,7 @@ class PaymentController extends BaseController {
         $transaction->user_id = Auth::user()->id;
         $transaction->tid = $result->getId(); //transaction id or transaction bordereaux
         $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
-        $transaction->receiver_email = $result->getPayer()->getPayerInfo()->getFirstName(); //receiver's email or number
+        $transaction->receiver_email = Session::get('destination'); //receiver's email or number)
         $transaction->type = 'PAYPAL_TO_'.Session::get('destProvider').'_'.$transaction_json['related_resources'][0]['sale']['payment_mode'];
         $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
         $transaction->amount = $transaction_json['amount']['total']; //total amount deducted and transferred
@@ -192,20 +300,22 @@ class PaymentController extends BaseController {
                                                                'receiver_email'=>$result->getPayer()->getPayerInfo()->getFirstName(),
                                                                'receiver_number'=>$result->getPayer()->getPayerInfo()->getFirstName(),
                                                                'status'=>'PENDING',
-                                                               'amount'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
-                                                               'charge'=>'0.0 '.$transaction_json['amount']['currency'],
+                                                               'amount'=>($transaction_json['amount']['total'] - 0.5 ).' '.$transaction_json['amount']['currency'],
+                                                               'charge'=>'0.5 '.$transaction_json['amount']['currency'],
                                                                'total'=>$transaction_json['amount']['total'].' '.$transaction_json['amount']['currency'],
                                                                'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
                                                                , function($message) use ($email, $username){
-		      			$message->to($email, $username)->subject('Transaction Receipt');
+		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
 			     	});
         
-        return Redirect::route('dashboard')
-                        ->with('alertMessage', 'Transaction Successful');
+//        return Redirect::route('dashboard')
+//                        ->with('alertMessage', 'Transaction Successful');
 
     if ($result->getState() == 'approved') { // payment made
-        return Redirect::route('original.route')
-            ->with('success', 'Payment successful');
+         return Redirect::route('dashboard')
+                        ->with('alertMessage', 'Transaction Successful');
+ //       return Redirect::route('original.route')
+   //         ->with('success', 'Payment successful');
     }
     return "Error!!!";
     }

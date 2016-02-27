@@ -4,7 +4,7 @@ class AccountController extends BaseController {
 	
 	public function getLogin(){ 
 		return View::make('site.login')
-				->with('title', 'IcePay - LogIn');
+				->with('title', 'HyboPay - LogIn');
 	}
 
 	public function handleLogin(){ 
@@ -49,7 +49,7 @@ class AccountController extends BaseController {
 
 	public function getCreate(){
 		return View::make('site.register')
-				->with('title', 'IcePay - Registration');
+				->with('title', 'HyboPay - Registration');
 	}
 
 	public function handleRegister(){
@@ -132,7 +132,7 @@ class AccountController extends BaseController {
 
 	public function getChangePassword(){
 		return View::make('site.password')
-					->with('title', 'IcePay - Change Password');
+					->with('title', 'HyboPay - Change Password');
 	}
 
 	public function handleChangePassword(){
@@ -177,7 +177,7 @@ class AccountController extends BaseController {
 
 		$data['user'] = User::find($id);
 		return View::make('site.edituser')->with($data)
-						->with('title', 'IcePay - Edit user account');;
+						->with('title', 'HyboPay - Edit user account');;
 	}
 
 	public function postManage(){

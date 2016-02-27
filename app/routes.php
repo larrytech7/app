@@ -14,8 +14,48 @@
 Route::get('/', array(
 	'as' => 'home',
 	'uses' => 'HomeController@home'
-
 ));
+//----------------------------------------------------------Merchant/Developer API routes--------------------------------
+Route::any('sandbox/api/merchantapi', array(
+    	'as' => 'sandbox/api/merchantapi',
+    	'uses' => 'DeveloperController@purchase'
+    ));
+    //checkout with paypal
+Route::post('sandbox/api/merchantapi/paypal', array(
+    	'as' => 'sandbox/api/merchantapi/paypal',
+    	'uses' => 'DeveloperController@checkout'
+    ));
+Route::any('api/merchantapi/paypalconfirm', array(
+    	'as' => 'api/merchantapi/paypalconfirm',
+    	'uses' => 'DeveloperController@ppconfirm'
+    ));
+Route::any('api/merchantapi/paypalcancel', array(
+    	'as' => 'api/merchantapi/paypalcancel',
+    	'uses' => 'DeveloperController@ppcancel'
+    ));
+    //checkout with mobile money (MTN)
+Route::any('sandbox/api/merchantapi/mobilemoney', array(
+    	'as' => 'sandbox/api/merchantapi/mobilemoney',
+    	'uses' => 'DeveloperController@checkout'
+    ));
+	// handles cancel requests from STP payment provider
+	Route::any('sandbox/api/merchantapi/cancelstppurchase', array(
+		'as' => 'sandbox/api/merchantapi/cancelstppurchase',
+		'uses' => 'DeveloperController@cancelStpPurchase'
+	));
+    // handles confirm requests from STP payment provider
+	Route::any('sandbox/api/merchantapi/confirmstppurchase', array(
+		'as' => 'sandbox/api/merchantapi/confirmstppurchase',
+		'uses' => 'DeveloperController@cancelStpPurchase'
+	));
+    //handle login route
+    Route::post('sandbox/api/merchantapi/login', array(
+		'as' => 'sandbox/api/merchantapi/login',
+		'uses' => 'DeveloperController@doPurchase'
+	));
+
+//});
+//--------------------------------------------------------------- End merchant Routes -------------------------------------
 /*
 | Route to static pages
 */
@@ -56,10 +96,21 @@ Route::group(array('before' => 'auth'), function(){
 	'uses' => 'DashboardController@viewUserProfile'
 
 	));
+    
+    Route::get('dashboard/developer', array(
+	'as' => 'developer',
+	'uses' => 'DashboardController@devzone'
+
+	));
     //currency conversion
     Route::get('dashboard/cnv', array(
 	'as' => 'cnv',
 	'uses' => 'DashboardController@convert'
+	));
+    //create a new developer/merchant account
+    Route::post('merchant', array(
+	'as' => 'merchant',
+	'uses' => 'DeveloperController@createDeveloper'
 	));
 
 	/*
@@ -76,8 +127,6 @@ Route::group(array('before' => 'auth'), function(){
 		));
 
 	});
-
-
 
 	/*
 	| Change password (GET)
