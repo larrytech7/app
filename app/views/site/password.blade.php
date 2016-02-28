@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <input type="password" name="password" class="form-control" placeholder=" New Password">
+                            <input type="password" name="password" class="form-control" placeholder="New Password">
                         </div>
                     </div>
                     <div class="form-group">

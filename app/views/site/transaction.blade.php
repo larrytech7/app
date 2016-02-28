@@ -16,21 +16,9 @@
                                 <th>Amount</th>
                                 <th>Receiver</th>
                               </tr>
-                              <!--@if($transactions != null)
-                                @foreach($transactions as $transaction)
-                                <tr>
-                                  <td>{{ $transaction->created_at }}</td>
-                                  <td>{{ $transaction->type }}</td>
-                                  <td>{{ $transaction->sender_email }}</td>
-                                  <td>{{ $transaction->status }}</td>
-                                  <td>{{ $transaction->amount }}</td>
-                                  <td>{{ $transaction->receiver_email }}</td>
-                                </tr>
-                                @endforeach
-                              @endif -->
 
                               @foreach($transactions as $transaction)
-                              <tr>
+                              <tr onclick="javascript:$('div.hide').toggle();$('#{{$transaction->id}}').dialog({minWidth: 400})">
                                   <td>{{ date("F jS, Y -- g:i A",strtotime($transaction->created_at)) }}</td>
                                   <td>{{ $transaction->type }}</td>
                                   <td>{{ $transaction->sender_email }}</td>
@@ -38,6 +26,15 @@
                                   <td>{{ $transaction->amount .' '.$transaction->currency}}</td>
                                   <td>{{ $transaction->receiver_email }}</td>
                                 </tr>
+                                <div id="{{$transaction->id}}" title="Transaction Details" class="modal">
+                                    <p>SENT: <u>{{ date("F jS, Y -- g:i A",strtotime($transaction->created_at)) }}</u></p>
+                                    <p>AMOUNT: <u>{{ $transaction->amount .' '.$transaction->currency}}</u> &nbsp; STATUS: <span class="red-text">{{ $transaction->status }}</span></p>
+                                    <p>TO: <u>{{ $transaction->receiver_email }} </u></p>
+                                    <p>TRANSACTION TYPE: <u>{{ $transaction->type }}</u></p>
+                                    <p>TRANSACTION ID: <u>{{ $transaction->tid }}</u></p>
+                                    <br />
+                                    All conflicts should be indicated within 24 hours after the trasaction status has been marked completed.
+                                </div>
                                 @endforeach
 
                               </table>
