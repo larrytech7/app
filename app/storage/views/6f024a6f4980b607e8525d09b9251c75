@@ -16,7 +16,7 @@
                               </tr>
 
                               <?php foreach($transactions as $transaction): ?>
-                              <tr onclick="javascript:$('div.hide').toggle();$('div.modal').dialog('close');$('#<?php echo $transaction->id; ?>').dialog({minWidth: 400})">
+                              <tr onclick="javascript:$('div.hide').toggle();$('#<?php echo $transaction->id; ?>').dialog({minWidth: 400})">
                                   <td><?php echo date("F jS, Y -- g:i A",strtotime($transaction->created_at)); ?></td>
                                   <td><?php echo $transaction->type; ?></td>
                                   <td><?php echo $transaction->sender_email; ?></td>

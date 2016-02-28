@@ -39,7 +39,7 @@
                     <table class="table table-condensed table-hover">
                                 <th>Username</th>
                                 <th>Payment Provider</th>
-                                <th>API_KEY</th>
+                                <!-- <th>API_KEY</th> -->
                                 <th>Status</th>
                                 <th>Action</th>
                         @foreach($developers as $developer)
@@ -47,14 +47,35 @@
                                 
                                   <td>{{ $developer->dev_username }}</td>
                                   <td>{{ $developer->dev_paymentprovider }}</td>
-                                  <td>{{ $developer->dev_key }}</td>
+                                  <!-- <td>{{ $developer->dev_key }}</td>-->
                                   <td>{{ $developer->status == 0? 'sandbox':'live' }}</td>
                                   <td>
                                     <a href="{{ URL::route('developer').'?ac=rm&id='.$developer->dev_key }}" class="red-text" title="Delete account"><i class="material-icons">delete</i></a>
                                     <a href="{{ URL::route('developer').'?ac=st&id='.$developer->dev_key }}" class="green-text" title="Activate or Deactivate account" ><i class="material-icons">swap_horiz</i></a>
-                                    <a href="{{ URL::route('developer').'?ac=gen&id='.$developer->dev_key }}" class="blue-text" title="Generate Payment Button"><i class="material-icons">autorenew</i></a>
+                                    <a href="#!" onclick="javascript:$('#{{$developer->dev_id}}').dialog({minWidth: 600})" class="blue-text" title="Generate Payment Button"><i class="material-icons">autorenew</i></a>
                                   </td>
                                 </tr>
+                                <div id="{{$developer->dev_id}}" title="Payment Button" class="modal">
+                                    Copy the following code and use as your payment button.
+                                    <p>API KEY: <u>{{ $developer->dev_key }}</u></p>
+                                    <p>
+                                        <pre>
+                                                {{htmlspecialchars('
+                                                <form action="https://izepay.iceteck.com/app/sandbox/api/merchantapi)" method="post" name="merchant_form">
+                                                    <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
+                                                    <input type="hidden" name="currency" value="USD"/>
+                                                    <input type="hidden" name="amount" value="AMOUNT HERE"/>
+                                                    <input type="hidden" name="return_url" value="YOUR RETURN/RESULTS URL" />
+                                                    <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
+                                                    <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
+                                                    <input type="image" src="https://izepay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
+                                                </form>
+                                                ')}}
+                                        </pre>
+                                    </p>
+                                    <br />    
+                                </div>
+                                
                         @endforeach
                     </table>
                 </div>
