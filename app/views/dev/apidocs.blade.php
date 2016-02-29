@@ -1,121 +1,77 @@
-<?php $__env->startSection('content'); ?>
+@extends('layouts.default')
+
+@section('content')
         <!-- Heading Row -->
+        
         <div class="row">
             <div class="col-md-8">
                 <div class="col s12 m3 ">
                     <div class="collection">
-                        <a class="collection-item blue active" href="<?php echo URL::route('home'); ?>">
-                            <i class="material-icons left ">home</i>Home
+                        <a class="collection-item blue-text" href="{{URL::route('home')}}">
+                            <i class="material-icons left blue-text">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
                             <i class="material-icons left blue-text darken-5">payment</i>New Transaction
                         </a>
-                        <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="collection-item blue-text">
+                        <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
                         </a>
-                        <a href="#" class="opt collection-item blue-text" >
+                        <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
-                        <a class="collection-item blue-text" href="<?php echo URL::route('developer'); ?>">
-                            <i class="material-icons left">business</i> Merchant
+                        <a class="collection-item blue-text" href="{{URL::route('developer')}}">
+                            <i class="material-icons left ">business</i> Merchant
                         </a>
-                        <a href="<?php echo URL::route('apidocs'); ?>" class="collection-item blue-text">
+                        <a href="{{URL::route('apidocs')}}" class="active collection-item blue">
                             <i class="material-icons left">inbox</i>API Docs
                         </a>
-                        
+                    
                     </div>
                 </div>
                 <div class="col s12 m9">
-                <div class="slider demoslider"> <!-- Start slider -->
-                <ul class="slides">
-                    <li>
-                        <img src="<?php echo URL::to('public/images'); ?>/payments.jpg" alt="Payment via mobilemoney" class="responsive-img"/>
-                        <div class="caption center-align">
-                            <h3 class="black-text">Make a Payment</h3>
-                            <h5 class="">Pay freelancers or remote collaborators easily in few clicks.</h5>
-                            <p class="col s10 m10 l12 "> Click &laquo;New Transaction&raquo; </p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="<?php echo URL::to('public/images'); ?>/sendmoney.jpg" alt="send money between accounts" class="responsive-img"/>
-                        <div class="caption center-align">
-                            <h3 class="black-text">Send Money</h3>
-                            <h5 class="">Send money to areas between different platforms we integrate.</h5>
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;New Transaction&raquo;</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="<?php echo URL::to('public/images'); ?>/transaction_history.jpg" alt="View Transaction history" class="responsive-img"/>
-                        <div class="caption right-align">
-                            <h3 class="teal-text">Transaction History</h3>
-                            <h5 class="teal-text">Properly organized history.</h5>                   
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;History&raquo; to view your latest transactions.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="<?php echo URL::to('public/images'); ?>/invoice.jpg" alt="View invoices" class="responsive-img"/>
-                        <div class="caption left-align">
-                            <h3 class="black-text">Invoices</h3>
-                            <h5 class="black-text">Create invoices as easy as possible.</h5>                            
-                            <p class="col s10 m10 l12 black-text "> Click &laquo;Invoices&raquo; to view them</p>
-                        </div>
-                    </li>
-                </ul>
-            </div> <!-- End slider -->
-            </div>
-                <!-- How it works -->
-                <div class="">
-                <p><h2>How it works </h2></p>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="<?php echo URL::to('public/images'); ?>/one.png" alt="View invoices" class="responsive-img"/>
-                            </h2>
-                            <h5 class="center">Send money/payment</h5>
-                            <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
-                        </div>
-                   </div>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="<?php echo URL::to('public/images'); ?>/two.png" alt="View invoices" class="responsive-img"/>
-                            </h2>
-                            <h5 class="center">Select Portal</h5>
-                            <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
-                        </div>
-                   </div>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="<?php echo URL::to('public/images'); ?>/three.png" alt="View invoices" class="responsive-img"/>
-                            </h2>
-                            <h5 class="center">Continue transaction</h5>
-                            <p class="light center-align">Once redirected to your payment provider, authenticate the transaction.</p>
-                        </div>
-                   </div>
-               <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.
-               You may also check in the history here to make sure your transaction has been recorded with us.
-               </p>
-               <br />
-               
-            </div>
+                    <h4>Merchant/Developer Documentation</h4>
+                    <!-- Documentation -->
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">payment</i>General Payment Button Integration</div>
+                          <div class="collapsible-body">
+                            <p>After generating the payment button. You will be required to fill in the blanks with paramters that are explained below. Your payment button only goes live when 
+                            you have switched the account mode to live. All interactions with the button prior to the live switching is fake and only for testing purposes.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">lock</i>API KEY Field</div>
+                          <div class="collapsible-body"><p>set the value of this field to the API KEY provided at the top of the dialog box</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">whatshot</i>CURRENCY Field</div>
+                          <div class="collapsible-body"><p>Set the value to the currency you wish users to purchase in.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">money</i>AMOUNT Field</div>
+                          <div class="collapsible-body"><p>sh users to purchase in.</p></div>
+                        </li>
+                      </ul>
+                    
+                </div>
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
                 <div class="flip-card active-card full-card" >
                         <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
+                            <a href=""><img class=" img-circle text-center" src="{{URL::to('public/images')}}/user.jpg"/></a>
                         </div>
                         
-                        <!--<a href="<?php echo URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
-                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
+                        <!--<a href="{{URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
+                        <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
                             <span class="glyphicon glyphicon-user"></span>
                         </a>
                         <div class="well">
-                            <h3><?php echo $user->username; ?></h3><!-- 
+                            <h3>{{$user->username}}</h3><!-- 
                             <p class="red-text"><b>NOTE:</b> TO SEND MONEY USING YOUR VISA CARD, MASTERCARD OR ANY OTHER CREDIT CARD, SELECT &QUOT;<b>EWAY</b>&QUOT; AS YOUR PAYMENT PROVIDER AND YOUR AMOUNT WILL BE CONVERTED TO &QUOT;<b>AUD</b>&QUOT;</p>                            
                             -->
                         </div>                        
@@ -210,20 +166,56 @@
             <!-- /.col-md-4 -->
         </div>
         <!-- /.row -->
-        <!-- options row -->
-        <div class="row">
-                <ul id="optionsmenu" class="dropdown-content">
-                  <li><a href="<?php echo URL::route('developer'); ?>">Developer</a></li>
-                  <li class="divider"></li>
-                  <li><a class="opt" href="#!">Settings</a></li>
-                </ul>
-        </div>
+       
+ <!-- new merchant account Modal Structure -->
+          <div id="merchantaccount" class="modal ">
+            <div class="modal-content">
+              <h4>New Merchant Account</h4>
+              {{Form::open(array('url'=>'merchant', 'class'=>'form-horizontal merchant', 'role'=>'form'))}}
+                  
+                  <div class="col s6 center-align">
+                      <div class=" input-field col s12">
+                            <i class="material-icons prefix blue-text lighten-4">account_circle</i>
+                            <input type="text" id="merchantname" name="dev_username" required />
+                            <label for="merchantname"> Merchant username</label>
+                            <span class="alert-danger">{{ $errors->first('dev_username') }}</span>
+                      </div>
+                      <div class=" input-field col s12">
+                            <i class="material-icons prefix blue-text lighten-4">phone</i>
+                            <input type="tel" id="merchantphone" name="dev_phone" required />
+                            <label for="merchantphone"> Phone number (international)</label>
+                            <span class="alert-danger">{{ $errors->first('dev_phone') }}</span>
+                      </div>
+                      <div class=" input-field col s12">
+                            <i class="material-icons prefix blue-text lighten-4">email</i>
+                            <input type="email" id="merchantemail" name="dev_email" required />
+                            <label for="merchantemail"> Email</label>
+                            <span class="alert-danger">{{ $errors->first('dev_email') }}</span>
+                      </div>
+                        <div class="input-field col s12">
+                            <select name="merhantprovider" id="merhantprovider">
+                                <option selected="selected" value="paypal" class="left circle">PayPal</option>
+                                <option value="solidtrustpay" class="left circle">Solid Trust Pay</option>
+                                <option value="mobilemoney" class="left circle">Mobile Money</option>
+                            </select>
+                            <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="The Payment provider to deposit funds in. Enter the corresponding phone, email or username to be used above.">info</i>Merchant Provider</label>
+                        </div>
+                      <div class="center-align">
+                        <button class="btn-flat btn-primary waves-effect waves-white" type="submit"> Create</button>
+                       <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Cancel</button>
+                        {{Form::token()}}
+                        {{Form::close()}}                    
+                      </div>
+                  </div>
+                  
+            </div>
+          </div>
+ <!-- end modal -->
  <!-- apyment Modal Structure -->
           <div id="modal1" class="modal ">
             <div class="modal-content">
               <h4>New Transaction</h4>
-              <?php echo Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form')); ?>
-
+              {{Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form'))}}
                   <div class="row">
                   <div class="col s12 m6">
                     <h5>Transaction Info</h5>
@@ -324,17 +316,16 @@
                     <div id="stp">
                         <input type="hidden" name="merchantAccount" value="larryakah" />
                         <input type="hidden" name="item_id" value="STP Hybrid Transfer" />
-                        <input type="hidden" name="confirm_url" value="<?php echo URL::route('dashboard'); ?>/stpconfirm" />
+                        <input type="hidden" name="confirm_url" value="{{URL::route('dashboard')}}/stpconfirm" />
                         <input type="hidden" name="testmode" value="on" />
-                        <input type="hidden" name="notify_url" value="<?php echo URL::route('dashboard'); ?>/stpnotif" />
-                        <input type="hidden" name="return_url" value="<?php echo URL::route('dashboard'); ?>" />
-                        <input type="hidden" name="cancel_url" value="<?php echo URL::route('dashboard'); ?>/cancel" />
+                        <input type="hidden" name="notify_url" value="{{URL::route('dashboard')}}/stpnotif" />
+                        <input type="hidden" name="return_url" value="{{URL::route('dashboard')}}" />
+                        <input type="hidden" name="cancel_url" value="{{URL::route('dashboard')}}/cancel" />
                         <input type="hidden" name="user1" value="xx" id="user1" /> <!-- receiver email, number etc set by js -->
                         <input type="hidden" name="user2" value="xx" id="user2" /><!-- receiver's payment provider -->
                     </div>
-                    <?php echo Form::token(); ?>
-
-                    <?php echo Form::close(); ?>                    
+                    {{Form::token()}}
+                    {{Form::close()}}                    
                   </div>
                   </div>
                        
@@ -343,11 +334,7 @@
                         Your account will be debited including the applicable Tax and platform charges as reflected on your Provider's account.                        
                     </div>
                   </div>
-             
             </div>
-           
           </div>
- <!-- end modal -->
-
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          
+@stop

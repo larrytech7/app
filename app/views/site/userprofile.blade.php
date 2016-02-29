@@ -11,25 +11,22 @@
                             <i class="material-icons left ">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left green-text darken-5">payment</i>New Transaction
+                            <i class="material-icons left blue-text darken-5">payment</i>New Transaction
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
-                            <i class="material-icons left brown-text lighten-1">assignment</i>History
+                            <i class="material-icons left blue-text lighten-1">assignment</i>History
                         </a>
                         <a href="#" class="opt collection-item blue-text" >
-                            <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
+                            <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
-                            <i class="material-icons left teal-text lighten-1">settings</i>Settings
+                            <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
                         <a class="collection-item blue-text" href="{{URL::route('developer')}}">
                             <i class="material-icons left">business</i> Merchant
                         </a>
                         <a href="#apidocs" class="opt collection-item blue-text">
                             <i class="material-icons left">inbox</i>API Docs
-                        </a>
-                        <a href="#support" class="opt collection-item blue-text ">
-                            <i class=" material-icons left">forum</i>API Support
                         </a>
                     </div>
                 </div>
