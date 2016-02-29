@@ -36,18 +36,22 @@
                         <li>
                           <div class="collapsible-header"><i class="material-icons">payment</i>General Payment Button Integration</div>
                           <div class="collapsible-body">
-                            <p>After generating the payment button. You will be required to fill in the blanks with paramters that are explained below. Your payment button only goes live when 
+                            <p>After generating the payment button. You will be required to fill in the blanks with parameters that are explained below. Your payment button only goes live when 
                             you have switched the account mode to live. All interactions with the button prior to the live switching is fake and only for testing purposes.
                             </p>
                           </div>
                         </li>
                         <li>
                           <div class="collapsible-header"><i class="material-icons">lock</i>API KEY Field</div>
-                          <div class="collapsible-body"><p>set the value of this field to the API KEY provided at the top of the dialog box</p></div>
+                          <div class="collapsible-body"><p>set the value of this field to the <b>API KEY</b> provided at the top of the dialog box. <br/>
+                          It is useless using someone elses' key because that would mean every fund received by this button would go the owner of the key irrespective of the origin of the payment button</p>
+                          </div>
                         </li>
                         <li>
                           <div class="collapsible-header"><i class="material-icons">whatshot</i>CURRENCY Field</div>
-                          <div class="collapsible-body"><p>Set the value to the currency you wish users to purchase in.</p></div>
+                          <div class="collapsible-body"><p>Set this value to the currency you wish users to purchase in. <br/>
+                            Valid values are: USD, EUR, GBP, XAF, AUD</p>
+                          </div>
                         </li>
                         <li>
                           <div class="collapsible-header"><i class="material-icons">money</i>AMOUNT Field</div>

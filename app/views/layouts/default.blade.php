@@ -204,9 +204,7 @@
         $('.tooltiped').tooltip({delay: 50,
                                 position: 'right',
                                 tooltip: 'New tootlip'});
-        $('.collapsible').collapsible({
-                accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-            });
+    
     });
     </script>
      @if(Session::has('alertMessage'))
