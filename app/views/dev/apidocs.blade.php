@@ -46,7 +46,7 @@
                         <li>
                           <div class="collapsible-header"><i class="material-icons">lock</i>API KEY Field</div>
                           <div class="collapsible-body"><p>set the value of this field to the <b>API KEY</b> provided at the top of the 'payment button' dialog box. <br/>
-                          It is useless using someone elses' key because that would mean every fund received by this button would go the owner of the key irrespective of the origin of the payment button</p>
+                          It is useless using someone elses' key because that would mean every fund received by this button would go to the owner of the key irrespective of the origin of the payment button</p>
                           </div>
                         </li>
                         <li>
