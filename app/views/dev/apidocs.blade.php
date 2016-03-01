@@ -26,7 +26,7 @@
                             <i class="material-icons left ">business</i> Merchant
                         </a>
                         <a href="{{URL::route('apidocs')}}" class="active collection-item blue">
-                            <i class="material-icons left">inbox</i>API Docs
+                            <i class="material-icons left">library_books</i>API Docs
                         </a>
                     
                     </div>
