@@ -70,11 +70,11 @@
             </div>
                 <!-- How it works -->
                 <div class="">
-                <p><h2>How it works </h2></p>
+                <p><h4>How it works </h4></p>
                    <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/one.png" alt="View invoices" class="responsive-img"/>
+                                <img src="{{URL::to('public/images')}}/one.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
                             <h5 class="center">Send money/payment</h5>
                             <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
@@ -83,7 +83,7 @@
                    <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/two.png" alt="View invoices" class="responsive-img"/>
+                                <img src="{{URL::to('public/images')}}/two.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
                             <h5 class="center">Select Portal</h5>
                             <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
@@ -92,7 +92,7 @@
                    <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="responsive-img"/>
+                                <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
                             <h5 class="center">Continue transaction</h5>
                             <p class="light center-align">Once redirected to your payment provider, login and validate the transaction.</p>

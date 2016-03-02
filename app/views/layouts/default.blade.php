@@ -204,6 +204,8 @@
         $('.tooltiped').tooltip({delay: 50,
                                 position: 'right',
                                 tooltip: 'New tootlip'});
+                                
+        Materialize.showStaggeredList('#menulist');
     
     });
     </script>
