@@ -94,7 +94,7 @@
                             <h2 class="center green-text">
                                 <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
-                            <h5 class="center">Continue transaction</h5>
+                            <h5 class="center">Validate transaction</h5>
                             <p class="light center-align">Once redirected to your payment provider, authenticate the transaction.</p>
                         </div>
                    </div>
