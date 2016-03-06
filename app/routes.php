@@ -194,6 +194,14 @@ Route::group(array('before' => 'guest'), function(){
 			'uses' => 'AccountController@handleForgotpasswd'
 		));
 
+		/*
+		| Recover Password (GET)
+		*/
+		Route::post('recovery', array(
+			'as' => 'recovery',
+			'uses' => 'AccountController@handleRecovery' 
+		));
+
 	});
 
 	/*
@@ -223,6 +231,14 @@ Route::group(array('before' => 'guest'), function(){
 	Route::get('activate/{code}', array(
 		'as' => 'account-activate',
 		'uses' => 'AccountController@handleActivate' 
+	));
+
+	/*
+	| Recover Password (GET)
+	*/
+	Route::get('recovery/{link}', array(
+		'as' => 'recovery',
+		'uses' => 'AccountController@recovery' 
 	));
 
 });
@@ -303,3 +319,6 @@ Route::group(array('before' => 'auth'), function(){
 	));
 
 });
+
+
+
