@@ -205,5 +205,16 @@ class AccountController extends BaseController {
         return Redirect::back()->with('alertMessage', 'Account updated successfully.');
     }
 
+    public function getForgotpasswd() {
+    	return View::make('site.forgotpasswd')
+				->with('title', 'HyboPay - Forgot Password');
+    }
+
+    public function handleForgotpasswd() {
+    	$email = Input::get('email');
+
+    	return $email;
+    }
+
 
 }

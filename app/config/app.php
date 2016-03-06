@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		//'Anouar\Paypalpayment\PaypalpaymentServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
 
 	),
 
@@ -190,6 +191,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		//'Paypalpayment'   => 'Anouar\Paypalpayment\Facades\PaypalPayment',
+		'Image' 			=> 'Intervention\Image\Facades\Image',
 
 	),
 
