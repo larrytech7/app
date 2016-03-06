@@ -15,6 +15,7 @@
     <link rel="icon" type="image/gif" href="{{URL::to('public/images')}}/animated_favicon1.gif" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- Bootstrap/material Core CSS -->
     <link rel="stylesheet" href="{{URL::to('public/css')}}/bootstrap.min.css" />
     <link type="text/css" href="{{URL::to('public/css')}}/bootstrap-responsive.min.css" rel="stylesheet" />
@@ -179,7 +180,8 @@
 
     <!-- jQuery -->
     <script type="text/javascript" src="{{URL::to('public/js')}}/jquery.js"></script>
-    <script type="text/javascript" src="{{URL::to('public/js')}}/jquery-ui.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <!-- Bootstrap/Materialize Core JavaScript -->
     <script type="text/javascript" src="{{URL::to('public/js')}}/flipper.js"></script>
@@ -202,6 +204,9 @@
         $('.tooltiped').tooltip({delay: 50,
                                 position: 'right',
                                 tooltip: 'New tootlip'});
+                                
+        Materialize.showStaggeredList('#menulist');
+    
     });
     </script>
      @if(Session::has('alertMessage'))

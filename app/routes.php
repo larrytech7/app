@@ -109,6 +109,12 @@ Route::group(array('before' => 'auth'), function(){
 	'uses' => 'DashboardController@devzone'
 
 	));
+    
+    Route::get('dashboard/apidocs', array(
+	'as' => 'apidocs',
+	'uses' => 'DashboardController@apidoc'
+
+	));
     //currency conversion
     Route::get('dashboard/cnv', array(
 	'as' => 'cnv',

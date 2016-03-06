@@ -22,60 +22,45 @@
                         <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
-                        <a class="active collection-item blue" href="{{URL::route('developer')}}">
-                            <i class="material-icons left">business</i> Merchant
+                        <a class="collection-item blue-text" href="{{URL::route('developer')}}">
+                            <i class="material-icons left ">business</i> Merchant
                         </a>
-                        <a href="{{URL::route('apidocs')}}" class="collection-item blue-text">
+                        <a href="{{URL::route('apidocs')}}" class="active collection-item blue">
                             <i class="material-icons left">library_books</i>API Docs
                         </a>
                     
                     </div>
                 </div>
                 <div class="col s12 m9">
-                    Accounts <span><a class="modal-trigger" href="#merchantaccount"><i class="material-icons">add_circle</i> New Account</a></span>
+                    <h4>Merchant/Developer Documentation</h4>
+                    <!-- Documentation -->
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">payment</i>General Payment Button Integration</div>
+                          <div class="collapsible-body">
+                            <p>After generating the payment button. You will be required to fill in the blanks with parameters that are explained below. Your payment button only goes live when 
+                            you have switched the account mode to live. All interactions with the button prior to the live switching is fake and only for testing purposes.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">lock</i>API KEY Field</div>
+                          <div class="collapsible-body"><p>set the value of this field to the <b>API KEY</b> provided at the top of the 'payment button' dialog box. <br/>
+                          It is useless using someone elses' key because that would mean every fund received by this button would go to the owner of the key irrespective of the origin of the payment button</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">whatshot</i>CURRENCY Field</div>
+                          <div class="collapsible-body"><p>Set this value to the currency you wish users to purchase in. <br/>
+                            Valid values are: USD, EUR, GBP, XAF, AUD</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">money</i>AMOUNT Field</div>
+                          <div class="collapsible-body"><p>sh users to purchase in.</p></div>
+                        </li>
+                      </ul>
                     
-                    <table class="table table-condensed table-hover">
-                                <th>Username</th>
-                                <th>Payment Provider</th>
-                                <!-- <th>API_KEY</th> -->
-                                <th>Status</th>
-                                <th>Action</th>
-                        @foreach($developers as $developer)
-                              <tr>
-                                
-                                  <td>{{ $developer->dev_username }}</td>
-                                  <td>{{ $developer->dev_paymentprovider }}</td>
-                                  <!-- <td>{{ $developer->dev_key }}</td>-->
-                                  <td>{{ $developer->status == 0? 'sandbox':'live' }}</td>
-                                  <td>
-                                    <a href="{{ URL::route('developer').'?ac=rm&id='.$developer->dev_key }}" class="red-text" title="Delete account"><i class="material-icons">delete</i></a>
-                                    <a href="{{ URL::route('developer').'?ac=st&id='.$developer->dev_key }}" class="green-text" title="Activate or Deactivate account" ><i class="material-icons">swap_horiz</i></a>
-                                    <a href="#!" onclick="javascript:$('#{{$developer->dev_id}}').dialog({minWidth: 600})" class="blue-text" title="Generate Payment Button"><i class="material-icons">autorenew</i></a>
-                                  </td>
-                                </tr>
-                                <div id="{{$developer->dev_id}}" title="Payment Button" class="modal">
-                                    Copy the following code and use as your payment button.
-                                    <p>API KEY: <u>{{ $developer->dev_key }}</u></p>
-                                    <p>
-                                        <pre>
-                                                {{htmlspecialchars('
-                                                <form action="https://izepay.iceteck.com/app/sandbox/api/merchantapi)" method="post" name="merchant_form">
-                                                    <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
-                                                    <input type="hidden" name="currency" value="USD"/>
-                                                    <input type="hidden" name="amount" value="AMOUNT HERE"/>
-                                                    <input type="hidden" name="return_url" value="YOUR RETURN/RESULTS URL" />
-                                                    <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
-                                                    <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
-                                                    <input type="image" src="https://izepay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
-                                                </form>
-                                                ')}}
-                                        </pre>
-                                    </p>
-                                    <br />    
-                                </div>
-                                
-                        @endforeach
-                    </table>
                 </div>
             </div>
             <!-- /.col-md-8 -->

@@ -102,5 +102,14 @@ class DashboardController extends BaseController {
 				    ->with('user', $user)
 				    ->with('title', 'HyboPay - Merchant|Developer');
     }
+    //API Docs
+    public function apidoc(){
+ 			
+        $user = User::find(Auth::user()->id);
+			
+        return View::make('dev.apidocs')
+				    ->with('user', $user)
+				    ->with('title', 'HyboPay - Developer|Documention');
+    }
 
 }
