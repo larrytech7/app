@@ -22,12 +22,24 @@ require __DIR__ . '/common.php';
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 
+// Suppress DateTime warnings, if not set already
+date_default_timezone_set(@date_default_timezone_get());
+
+// Adding Error Reporting for understanding errors properly
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 // Replace these values by entering your own ClientId and Secret by visiting https://developer.paypal.com/webapps/developer/applications/myapps
 $clientId = 'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS';
 $clientSecret = 'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL';
+
+/**
+ * All default curl options are stored in the array inside the PayPalHttpConfig class. To make changes to those settings
+ * for your specific environments, feel free to add them using the code shown below
+ * Uncomment below line to override any default curl options.
+ */
+//PayPalHttpConfig::$defaultCurlOptions[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2;
+
 
 /** @var \Paypal\Rest\ApiContext $apiContext */
 $apiContext = getApiContext($clientId, $clientSecret);
@@ -75,7 +87,6 @@ function getApiContext($clientId, $clientSecret)
             'log.LogEnabled' => true,
             'log.FileName' => '../PayPal.log',
             'log.LogLevel' => 'DEBUG', // PLEASE USE `FINE` LEVEL FOR LOGGING IN LIVE ENVIRONMENTS
-            'validation.level' => 'log',
             'cache.enabled' => true,
             // 'http.CURLOPT_CONNECTTIMEOUT' => 30
             // 'http.headers.PayPal-Partner-Attribution-Id' => '123123123'

@@ -205,5 +205,99 @@ class AccountController extends BaseController {
         return Redirect::back()->with('alertMessage', 'Account updated successfully.');
     }
 
+    public function getForgotpasswd() {
+    	return View::make('site.forgotpasswd')
+				->with('title', 'HyboPay - Forgot Password');
+    }
+
+    public function handleForgotpasswd() {
+    	
+    	$validator = Validator::make(
+            Input::all(),
+            array('email' => 'required|email')
+        );
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        } else {
+
+            $user = User::where('email', '=', Input::get('email'));
+
+            if ($user->count()) {
+                $user = $user->first();
+
+                $code = str_random(120);
+
+                $user->remind = $code;
+                $user->save();
+
+                $mailData = array(
+                'email' => Input::get('email'),
+                'link' => $code,
+                );
+	            
+	            //return $mailData['email'] . $training->title;
+
+	            Mail::send('emails.auth.remind',$mailData,
+	            	function($message) {
+	                     $message->subject("izepay password reset");
+	                     $message->to(Input::get('email'));
+	                 }
+	             );
+
+                return Redirect::back()->with('alertMessage', 'a link has been send to your email to reset your password.');
+
+            } else {
+                return Redirect::back()->with('alertError', 'we can not find a user with that email address.');
+
+            }
+
+        }
+    }
+
+    public function recovery($link){
+
+		$user = User::where('remind', '=', $link)->first();
+
+		//return var_dump($user->id);
+
+		if ($user->count()) {
+			return View::make('password.reset')
+				->with('user', $user)
+				->with('title', 'IzePay - Recover Password');
+		} else {
+			return Redirect::back()->with('alertError', 'invalid reset code');
+
+		}
+
+	}
+
+	public function handleRecovery(){
+
+		$messages = array(
+            'same'    => 'The :attribute and :other must match.',
+            'required' => 'The :attribute field is required.',
+            'min'       =>'The :attribute must be atleast :min characters'
+        );
+        $editData = Input::all();
+        $editRules = array(
+            'new_password' =>'required|min:6',
+            'confirm_new_password' => 'required|same:new_password'
+        );
+
+        $editValidator = Validator::make($editData,$editRules);
+        if($editValidator->fails()) {   
+            return Redirect::back()->withInput()->withErrors($editValidator);
+        } 
+
+        if ($editValidator->passes()) {
+        	$userToUpdate = User::find(Input::get('special'));
+        	$userToUpdate->password = Hash::make(Input::get('new_password'));
+        	$userToUpdate->save();
+
+        	return Redirect::to('login')->with('alertMessage',"password reseted successfully. Login now!!!");
+        }
+	}
+
 
 }

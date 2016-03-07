@@ -1,0 +1,68 @@
+<?php $__env->startSection('content'); ?>
+        <!-- Heading Row -->
+        <div class="row">
+            <div class="col-md-8">
+                    <div class="media-body">
+                              <h3 class="media-heading"><a href="<?php echo URL::route('dashboard'); ?>"><i class="material-icons small blue-text">home</i></a>Transaction History</h3>
+                               <br />
+                              <table class="table table-condensed table-hover" >
+                              <tr class="table-bordered">
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Sender</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Receiver</th>
+                              </tr>
+                              <!--<?php if($transactions != null): ?>
+                                <?php foreach($transactions as $transaction): ?>
+                                <tr>
+                                  <td><?php echo $transaction->created_at; ?></td>
+                                  <td><?php echo $transaction->type; ?></td>
+                                  <td><?php echo $transaction->sender_email; ?></td>
+                                  <td><?php echo $transaction->status; ?></td>
+                                  <td><?php echo $transaction->amount; ?></td>
+                                  <td><?php echo $transaction->receiver_email; ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                              <?php endif; ?> -->
+
+                              <?php foreach($transactions as $transaction): ?>
+                              <tr>
+                                  <td><?php echo date("F jS, Y -- g:i A",strtotime($transaction->created_at)); ?></td>
+                                  <td><?php echo $transaction->type; ?></td>
+                                  <td><?php echo $transaction->sender_email; ?></td>
+                                  <td><?php echo $transaction->status; ?></td>
+                                  <td><?php echo $transaction->amount .' '.$transaction->currency; ?></td>
+                                  <td><?php echo $transaction->receiver_email; ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+
+                              </table>
+
+
+                            </div>
+
+            </div>
+            <!-- /.col-md-8 -->
+            <div class="col-md-4">
+                <div class="flip-card active-card full-card" >
+                        <div class="pcard label-info">
+                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
+                        </div>
+                        
+                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                        <div class="well">
+                            <h3><?php echo $user->username; ?></h3>                            
+                        </div>                        
+                 </div>
+            </div>
+            <!-- /.col-md-4 -->
+        </div>
+        <!-- /.row -->
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

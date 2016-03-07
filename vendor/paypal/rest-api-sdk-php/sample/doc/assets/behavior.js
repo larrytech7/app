@@ -518,18 +518,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "pageTitle": "lipp/GenerateAccessTokenFromRefreshToken",
             "title": "GenerateAccessTokenFromRefreshToken"
           },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "Obtain Access Token From Refresh Token",
-                "slug": "obtain-access-token-from-refresh-token"
-              },
-              "depth": 3
-            }
-          ]
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -547,18 +536,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "pageTitle": "lipp/GetUserInfo",
             "title": "GetUserInfo"
           },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 3,
-                "title": "Obtain Access Token From Refresh Token",
-                "slug": "obtain-access-token-from-refresh-token"
-              },
-              "depth": 3
-            }
-          ]
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -984,77 +962,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "pageTitle": "payments/CreateFuturePayment",
             "title": "CreateFuturePayment"
           },
-          "depth": 2,
-          "outline": [
-            {
-              "type": "heading",
-              "data": {
-                "level": 1,
-                "title": "Create Payment using PayPal as payment method",
-                "slug": "create-payment-using-paypal-as-payment-method"
-              },
-              "depth": 1,
-              "children": [
-                {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Payer",
-                    "slug": "payer"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Amount",
-                    "slug": "amount"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Transaction",
-                    "slug": "transaction"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Redirect urls",
-                    "slug": "redirect-urls"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Payment",
-                    "slug": "payment"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Get Refresh Token",
-                    "slug": "get-refresh-token"
-                  },
-                  "depth": 3
-                }, {
-                  "type": "heading",
-                  "data": {
-                    "level": 3,
-                    "title": "Create Future Payment",
-                    "slug": "create-future-payment"
-                  },
-                  "depth": 3
-                }
-              ]
-            }
-          ]
+          "depth": 2
         }, {
           "type": "file",
           "data": {
@@ -1561,6 +1469,67 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "RefundSale"
           },
           "depth": 2
+        }
+      ]
+    }, {
+      "type": "folder",
+      "data": {
+        "path": "tls",
+        "title": "tls"
+      },
+      "depth": 1,
+      "children": [
+        {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [{}, ".fbp"],
+              "pygmentsLexer": "php",
+              "singleLineComment": ["//"],
+              "ignorePrefix": "}",
+              "foldPrefix": "^",
+              "name": "PHP"
+            },
+            "sourcePath": "/Users/japatel/Documents/workspace/paypal/PayPal-PHP-SDK/sample/tls/TlsCheck.php",
+            "projectPath": "tls/TlsCheck.php",
+            "targetPath": "tls/TlsCheck",
+            "pageTitle": "tls/TlsCheck",
+            "title": "TlsCheck"
+          },
+          "depth": 2,
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Create Payment using PayPal as payment method",
+                "slug": "create-payment-using-paypal-as-payment-method"
+              },
+              "depth": 1,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "TLS Check",
+                    "slug": "tls-check"
+                  },
+                  "depth": 2,
+                  "children": [
+                    {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Create a Payment for testing",
+                        "slug": "create-a-payment-for-testing"
+                      },
+                      "depth": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }, {

@@ -96,7 +96,14 @@ Route::group(array('before' => 'auth'), function(){
 	'uses' => 'DashboardController@viewUserProfile'
 
 	));
-    
+
+	/**************************************/
+	Route::post('uploadphoto', array(
+	'as' => 'uploadphoto',
+	'uses' => 'DashboardController@uploadPhoto'
+	));
+	/******************************************/
+
     Route::get('dashboard/developer', array(
 	'as' => 'developer',
 	'uses' => 'DashboardController@devzone'
@@ -185,6 +192,22 @@ Route::group(array('before' => 'guest'), function(){
 			'uses'=>'AccountController@handleLogin'
 		));
 
+		/*
+		| Forgot Password (POST)
+		*/
+		Route::post('forgotpasswd', array(
+			'as' => 'forgotpasswd',
+			'uses' => 'AccountController@handleForgotpasswd'
+		));
+
+		/*
+		| Recover Password (GET)
+		*/
+		Route::post('recovery', array(
+			'as' => 'recovery',
+			'uses' => 'AccountController@handleRecovery' 
+		));
+
 	});
 
 	/*
@@ -193,6 +216,14 @@ Route::group(array('before' => 'guest'), function(){
 	Route::get('login', array(
 		'as' => 'get-login',
 		'uses' => 'AccountController@getLogin'
+	));
+
+	/*
+	| Forgot Password (GET)
+	*/
+	Route::get('forgotpasswd', array(
+		'as' => 'forgotpasswd',
+		'uses' => 'AccountController@getForgotpasswd'
 	));
 
 	/*
@@ -206,6 +237,14 @@ Route::group(array('before' => 'guest'), function(){
 	Route::get('activate/{code}', array(
 		'as' => 'account-activate',
 		'uses' => 'AccountController@handleActivate' 
+	));
+
+	/*
+	| Recover Password (GET)
+	*/
+	Route::get('recovery/{link}', array(
+		'as' => 'recovery',
+		'uses' => 'AccountController@recovery' 
 	));
 
 });
@@ -286,3 +325,6 @@ Route::group(array('before' => 'auth'), function(){
 	));
 
 });
+
+
+

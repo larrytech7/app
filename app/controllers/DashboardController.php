@@ -19,6 +19,32 @@ class DashboardController extends BaseController {
 				->with('user', $user)
 				->with('title', 'IzePay - User Profile');
 	}
+
+    public function uploadPhoto() {
+
+        $userEdit = User::find(Auth::user()->id);
+
+        // delete existing logo if any
+        if ($userEdit->photo != null) {
+            File::delete('photo/'.$userEdit->photo);
+            File::delete('photo/'.$userEdit->photo_thumbnail);
+        }
+
+        // uploading and setting of new profile photo
+        $photo = bin2hex(openssl_random_pseudo_bytes(20)). '_'. '.'.Input::file('photo')->getClientOriginalExtension();
+        $photo_thumbnail = bin2hex(openssl_random_pseudo_bytes(20)). '_'. 'thumbnail'. '.'.Input::file('photo')->getClientOriginalExtension();
+        Input::file('photo')->move('photo/', $photo);
+        File::copy('photo/'.$photo, 'photo/'.$photo_thumbnail);
+
+        Image::make('photo/'.$photo)->resize(170, 200)->save('photo/'.$photo);
+        Image::make('photo/'.$photo_thumbnail)->resize(48, 48)->save('photo/'.$photo_thumbnail);
+
+        $userEdit->photo = $photo;
+        $userEdit->photo_thumbnail = $photo_thumbnail;
+        $userEdit->save();
+
+        return Redirect::back();
+    }
     
     public function about(){
         try{

@@ -65,7 +65,7 @@ function convert(){
                 $('.cloader').addClass('active')
                 $('.cloader').removeClass('hide')
            },
-           url      : 'http://localhost/app/dashboard/cnv',
+           url      : 'http://izepay.dev/dashboard/cnv',
            cache    : false,
            type     : 'GET',    
            data     : {

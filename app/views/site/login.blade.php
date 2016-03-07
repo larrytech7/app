@@ -27,6 +27,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
+                        <a href="{{URL::route('forgotpasswd')}}">Forgot Password</a> <br>
                             <a href="{{URL::route('home')}}">Create new acccount</a>
                             <button type="submit" class="btn-flat btn-success right">Login to My Account</button>
                         </div>
