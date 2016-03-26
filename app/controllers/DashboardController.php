@@ -100,7 +100,7 @@ class DashboardController extends BaseController {
         return View::make('dev.developer')
                     ->with($data)
 				    ->with('user', $user)
-				    ->with('title', 'HyboPay - Merchant|Developer');
+				    ->with('title', 'Izepay - Merchant|Developer');
     }
     //API Docs
     public function apidoc(){
@@ -109,7 +109,7 @@ class DashboardController extends BaseController {
 			
         return View::make('dev.apidocs')
 				    ->with('user', $user)
-				    ->with('title', 'HyboPay - Developer|Documention');
+				    ->with('title', 'IzePay - Developer|Documention');
     }
 
 }
