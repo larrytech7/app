@@ -11,7 +11,7 @@
                             <i class="material-icons left blue-text">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>New Transaction
+                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
