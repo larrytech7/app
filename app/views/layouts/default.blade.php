@@ -190,9 +190,11 @@
     <script src="{{URL::to('public/js')}}/materialize.min.js"></script>
     <script src="{{URL::to('public/js')}}/init.js"></script>
     <script src="{{URL::to('public/js')}}/platform.js"></script>
+    <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
     
     <script>
     $(document).ready(function(){
+        $('#transaction_table').dataTable();
         $('.modal-trigger').leanModal();
         $('select').material_select();
         $('.loading').hide();
