@@ -22,7 +22,7 @@
                         <input type="hidden" name="return_url" value="https://iceteck.com" />
                         <input type="hidden" name="cdata1" value="xxxxx"/>
                         <input type="hidden" name="cdata2" value="xxxxx"/>
-                        <input type="image" src="{{URL::to('public/images/hybopay_checkout.png')}}" width="150" height="80"/>
+                        <input type="image" src="{{URL::to('public/images/logo.png')}}" width="150" height="80"/>
             </form>
         </div>
         <div class="row">

@@ -96,12 +96,12 @@
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
                 <a class="brand-logo" href="{{URL::route('home')}}">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 180px;height: 90px; margin-top:5px"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" style="width: 180px;height: 90px;"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="HyboPay Logo" style="width: 180px;height: 80px;margin-top:5px"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" style="width: 180px;height: 90px;"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
