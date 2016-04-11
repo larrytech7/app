@@ -15,7 +15,7 @@
     <link rel="icon" type="image/gif" href="<?php echo URL::to('public/images'); ?>/animated_favicon1.gif" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <!-- Bootstrap/material Core CSS -->
     <link rel="stylesheet" href="<?php echo URL::to('public/css'); ?>/bootstrap.min.css" />
     <link type="text/css" href="<?php echo URL::to('public/css'); ?>/bootstrap-responsive.min.css" rel="stylesheet" />

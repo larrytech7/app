@@ -24,6 +24,8 @@
                         <input type="hidden" name="cdata2" value="xxxxx"/>
                         <input type="image" src="{{URL::to('public/images/logo.png')}}" width="150" height="80"/>
             </form>
+           <!-- <input type="image" src="{{URL::to('public/images/logo.png')}}" class="izepay_pay_btn" width="150" height="80"/>
+           -->
         </div>
         <div class="row">
             <div class="col s12 m8 l8"> 

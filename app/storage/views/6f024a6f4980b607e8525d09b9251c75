@@ -7,7 +7,7 @@
                                
                               <table class="table table-stripped table-hover" id="transaction_table">
                                     <thead>
-                                      <tr>
+                                      <tr class="table-bordered">
                                         <th>Date</th>
                                         <th>Type</th>
                                         <th>Sender</th>
