@@ -1,49 +1,39 @@
 <?php $__env->startSection('content'); ?>
 <!-- Heading Row -->
+        <div class="row center-align" > <!-- CLIENT LOGO HERE --><img src="" alt="" class="responsive-img"/></div>
         <div class="row">
-            <div class="col s4 "></div>
-            <!-- /.col-md-8 -->
-            <div class="col s12 m4 well offset-l4">
-                <div class="center-align">
-                    <img class="responsive-img" src="<?php echo URL::to('public/images'); ?>/hybopay_checkout.png" alt="HyboPay Logo" style="height:150px;width:200px"/>
-                </div>
-                <h3 id="pad" class="center"> How do you wish to Pay?</h3>
-                <div class="purchase">
-                      <ul class="collection">
-                        <li class="collection-item avatar">
-                          <img src="<?php echo URL::to('public/images'); ?>/paypa_icon.png" alt="" class="circle" />
-                          <span class="title">PayPal</span>
-                          <p>
-                             Purchase this item with your paypal Account.
-                          </p>
-                          <?php echo Form::open(array('url'=>URL::to('sandbox/api/merchantapi/paypal'), 'class'=>'form-horizontal paypal', 'role'=>'form')); ?>
+            <div class="col m4 well">
+            </div>
+            
+            <div class="col s12 m4">    
+                    <div class="card blue-grey darken-1 center-align">
+                        <span class="card-title">Pay with your preferred method</span>
+                        <div class="card-content white-text">
+                          
+                          <div>
+                            <?php echo Form::open(array('url'=>URL::to('sandbox/api/merchantapi/paypal'), 'class'=>'paypal', 'role'=>'form')); ?>
 
-                            <div id="stp">
                                 <input type="hidden" name="extra_data" value="data1" />
                                 <input type="hidden" name="apikey" value="<?php echo Input::get('apikey'); ?>"/>
                                 <input type="hidden" name="amount" value="<?php echo Input::get('amount'); ?>"/>
                                 <input type="hidden" name="currency" value="<?php echo Input::get('currency'); ?>"/>
-                                <input type="hidden" name="cancel_url" value="https://mysite.com/cancel" />
-                                <input type="hidden" name="confirm_url" value="https://mysite.com/confirm" />
-                                <input type="hidden" name="item_name" value="candy" />
+                                <input type="hidden" name="cancel_url" value="<?php echo Input::get('cancel_url'); ?>" />
+                                <input type="hidden" name="confirm_url" value="<?php echo Input::get('confirm_url'); ?>" />
+                                <input type="hidden" name="item_name" value="<?php echo Input::get('item_name'); ?>" />
                                 <input type="hidden" name="method" value="paypal"/>
-                            </div>
-                          <a href="#!" class="secondary-content paypal" ><i class="material-icons">done_all</i></a>
-                          <?php echo Form::token(); ?>
+                            
+                            <a href="#!" class="secondary-content paypal"  title="PayPal">
+                                <img src="<?php echo URL::to('public/images'); ?>/paypa_icon.png" alt="Purchase item with your paypal Account." class="circle responsive" height="50" width="50"/>
+                            </a>
+                            <?php echo Form::token(); ?>
 
-                        <?php echo Form::close(); ?>
+                            <?php echo Form::close(); ?>
 
-                        </li>
-                        <li class="collection-item avatar">
-                          <img src="<?php echo URL::to('public/images'); ?>/stp_icon.png" alt="" class="circle" />
+                        </div>
                         
-                          <span class="title">Solid Trust Pay</span>
-                          <p>
-                             Purchase this item with your Solid Trust Pay Account.
-                          </p>
-                          <?php echo Form::open(array('url'=>'https://solidtrustpay.com/handle_accver.php', 'class'=>'form-horizontal dostpay', 'role'=>'form')); ?>
+                        <div>
+                            <?php echo Form::open(array('url'=>'https://solidtrustpay.com/handle_accver.php', 'class'=>'dostpay', 'role'=>'form')); ?>
 
-                            <div id="stp">
                                 <input type="hidden" name="merchantAccount" value="larryakah" />
                                 <input type="hidden" name="apikey" value="<?php echo Input::get('apikey'); ?>"/>
                                 <input type="hidden" name="amount" value="<?php echo Input::get('amount'); ?>"/>
@@ -56,27 +46,27 @@
                                 <input type="hidden" name="cancel_url" value="<?php echo URL::route('sandbox/api/merchantapi/cancelstppurchase'); ?>" />
                                 <input type="hidden" name="user1" value="<?php echo Input::get('return_url'); ?>"/> <!-- receiver email, number etc set by js -->
                                 <input type="hidden" name="user2" value="xx"/><!-- receiver's payment provider -->
-                            </div>
-                          <a href="#!" class="secondary-content stpay" ><i class="material-icons">done_all</i></a>
+                            
+                          <a href="#!" class="secondary-content stpay"  title="Solid Trust Pay">
+                            <img src="<?php echo URL::to('public/images'); ?>/stp_icon.png" alt="Purchase item with your Solid Trust Pay Account." class="circle responsive" height="50" width="50"/>
+                          </a>
                           <?php echo Form::token(); ?>
 
                         <?php echo Form::close(); ?>
 
-                        </li>
-                        <li class="collection-item avatar">
-                          <img src="<?php echo URL::to('public/images'); ?>/mtnmomo.jpg" alt="" class="circle" />
-                          <span class="title">MobileMoney</span>
-                          <p>
-                             Purchase this item with your Mobile Money Account.
-                          </p>
-                          <a href="#!" class="secondary-content"><i class="material-icons">done_all</i></a>
-                        </li>
-                      </ul>
-                      <p class="teal-text">More coming up soon!</p>
-                </div>
+                        </div>
+                        <div>
+                              <!-- Create Mobile Money form here -->
+                            <a href="#!" class="secondary-content momo right"  title="MTN Mobile Money">
+                                <img src="<?php echo URL::to('public/images'); ?>/mtnmomo.jpg" alt="Purchase with your Mobile Money Account" class="circle responsive" height="50" width="50" />
+                            </a>
+                        </div>
+                    </div>
+                    </div>
             </div>
-            <div class="col s4"></div>
-            <!-- /.col-md-4 -->
+            
+            <div class="col m4 well">
+            </div>
         </div>
 <?php $__env->stopSection(); ?>
 

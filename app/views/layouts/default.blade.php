@@ -67,6 +67,11 @@
         html   {
                 background: url(polina.jpg) #000 no-repeat center center fixed;
             }
+    @media screen and (max-width: 350px){
+        footer {
+            display:none;
+        }
+    }
     #bgvid {
             display: none;
         }
@@ -142,8 +147,7 @@
         <div class="divider grey"></div>
         
         <!-- Footer -->
-        <footer class="page-footer grey lighten-3">
-            
+       <footer class="page-footer grey lighten-3">
             <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
             <p>&copy; {{ date('Y') }} IceTeck.</p>
       </footer>
@@ -282,13 +286,17 @@
                 content: {
                     title:'<b>Izepay</b> - Choose your payment method below',
                     text: function(event, api) {
-                        $.ajax({
+                        api.elements.content.html('Loading...');
+                        return $.ajax({
                             url: api.elements.target.attr('href'),
                             type: 'POST',
                             data:{
-                                API_KEY:'asdaf3',
-                                AMOUNT: 212,
-                                CURR: 'USD'
+                                apikey:'asdaf3',
+                                amount: 212,
+                                currency: 'USD',
+                                cancel_url: 'localhost/app/',
+                                confirm_url: 'localhost/app',
+                                item_name: 'website development'
                             } // Use data-url attribute for the URL
                         })
                         .then(function(content) {
@@ -311,7 +319,7 @@
                   effect: function(api, pos, viewport) {
                         // "this" refers to the tooltip
                         $(this).animate(pos, {
-                            duration: 600,
+                            duration: 500,
                             easing: 'linear',
                             queue: false // Set this to false so it doesn't interfere with the show/hide animations
                         });
@@ -323,7 +331,7 @@
                 style:{
                     width:350,
                     height:200,
-                    classes: 'qtip-rounded qtip-green qtip-shadow qtip-light'
+                    classes: 'qtip-rounded qtip-green qtip-shadow'
                 },
                 show: {
                     effect: function() {

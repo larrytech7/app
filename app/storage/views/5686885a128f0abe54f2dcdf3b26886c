@@ -6,7 +6,7 @@
             </video>
             <button id="vidpause" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">pause</i></button>
         </div>
-        <div class="row center" style="margin-bottom: 28%;">
+        <div class="row center" style="margin-bottom: 20%;">
             <p class="center-align"><h2 class="white-text">Make payments or send money using any provider.</h2></p>
             <p><h5 class="white-text">The best cross-wallet solution for you. Pay a mobile money user using your paypal account and more.</h5></p>
             <p></p>
@@ -22,14 +22,11 @@
                         <input type="hidden" name="cdata2" value="xxxxx"/>
                         <input type="image" src="<?php echo URL::to('public/images/logo.png'); ?>" width="150" height="80"/>
             </form>
-            <a class="izepay_pay_btn" href="http://localhost/app/sandbox/api/merchantapi"><img src="<?php echo URL::to('public/images/logo.png'); ?>"  width="150" height="80"/></a>
-           
+            
         </div>
         <div class="row">
             <div class="col s12 m8 l8"> 
-
-                    <h5 class="center-align">Money transfer/payments made simple in Africa and the world at large.</h5>                   
-
+                <h5 class="center-align">Money transfer/payments made simple in Africa and the world at large.</h5>                   
                 <div class="row">
                     <div class="col s12 m4">
                       <div class="icon-block">
@@ -84,7 +81,7 @@
                       </div>
                     </div>
               </div>
-                <div>
+                <div class="divider grey">
                 </div>    
             </div>
             <!-- /.col-md-8 -->
@@ -139,7 +136,7 @@
                                 <option value="USA" >USA</option>
                                 <option value="UK" >UK</option>
                                 <option value="France" >France</option>
-                                <option value="Germany">Germany</option>
+                                <!-- <option value="Germany">Germany</option> -->
                                 <option value="Canada" >Canada</option>
                                 <option value="South Korea" >South Korea</option>
                             </select>
@@ -164,7 +161,6 @@
                     </div>
                     <?php echo Form::token(); ?>
 
-                    
                 <?php echo Form::close(); ?>
 
 
