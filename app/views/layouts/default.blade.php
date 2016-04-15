@@ -277,6 +277,69 @@
                 Materialize.toast('Passwords Do not match <i class="material-icons right">clear</i>', 3000, 'red-text', '');
         }
   </script>
+  <script>
+            $('a.izepay_pay_btn').qtip({
+                content: {
+                    title:'<b>Izepay</b> - Choose your payment method below',
+                    text: function(event, api) {
+                        $.ajax({
+                            url: api.elements.target.attr('href'),
+                            type: 'POST',
+                            data:{
+                                API_KEY:'asdaf3',
+                                AMOUNT: 212,
+                                CURR: 'USD'
+                            } // Use data-url attribute for the URL
+                        })
+                        .then(function(content) {
+                            // Set the tooltip content upon successful retrieval
+                           // api.set('content.text', content);
+                            //this is so that a request is sent to reload a new parameters for the payment button
+                            return content;
+                        }, function(xhr, status, error) {
+                            // Upon failure... set the tooltip content to the status and error value
+                            api.set('content.text', status + ': ' + error);
+                        });
+            
+                        return 'Loading ...'; // Set some initial text
+                    }
+                },
+                position:{
+                  //viewport: $(window),
+                  my:'left center',
+                  at:'right center',
+                  effect: function(api, pos, viewport) {
+                        // "this" refers to the tooltip
+                        $(this).animate(pos, {
+                            duration: 600,
+                            easing: 'linear',
+                            queue: false // Set this to false so it doesn't interfere with the show/hide animations
+                        });
+                    },
+                    adjust: {
+                            scroll: true // Can be ommited (e.g. default behaviour)
+                        }  
+                },
+                style:{
+                    width:350,
+                    height:200,
+                    classes: 'qtip-rounded qtip-green qtip-shadow qtip-light'
+                },
+                show: {
+                    effect: function() {
+                        $(this).fadeTo(500, 1);
+                    },
+                    event:'click',
+                    solo:true
+                },
+                hide: {
+                        event: 'unfocus',
+                        effect: function(offset) {
+                            $(this).slideDown(100); // "this" refers to the tooltip
+                        }
+                    }
+            }).click(function(e){ e.preventDefault(); });;
+           </script>
 
 </body>
 
