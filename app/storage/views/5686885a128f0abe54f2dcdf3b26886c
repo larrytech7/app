@@ -22,8 +22,33 @@
                         <input type="hidden" name="cdata2" value="xxxxx"/>
                         <input type="image" src="<?php echo URL::to('public/images/logo.png'); ?>" width="150" height="80"/>
             </form>
-           <!-- <input type="image" src="<?php echo URL::to('public/images/logo.png'); ?>" class="izepay_pay_btn" width="150" height="80"/>
-           -->
+            <input type="image" src="<?php echo URL::to('public/images/logo.png'); ?>" class="izepay_pay_btn" width="150" height="80"/>
+           
+           <script>
+            $('.izepay_pay_btn').qtip({
+                content: {
+                    text: function(event, api) {
+                        $.ajax({
+                            url: 'https://izepay.iceteck.com/app/sandbox/api/merchantapi',
+                            data:{
+                                API_KEY:'asdaf3',
+                                AMOUNT: 212,
+                                CURR: 'USD'
+                            } // Use data-url attribute for the URL
+                        })
+                        .then(function(content) {
+                            // Set the tooltip content upon successful retrieval
+                            api.set('content.text', content);
+                        }, function(xhr, status, error) {
+                            // Upon failure... set the tooltip content to the status and error value
+                            api.set('content.text', status + ': ' + error);
+                        });
+            
+                        return 'Loading...'; // Set some initial text
+                    }
+                }
+            });
+           </script>
         </div>
         <div class="row">
             <div class="col s12 m8 l8"> 

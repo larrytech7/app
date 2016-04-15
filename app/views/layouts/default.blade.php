@@ -31,6 +31,7 @@
     <link href="{{URL::to('public/css')}}/buttons.css" rel="stylesheet" />
     <link href="{{URL::to('public/css')}}/flipper.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/material-wfont.min.css" rel="stylesheet"/>
+    <link href="{{URL::to('public/css')}}/jquery.qtip.min.css" rel="stylesheet"/>
 
     <style>
     body {
@@ -191,7 +192,8 @@
     <script src="{{URL::to('public/js')}}/init.js"></script>
     <script src="{{URL::to('public/js')}}/platform.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
-    
+    <script src="{{URL::to('public/js')}}/jquery.qtip.min.js"></script>
+        
     <script>
     $(document).ready(function(){
         $('#transaction_table').dataTable();

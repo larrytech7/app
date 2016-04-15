@@ -59,7 +59,7 @@
                                     <p>
                                         <pre>
                                                 {{htmlspecialchars('
-                                                <form action="https://izepay.iceteck.com/app/sandbox/api/merchantapi)" method="post" name="merchant_form">
+                                                <form action="https://izepay.iceteck.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
                                                     <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
                                                     <input type="hidden" name="currency" value="USD"/>
                                                     <input type="hidden" name="amount" value="AMOUNT HERE"/>
