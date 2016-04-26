@@ -83,8 +83,7 @@
                       </div>
                     </div>
               </div>
-                <div class="divider grey">
-                </div>
+               
                 <div class="clearfix"></div>
                 <!-- Public eye -->
                 <div>
@@ -103,7 +102,7 @@
                           <span class="card-title"></span>
                         </div>
                         <div class="card-content">
-                          <p>Leverage enzympay to make transactions accross several other payment providers.</p>
+                          <p>Leverage enzympay to make transactions accross several payment providers.</p>
                         </div>
                       </div>
                       <div class="card" style="width: 500px; height: 300px;">
@@ -133,7 +132,7 @@
                 
                     <div class="input-field col s12">
                         <i class="material-icons prefix blue-text lighten-4">account_circle</i>
-                        <input id="icon_prefix" name="username" type="text" class="validate" required autofocus/>
+                        <input id="icon_prefix" name="username" type="text" class="validate" required/>
                         <label for="icon_prefix">Username</label>
                          <span class="badge alert-danger">{{ $errors->first('username') }}</span>
                     </div>
@@ -208,9 +207,24 @@
             <!-- /.col-md-4 -->
         </div>
         <div class="row">
-            <div class="col s12 center" id="contact">
-                <i class="large material-icons blue-text">perm_phone_msg</i>
-                <h4>Contact Us</h4>
+            <div class="col s4">
+                <div class="social">
+                <h4><i class="small material-icons blue-text">group_work</i>We are social</h4>
+                    <div class="divider grey"></div>
+                    <br />
+                    Meet the awesome community we drive worldwide on our social pages.<br />
+                    <img src="{{URL::to('public/images')}}/social.JPG" class="img img-responsive"/>
+                </div>
+            </div>
+            <div class="col s4">
+                <h4><i class="small material-icons blue-text">verified_user</i> Our Partners</h4>
+                <div class="divider grey"></div>
+                <br />
+                PAypal | SG | FurtherMarket | Solid Trust Pay | MyEway
+            </div>
+            <div class="col s4" id="contact">
+                <h4><i class="small material-icons blue-text">perm_phone_msg</i> Contact Us </h4>
+                <div class="divider grey"></div> <br />
                 <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b></span> @ &nbsp;ActivSpaces</p>
                 <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
                 <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@iceteck.com</a> </p>
