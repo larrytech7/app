@@ -22,7 +22,7 @@
                         <input type="hidden" name="return_url" value="https://iceteck.com" />
                         <input type="hidden" name="cdata1" value="xxxxx"/>
                         <input type="hidden" name="cdata2" value="xxxxx"/>
-                        <input type="image" src="{{URL::to('public/images/logo.png')}}" width="150" height="80"/>
+                        <input type="image" src="{{URL::to('public/images/logo.png')}}" class="image-responsive"/>
             </form>
             
         </div>
@@ -61,7 +61,7 @@
                       <div class="icon-block">
                         <h2 class="center green-text"><i class="material-icons large">call_split</i></h2>
                         <h5 class="center">Opportunity & Potential</h5>
-                        <p class="center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
+                        <p class="center-align">Pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
                       </div>
                     </div>
             
@@ -70,7 +70,7 @@
                         <h2 class="center blue-text"><i class="material-icons large">extension</i></h2>
                         <h5 class="center">Smart Experience</h5>
             
-                        <p class="center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
+                        <p class="center-align">Send money to users of Paypal, Skrill, Mobile Money etc from your single account.</p>
                       </div>
                     </div>
             
@@ -84,16 +84,56 @@
                     </div>
               </div>
                 <div class="divider grey">
+                </div>
+                <div class="clearfix"></div>
+                <!-- Public eye -->
+                <div>
+                    <div class="card" style="width: 500px; height: 280px;">
+                        <div class="card-image">
+                          <img src="{{URL::to('public/images')}}/fblack.jpg" />
+                          <span class="card-title">Use more than a card.</span>
+                        </div>
+                        <div class="card-content">
+                          <p>Leverage enzympay to make transactions accross several other payment providers.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="height: 280px;">
+                        <div class="card-image">
+                          <img src="{{URL::to('public/images')}}/fblack2.jpg" />
+                          <span class="card-title"></span>
+                        </div>
+                        <div class="card-content">
+                          <p>Leverage enzympay to make transactions accross several other payment providers.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="width: 500px; height: 300px;">
+                        <div class="card-image">
+                          <img src="{{URL::to('public/images')}}/wallet1.jpg" />
+                          <span class="card-title black-text">Be more flexible with Mobile.</span>
+                        </div>
+                        <div class="card-content">
+                          <p>Accept payment via mobile money providers like MTN mobile money.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="height: 300px;">
+                        <div class="card-image">
+                          <img src="{{URL::to('public/images')}}/mm2.jpg" />
+                          <span class="card-title"></span>
+                        </div>
+                        <div class="card-content">
+                          <p>Accept payment via mobile money providers like MTN mobile money.</p>
+                        </div>
+                      </div>
                 </div>    
             </div>
             <!-- /.col-md-8 -->
             <div class="col well s12 m4 l4" id="signup">
-                <h3 id="pad">Create Account</h3>
+                <h4 id="pad">Create Account</h4>
                 {{Form::open(array('url'=>'register', 'class'=>'form-horizontal', 'role'=>'form'))}}
                 
                     <div class="input-field col s12">
                         <i class="material-icons prefix blue-text lighten-4">account_circle</i>
-                        <input id="icon_prefix" name="username" type="text" class="validate" required/>
+                        <input id="icon_prefix" name="username" type="text" class="validate" required autofocus/>
                         <label for="icon_prefix">Username</label>
                          <span class="badge alert-danger">{{ $errors->first('username') }}</span>
                     </div>
@@ -163,6 +203,7 @@
                     {{Form::token()}}
                 {{Form::close()}}
 
+                <div class="clearfix"></div>
             </div>
             <!-- /.col-md-4 -->
         </div>

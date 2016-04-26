@@ -9,7 +9,7 @@ class DashboardController extends BaseController {
 			
 			return View::make('site.dashboard')
 				->with('user', $user)
-				->with('title', 'IzePay - User Dashboard');
+				->with('title', 'Enzympay - User Dashboard');
 	}
 
 	public function viewUserProfile(){
@@ -17,7 +17,7 @@ class DashboardController extends BaseController {
 			
 			return View::make('site.userprofile')
 				->with('user', $user)
-				->with('title', 'IzePay - User Profile');
+				->with('title', 'Enzympay - User Profile');
 	}
 
     public function uploadPhoto() {
@@ -50,11 +50,11 @@ class DashboardController extends BaseController {
         try{
             $user = User::find(Auth::user()->id);
             return View::make('site.about')
-                    ->with('title', 'IzePay - About')
+                    ->with('title', 'Enzympay - About')
                     ->with('user', $user);
         }catch(Exception  $ex){
             return View::make('site.about')
-                ->with('title', 'IzePay - About');
+                ->with('title', 'Enzympay - About');
         }
     }
     
@@ -62,11 +62,11 @@ class DashboardController extends BaseController {
         try{
             $user = User::find(Auth::user()->id);
             return View::make('site.privacy')
-                    ->with('title', 'IzePay - Privacy')
+                    ->with('title', 'Enzympay - Privacy')
                     ->with('user', $user);
         }catch(Exception $ex){
             return View::make('site.privacy')
-                    ->with('title', 'IzePay - Privacy');            
+                    ->with('title', 'Enzympay - Privacy');            
         }
     }
     
@@ -74,11 +74,11 @@ class DashboardController extends BaseController {
         try{
             $user = User::find(Auth::user()->id);
             return View::make('site.terms')
-                    ->with('title', 'IzePay - Terms and Conditions')
+                    ->with('title', 'Enzympay - Terms and Conditions')
                     ->with('user', $user);
         }catch(Exception $ex){
             return View::make('site.terms')
-                    ->with('title', 'IzePay - Terms and Conditions');            
+                    ->with('title', 'Enzympay - Terms and Conditions');            
         }
     }
     
@@ -100,7 +100,7 @@ class DashboardController extends BaseController {
         return View::make('dev.developer')
                     ->with($data)
 				    ->with('user', $user)
-				    ->with('title', 'Izepay - Merchant|Developer');
+				    ->with('title', 'Enzympay - Merchant|Developer');
     }
     //API Docs
     public function apidoc(){
@@ -109,7 +109,7 @@ class DashboardController extends BaseController {
 			
         return View::make('dev.apidocs')
 				    ->with('user', $user)
-				    ->with('title', 'IzePay - Developer|Documention');
+				    ->with('title', 'Enzympay - Developer|Documention');
     }
 
 }

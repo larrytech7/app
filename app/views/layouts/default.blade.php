@@ -38,6 +38,8 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    margin-left: 2px;
+    margin-right: 2px;
   }
   .sup{
         background-color: transparent;
@@ -102,12 +104,12 @@
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
                 <a class="brand-logo" href="{{URL::route('home')}}">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" style="width: 180px;height: 90px;"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="IzePay Logo" style="width: 180px;height: 90px;"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -282,9 +284,9 @@
         }
   </script>
   <script>
-            $('a.izepay_pay_btn').qtip({
+            $('a.Enzympay_pay_btn').qtip({
                 content: {
-                    title:'<b>Izepay</b> - Choose your payment method below',
+                    title:'<b>Enzympay</b> - Choose your payment method below',
                     text: function(event, api) {
                         api.elements.content.html('Loading...');
                         return $.ajax({
