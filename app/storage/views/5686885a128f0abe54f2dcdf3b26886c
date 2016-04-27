@@ -124,7 +124,8 @@
                 </div>    
             </div>
             <!-- /.col-md-8 -->
-            <div class="col well s12 m4 l4" id="signup">
+            <div class="col s12 m4 l4" id="signup">
+                <div class="well">
                 <h4 id="pad">Create Account</h4>
                 <?php echo Form::open(array('url'=>'register', 'class'=>'form-horizontal', 'role'=>'form')); ?>
 
@@ -202,8 +203,42 @@
 
                 <?php echo Form::close(); ?>
 
-
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="card col s12">
+                    <div>
+                        <img src="<?php echo URL::to('public/images'); ?>/ceo.jpg" class="img img-circle" width="80" height="80"/>
+                        <span class="">Larry Akah H</span>
+                        </div>
+                    <div class="card-content">
+                        <p>We achieve true accountability and more flexibility with a truely digitalized independent monetary system</p>
+                    </div>
+                </div>
+                    <div class="client col s12">
+                    						<div class="" style="max-height: 220px; overflow-y: scroll;">
+                    							<ul>
+                    								<li>
+                    									<img src="<?php echo URL::to('public/images'); ?>/jaolin.jpg" alt="" class="img-circle" width="100" height="100"/>
+                    									<h4 class="pull-right">Alembong Elvis</h4>
+                    									<h6 class="pull-right">I now use my mobile money account to do paypal and solid trust pay transactions. Just awesome and innovative.</h6>
+                    								    <hr />
+                                                    </li>
+                    								<li>	
+                    									<img src="<?php echo URL::to('public/images'); ?>/ceo.jpg" alt="" class="img-circle" width="100" height="100" />
+                    									<h4 class="pull-right">Sarah Menja</h4>
+                    									<h6>Buying online has never been hasle free until enzympay. Dynamic and flexible like no other</h6>
+                    								</li>
+                    								<li>
+                    									<img src="<?php echo URL::to('public/images'); ?>/jaolin.jpg" class="img-circle" alt="" width="100" height="100"/>
+                    									<h4 class="pull-right">Jao Lin</h4>
+                    									<h6>I earned by freelance payment quite rapidly without any stress</h6>
+                    								</li>	
+                    								<div class="clearfix"> </div>
+                    							</ul>
+                    						</div>
+                    		
+                    </div>
             </div>
             <!-- /.col-md-4 -->
         </div>

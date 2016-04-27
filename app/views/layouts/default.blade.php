@@ -198,6 +198,7 @@
     <script src="{{URL::to('public/js')}}/init.js"></script>
     <script src="{{URL::to('public/js')}}/platform.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
+    <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.qtip.min.js"></script>
         
     <script>
@@ -349,8 +350,22 @@
                         }
                     }
             }).click(function(e){ e.preventDefault(); });;
-           </script>
-
+  </script>
+<!-- FlexSlider -->
+				  <script type="text/javascript">
+					$(function(){
+					  SyntaxHighlighter.all();
+					});
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+			<!-- FlexSlider -->
 </body>
 
 </html>
