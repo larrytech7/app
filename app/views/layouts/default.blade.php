@@ -243,19 +243,19 @@
         vid.addEventListener('ended', function() {
             // only functional if "loop" is removed 
             vid.pause();
-        	// to capture IE10
-        	vidFade();
+            // to capture IE10
+            vidFade();
         });
 
         pauseButton.addEventListener("click", function() {
             vid.classList.toggle("stopfade");
-        	if (vid.paused) {
+            if (vid.paused) {
                 vid.play();
-        		pauseButton.innerHTML = '<i class="material-icons">pause</i>'; //pause
-        	} else {
+                pauseButton.innerHTML = '<i class="material-icons">pause</i>'; //pause
+            } else {
                 vid.pause();
                 pauseButton.innerHTML = '<i class="material-icons">play_arrow</i>';//paused
-        	}
+            }
         })
         }catch(err){}
         //click scroll functionality
@@ -351,21 +351,36 @@
                     }
             }).click(function(e){ e.preventDefault(); });;
   </script>
-<!-- FlexSlider -->
-				  <script type="text/javascript">
-					$(function(){
-					  SyntaxHighlighter.all();
-					});
-					$(window).load(function(){
-					  $('.flexslider').flexslider({
-						animation: "slide",
-						start: function(slider){
-						  $('body').removeClass('loading');
-						}
-					  });
-					});
-				  </script>
-			<!-- FlexSlider -->
+    <!-- FlexSlider -->
+    <script type="text/javascript">
+    $(function(){
+        SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+        $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+            $('body').removeClass('loading');
+        }
+        });
+    });
+    </script>
+    <!-- FlexSlider -->
+
+
+     <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var $_Tawk_API={},$_Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5720b073c5def4a7560a36d2/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 
 </html>

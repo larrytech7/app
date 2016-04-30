@@ -75,7 +75,7 @@ class StpayController extends BaseController {
         if ($hash_received == $_POST['hash']) {
         // valid payment
                 
-             Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date("Y-m-d H:i:s"),
+             Mail::send(['html'=>'emails.auth.transactions'], array('tdate' => date("Y-m-d H:i:s"),
                                                             'tid' => $notification['tr_id'],
                                                                'sender_email'=>Auth::user()->email,
                                                                'sender_number'=>Auth::user()->number,

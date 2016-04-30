@@ -1,7 +1,7 @@
 
 <html>
 	<head>
-		<title>Transaction Receipt</title>
+		<title>Enzympay.com | Transaction Receipt</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <!-- Compiled and minified CSS -->
 <!--

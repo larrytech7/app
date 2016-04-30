@@ -188,7 +188,7 @@ class PaymentController extends BaseController {
         $username = Auth::user()->username;
         
         //send transaction email to sender confirming transactions in a much professional way.
-        	Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date('Y-m-d H:i:s'),
+        	Mail::send(['html'=>'emails.auth.transactions'], array('tdate' => date('Y-m-d H:i:s'),
                                                             'tid' => $result->getId(),
                                                                'sender_email'=>Auth::user()->email,
                                                                'sender_number'=>Auth::user()->number,
@@ -257,7 +257,7 @@ class PaymentController extends BaseController {
                     ;
                     */
         $data['user'] = User::find(Auth::user()->id);
-        $data['transactions'] = IcePayTransaction::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $data['transactions'] = IcePayTransaction::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(5);
 
         return View::make('site.transaction')->with($data)->with('title', 'IzePay - Transactions');
     }

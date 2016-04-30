@@ -8,6 +8,9 @@
                               <h3 class="media-heading"><a href="{{URL::route('dashboard')}}"><i class="material-icons small blue-text">home</i></a>Transaction History</h3>
                                
                               <table class="table table-stripped table-hover" id="">
+
+                              <table class="table table-stripped table-hover">
+
                                     <thead>
                                       <tr class="table-bordered">
                                         <th>Date</th>
@@ -40,25 +43,14 @@
                                 @endforeach
 
                               </table>
-
+                              {{$transactions->links()}}
 
                             </div>
 
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
-                <div class="flip-card active-card full-card" >
-                        <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="{{URL::to('public/images')}}/user.jpg"/></a>
-                        </div>
-                        
-                        <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                        <div class="well">
-                            <h3>{{$user->username}}</h3>                            
-                        </div>                        
-                 </div>
+                @include('site.userModule')
             </div>
             <!-- /.col-md-4 -->
         </div>
