@@ -14,21 +14,9 @@
                                 <th>Amount</th>
                                 <th>Receiver</th>
                               </tr>
-                              <!--<?php if($transactions != null): ?>
-                                <?php foreach($transactions as $transaction): ?>
-                                <tr>
-                                  <td><?php echo $transaction->created_at; ?></td>
-                                  <td><?php echo $transaction->type; ?></td>
-                                  <td><?php echo $transaction->sender_email; ?></td>
-                                  <td><?php echo $transaction->status; ?></td>
-                                  <td><?php echo $transaction->amount; ?></td>
-                                  <td><?php echo $transaction->receiver_email; ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                              <?php endif; ?> -->
 
                               <?php foreach($transactions as $transaction): ?>
-                              <tr>
+                              <tr onclick="javascript:$('div.hide').toggle();$('#<?php echo $transaction->id; ?>').dialog({minWidth: 400})">
                                   <td><?php echo date("F jS, Y -- g:i A",strtotime($transaction->created_at)); ?></td>
                                   <td><?php echo $transaction->type; ?></td>
                                   <td><?php echo $transaction->sender_email; ?></td>
@@ -36,9 +24,19 @@
                                   <td><?php echo $transaction->amount .' '.$transaction->currency; ?></td>
                                   <td><?php echo $transaction->receiver_email; ?></td>
                                 </tr>
+                                <div id="<?php echo $transaction->id; ?>" title="Transaction Details" class="modal">
+                                    <p>SENT: <u><?php echo date("F jS, Y -- g:i A",strtotime($transaction->created_at)); ?></u></p>
+                                    <p>AMOUNT: <u><?php echo $transaction->amount .' '.$transaction->currency; ?></u> &nbsp; STATUS: <span class="red-text"><?php echo $transaction->status; ?></span></p>
+                                    <p>TO: <u><?php echo $transaction->receiver_email; ?> </u></p>
+                                    <p>TRANSACTION TYPE: <u><?php echo $transaction->type; ?></u></p>
+                                    <p>TRANSACTION ID: <u><?php echo $transaction->tid; ?></u></p>
+                                    <br />
+                                    All conflicts should be indicated within 24 hours after the trasaction status has been marked completed.
+                                </div>
                                 <?php endforeach; ?>
 
                               </table>
+                              <?php echo $transactions->links(); ?>
 
 
                             </div>

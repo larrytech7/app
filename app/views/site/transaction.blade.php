@@ -38,7 +38,7 @@
                                 @endforeach
 
                               </table>
-
+                              {{$transactions->links()}}
 
                             </div>
 
