@@ -229,12 +229,13 @@
  <!-- payment Modal Structure -->
           <div id="modal1" class="modal ">
             <div class="modal-content">
-              <h4>New Transaction &nbsp;&nbsp;<span class="notifications hide"><div class="progress"><div class="indeterminate"></div></div></span></h4>
+              <h4>New Transaction &nbsp;&nbsp;</h4>
+              <span class="notifications hide">Processing</span>
               {{Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form', 'onsubmit'=>'sendpayment(event)'))}}
                   <div class="row">
                   <div class="col s12 m6">
                     <h5>Transaction Info</h5>
-                    <input type="hidden" id="to" name="to" value="{{Auth::user()->number}}"/>
+                    <input type="hidden" id="mynum" name="mynum" value="{{Auth::user()->number}}"/>
                       <div class=" input-field col s12">
                             <i class="material-icons prefix blue-text lighten-4">attach_money</i>
                             <input type="number" id="amount" name="amount" min="1" required />
@@ -327,7 +328,7 @@
                      </div>
                      <div class="right">
                         <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>
-                        <button type="submit" class="btn-flat btn-primary waves-effect waves-white sendpayment"><i class="material-icons right">send</i>Continue</button>                        
+                        <button type="submit" class="btn-flat btn-primary waves-effect waves-white"><i class="material-icons right">send</i>Continue</button>                        
                     </div>
                     <div id="stp">
                         <input type="hidden" name="merchantAccount" value="larryakah" />

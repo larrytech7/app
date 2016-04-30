@@ -63,13 +63,22 @@ $(document).ready(function(){
     })
 })
 function sendpayment(event){
-        alert('ok');
-        event.preventDefault();
+       // alert('ok');
         url = $('form.payment').attr('action');
         if(url == 'transfer'){
-            init_momo();
+            event.preventDefault();
+            num = $('#mynum').val();
+            if(!isNaN(num)){
+                init_momo();
+                return false;
+            }
+            else{
+                 $('.notifications').html('<span class="red-text">Error. Your phone number appears to be incomplete or not correct</span>');
+                return false;
+            }
         }else{
             event.trigger();
+            return true;
         }
     }
 function convert(){
@@ -118,9 +127,10 @@ function init_momo(){
              cpt  = 0;
              
             $.ajax({
-                        before: function(){
-                                $('.notifications').show();
-                                $('.notifications').html('Processing your request. Please wait')
+                        beforeSend: function(){
+                                //alert('ok')
+                                $('.notifications').toggleClass('hide');
+                                $('.notifications').html('<span>Processing your request. Please wait<div class="progress"><div class="indeterminate"></div></div></span>')
                                 },
                         type: 'POST',
 
@@ -130,10 +140,10 @@ function init_momo(){
                                 'from':'CashCollect',
                                 'currency': $('#cur').val(),
                                 'amount':$('#amount').val(),
-                                'receiver'$('#number'),
+                                'receiver':$('#number').val(),
                                 'provider':$('#target').val(),
                                 'receivercontact':$('#remail').val(),
-                                'to': $('#to').val()
+                                'to': $('#mynum').val()
                             },
 
                         async: true,
@@ -142,7 +152,7 @@ function init_momo(){
 
                         success:function(data1){
 
-                                   cashResult    = data1.placepayment;
+                                   cashResult    = data1.paymentresult;
                                    cashResult    = cashResult.split(',');
 
                                    $('.notifications').html(cashResult[1]).trigger('refresh');
@@ -160,7 +170,8 @@ function init_momo(){
                             },
 
                         error: function(e){
-                            console.log('Error placepayment :'+e.responseText);
+                            console.log('Error requesting payment :'+e.responseText);
+                            $('.notifications').html('<span class="red-text">Error. '+e.responseText.error.message+'</span>');
                         }
 
             }).always(function(){
@@ -216,7 +227,7 @@ function checkPayment(paymentID,receiver){
                                                  //   $('.notifications').attr('src','../<?=_FMTESTDIR?>img/close2.png').trigger('refresh');
                                                }
 
-                                               $('.notifications').html('').trigger('refresh');
+                                             //  $('.notifications').html('').trigger('refresh');
 
                                                isOK   = false;
                                                cpt      = 0;

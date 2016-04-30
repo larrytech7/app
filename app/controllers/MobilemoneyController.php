@@ -23,8 +23,7 @@ class MobilemoneyController extends BaseController {
         $currency = Input::get('currency'); //currency to use
         $sendto = Input::get('receiver'); //funds are sent to this user
         
-        $charges = new PlatformCharges($Amount, $currency, $dest_provider);
-        $Amount = $charges->getDueAmount('mm',$dest_provider);
+        $Amount = $Amount + ((2/100) * $Amount);
         
         $mes_donnees = array('MyAccountID'=> $AccountID, 'CustomerPhonenumber' => $Phonenumber, 'Amount' => $Amount);
         
@@ -40,7 +39,11 @@ class MobilemoneyController extends BaseController {
         );
         
         $context = stream_context_create($opts);
-        $UssdResult = file_get_contents('http://api.furthermarket.com/FM/MTN/MoMo/requestpayment?MyAccountID='.$AccountID.'&CustomerPhonenumber='.$Phonenumber.'&Amount='.$Amount, 1, $context);
+        $UssdResult = file_get_contents('http://api.furthermarket.com/FM/MTN/MoMo/requestpayment?MyaccountID='.$AccountID
+                                        .'&CustomerPhonenumber='.$Phonenumber
+                                        .'&Amount='.$Amount
+                                        .'&ItemDesignation=MoMoPayment&ItemDescription=SendMomoto_'.$dest_provider.'_user',
+                                         1, $context);
         
         header('Content-Type:text/javascript');
         
@@ -62,6 +65,33 @@ class MobilemoneyController extends BaseController {
       */ 
       public function checkPayment(){
         
+                $AccountID   = Input::get('receiver');
+                $PaymentID = Input::get('paymentID');
+                $mes_donnees =   array('accountID'  => $AccountID, 'paymentID' => $PaymentID);
+        
+                $postdata = http_build_query($mes_donnees);
+        
+                $opts = array('http' =>
+                                array(
+                                           'method'  => 'GET',
+        
+                                           'header'  => 'Content-type: text/xml',
+        
+                                           'CharSet' => 'utf-8',
+ 
+                                           'content' => $postdata
+                            )
+                    );
+        
+                    $context       = stream_context_create($opts);
+        
+                    $UssdResult = file_get_contents('http://api.furthermarket.com/FM/MTN/MoMo/checkpayment?accountID='.$AccountID.'&paymentID='.$PaymentID);
+        
+                    header('Content-Type:text/javascript');
+        
+                echo json_encode(
+                        array('checkpayment' => nl2br($UssdResult))
+                );
       }
       /**
        * 
