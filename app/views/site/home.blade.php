@@ -111,7 +111,7 @@
                           <span class="card-title black-text">Be more flexible with Mobile.</span>
                         </div>
                         <div class="card-content">
-                          <p>Accept payment via mobile money providers like MTN mobile money.</p>
+                          <p>Use your mobile wallet and do cross-wallet transactions with ease.</p>
                         </div>
                       </div>
                       <div class="card" style="height: 300px;">
@@ -218,20 +218,20 @@
                     						<div class="" style="max-height: 220px; overflow-y: scroll;">
                     							<ul>
                     								<li>
-                    									<img src="{{URL::to('public/images')}}/jaolin.jpg" alt="" class="img-circle" width="100" height="100"/>
-                    									<h4 class="pull-right">Alembong Elvis</h4>
-                    									<h6 class="pull-right">I now use my mobile money account to do paypal and solid trust pay transactions. Just awesome and innovative.</h6>
+                    									<img src="{{URL::to('public/images')}}/derick.jpg" alt="" class="img-circle" width="100" height="100"/>
+                    									<h4 class="pull-right">Alangi Derick</h4>
+                    									<h6 class="pull-right">I use my mobile money to do paypal and solid trust pay transactions. Just so simple and awesome.</h6>
                     								    
                                                     </li>
                     								<li>	
-                    									<img src="{{URL::to('public/images')}}/ceo.jpg" alt="" class="img-circle" width="100" height="100" />
-                    									<h4 class="pull-right">Sarah Menja</h4>
-                    									<h6>Buying online has never been hasle free until enzympay. Dynamic and flexible like no other</h6>
+                    									<img src="{{URL::to('public/images')}}/payet.jpg" alt="" class="img-circle" width="100" height="100" />
+                    									<h4 class="pull-right">Annie Payet</h4>
+                    									<h6>There has never been a more flexible way to pay for my online shopping. Now i can use any wallet to pay.</h6>
                     								</li>
                     								<li>
                     									<img src="{{URL::to('public/images')}}/jaolin.jpg" class="img-circle" alt="" width="100" height="100"/>
                     									<h4 class="pull-right">Jao Lin</h4>
-                    									<h6>I earned by freelance payment quite rapidly without any stress</h6>
+                    									<h6>I received my freelance payment quite rapidly and conviniently without any stress</h6>
                     								</li>	
                     								<div class="clearfix"> </div>
                     							</ul>

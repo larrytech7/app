@@ -54,13 +54,13 @@ class PlatformCharges{
         if($originProvider == 'ew') //am average charge of $0.5 has to be applied here
             return ( $this->ewamount + (0.01 * $this->ewamount) );
         else if($originProvider == 'pp')
-            return $this->amount;//TODO:
+            return $this->amount + ((4/100) * $this->amount);//PayPal charges = 3.7% , our charges here is 0.3%
         else if($originProvider == 'mm')
-            return 0;//TODO:
+            return $this->amount + ((2.5/100) * $this->amount);//FM charges 2%, we charge 0.5%:
         else if($originProvider == 'sk')
             return 0; //TODO:
         else if($originProvider == 'stp')
-            return 0; //TODO:
+            return $this->amount + ((2/100) * $this->amount) + 0.55; //solidtrustpay fees(2.5% + $0.35) plus our fees ($0.5)
         else
             return 0;    
     }

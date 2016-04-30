@@ -127,7 +127,7 @@
                 <div class="navbar-form navbar-right">
                     @if(Auth::check()==NULL)
                         <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
-                        <a href="#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
+                        <a href="{{URL::route('home')}}#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     @endif
                    
                     @if(Auth::check())

@@ -291,7 +291,7 @@ Route::group(array('before' => 'auth'), function(){
 	    'uses' => 'StpayController@notifPayment',
 	));
 
-	// handles confirm requests fro STP transactions
+	// handles confirm requests for STP transactions
 	Route::get('dashboard/stpconfirm', array(
 		'as' => 'stpconfirm',
 		'uses' => 'StpayController@confirmPayment'

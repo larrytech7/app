@@ -208,7 +208,7 @@
                         <tr>
                             <td></td>
                             <td>*</td>
-                            <td>Eway</td>
+                            <td>Eway/Credit Card</td>
                             <td>$ 5000</td>
                         </tr>
                     </table>
@@ -226,7 +226,7 @@
                   <li><a class="opt" href="#!">Settings</a></li>
                 </ul>
         </div>
- <!-- apyment Modal Structure -->
+ <!-- payment Modal Structure -->
           <div id="modal1" class="modal ">
             <div class="modal-content">
               <h4>New Transaction</h4>

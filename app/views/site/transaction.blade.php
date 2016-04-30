@@ -7,7 +7,7 @@
                     <div class="media-body">
                               <h3 class="media-heading"><a href="{{URL::route('dashboard')}}"><i class="material-icons small blue-text">home</i></a>Transaction History</h3>
                                
-                              <table class="table table-stripped table-hover" id="transaction_table">
+                              <table class="table table-stripped table-hover" id="">
                                     <thead>
                                       <tr class="table-bordered">
                                         <th>Date</th>
