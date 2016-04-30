@@ -6,7 +6,7 @@
         <!-- Compiled and minified CSS -->
 <!--
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css"/>
--->     <link type="text/css" href="{{URL::to('public/css')}}/materialize.css" rel="stylesheet" />
+-->     <link type="text/css" href="<?php echo URL::to('public/css'); ?>/materialize.css" rel="stylesheet" />
 		<style type="text/css" rel="stylesheet">
 		body{
   text-align : center;
@@ -31,8 +31,8 @@
 	<body>
         <div class="container container-fluid">
         <p style="text-align: center;">
-            <a href="{{URL::route('home')}}" class="center" target="_blank">
-	           <img class="circle" src="{{URL::to('public/images')}}/logo.png" width="250" height="180"/>
+            <a href="<?php echo URL::route('home'); ?>" class="center" target="_blank">
+	           <img class="circle" src="<?php echo URL::to('public/images'); ?>/logo.png" width="250" height="180"/>
             </a>
        </p>
        <p style="text-align: center;">
@@ -40,7 +40,7 @@
        </p>
        <hr style="text-color: black"/>
        <p>
-            <span>Transaction date: {{$tdate}}</span>
+            <span>Transaction date: <?php echo $tdate; ?></span>
             <br />
             <table>
                 <th>
@@ -48,11 +48,11 @@
                 </th>
                 <tr>
                     <td>Receipient Email</td>
-                    <td>{{$receiver_email}}</td>
+                    <td><?php echo $receiver_email; ?></td>
                 </tr>
                 <tr>
                     <td>Receipient Phone </td>
-                    <td> {{$receiver_number}} </td>
+                    <td> <?php echo $receiver_number; ?> </td>
                 </tr>
             </table>
             <table>
@@ -61,27 +61,27 @@
                 </th>
                 <tr>
                     <td>Transaction ID</td>
-                    <td>{{$tid}}</td>
+                    <td><?php echo $tid; ?></td>
                 </tr>
                 <tr>
                     <td>STATUS </td>
-                    <td style="color: red;"> {{$status}} </td>
+                    <td style="color: red;"> <?php echo $status; ?> </td>
                 </tr>
                 <tr>
                     <td>AMOUNT</td>
-                    <td>{{$amount}}</td>
+                    <td><?php echo $amount; ?></td>
                 </tr>
                 <tr>
                     <td>CHARGE </td>
-                    <td>{{$charge}}</td>
+                    <td><?php echo $charge; ?></td>
                 </tr>
                 <tr>
                     <td>TOTAL</td>
-                    <td>{{$total}}</td>
+                    <td><?php echo $total; ?></td>
                 </tr>
                 <tr>
                     <td>MODE</td>
-                    <td>{{$mode}}</td>
+                    <td><?php echo $mode; ?></td>
                 </tr>
             </table>
        </p>
@@ -92,9 +92,9 @@
             <div class="row">
                 <!-- Main content for the receipt card-->
                 <div class="footer footer-div">
-                    <span>&COPY;</span> {{date('Y')}} Izepay, Inc <br />
-                    <a href="{{URL::to('terms')}}">Terms &AMP; Conditions</a> |
-                    <a href="{{URL::to('privacy')}}">Privacy Policy</a>
+                    <span>&COPY;</span> <?php echo date('Y'); ?> Izepay, Inc <br />
+                    <a href="<?php echo URL::to('terms'); ?>">Terms &AMP; Conditions</a> |
+                    <a href="<?php echo URL::to('privacy'); ?>">Privacy Policy</a>
                 </div>
             </div>
         </div>
