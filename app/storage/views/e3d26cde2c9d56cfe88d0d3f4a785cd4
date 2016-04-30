@@ -3,31 +3,29 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="col s12 m3 ">
-                    <div class="collection">
+                    <div class="collection" >
                         <a class="collection-item blue active" href="<?php echo URL::route('home'); ?>">
                             <i class="material-icons left ">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left green-text darken-5">payment</i>New Transaction
+                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
                         </a>
                         <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="collection-item blue-text">
-                            <i class="material-icons left brown-text lighten-1">assignment</i>History
+                            <i class="material-icons left blue-text lighten-1">assignment</i>History
                         </a>
                         <a href="#" class="opt collection-item blue-text" >
-                            <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
+                            <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
-                            <i class="material-icons left teal-text lighten-1">settings</i>Settings
+                            <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
                         <a class="collection-item blue-text" href="<?php echo URL::route('developer'); ?>">
                             <i class="material-icons left">business</i> Merchant
                         </a>
-                        <a href="#apidocs" class="opt collection-item blue-text">
-                            <i class="material-icons left">inbox</i>API Docs
+                        <a href="<?php echo URL::route('apidocs'); ?>" class="collection-item blue-text">
+                            <i class="material-icons left">library_books</i>API Docs
                         </a>
-                        <a href="#support" class="opt collection-item blue-text ">
-                            <i class=" material-icons left">forum</i>API Support
-                        </a>
+                        
                     </div>
                 </div>
                 <div class="col s12 m9">
@@ -38,7 +36,7 @@
                         <div class="caption center-align">
                             <h3 class="black-text">Make a Payment</h3>
                             <h5 class="">Pay freelancers or remote collaborators easily in few clicks.</h5>
-                            <p class="col s10 m10 l12 "> Click &laquo;New Transaction&raquo; </p>
+                            <p class="col s10 m10 l12 "> Click &laquo;Make payment&raquo; </p>
                         </div>
                     </li>
                     <li>
@@ -46,7 +44,7 @@
                         <div class="caption center-align">
                             <h3 class="black-text">Send Money</h3>
                             <h5 class="">Send money to areas between different platforms we integrate.</h5>
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;New Transaction&raquo;</p>
+                            <p class="col s10 m10 l12 black-text"> Click &laquo;Make payment&raquo;</p>
                         </div>
                     </li>
                     <li>
@@ -70,11 +68,11 @@
             </div>
                 <!-- How it works -->
                 <div class="">
-                <p><h2>How it works </h2></p>
+                <p ><h4 >How it works </h4></p>
                    <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center green-text">
-                                <img src="<?php echo URL::to('public/images'); ?>/one.png" alt="View invoices" class="responsive-img"/>
+                                <img src="<?php echo URL::to('public/images'); ?>/one.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
                             <h5 class="center">Send money/payment</h5>
                             <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
@@ -83,7 +81,7 @@
                    <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center green-text">
-                                <img src="<?php echo URL::to('public/images'); ?>/two.png" alt="View invoices" class="responsive-img"/>
+                                <img src="<?php echo URL::to('public/images'); ?>/two.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
                             <h5 class="center">Select Portal</h5>
                             <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
@@ -92,10 +90,10 @@
                    <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center green-text">
-                                <img src="<?php echo URL::to('public/images'); ?>/three.png" alt="View invoices" class="responsive-img"/>
+                                <img src="<?php echo URL::to('public/images'); ?>/three.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
-                            <h5 class="center">Continue transaction</h5>
-                            <p class="light center-align">Once redirected to your payment provider, login and validate the transaction.</p>
+                            <h5 class="center">Validate transaction</h5>
+                            <p class="light center-align">Once redirected to your payment provider, authenticate the transaction.</p>
                         </div>
                    </div>
                <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.

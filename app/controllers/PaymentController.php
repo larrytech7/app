@@ -362,7 +362,7 @@ class PaymentController extends BaseController {
                     ;
                     */
         $data['user'] = User::find(Auth::user()->id);
-        $data['transactions'] = IcePayTransaction::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $data['transactions'] = IcePayTransaction::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(5);
 
         return View::make('site.transaction')->with($data)->with('title', 'IzePay - Transactions');
     }
