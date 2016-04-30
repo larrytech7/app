@@ -65,21 +65,9 @@
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
-                <div class="flip-card active-card full-card" >
-                        <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="{{URL::to('public/images')}}/user.jpg"/></a>
-                        </div>
-                        
-                        <!--<a href="{{URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
-                        <a href="{{URL::route('viewprofile')}}" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                        <div class="well">
-                            <h3>{{$user->username}}</h3><!-- 
-                            <p class="red-text"><b>NOTE:</b> TO SEND MONEY USING YOUR VISA CARD, MASTERCARD OR ANY OTHER CREDIT CARD, SELECT &QUOT;<b>EWAY</b>&QUOT; AS YOUR PAYMENT PROVIDER AND YOUR AMOUNT WILL BE CONVERTED TO &QUOT;<b>AUD</b>&QUOT;</p>                            
-                            -->
-                        </div>                        
-                 </div>
+            <!-- user profile display -->
+                @include('site.userModule')
+
                  <div id="currencyconvert" >
                     <p class="align-center"><h4>Currency Converter</h4></p>
                     <div class="input-field col s6">

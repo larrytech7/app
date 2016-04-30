@@ -46,18 +46,7 @@
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
-                <div class="flip-card active-card full-card" >
-                        <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
-                        </div>
-                        
-                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                        <div class="well">
-                            <h3><?php echo $user->username; ?></h3>                            
-                        </div>                        
-                 </div>
+                <?php echo $__env->make('site.userModule', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
             <!-- /.col-md-4 -->
         </div>
