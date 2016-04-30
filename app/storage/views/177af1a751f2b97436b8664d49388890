@@ -15,7 +15,7 @@
     <link rel="icon" type="image/gif" href="<?php echo URL::to('public/images'); ?>/animated_favicon1.gif" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <!-- Bootstrap/material Core CSS -->
     <link rel="stylesheet" href="<?php echo URL::to('public/css'); ?>/bootstrap.min.css" />
     <link type="text/css" href="<?php echo URL::to('public/css'); ?>/bootstrap-responsive.min.css" rel="stylesheet" />
@@ -31,12 +31,15 @@
     <link href="<?php echo URL::to('public/css'); ?>/buttons.css" rel="stylesheet" />
     <link href="<?php echo URL::to('public/css'); ?>/flipper.css" rel="stylesheet"/>
     <link href="<?php echo URL::to('public/css'); ?>/material-wfont.min.css" rel="stylesheet"/>
+    <link href="<?php echo URL::to('public/css'); ?>/jquery.qtip.min.css" rel="stylesheet"/>
 
     <style>
     body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    margin-left: 2px;
+    margin-right: 2px;
   }
   .sup{
         background-color: transparent;
@@ -66,6 +69,11 @@
         html   {
                 background: url(polina.jpg) #000 no-repeat center center fixed;
             }
+    @media  screen and (max-width: 350px){
+        footer {
+            display:none;
+        }
+    }
     #bgvid {
             display: none;
         }
@@ -96,12 +104,12 @@
         <div class=" navbar-inner">
              <?php if(Auth::check()==NULL): ?>
                 <a class="brand-logo" href="<?php echo URL::route('home'); ?>">
-                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="HyboPay Logo" style="width: 180px;height: 90px; margin-top:5px"/>
+                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 <?php endif; ?>
                 <?php if(Auth::check()): ?>
                 <a class="brand-logo" href="<?php echo URL::route('dashboard'); ?>" title="Dashboard">
-                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="HyboPay Logo" style="width: 180px;height: 80px;margin-top:5px"/>
+                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 <?php endif; ?>
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -141,8 +149,7 @@
         <div class="divider grey"></div>
         
         <!-- Footer -->
-        <footer class="page-footer grey lighten-3">
-            
+       <footer class="page-footer grey lighten-3">
             <p class="pull-right"><a href="<?php echo URL::to('privacy'); ?>">Privacy Policy </a>|<a href="<?php echo URL::to('terms'); ?>"> Terms & Conditions </a>|<a href="<?php echo URL::to('about'); ?>"> About</a></p>
             <p>&copy; <?php echo date('Y'); ?> IceTeck.</p>
       </footer>
@@ -193,9 +200,13 @@
     <script src="<?php echo URL::to('public/js'); ?>/materialize.min.js"></script>
     <script src="<?php echo URL::to('public/js'); ?>/init.js"></script>
     <script src="<?php echo URL::to('public/js'); ?>/platform.js"></script>
-    
+    <script src="<?php echo URL::to('public/js'); ?>/jquery.dataTables.js"></script>
+    <script src="<?php echo URL::to('public/js'); ?>/jquery.flexslider.js"></script>
+    <script src="<?php echo URL::to('public/js'); ?>/jquery.qtip.min.js"></script>
+        
     <script>
     $(document).ready(function(){
+        $('#transaction_table').dataTable();
         $('.modal-trigger').leanModal();
         $('select').material_select();
         $('.loading').hide();
@@ -276,7 +287,88 @@
                 Materialize.toast('Passwords Do not match <i class="material-icons right">clear</i>', 3000, 'red-text', '');
         }
   </script>
-
+  <script>
+            $('a.Enzympay_pay_btn').qtip({
+                content: {
+                    title:'<b>Enzympay</b> - Choose your payment method below',
+                    text: function(event, api) {
+                        api.elements.content.html('Loading...');
+                        return $.ajax({
+                            url: api.elements.target.attr('href'),
+                            type: 'POST',
+                            data:{
+                                apikey:'asdaf3',
+                                amount: 212,
+                                currency: 'USD',
+                                cancel_url: 'localhost/app/',
+                                confirm_url: 'localhost/app',
+                                item_name: 'website development'
+                            } // Use data-url attribute for the URL
+                        })
+                        .then(function(content) {
+                            // Set the tooltip content upon successful retrieval
+                           // api.set('content.text', content);
+                            //this is so that a request is sent to reload a new parameters for the payment button
+                            return content;
+                        }, function(xhr, status, error) {
+                            // Upon failure... set the tooltip content to the status and error value
+                            api.set('content.text', status + ': ' + error);
+                        });
+            
+                        return 'Loading ...'; // Set some initial text
+                    }
+                },
+                position:{
+                  //viewport: $(window),
+                  my:'left center',
+                  at:'right center',
+                  effect: function(api, pos, viewport) {
+                        // "this" refers to the tooltip
+                        $(this).animate(pos, {
+                            duration: 500,
+                            easing: 'linear',
+                            queue: false // Set this to false so it doesn't interfere with the show/hide animations
+                        });
+                    },
+                    adjust: {
+                            scroll: true // Can be ommited (e.g. default behaviour)
+                        }  
+                },
+                style:{
+                    width:350,
+                    height:200,
+                    classes: 'qtip-rounded qtip-green qtip-shadow'
+                },
+                show: {
+                    effect: function() {
+                        $(this).fadeTo(500, 1);
+                    },
+                    event:'click',
+                    solo:true
+                },
+                hide: {
+                        event: 'unfocus',
+                        effect: function(offset) {
+                            $(this).slideDown(100); // "this" refers to the tooltip
+                        }
+                    }
+            }).click(function(e){ e.preventDefault(); });;
+  </script>
+<!-- FlexSlider -->
+				  <script type="text/javascript">
+					$(function(){
+					  SyntaxHighlighter.all();
+					});
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+			<!-- FlexSlider -->
 </body>
 
 </html>

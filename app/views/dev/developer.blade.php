@@ -11,7 +11,7 @@
                             <i class="material-icons left blue-text">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>New Transaction
+                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
@@ -59,14 +59,14 @@
                                     <p>
                                         <pre>
                                                 {{htmlspecialchars('
-                                                <form action="https://izepay.iceteck.com/app/sandbox/api/merchantapi)" method="post" name="merchant_form">
+                                                <form action="https://Enzympay.iceteck.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
                                                     <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
                                                     <input type="hidden" name="currency" value="USD"/>
                                                     <input type="hidden" name="amount" value="AMOUNT HERE"/>
                                                     <input type="hidden" name="return_url" value="YOUR RETURN/RESULTS URL" />
                                                     <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
                                                     <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
-                                                    <input type="image" src="https://izepay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
+                                                    <input type="image" src="https://Enzympay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
                                                 </form>
                                                 ')}}
                                         </pre>

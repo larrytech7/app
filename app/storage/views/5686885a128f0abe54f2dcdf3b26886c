@@ -6,9 +6,9 @@
             </video>
             <button id="vidpause" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">pause</i></button>
         </div>
-        <div class="row center" style="margin-bottom: 28%;">
-            <p class="center-align"><h2 class="white-text"> Make payments or send money accross the world.</h2></p>
-            <p><h5 class="white-text">You now possess the power to pay freelancers more conviniently than ever before.</h5></p>
+        <div class="row center" style="margin-bottom: 20%;">
+            <p class="center-align"><h2 class="white-text">Make payments or send money using any provider.</h2></p>
+            <p><h5 class="white-text">The best cross-wallet solution for you. Pay a mobile money user using your paypal account and more.</h5></p>
             <p></p>
             <br />
             <br />
@@ -20,14 +20,13 @@
                         <input type="hidden" name="return_url" value="https://iceteck.com" />
                         <input type="hidden" name="cdata1" value="xxxxx"/>
                         <input type="hidden" name="cdata2" value="xxxxx"/>
-                        <input type="image" src="<?php echo URL::to('public/images/hybopay_checkout.png'); ?>" width="150" height="80"/>
+                        <input type="image" src="<?php echo URL::to('public/images/logo.png'); ?>" class="image-responsive"/>
             </form>
+            
         </div>
         <div class="row">
             <div class="col s12 m8 l8"> 
-                <div class="card-panel responsive">
-                    <h5 class="center-align">Money transfer/payments made simple in Africa and the world at large.</h5>                   
-                </div>
+                <h5 class="center-align">Money transfer/payments made simple in Africa and the world at large.</h5>                   
                 <div class="row">
                     <div class="col s12 m4">
                       <div class="icon-block">
@@ -60,7 +59,7 @@
                       <div class="icon-block">
                         <h2 class="center green-text"><i class="material-icons large">call_split</i></h2>
                         <h5 class="center">Opportunity & Potential</h5>
-                        <p class="center-align">Conviniently pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
+                        <p class="center-align">Pay freelancers worldwide. No need for new payment accounts. We do the heavy lifting.</p>
                       </div>
                     </div>
             
@@ -69,7 +68,7 @@
                         <h2 class="center blue-text"><i class="material-icons large">extension</i></h2>
                         <h5 class="center">Smart Experience</h5>
             
-                        <p class="center-align">Send money to users of different payment systems (Paypal, Skrill, Mobile Money etc) from your single account.</p>
+                        <p class="center-align">Send money to users of Paypal, Skrill, Mobile Money etc from your single account.</p>
                       </div>
                     </div>
             
@@ -82,12 +81,52 @@
                       </div>
                     </div>
               </div>
+               
+                <div class="clearfix"></div>
+                <!-- Public eye -->
                 <div>
+                    <div class="card" style="width: 500px; height: 280px;">
+                        <div class="card-image">
+                          <img src="<?php echo URL::to('public/images'); ?>/fblack.jpg" />
+                          <span class="card-title">Use more than a card.</span>
+                        </div>
+                        <div class="card-content">
+                          <p>Leverage enzympay to make transactions accross several other payment providers.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="height: 280px;">
+                        <div class="card-image">
+                          <img src="<?php echo URL::to('public/images'); ?>/fblack2.jpg" />
+                          <span class="card-title"></span>
+                        </div>
+                        <div class="card-content">
+                          <p>Leverage enzympay to make transactions accross several payment providers.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="width: 500px; height: 300px;">
+                        <div class="card-image">
+                          <img src="<?php echo URL::to('public/images'); ?>/wallet1.jpg" />
+                          <span class="card-title black-text">Be more flexible with Mobile.</span>
+                        </div>
+                        <div class="card-content">
+                          <p>Accept payment via mobile money providers like MTN mobile money.</p>
+                        </div>
+                      </div>
+                      <div class="card" style="height: 300px;">
+                        <div class="card-image">
+                          <img src="<?php echo URL::to('public/images'); ?>/mm2.jpg" />
+                          <span class="card-title"></span>
+                        </div>
+                        <div class="card-content">
+                          <p>Accept payment via mobile money providers like MTN mobile money.</p>
+                        </div>
+                      </div>
                 </div>    
             </div>
             <!-- /.col-md-8 -->
-            <div class="col well s12 m4 l4" id="signup">
-                <h3 id="pad">Create Account</h3>
+            <div class="col s12 m4 l4" id="signup">
+                <div class="well">
+                <h4 id="pad">Create Account</h4>
                 <?php echo Form::open(array('url'=>'register', 'class'=>'form-horizontal', 'role'=>'form')); ?>
 
                 
@@ -137,7 +176,7 @@
                                 <option value="USA" >USA</option>
                                 <option value="UK" >UK</option>
                                 <option value="France" >France</option>
-                                <option value="Germany">Germany</option>
+                                <!-- <option value="Germany">Germany</option> -->
                                 <option value="Canada" >Canada</option>
                                 <option value="South Korea" >South Korea</option>
                             </select>
@@ -162,17 +201,66 @@
                     </div>
                     <?php echo Form::token(); ?>
 
-                    
                 <?php echo Form::close(); ?>
 
-
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="card col s12">
+                    <div>
+                        <img src="<?php echo URL::to('public/images'); ?>/ceo.jpg" class="img img-circle" width="80" height="80"/>
+                        <span class="">Larry Akah H</span>
+                        </div>
+                    <div class="card-content">
+                        <p>We achieve true accountability and more flexibility with a truely digitalized independent monetary system</p>
+                    </div>
+                </div>
+                    <div class="client col s12">
+                    						<div class="" style="max-height: 220px; overflow-y: scroll;">
+                    							<ul>
+                    								<li>
+                    									<img src="<?php echo URL::to('public/images'); ?>/jaolin.jpg" alt="" class="img-circle" width="100" height="100"/>
+                    									<h4 class="pull-right">Alembong Elvis</h4>
+                    									<h6 class="pull-right">I now use my mobile money account to do paypal and solid trust pay transactions. Just awesome and innovative.</h6>
+                    								    
+                                                    </li>
+                    								<li>	
+                    									<img src="<?php echo URL::to('public/images'); ?>/ceo.jpg" alt="" class="img-circle" width="100" height="100" />
+                    									<h4 class="pull-right">Sarah Menja</h4>
+                    									<h6>Buying online has never been hasle free until enzympay. Dynamic and flexible like no other</h6>
+                    								</li>
+                    								<li>
+                    									<img src="<?php echo URL::to('public/images'); ?>/jaolin.jpg" class="img-circle" alt="" width="100" height="100"/>
+                    									<h4 class="pull-right">Jao Lin</h4>
+                    									<h6>I earned by freelance payment quite rapidly without any stress</h6>
+                    								</li>	
+                    								<div class="clearfix"> </div>
+                    							</ul>
+                    						</div>
+                    		
+                    </div>
             </div>
             <!-- /.col-md-4 -->
         </div>
         <div class="row">
-            <div class="col s12 center" id="contact">
-                <i class="large material-icons blue-text">perm_phone_msg</i>
-                <h4>Contact Us</h4>
+            <div class="col s4">
+                <div class="social">
+                <h4><i class="small material-icons blue-text">group_work</i>We are social</h4>
+                    <div class="divider grey"></div>
+                    <br />
+                    Meet the awesome community we drive worldwide on our social pages.<br />
+                    <img src="<?php echo URL::to('public/images'); ?>/social.JPG" class="img img-responsive"/>
+                </div>
+            </div>
+            <div class="col s4">
+                <h4><i class="small material-icons blue-text">verified_user</i> Our Partners</h4>
+                <div class="divider grey"></div>
+                <br />
+                PAypal | SG | FurtherMarket | Solid Trust Pay | MyEway
+            </div>
+            <div class="col s4" id="contact">
+                <h4><i class="small material-icons blue-text">perm_phone_msg</i> Contact Us </h4>
+                <div class="divider grey"></div> <br />
                 <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b></span> @ &nbsp;ActivSpaces</p>
                 <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
                 <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@iceteck.com</a> </p>

@@ -10,7 +10,7 @@
                             <i class="material-icons left ">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>New Transaction
+                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
@@ -38,7 +38,7 @@
                         <div class="caption center-align">
                             <h3 class="black-text">Make a Payment</h3>
                             <h5 class="">Pay freelancers or remote collaborators easily in few clicks.</h5>
-                            <p class="col s10 m10 l12 "> Click &laquo;New Transaction&raquo; </p>
+                            <p class="col s10 m10 l12 "> Click &laquo;Make payment&raquo; </p>
                         </div>
                     </li>
                     <li>
@@ -46,7 +46,7 @@
                         <div class="caption center-align">
                             <h3 class="black-text">Send Money</h3>
                             <h5 class="">Send money to areas between different platforms we integrate.</h5>
-                            <p class="col s10 m10 l12 black-text"> Click &laquo;New Transaction&raquo;</p>
+                            <p class="col s10 m10 l12 black-text"> Click &laquo;Make payment&raquo;</p>
                         </div>
                     </li>
                     <li>

@@ -6,7 +6,7 @@
             <h1 class="center-align">Service &QUOT;Terms of Use&QUOT;</h1>
            <p>Last updated: September 14, 2015</p>
 
-<p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the http://icepay.iceteck.com website (the "Service") operated by Izepay ("us", "we", or "our").</p>
+<p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the http://Enzympay.iceteck.com website (the "Service") operated by Enzympay ("us", "we", or "our").</p>
 
 <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
 
@@ -22,9 +22,9 @@
 
 <p><strong>Links To Other Web Sites</strong></p>
 
-<p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Izepay.</p>
+<p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Enzympay.</p>
 
-<p>Izepay has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Izepay shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+<p>Enzympay has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Enzympay shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
 
 <p>We strongly advise you to read the terms and conditions and privacy policies of any third-party web sites or services that you visit.</p>
 
@@ -63,9 +63,9 @@ These Terms constitute the entire agreement between us regarding our Service, an
                     <div class="col s12 center" id="contact">
                       <i class="large material-icons green-text">perm_phone_msg</i>
                       <h4>Contact Us</h4>
-                      <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Izepay </b>Inc.</span> @ &nbsp;ActivSpaces</p>
+                      <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Enzympay </b>Inc.</span> @ &nbsp;ActivSpaces</p>
                       <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
-                      <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@Izepay.com</a> </p>
+                      <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@Enzympay.com</a> </p>
                     </div>
             </div>
             <!-- /.col-md-8 -->
