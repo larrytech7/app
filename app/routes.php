@@ -268,10 +268,11 @@ Route::group(array('before' => 'auth'), function(){
 	/*
 	| Mobile Money Routes
 	*/
-	Route::post('transfer', array(
+	/*Route::post('transfer', array(
 	    'as' => 'transfer',
 	    'uses' => 'PaymentController@postTransfer',
 	));
+    */
 
 
 	Route::get('dashboard/transaction', array(
@@ -322,6 +323,29 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('dashboard/ewaycancel', array(
 		'as' => 'ewaycancel',
 		'uses' => 'EwayController@cancelTransaction'
+	));
+
+});
+
+Route::group(array('before' => 'auth'), function(){
+	/*
+	| Mobile money management Routes
+	*/
+    //request payment
+	Route::any('dashboard/momo', array(
+	    'as' => 'momo',
+	    'uses' => 'MobilemoneyController@requestPayment',
+	));
+
+	// make deposit
+	Route::get('dashboard/momod', array(
+		'as' => 'ewayconfirm',
+		'uses' => 'MobilemoneyController@makePayment'
+	));
+    // check payment status 
+	Route::get('dashboard/momoc', array(
+		'as' => 'ewayconfirm',
+		'uses' => 'MobilemoneyController@checkPayment'
 	));
 
 });

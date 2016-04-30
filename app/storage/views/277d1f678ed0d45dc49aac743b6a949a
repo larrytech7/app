@@ -134,7 +134,7 @@
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF">FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option>
+                                <option value="ZAR">South African Rand</option> 
                                 <option value="AUD">AUD - Australlian </option> <!-- CAD  and JPY conversions coming soon! -->
                             </select>
                             <label for="from">FROM</label>
@@ -148,7 +148,7 @@
                                 <option value="ZAR">South African Rand</option>
                                 <option value="AUD">AUD - Australlian </option>
                                 <option value="CAD">CAD - Canadian </option>
-                                <option value="JPY">Japanese Yen</option>
+                                <option value="JPY">Japanese Yen</option> 
                             </select>
                             <label for="to">TO</label>
                       </div>
@@ -227,19 +227,20 @@
  <!-- payment Modal Structure -->
           <div id="modal1" class="modal ">
             <div class="modal-content">
-              <h4>New Transaction</h4>
-              <?php echo Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form')); ?>
+              <h4>New Transaction &nbsp;&nbsp;<span class="notifications hide"><div class="progress"><div class="indeterminate"></div></div></span></h4>
+              <?php echo Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form', 'onsubmit'=>'sendpayment(event)')); ?>
 
                   <div class="row">
                   <div class="col s12 m6">
                     <h5>Transaction Info</h5>
+                    <input type="hidden" id="to" name="to" value="<?php echo Auth::user()->number; ?>"/>
                       <div class=" input-field col s12">
                             <i class="material-icons prefix blue-text lighten-4">attach_money</i>
                             <input type="number" id="amount" name="amount" min="1" required />
                             <label for="number"> Amount to send</label>
                       </div>
                       <div class="input-field col s12" id="currency">
-                            <select class="" name="currency">
+                            <select class="" name="currency" id="cur">
                                 <option selected="selected" value="USD">USD - US Dollars</option>
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
@@ -309,8 +310,8 @@
                     </div>
                     <div class="input-field col s12">
                               <i class="material-icons prefix blue-text lighten-4">email</i>
-                              <input type="email" id="remail" name="remail" required />
-                                <label for="number">email</label>
+                              <input type="email" id="remail" name="remail" />
+                              <label for="number">email</label>
                     </div>
                     <div class="input-field col s12">
                             <select class="target" name="target" id="target" required="required">
@@ -325,7 +326,7 @@
                      </div>
                      <div class="right">
                         <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat btn-danger">Close</button>
-                        <button type="submit" class="btn-flat btn-primary waves-effect waves-white"><i class="material-icons right">send</i>Continue</button>                        
+                        <button type="submit" class="btn-flat btn-primary waves-effect waves-white sendpayment"><i class="material-icons right">send</i>Continue</button>                        
                     </div>
                     <div id="stp">
                         <input type="hidden" name="merchantAccount" value="larryakah" />
