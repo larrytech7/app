@@ -354,21 +354,21 @@
                     }
             }).click(function(e){ e.preventDefault(); });;
   </script>
-<!-- FlexSlider -->
-                  <script type="text/javascript">
-                    $(function(){
-                      SyntaxHighlighter.all();
-                    });
-                    $(window).load(function(){
-                      $('.flexslider').flexslider({
-                        animation: "slide",
-                        start: function(slider){
-                          $('body').removeClass('loading');
-                        }
-                      });
-                    });
-                  </script>
-            <!-- FlexSlider -->
+    <!-- FlexSlider -->
+    <script type="text/javascript">
+    $(function(){
+        SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+        $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+            $('body').removeClass('loading');
+        }
+        });
+    });
+    </script>
+    <!-- FlexSlider -->
 
 
      <!--Start of Tawk.to Script-->

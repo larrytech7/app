@@ -150,7 +150,7 @@ class EwayController extends BaseController {
                 $email = Auth::user()->email;//$payer['email'];
                 $username = Auth::user()->username;
             
-            Mail::send(['html'=>'emails.auth.transactionemail'], array('tdate' => date('Y-m-d H:i:s'),
+            Mail::send(['html'=>'emails.auth.transactions'], array('tdate' => date('Y-m-d H:i:s'),
                                                             'tid' => $transactionResponse->TransactionID,
                                                                'sender_email'=>Auth::user()->email,
                                                                'sender_number'=>Auth::user()->number,

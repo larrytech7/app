@@ -9,26 +9,24 @@
                             <i class="material-icons left blue-text">home</i>Home
                         </a>
                         <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left green-text darken-5">payment</i>New Transaction
+                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
                         </a>
                         <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="collection-item blue-text">
-                            <i class="material-icons left brown-text lighten-1">assignment</i>History
+                            <i class="material-icons left blue-text lighten-1">assignment</i>History
                         </a>
                         <a href="#" class="collection-item blue-text" >
-                            <i class="material-icons left yellow-text lighten-1">flash_on</i>Invoices
+                            <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
-                            <i class="material-icons left teal-text lighten-1">settings</i>Settings
+                            <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
                         <a class="active collection-item blue" href="<?php echo URL::route('developer'); ?>">
                             <i class="material-icons left">business</i> Merchant
                         </a>
-                        <a href="#apidocs" class="collection-item blue-text">
-                            <i class="material-icons left">inbox</i>API Docs
+                        <a href="<?php echo URL::route('apidocs'); ?>" class="collection-item blue-text">
+                            <i class="material-icons left">library_books</i>API Docs
                         </a>
-                        <a href="#support" class="collection-item blue-text ">
-                            <i class="material-icons left">forum</i>API Support
-                        </a>
+                    
                     </div>
                 </div>
                 <div class="col s12 m9">
@@ -37,7 +35,7 @@
                     <table class="table table-condensed table-hover">
                                 <th>Username</th>
                                 <th>Payment Provider</th>
-                                <th>API_KEY</th>
+                                <!-- <th>API_KEY</th> -->
                                 <th>Status</th>
                                 <th>Action</th>
                         <?php foreach($developers as $developer): ?>
@@ -45,35 +43,45 @@
                                 
                                   <td><?php echo $developer->dev_username; ?></td>
                                   <td><?php echo $developer->dev_paymentprovider; ?></td>
-                                  <td><?php echo $developer->dev_key; ?></td>
+                                  <!-- <td><?php echo $developer->dev_key; ?></td>-->
                                   <td><?php echo $developer->status == 0? 'sandbox':'live'; ?></td>
                                   <td>
                                     <a href="<?php echo URL::route('developer').'?ac=rm&id='.$developer->dev_key; ?>" class="red-text" title="Delete account"><i class="material-icons">delete</i></a>
                                     <a href="<?php echo URL::route('developer').'?ac=st&id='.$developer->dev_key; ?>" class="green-text" title="Activate or Deactivate account" ><i class="material-icons">swap_horiz</i></a>
-                                    <a href="<?php echo URL::route('developer').'?ac=gen&id='.$developer->dev_key; ?>" class="blue-text" title="Generate Payment Button"><i class="material-icons">autorenew</i></a>
+                                    <a href="#!" onclick="javascript:$('#<?php echo $developer->dev_id; ?>').dialog({minWidth: 600})" class="blue-text" title="Generate Payment Button"><i class="material-icons">autorenew</i></a>
                                   </td>
                                 </tr>
+                                <div id="<?php echo $developer->dev_id; ?>" title="Payment Button" class="modal">
+                                    Copy the following code and use as your payment button.
+                                    <p>API KEY: <u><?php echo $developer->dev_key; ?></u></p>
+                                    <p>
+                                        <pre>
+                                                <?php echo htmlspecialchars('
+                                                <form action="https://Enzympay.iceteck.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
+                                                    <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
+                                                    <input type="hidden" name="currency" value="USD"/>
+                                                    <input type="hidden" name="amount" value="AMOUNT HERE"/>
+                                                    <input type="hidden" name="return_url" value="YOUR RETURN/RESULTS URL" />
+                                                    <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
+                                                    <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
+                                                    <input type="image" src="https://Enzympay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
+                                                </form>
+                                                '); ?>
+
+                                        </pre>
+                                    </p>
+                                    <br />    
+                                </div>
+                                
                         <?php endforeach; ?>
                     </table>
                 </div>
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
-                <div class="flip-card active-card full-card" >
-                        <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
-                        </div>
-                        
-                        <!--<a href="<?php echo URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
-                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                        <div class="well">
-                            <h3><?php echo $user->username; ?></h3><!-- 
-                            <p class="red-text"><b>NOTE:</b> TO SEND MONEY USING YOUR VISA CARD, MASTERCARD OR ANY OTHER CREDIT CARD, SELECT &QUOT;<b>EWAY</b>&QUOT; AS YOUR PAYMENT PROVIDER AND YOUR AMOUNT WILL BE CONVERTED TO &QUOT;<b>AUD</b>&QUOT;</p>                            
-                            -->
-                        </div>                        
-                 </div>
+                <!-- user profile display -->
+                <?php echo $__env->make('site.userModule', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
                  <div id="currencyconvert" >
                     <p class="align-center"><h4>Currency Converter</h4></p>
                     <div class="input-field col s6">
