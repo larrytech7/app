@@ -339,13 +339,18 @@ Route::group(array('before' => 'auth'), function(){
 
 	// make deposit
 	Route::get('dashboard/momod', array(
-		'as' => 'ewayconfirm',
+		'as' => 'momoconfirm',
 		'uses' => 'MobilemoneyController@makePayment'
 	));
     // check payment status 
 	Route::get('dashboard/momoc', array(
-		'as' => 'ewayconfirm',
+		'as' => 'momoconfirm',
 		'uses' => 'MobilemoneyController@checkPayment'
+	));
+    //confirm momo transaction
+    Route::get('dashboard/confirmmomotransaction', array(
+		'as' => 'momoconfirm',
+		'uses' => 'MobilemoneyController@confirmmomotransaction'
 	));
 
 });

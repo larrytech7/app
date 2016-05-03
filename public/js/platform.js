@@ -87,7 +87,7 @@ function convert(){
                 $('.cloader').addClass('active')
                 $('.cloader').removeClass('hide')
            },
-           url      : 'http://izepay.dev/dashboard/cnv',
+           url      : 'https://izepay/dashboard/cnv',
            cache    : false,
            type     : 'GET',    
            data     : {
@@ -124,13 +124,13 @@ function init_momo(){
             isTreat = true;
             var cashResult        = '';
             var checkResult      = '';
-             cpt  = 0;
+            cpt  = 0;
              
             $.ajax({
                         beforeSend: function(){
                                 //alert('ok')
-                                $('.notifications').toggleClass('hide');
-                                $('.notifications').html('<span>Processing your request. Please wait<div class="progress"><div class="indeterminate"></div></div></span>')
+                                $('.notifications').removeClass('hide');
+                                $('.notifications').html('<span>Processing your request. Confirm transaction on your mobile.<div class="progress"><div class="indeterminate"></div></div></span>')
                                 },
                         type: 'POST',
 
@@ -146,40 +146,46 @@ function init_momo(){
                                 'to': $('#mynum').val()
                             },
 
-                        async: true,
-
                         dataType: "json",
 
                         success:function(data1){
 
-                                   cashResult    = data1.paymentresult;
+                                 //   receiver_client = data1.to;
+                                 //   receiver_sender = data1.from;
+                                 //   receiver_provider = data1.provider;
+                                 //   receiver_amount = data1.amount;
+                                    
+                                   cashResult    = data1.paymentresult; 
                                    cashResult    = cashResult.split(',');
 
-                                   $('.notifications').html(cashResult[1]).trigger('refresh');
-
+                                   $('.notifications').html('<span class="green-text">Done. '+cashResult[2]+'</span>').trigger('refresh');
+                                    console.log("response: "+data1.toString());
+                                   /*
                                    if(cashResult[0] == 1){
                                                checkResult = cashResult[1];
                                                checkResult = checkResult.split('=');
-                                               checkPayment(checkResult[1], receiver);
+                                               data = JSON.parse(data1);
+                                    $('.notifications').append('<span class="red-text">Werror_no '+data.error_no+' </span>');
+                                    //checkPayment(checkResult[1], receiver, receiver_client, receiver_sender, receiver_provider, receiver_amount); //check
                                    }
                                    else{
                                         $('#notifications').html('Error code:'+cashResult[0]+', '+cashResult[1]).trigger('refresh');
                                    }
-
-                                   $('.notifications').append('<span class="red-text">Waiting for confirmation ... </span>');
+                                   */
                             },
 
                         error: function(e){
                             console.log('Error requesting payment :'+e.responseText);
-                            $('.notifications').html('<span class="red-text">Error. '+e.responseText.error.message+'</span>');
+                            response = JSON.parse(e.responseText);
+                            $('.notifications').html('<span class="red-text">Error. '+response.error.message+' . Transaction aborted</span>');
                         }
 
             }).always(function(){
 
             });
 }
-//check status for momo processing every 10s
-function checkPayment(paymentID,receiver){
+//check status for momo processing every 30s
+function checkPayment(paymentID,receiver, clientreceiver, clientsender, clientprovider, clientamount){
 
             var status = '';
 
@@ -216,26 +222,36 @@ function checkPayment(paymentID,receiver){
 
                                    if((cpt == 12) || isOK){                
                                     // break the timer after 2 minutes or when successful payment
-
                                                clearInterval(x);
                                                
                                                if(isOK){
-                                                           $('#notifications').html('<span class="green-text">Transaction successful').trigger('refresh');
+                                                    $('#notifications').html('<span class="green-text">Transaction successful').trigger('refresh');
+                                                    //push confirmation
+                                                    $.ajax({
+                                                        type:'POST',
+                                                        url:'http://localhost/app/dashboard/confirmmomotransaction',
+                                                        async:true,
+                                                        data:{
+                                                            'amount':clientamount,
+                                                            'sender':clientsender,
+                                                            'receiver':clientreceiver,
+                                                            'provider':clientprovider
+                                                        },
+                                                        success:function(e){cosole.log("CP success: "+e.responseText)},
+                                                        error: function(e){console.log("CP Error: "+e.responseText)}
+                                                        
+                                                    })
                                                }
                                                else{
-                                                    $('.notifications').html('Error code:'+status[0]+', '+status[1]).trigger('refresh');
-                                                 //   $('.notifications').attr('src','../<?=_FMTESTDIR?>img/close2.png').trigger('refresh');
+                                                    $('.notifications').html('<span>Error code:'+status[0]+', '+status[1]+'. Transaction interrupted. Try again </span>').trigger('refresh');
                                                }
-
-                                             //  $('.notifications').html('').trigger('refresh');
 
                                                isOK   = false;
                                                cpt      = 0;
                                                isTreat = false;
                                    }
-
                         });
 
-            },10000);// repeat check payment every 10 seconds
+            },30000);// repeat check payment every 30 seconds
 
 }
