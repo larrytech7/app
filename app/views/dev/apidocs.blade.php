@@ -61,11 +61,11 @@
                         </li>
                         <li>
                           <div class="collapsible-header"><i class="material-icons">restore</i>RETURN_URL Field</div>
-                          <div class="collapsible-body"><p>The url you wish to receive response for the transaction from Enzympay.</p></div>
+                          <div class="collapsible-body"><p>The url you wish to receive response for the transaction from Paygray.</p></div>
                         </li>
                         <li>
                           <div class="collapsible-header"><i class="material-icons">class</i>CDATA1 &amp; 2 Fields</div>
-                          <div class="collapsible-body"><p>Extra data you may wish to preserve accross requests and receive back as part of the response from enzympay.</p></div>
+                          <div class="collapsible-body"><p>Extra data you may wish to preserve accross requests and receive back as part of the response from Paygray.</p></div>
                         </li>
                         <li>
                           <div class="collapsible-header"><i class="material-icons">perm_media</i>LOGO Field</div>

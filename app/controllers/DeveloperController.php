@@ -104,7 +104,7 @@ class DeveloperController extends BaseController {
        );
         return View::make('merchant.purchase')
                     ->with('data', $data)
-                    ->with('title', 'Enzympay - Purchase Method');
+                    ->with('title', 'Paygray - Purchase Method');
     }
     
     //handle client login for purchase operation

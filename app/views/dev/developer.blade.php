@@ -59,7 +59,7 @@
                                     <p>
                                         <pre>
                                                 {{htmlspecialchars('
-                                                <form action="https://enzympay.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
+                                                <form action="https://Paygray.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
                                                     <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
                                                     <input type="hidden" name="currency" value="USD"/>
                                                     <input type="hidden" name="amount" value="AMOUNT HERE"/>
@@ -67,7 +67,7 @@
                                                     <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
                                                     <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
                                                     <input type="hidden" name="mylogo" value="LOGO_OF_MY_SITE"/>
-                                                    <input type="image" src="https://Enzympay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
+                                                    <input type="image" src="https://Paygray.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
                                                 </form>
                                                 ')}}
                                         </pre>

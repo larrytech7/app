@@ -104,12 +104,12 @@
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
                 <a class="brand-logo" href="{{URL::route('home')}}">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="Paygray Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="Paygray Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -285,9 +285,9 @@
         }
   </script>
   <script>
-            $('a.Enzympay_pay_btn').qtip({
+            $('a.Paygray_pay_btn').qtip({
                 content: {
-                    title:'<b>Enzympay</b> - Choose your payment method below',
+                    title:'<b>Paygray</b> - Choose your payment method below',
                     text: function(event, api) {
                         api.elements.content.html('Loading...');
                         return $.ajax({

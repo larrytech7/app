@@ -93,7 +93,7 @@
                           <span class="card-title">Use more than a card.</span>
                         </div>
                         <div class="card-content">
-                          <p>Leverage enzympay to make transactions accross several other payment providers.</p>
+                          <p>Leverage Paygray to make transactions accross several other payment providers.</p>
                         </div>
                       </div>
                       <div class="card" style="height: 280px;">
@@ -102,7 +102,7 @@
                           <span class="card-title"></span>
                         </div>
                         <div class="card-content">
-                          <p>Leverage enzympay to make transactions accross several payment providers.</p>
+                          <p>Leverage Paygray to make transactions accross several payment providers.</p>
                         </div>
                       </div>
                       <div class="card" style="width: 500px; height: 300px;">
