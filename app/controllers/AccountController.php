@@ -4,7 +4,7 @@ class AccountController extends BaseController {
 	
 	public function getLogin(){ 
 		return View::make('site.login')
-				->with('title', 'HyboPay - LogIn');
+				->with('title', 'Paygray - LogIn');
 	}
 
 	public function handleLogin(){ 
@@ -49,7 +49,7 @@ class AccountController extends BaseController {
 
 	public function getCreate(){
 		return View::make('site.register')
-				->with('title', 'HyboPay - Registration');
+				->with('title', 'Paygray - Registration');
 	}
 
 	public function handleRegister(){
@@ -132,7 +132,7 @@ class AccountController extends BaseController {
 
 	public function getChangePassword(){
 		return View::make('site.password')
-					->with('title', 'HyboPay - Change Password');
+					->with('title', 'Paygray - Change Password');
 	}
 
 	public function handleChangePassword(){
@@ -177,7 +177,7 @@ class AccountController extends BaseController {
 
 		$data['user'] = User::find($id);
 		return View::make('site.edituser')->with($data)
-						->with('title', 'HyboPay - Edit user account');;
+						->with('title', 'Paygray - Edit user account');;
 	}
 
 	public function postManage(){
@@ -207,7 +207,7 @@ class AccountController extends BaseController {
 
     public function getForgotpasswd() {
     	return View::make('site.forgotpasswd')
-				->with('title', 'HyboPay - Forgot Password');
+				->with('title', 'Paygray - Forgot Password');
     }
 
     public function handleForgotpasswd() {
@@ -240,7 +240,7 @@ class AccountController extends BaseController {
 
 	            Mail::send('emails.auth.remind',$mailData,
 	            	function($message) {
-	                     $message->subject("izepay password reset");
+	                     $message->subject("Paygray password reset");
 	                     $message->to(Input::get('email'));
 	                 }
 	             );
@@ -264,7 +264,7 @@ class AccountController extends BaseController {
 		if ($user->count()) {
 			return View::make('password.reset')
 				->with('user', $user)
-				->with('title', 'IzePay - Recover Password');
+				->with('title', 'Paygray - Recover Password');
 		} else {
 			return Redirect::back()->with('alertError', 'invalid reset code');
 
