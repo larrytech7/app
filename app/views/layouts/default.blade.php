@@ -32,6 +32,7 @@
     <link href="{{URL::to('public/css')}}/flipper.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/material-wfont.min.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/jquery.qtip.min.css" rel="stylesheet"/>
+        <link href="{{URL::to('public/css')}}/flexslider.css" rel="stylesheet"/>
 
     <style>
     body {
@@ -149,7 +150,7 @@
         <div class="divider grey"></div>
         
         <!-- Footer -->
-       <footer class="page-footer grey lighten-3">
+       <footer class="page-footer grey lighten-3" style="background-color: black;">
             <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
             <p>&copy; {{ date('Y') }} IceTeck.</p>
       </footer>
@@ -200,6 +201,22 @@
     <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.qtip.min.js"></script>
+    <!-- FlexSlider -->
+				  <script defer src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
+				  <script type="text/javascript">
+					$(function(){
+					  //SyntaxHighlighter.all();
+					});
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+    <!-- FlexSlider -->
         
     <script>
     $(document).ready(function(){

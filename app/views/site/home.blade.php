@@ -205,6 +205,7 @@
                     <div class="clearfix"></div>
                 </div>
                 
+                <!--
                 <div class="card col s12">
                     <div>
                         <img src="{{URL::to('public/images')}}/ceo.jpg" class="img img-circle" width="80" height="80"/>
@@ -214,24 +215,25 @@
                         <p>We achieve true accountability and more flexibility with a truely digitalized independent monetary system</p>
                     </div>
                 </div>
+                -->
                     <div class="client col s12">
-                    						<div class="" style="max-height: 220px; overflow-y: scroll;">
+                    						<div class="" style="max-height: 500px; overflow-y: scroll;">
                     							<ul>
                     								<li>
                     									<img src="{{URL::to('public/images')}}/derick.jpg" alt="" class="img-circle" width="100" height="100"/>
-                    									<h4 class="pull-right">Alangi Derick</h4>
+                    									<h5 class="pull-right">Alangi Derick</h5>
                     									<h6 class="pull-right">I use my mobile money to do paypal and solid trust pay transactions. Just so simple and awesome.</h6>
                     								    
                                                     </li>
                     								<li>	
                     									<img src="{{URL::to('public/images')}}/payet.jpg" alt="" class="img-circle" width="100" height="100" />
-                    									<h4 class="pull-right">Annie Payet</h4>
+                    									<h5 class="pull-right">Annie Payet</h5>
                     									<h6>There has never been a more flexible way to pay for my online shopping. Now i can use any wallet to pay.</h6>
                     								</li>
                     								<li>
                     									<img src="{{URL::to('public/images')}}/jaolin.jpg" class="img-circle" alt="" width="100" height="100"/>
-                    									<h4 class="pull-right">Jao Lin</h4>
-                    									<h6>I received my freelance payment quite rapidly and conviniently without any stress</h6>
+                    									<h5 class="pull-right">Jao Lin</h5>
+                    									<h6>I received my freelance payment quite rapidly and conviniently without. Simple and works well.</h6>
                     								</li>	
                     								<div class="clearfix"> </div>
                     							</ul>
@@ -242,20 +244,46 @@
             <!-- /.col-md-4 -->
         </div>
         <div class="row">
+            <div class="col m12">
+                <h3 class="center-align">What the fans are saying about Us?</h3>
+                <section class="slidr">
+                <div class="flexslider">
+                        <ul class="slides">
+							<li>
+								<img src="{{URL::to('public/images')}}/derick.jpg" alt="testimonial" class="img-circle text-center" width="130" height="130">
+								<h4>Alangi Derick (Cameroon)</h4>
+								<h5>I use my mobile money to do paypal and solid trust pay transactions. Couldn't be more useful.</h5>
+							</li>
+							<li>	
+								<img src="{{URL::to('public/images')}}/payet.jpg" alt="testimonial" class="img-circle align-center" width="130" height="130">
+								<h4>Annie Payet (USA)</h4>
+								<h5>There has never been a more universal way to pay for my online shopping. Now i can use any wallet to pay.</h5>
+							</li>
+							<li>
+								<img src="{{URL::to('public/images')}}/jaolin.jpg" alt="testimonial" class="img-circle" width="130" height="130"/>
+								<h4>Jao Lin (China)</h4>
+								<h5>I received my freelance payment quite rapidly and conviniently. It's simple and works well.</h5>
+                            </li>	
+                        <div class="clearfix"> </div>
+                    </ul>
+                </div>
+                </section>
+            </div>
+        </div>
+        <div class="row" style="background-color: black;">
             <div class="col s4">
                 <div class="social">
-                <h4><i class="small material-icons blue-text">group_work</i>We are social</h4>
+                <h4><i class="small material-icons blue-text">verified_user</i>Certified</h4>
                     <div class="divider grey"></div>
                     <br />
-                    Meet the awesome community we drive worldwide on our social pages.<br />
-                    <img src="{{URL::to('public/images')}}/social.JPG" class="img img-responsive"/>
+                    VISA.<br />
                 </div>
             </div>
             <div class="col s4">
-                <h4><i class="small material-icons blue-text">verified_user</i> Our Partners</h4>
+                <h4><i class="small material-icons blue-text">group_work</i>Our Partners</h4>
                 <div class="divider grey"></div>
                 <br />
-                PAypal | SG | FurtherMarket | Solid Trust Pay | MyEway
+                PAypal | FurtherMarket | Solid Trust Pay | MyEway
             </div>
             <div class="col s4" id="contact">
                 <h4><i class="small material-icons blue-text">perm_phone_msg</i> Contact Us </h4>

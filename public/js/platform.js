@@ -87,7 +87,7 @@ function convert(){
                 $('.cloader').addClass('active')
                 $('.cloader').removeClass('hide')
            },
-           url      : 'https://izepay/dashboard/cnv',
+           url      : 'https://izepay.iceteck.com/dashboard/cnv',
            cache    : false,
            type     : 'GET',    
            data     : {
