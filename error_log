@@ -1,2 +1,18 @@
 [10-Nov-2015 23:31:52 UTC] PHP Warning:  require(/home/icetechalpha/public_html/icepay/../bootstrap/autoload.php): failed to open stream: No such file or directory in /home/icetechalpha/public_html/icepay/index.php on line 21
 [10-Nov-2015 23:31:52 UTC] PHP Fatal error:  require(): Failed opening required '/home/icetechalpha/public_html/icepay/../bootstrap/autoload.php' (include_path='.:/opt/alt/php55/usr/share/pear:/opt/alt/php55/usr/share/php') in /home/icetechalpha/public_html/icepay/index.php on line 21
+[02-Dec-2015 13:43:15 UTC] PHP Fatal error:  Class 'PayerInfo' not found in /home/icetechalpha/public_html/icepay/app/controllers/PaymentController.php on line 45
+[02-Dec-2015 13:46:55 UTC] PHP Fatal error:  Call to undefined method PayPal\Api\Payment::getTimeStamp() in /home/icetechalpha/public_html/icepay/app/controllers/PaymentController.php on line 177
+[02-Dec-2015 13:58:57 UTC] PHP Fatal error:  Call to undefined method PayPal\Api\Payment::getAmount() in /home/icetechalpha/public_html/icepay/app/controllers/PaymentController.php on line 184
+[17-Dec-2015 14:39:14 UTC] PHP Fatal error:  Call to a member function createTransaction() on a non-object in /home/icetechalpha/public_html/icepay/app/controllers/EwayController.php on line 102
+[31-Mar-2016 11:26:07 UTC] PHP Fatal error:  Class 'Image' not found in /home/icetechalpha/public_html/icepay/app/controllers/DashboardController.php on line 39
+[23-Apr-2016 10:55:25 UTC] PHP Fatal error:  Class 'Image' not found in /home/icetechalpha/public_html/icepay/app/controllers/DashboardController.php on line 39
+[30-Apr-2016 09:54:50 UTC] PHP Fatal error:  Class 'Image' not found in /home/icetechalpha/public_html/icepay/app/controllers/DashboardController.php on line 39
+[30-Apr-2016 10:15:47 UTC] PHP Fatal error:  Class 'Image' not found in /home/icetechalpha/public_html/icepay/app/controllers/DashboardController.php on line 39
+[30-Apr-2016 11:54:39 UTC] PHP Fatal error:  Class 'Intervention\Image\ImageServiceProvider' not found in /home/icetechalpha/public_html/icepay/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 157
+[30-Apr-2016 12:06:04 UTC] PHP Fatal error:  Class 'Intervention\Image\ImageServiceProvider' not found in /home/icetechalpha/public_html/icepay/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 157
+[30-Apr-2016 12:06:09 UTC] PHP Fatal error:  Class 'Intervention\Image\ImageServiceProvider' not found in /home/icetechalpha/public_html/icepay/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 157
+[30-Apr-2016 12:06:12 UTC] PHP Fatal error:  Class 'Intervention\Image\ImageServiceProvider' not found in /home/icetechalpha/public_html/icepay/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 157
+[30-Apr-2016 12:06:19 UTC] PHP Fatal error:  Class 'Intervention\Image\ImageServiceProvider' not found in /home/icetechalpha/public_html/icepay/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 157
+[30-Apr-2016 12:20:56 UTC] PHP Fatal error:  Class 'Image' not found in /home/icetechalpha/public_html/icepay/app/controllers/DashboardController.php on line 39
+[08-May-2016 01:36:49 UTC] PHP Fatal error:  Class 'Image' not found in /home/icetechalpha/public_html/icepay/app/controllers/DashboardController.php on line 39
+[17-Jun-2016 23:37:25 UTC] PHP Fatal error:  Call to a member function getId() on a non-object in /home/icetechalpha/public_html/icepay/app/controllers/MobilemoneyController.php on line 93

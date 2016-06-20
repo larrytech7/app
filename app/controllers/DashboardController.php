@@ -9,7 +9,7 @@ class DashboardController extends BaseController {
 			
 			return View::make('site.dashboard')
 				->with('user', $user)
-				->with('title', 'Enzympay - User Dashboard');
+				->with('title', 'Paygray- User Dashboard');
 	}
 
 	public function viewUserProfile(){
@@ -17,9 +17,31 @@ class DashboardController extends BaseController {
 			
 			return View::make('site.userprofile')
 				->with('user', $user)
-				->with('title', 'Enzympay - User Profile');
+				->with('title', 'Paygray- User Profile');
 	}
 
+	//send payment
+    public function sendpayment(){
+        $user = User::find(Auth::user()->id);
+        
+        return View::make('site.payments')
+				->with('user', $user)
+				->with('title', 'Paygray - Send payment');
+    }
+    //request payment from third party
+    public function requestpayment(){
+        $user = User::find(Auth::user()->id);
+        
+        return View::make('site.payments')
+				->with('user', $user)
+				->with('title', 'Paygray - Request payment');
+    }
+    
+    //send message to message center
+    public function messagecenter(){
+        
+    }
+    
     public function uploadPhoto() {
 
         $userEdit = User::find(Auth::user()->id);
@@ -50,11 +72,11 @@ class DashboardController extends BaseController {
         try{
             $user = User::find(Auth::user()->id);
             return View::make('site.about')
-                    ->with('title', 'Enzympay - About')
+                    ->with('title', 'Paygray - About')
                     ->with('user', $user);
         }catch(Exception  $ex){
             return View::make('site.about')
-                ->with('title', 'Enzympay - About');
+                ->with('title', 'Paygray - About');
         }
     }
     
@@ -62,11 +84,11 @@ class DashboardController extends BaseController {
         try{
             $user = User::find(Auth::user()->id);
             return View::make('site.privacy')
-                    ->with('title', 'Enzympay - Privacy')
+                    ->with('title', 'Paygray - Privacy')
                     ->with('user', $user);
         }catch(Exception $ex){
             return View::make('site.privacy')
-                    ->with('title', 'Enzympay - Privacy');            
+                    ->with('title', 'Paygray - Privacy');            
         }
     }
     
@@ -74,11 +96,11 @@ class DashboardController extends BaseController {
         try{
             $user = User::find(Auth::user()->id);
             return View::make('site.terms')
-                    ->with('title', 'Enzympay - Terms and Conditions')
+                    ->with('title', 'Paygray - Terms and Conditions')
                     ->with('user', $user);
         }catch(Exception $ex){
             return View::make('site.terms')
-                    ->with('title', 'Enzympay - Terms and Conditions');            
+                    ->with('title', 'Paygray- Terms and Conditions');            
         }
     }
     
@@ -100,7 +122,7 @@ class DashboardController extends BaseController {
         return View::make('dev.developer')
                     ->with($data)
 				    ->with('user', $user)
-				    ->with('title', 'Enzympay - Merchant|Developer');
+				    ->with('title', 'Paygray - Merchant|Developer');
     }
     //API Docs
     public function apidoc(){
@@ -109,7 +131,7 @@ class DashboardController extends BaseController {
 			
         return View::make('dev.apidocs')
 				    ->with('user', $user)
-				    ->with('title', 'Enzympay - Developer|Documention');
+				    ->with('title', 'Paygray - Developer|Documention');
     }
 
 }

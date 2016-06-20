@@ -2,13 +2,16 @@
         <!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">
-                <div class="col s12 m3 ">
+                <div class="col-sm-12 col-md-3 ">
                     <div class="collection" >
                         <a class="collection-item blue active" href="<?php echo URL::route('home'); ?>">
                             <i class="material-icons left ">home</i>Home
                         </a>
-                        <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
+                        <a class="collection-item blue-text modal-trigger" href="<?php echo URL::route('send'); ?>" >
+                            <i class="material-icons left blue-text darken-5">payment</i>Send payment
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="<?php echo URL::route('request'); ?>" >
+                            <i class="material-icons left blue-text darken-5">play_for_work</i>Request payment
                         </a>
                         <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
@@ -25,10 +28,13 @@
                         <a href="<?php echo URL::route('apidocs'); ?>" class="collection-item blue-text">
                             <i class="material-icons left">library_books</i>API Docs
                         </a>
+                        <a href="<?php echo URL::route('messagecenter'); ?>" class="collection-item blue-text">
+                            <i class="material-icons left">comment</i>Message Center
+                        </a>
                         
                     </div>
                 </div>
-                <div class="col s12 m9">
+                <div class="col-sm-12 col-md-9">
                 <div class="slider demoslider"> <!-- Start slider -->
                 <ul class="slides">
                     <li>
@@ -65,9 +71,8 @@
                     </li>
                 </ul>
             </div> <!-- End slider -->
-            </div>
-                <!-- How it works -->
-                <div class="">
+            <!-- how it works -->
+            <div class="">
                 <p ><h4 >How it works </h4></p>
                    <div class="col s12 m4">
                         <div class="icon-block">
@@ -75,7 +80,7 @@
                                 <img src="<?php echo URL::to('public/images'); ?>/one.png" alt="View invoices" class="circle" width="50" height="50"/>
                             </h2>
                             <h5 class="center">Send money/payment</h5>
-                            <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
+                            <p class="light center-align">Click 'send payment' and enter receiver's information appropriately as requested.</p>
                         </div>
                    </div>
                    <div class="col s12 m4">
@@ -96,12 +101,15 @@
                             <p class="light center-align">Once redirected to your payment provider, authenticate the transaction.</p>
                         </div>
                    </div>
-               <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.
+               <p> Once these steps are complete, you would receive an email of the transaction receipt and your receipient would be notified of the transaction.
                You may also check in the history here to make sure your transaction has been recorded with us.
                </p>
                <br />
                
             </div>
+            <!-- end how it works -->
+            </div>
+            
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
@@ -134,7 +142,7 @@
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF">FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option>
+                                <option value="ZAR">ZAR - South African Rand</option> 
                                 <option value="AUD">AUD - Australlian </option> <!-- CAD  and JPY conversions coming soon! -->
                             </select>
                             <label for="from">FROM</label>
@@ -145,10 +153,10 @@
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF">FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option>
+                                <option value="ZAR">ZAR - South African Rand</option>
                                 <option value="AUD">AUD - Australlian </option>
                                 <option value="CAD">CAD - Canadian </option>
-                                <option value="JPY">Japanese Yen</option>
+                                <option value="JPY">Japanese Yen</option> 
                             </select>
                             <label for="to">TO</label>
                       </div>
@@ -183,38 +191,40 @@
                             <td></td>
                             <td>*</td>
                             <td>Mobile Money</td>
-                            <td>500000 FCFA</td>
+                            <td>FCFA 500000 </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>PayPal</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>Skrill</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>Solid Trust Pay</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
-                            <td>Eway</td>
-                            <td>$ 5000</td>
+                            <td>Eway/Credit Card</td>
+                            <td>USD 5000</td>
                         </tr>
                     </table>
                  </div>
                 
             </div>
+            
             <!-- /.col-md-4 -->
         </div>
+        
         <!-- /.row -->
         <!-- options row -->
         <div class="row">
@@ -224,30 +234,32 @@
                   <li><a class="opt" href="#!">Settings</a></li>
                 </ul>
         </div>
- <!-- apyment Modal Structure -->
+ <!-- payment Modal Structure -->
           <div id="modal1" class="modal ">
             <div class="modal-content">
-              <h4>New Transaction</h4>
-              <?php echo Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form')); ?>
+              <h4>New Transaction &nbsp;&nbsp;</h4>
+              <span class="notifications hide">Processing</span>
+              <?php echo Form::open(array('url'=>'payment', 'class'=>'form-horizontal payment', 'role'=>'form', 'onsubmit'=>'sendpayment(event)')); ?>
 
                   <div class="row">
                   <div class="col s12 m6">
                     <h5>Transaction Info</h5>
+                    <input type="hidden" id="mynum" name="mynum" value="<?php echo Auth::user()->number; ?>"/>
                       <div class=" input-field col s12">
                             <i class="material-icons prefix blue-text lighten-4">attach_money</i>
                             <input type="number" id="amount" name="amount" min="1" required />
                             <label for="number"> Amount to send</label>
                       </div>
                       <div class="input-field col s12" id="currency">
-                            <select class="" name="currency">
+                            <select class="" name="currency" id="cur">
                                 <option selected="selected" value="USD">USD - US Dollars</option>
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF"> FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option>
+                                <option value="ZAR">ZAR - South African Rand</option>
                                 <option value="AUD">AUD - Australlian </option>
                                 <option value="CAD">CAD - Canadian </option>
-                                <option value="JPY">Japanese Yen</option>
+                              <!--  <option value="JPY">Japanese Yen</option> -->
                             </select>
                             <label>Currency</label>
                       </div>
@@ -255,10 +267,10 @@
                             <select class="pmode" name="mode" id="mode">
                                 <option selected="selected" value="pp" class="left circle">PayPal</option>
                                 <option value="stp" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" class="left circle">Skrill</option>
+                               <!-- <option value="sk" class="left circle">Skrill</option> -->
                                 <option value="mm" class="left circle">Mobile Money</option>
                                 <option value="ew" class="left circle">eWay</option>
-                                <option value="cc" class="left circle">Credit/Debit Card</option>
+                               <!-- <option value="cc" class="left circle">Credit/Debit Card</option> -->
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div> <!-- cc Detail section -->
@@ -309,15 +321,15 @@
                     </div>
                     <div class="input-field col s12">
                               <i class="material-icons prefix blue-text lighten-4">email</i>
-                              <input type="email" id="remail" name="remail" required />
-                                <label for="number">email</label>
+                              <input type="email" id="remail" name="remail" />
+                              <label for="number">email</label>
                     </div>
                     <div class="input-field col s12">
                             <select class="target" name="target" id="target" required="required">
                                 <option value="" disabled selected >Select Receiver Platform</option>
                                 <option value="pp" class="left circle">PayPal</option>
                                 <option value="stp" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" class="left circle">Skrill</option>
+                             <!--   <option value="sk" class="left circle">Skrill</option> -->
                                 <option value="mm" class="left circle">Mobile Money</option>
                                 <option value="ew" class="left circle">eWay</option>
                             </select>

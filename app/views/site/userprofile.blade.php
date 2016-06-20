@@ -10,8 +10,11 @@
                         <a class="collection-item blue active" href="{{URL::route('home')}}">
                             <i class="material-icons left ">home</i>Home
                         </a>
-                        <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('send')}}" >
+                            <i class="material-icons left blue-text darken-5">payment</i>Send payment
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('request')}}" >
+                            <i class="material-icons left blue-text darken-5">play_for_work</i>Request payment
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
@@ -27,6 +30,9 @@
                         </a>
                         <a href="{{URL::route('apidocs')}}" class="collection-item blue-text">
                             <i class="material-icons left">library_books</i>API Docs
+                        </a>
+                        <a href="{{URL::route('messagecenter')}}" class="collection-item blue-text">
+                            <i class="material-icons left">comment</i>Message Center
                         </a>
                     </div>
                 </div>
@@ -197,7 +203,7 @@
                                 <option value="ZAR">South African Rand</option>
                                 <option value="AUD">AUD - Australlian </option>
                                 <option value="CAD">CAD - Canadian </option>
-                                <option value="JPY">Japanese Yen</option>
+                             <!--   <option value="JPY">Japanese Yen</option> -->
                             </select>
                             <label>Currency</label>
                       </div>
@@ -205,10 +211,10 @@
                             <select class="pmode" name="mode" id="mode">
                                 <option selected="selected" value="pp" class="left circle">PayPal</option>
                                 <option value="stp" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" class="left circle">Skrill</option>
+                          <!--      <option value="sk" class="left circle">Skrill</option> -->
                                 <option value="mm" class="left circle">Mobile Money</option>
                                 <option value="ew" class="left circle">eWay</option>
-                                <option value="cc" class="left circle">Credit/Debit Card</option>
+                            <!--    <option value="cc" class="left circle">Credit/Debit Card</option> -->
                             </select>
                             <label><i class="material-icons grey-text tooltiped" data-position="right" data-delay="50" data-tooltip="This is the method of transfer you currently/actively use. Make sure you have a valid account with the provider">info</i>Sender Provider</label>
                         </div> <!-- cc Detail section -->
@@ -267,7 +273,7 @@
                                 <option value="" disabled selected >Select Receiver Platform</option>
                                 <option value="pp" class="left circle">PayPal</option>
                                 <option value="stp" class="left circle">Solid Trust Pay</option>
-                                <option value="sk" class="left circle">Skrill</option>
+                          <!--      <option value="sk" class="left circle">Skrill</option> -->
                                 <option value="mm" class="left circle">Mobile Money</option>
                                 <option value="ew" class="left circle">eWay</option>
                             </select>

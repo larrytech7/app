@@ -104,6 +104,26 @@ Route::group(array('before' => 'auth'), function(){
 	));
 	/******************************************/
 
+	//send money to user
+    Route::get('dashboard/send', array(
+	'as' => 'send',
+	'uses' => 'DashboardController@sendpayment'
+
+	));
+    
+    //request a payment from a third party
+    Route::get('dashboard/request', array(
+	'as' => 'request',
+	'uses' => 'DashboardController@requestpayment'
+
+	));
+    
+    Route::get('dashboard/messagecenter', array(
+	'as' => 'messagecenter',
+	'uses' => 'DashboardController@messagecenter'
+
+	));
+	
     Route::get('dashboard/developer', array(
 	'as' => 'developer',
 	'uses' => 'DashboardController@devzone'
@@ -268,10 +288,11 @@ Route::group(array('before' => 'auth'), function(){
 	/*
 	| Mobile Money Routes
 	*/
-	Route::post('transfer', array(
+	/*Route::post('transfer', array(
 	    'as' => 'transfer',
 	    'uses' => 'PaymentController@postTransfer',
 	));
+    */
 
 
 	Route::get('dashboard/transaction', array(
@@ -291,7 +312,7 @@ Route::group(array('before' => 'auth'), function(){
 	    'uses' => 'StpayController@notifPayment',
 	));
 
-	// handles confirm requests fro STP transactions
+	// handles confirm requests for STP transactions
 	Route::get('dashboard/stpconfirm', array(
 		'as' => 'stpconfirm',
 		'uses' => 'StpayController@confirmPayment'
@@ -322,6 +343,34 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('dashboard/ewaycancel', array(
 		'as' => 'ewaycancel',
 		'uses' => 'EwayController@cancelTransaction'
+	));
+
+});
+
+Route::group(array('before' => 'auth'), function(){
+	/*
+	| Mobile money management Routes
+	*/
+    //request payment
+	Route::any('dashboard/momo', array(
+	    'as' => 'momo',
+	    'uses' => 'MobilemoneyController@requestPayment',
+	));
+
+	// make deposit
+	Route::get('dashboard/momod', array(
+		'as' => 'momoconfirm',
+		'uses' => 'MobilemoneyController@makePayment'
+	));
+    // check payment status 
+	Route::get('dashboard/momoc', array(
+		'as' => 'momoconfirm',
+		'uses' => 'MobilemoneyController@checkPayment'
+	));
+    //confirm momo transaction
+    Route::get('dashboard/confirmmomotransaction', array(
+		'as' => 'momoconfirm',
+		'uses' => 'MobilemoneyController@confirmmomotransaction'
 	));
 
 });

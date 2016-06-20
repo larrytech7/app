@@ -104,7 +104,7 @@ class DeveloperController extends BaseController {
        );
         return View::make('merchant.purchase')
                     ->with('data', $data)
-                    ->with('title', 'HyboPay - Purchase Method');
+                    ->with('title', 'Enzympay - Purchase Method');
     }
     
     //handle client login for purchase operation
@@ -143,16 +143,17 @@ class DeveloperController extends BaseController {
                $merchant = Developer::where('dev_key', '=',$data['data'][0])->get(); //the merchant to whom to make payment to
                 
                if($data['data'][4] == 'solidtrustpay'){
+                    $charges = new PlatformCharges($data['data'][2], $data['data'][1], 'stp');
                     $url = 'https://solidtrustpay.com/handle_accver.php';
                     $fields = array(
                                             'merchantAccount'   => 'larryakah',
                                             'item_id'           => 'Item Purchase: '.$data['data'][5],
-                                            'amount'            => $data['data'][2],
+                                            'amount'            => $charges->getDueAmount('stp', $data['data'][4]),
                                             'currency'          => $data['data'][1],
                                             'confirm_url'       => URL::route('dashboard').'/stpconfirm',
                                             'testmode'          => 'on',
-                                            'user1'             => 'larryakah@gmail.com',
-                                            'user2'             => 'larryakah@gmail.com',
+                                            'user1'             => '',
+                                            'user2'             => '',
                                             'return_url'        => URL::route('dashboard'),
                                             'notify_url'        => URL::route('dashboard'),
                                             'cancel_url'        => URL::route('dashboard')
@@ -312,7 +313,7 @@ class DeveloperController extends BaseController {
                 ->setDescription("Purchase made for $item")
     	        ->setCurrency('USD')
     	        ->setQuantity(1)
-    	        ->setPrice($charges->getDueAmount('pp', $type) + 0.5 ); // unit price
+    	        ->setPrice($charges->getDueAmount('pp', $type) ); // unit price
     
     	// add item to list
         $item_list = new ItemList();
@@ -320,7 +321,7 @@ class DeveloperController extends BaseController {
     
         $amount = new Amount();
         $amount->setCurrency('USD')
-               ->setTotal($charges->getDueAmount('pp', $type) + 0.5 );
+               ->setTotal($charges->getDueAmount('pp', $type) );
     
         $transaction = new Transaction();
         $transaction->setAmount($amount)

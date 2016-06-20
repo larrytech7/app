@@ -3,118 +3,170 @@
  * @author Larry Akah
  * @date date("Y-m-d")
  * This is the MOBILE MONEY Controller for handling and controlling MM operations
- */  
+ */
+ require_once('PaymentUtil.php');
+   
 class MobilemoneyController extends BaseController {
-    
-    public static $_MM_API_PASSWORD = '7z$$}2yY!i.f:!$';
-    public static $_MM_API_NAME = 'izepayapp';
-    public static $_MM_ACCOUNT_PASS = 'creationFox7!';
-    public static $_MM_API_URL = 'https://solidtruMMay.com/accapi/process.php';
-    public static $MM_PAY_URL = 'https://solidtruMMay.com/handle_accver.php'; //url for user to send payment to admin account
-    public static $_MM_USERNAME = 'larryakah';
 
 	/**
 	 * Make a MM payment to the destined user from the main business account.
-	 *
 	 * @return void
 	 */
-	protected function makePayment($receiver, $amount, $cur)
+	public function requestPayment()
 	{
-        $receiver      = $receiver;
-        $amounttosend  = $amount;
-        $currency      = $cur;
-        $fee            = 0;
-        
-        foreach($_POST as $k=>$v) $$k=urldecode($v); 
-        $urladdress = "https://solidtruMMay.com/accapi/test.php"; 
+	   //parameters fetched from ajax request
        
-        $api_pwd = md5(MMayController::$_MM_API_PASSWORD.'s+E_a*'); 
-        //change tesmode to 0 to render live transactions
-        $data = "user=".$receiver. "&testmode=1&api_id=".MMayController::$_MM_API_NAME. "&api_pwd=".$api_pwd.
-         "&amount=".$amount."&paycurrency=".$currency."&comments=transfers&fee=".$fee."&udf1=0&udf2=0";
-        // Call MM API
+	$AccountID = 4420274;
+        $Phonenumber = Input::get('to'); //number of the person who initiated the request
+        $Amount = Input::get('amount'); //amount to charge the sender
+        $destination = Input::get('receivercontact'); //other address of the receiver
+        $dest_provider = Input::get('provider'); //provider platform to send the funds in
+        $currency = Input::get('currency'); //currency to use
+        $sendto = Input::get('receiver'); //funds are sent to this user
         
-        $ch = curl_init(); curl_setopt($ch, CURLOPT_URL,"$urladdress"); 
-        curl_setopt($ch, CURLOPT_POST, 1); 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data); 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-        curl_setopt($ch, CURLOPT_HEADER, 0); //use this to suppress output 
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);// tell cURL to graciously accept an SSL certificate 
-        $result = curl_exec ($ch) or die(curl_error($ch)); 
-        echo $result; 
-        echo curl_error($ch); 
-        curl_close ($ch);
+        $initAmount = $Amount;
+        $Amount = (int) $Amount + ((2/100) * $Amount);
+        
+        $mes_donnees = array('MyAccountID'=> $AccountID, 'CustomerPhonenumber' => $Phonenumber, 'Amount' => $Amount);
+        
+        $postdata = http_build_query($mes_donnees);
+        
+        $url = 'http://api.furthermarket.com/FM/MTN/MoMo/requestpayment?';
+        //make request and fetch result
+        $ch = curl_init();	//  Initiate curl
+		curl_setopt($ch, CURLOPT_TIMEOUT, 300); //timeout in seconds (300)
+	//	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	//	curl_setopt($ch, CURLOPT_POST, 1);                                                                     
+	//	curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);                                                              
+	//	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml','Content-Length:'.strlen($url.$postdata)));
+		curl_setopt($ch, CURLOPT_HEADER, 0);  //TRUE to include the header in the output.
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0); //0 = wait indefinitely while trying to connect 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);	// Will return the response, if false it print the response
+		curl_setopt($ch, CURLOPT_URL,$url.$postdata);	// Set the url
+	
+		$result = curl_exec($ch);	// Execute
+		$httpstatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$curl_errno = curl_errno($ch);
+        
+        /*
+        $opts = array('http' =>
+                    array(
+                               'method'  => 'GET',
+                               'header'  => 'Content-type: text/xml',
+                               'CharSet' => 'utf-8',
+                               'content' => $postdata
+                        )
+        );
+        
+        $context = stream_context_create($opts);
+        $UssdResult = file_get_contents('http://api.furthermarket.com/FM/MTN/MoMo/requestpayment?MyaccountID='.$AccountID
+                                        .'&CustomerPhonenumber='.$Phonenumber
+                                        .'&Amount='.$Amount
+                                        .'&ItemDesignation=MoMoPayment&ItemDescription=SendMomoto_'.$dest_provider.'_user',
+                                         1, $context);
+        
+        header('Content-Type:text/javascript');
+        */
+        //process the result here
+        $params = explode(',', $result, 3); //[0] = 1 or 0, [1] = payment id, [2] = message for success
+        //create amount to send to user provider in USD
+        $montant = new PlatformCharges($initAmount, 'XAF', $dest_provider);
+        
+        if($params[0] == 1 && isset($params[2])){ //verify for successful transaction and save to db and email receipt
+            
+        $transaction = new IcePayTransaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->tid = $params[1]; //transaction id or transaction bordereaux
+        $transaction->sender_email = Auth::user()->email;//sender's email
+        $transaction->receiver_email = $sendto; //receiver's email or number)
+        $transaction->type = 'MOMO_TO_'.$dest_provider;
+        $transaction->status = 'pending';
+        $transaction->amount = $Amount; //total amount deducted and transferred. The amount to be transfered to the receiver is initial $amount without our charges(2%) applied.
+        $transaction->currency = $currency;
+        $transaction->save();
+        
+        $email = Auth::user()->email;//
+        $username = Auth::user()->username;
+        
+        //send transaction email to sender confirming transactions in a professional way. send copy to company(Paygray)
+        	Mail::send(['html'=>'emails.auth.transactions'], array('tdate' => date('Y-m-d H:i:s'),
+                                                            'tid' => $result->getId(),
+                                                               'sender_email'=>Auth::user()->email,
+                                                               'sender_number'=>Auth::user()->number,
+                                                               'receiver_email'=>$sendto,
+                                                               'receiver_number'=>$destination,
+                                                               'status'=>'PENDING',
+                                                               'amount'=>$initAmount ,
+                                                               'charge'=>'2% of '.$initAmount.' in '.$currency,
+                                                               'total'=> $montant->getDueAmount('mm', $dest_provider),
+                                                               'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
+                                                               , function($message) use ($email, $username){
+		      			$message->to(array($email,'larryakah@iceteck.com','larryakah@gmail.com'), $username)->subject('Transaction Receipt - Incoming');
+			     	});
+         
+        echo json_encode(
+                    array('paymentresult' => $result,//nl2br($UssdResult),
+                    'message'=>'Transaction successful',
+                    'error_no'=>$curl_errno)
+            );
+        }else{
+            echo json_encode(
+                    array('paymentresult' => $result,//nl2br($UssdResult),
+                    'message'=> 'Transaction failed',
+                    'error_no'=>$curl_errno)
+            );
+        }
         
 	}
-    /**
-     * handle payment notifications from MM API server
-     * 
-     */ 
-     public function notifPayment(){
-        $notification = array('merchantAccount'=>Input::get('merchantAccount'),
-                            'item_id'=>Input::get('item_id'),
-                            'amount'=>Input::get('amount'), //actual amount transferred to account
-                            'notify_url'=>Input::get('notify_url'),
-                            'return_url'=>Input::get('return_url'),
-                            'cancel_url'=>Input::get('cancel_url'),
-                            'testmode'=>Input::get('testmode'),
-                            'memo'=>Input::get('memo'),
-                            'payerAccount'=>Input::get('payerAccount'),
-                            'tr_id'=>Input::get('tr_id'), //transaction id, used for tracking transactions
-                            'status'=>Input::get('status'),
-                            'paymentReceiver'=>Input::get('user1'));
-                            
-        print_r($notification);
-        //transaction verification and authentication scheme
-        $secondary_password = 'Creationfox7!';
-        $secondary_password = md5($secondary_password.'s+E_a*');  //encryption for db
-        $hash_received = MD5($_POST['tr_id'].":".MD5($secondary_password).":".$_POST['amount']."
-        :".$_POST['merchantAccount'].":".$_POST['payerAccount']);
-
-        if ($hash_received == $_POST['hash']) {
-        // valid payment
-        }
-        else {
-            // invalid payment; the payment has been altered
-        }    
-        
-     }
+    
      /**
-      * Manage confirm requests from MM API server
-      * Confirm payment was actually made and effective.
-      * Notify platform admin to proceed with payment to the receiver from the appropriate platform
+      * Check for payment status
       */ 
-      public function confirmPayment(){
-        $payment = array('MM_transact_status'=>Input::get('merchantAccount'),
-                            'date'=>Input::get('date'),
-                            'amount'=>Input::get('amount'), //actual amount transferred to account
-                            'member'=>Input::get('member'),
-                            'item_id'=>Input::get('item_id'),
-                            'email'=>Input::get('email'),
-                            'memo'=>Input::get('memo'),
-                            'tr_id'=>Input::get('tr_id'));
-                            
-        print_r($payment);
-         //transaction verification and authentication scheme
-        $secondary_password = 'Creationfox7!';
-        $secondary_password = md5($secondary_password.'s+E_a*');  //encryption for db
-        $hash_received = MD5($_POST['tr_id'].":".MD5($secondary_password).":".$_POST['amount']."
-        :".$_POST['merchantAccount'].":".$_POST['payerAccount']);
-
-        if ($hash_received == $_POST['hash']) {
-        // valid payment
-        }
-        else {
-            // invalid payment; the payment has been altered
-        }   
+      public function checkPayment(){
+        
+                $AccountID   = Input::get('receiver');
+                $PaymentID = Input::get('paymentID');
+                $mes_donnees =   array('accountID'  => $AccountID, 'paymentID' => $PaymentID);
+        
+                $postdata = http_build_query($mes_donnees);
+        
+                $opts = array('http' =>
+                                array(
+                                           'method'  => 'GET',
+        
+                                           'header'  => 'Content-type: text/xml',
+        
+                                           'CharSet' => 'utf-8',
+ 
+                                           'content' => $postdata
+                            )
+                    );
+        
+                    $context       = stream_context_create($opts);
+        
+                    $UssdResult = file_get_contents('http://api.furthermarket.com/FM/MTN/MoMo/checkpayment?accountID='.$AccountID.'&paymentID='.$PaymentID);
+        
+                    header('Content-Type:text/javascript');
+        
+                echo json_encode(
+                        array('checkpayment' => nl2br($UssdResult))
+                );
       }
-      /**
+      
+      //confirm the transaction and save the result
+      public function confirmmomotransaction(){
+            $to = Input::get('receiver');
+            $from = Input::get('sender');
+            $amount = Input::get('amount');
+            $provider = Input::get('provider');
+            
+      }
+        /**
        * 
        */
        public function cancelTransaction(){
-        
             return Redirect::route('dashboard')
-			             	->with('alertError', 'MM Transaction cancelled by user');
+			             	->with('alertError', 'Mobile Money Transaction cancelled by user');
        } 
 
 }

@@ -32,6 +32,7 @@
     <link href="{{URL::to('public/css')}}/flipper.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/material-wfont.min.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/jquery.qtip.min.css" rel="stylesheet"/>
+    <link href="{{URL::to('public/css')}}/flexslider.css" rel="stylesheet"/>
 
     <style>
     body {
@@ -104,12 +105,12 @@
         <div class=" navbar-inner">
              @if(Auth::check()==NULL)
                 <a class="brand-logo" href="{{URL::route('home')}}">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="Paygray Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 @endif
                 @if(Auth::check())
                 <a class="brand-logo" href="{{URL::route('dashboard')}}" title="Dashboard">
-                    <img src="{{URL::to('public/images')}}/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
+                    <img src="{{URL::to('public/images')}}/logo.png" alt="Paygray Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 @endif
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -127,7 +128,7 @@
                 <div class="navbar-form navbar-right">
                     @if(Auth::check()==NULL)
                         <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
-                        <a href="#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
+                        <a href="{{URL::route('home')}}#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     @endif
 
                     @if(Auth::check())
@@ -149,7 +150,7 @@
         <div class="divider grey"></div>
 
         <!-- Footer -->
-       <footer class="page-footer grey lighten-3">
+       <footer class="page-footer grey lighten-3" style="background-color: black;">
             <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
             <p>&copy; {{ date('Y') }} IceTeck.</p>
       </footer>
@@ -200,7 +201,23 @@
     <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.qtip.min.js"></script>
-
+    <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
+        <!-- FlexSlider -->
+				  <script defer src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
+				  <script type="text/javascript">
+					$(function(){
+					 // SyntaxHighlighter.all();
+					});
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+    <!-- FlexSlider -->
     <script>
     $(document).ready(function(){
         $('#transaction_table').dataTable();
@@ -285,9 +302,9 @@
         }
   </script>
   <script>
-            $('a.Enzympay_pay_btn').qtip({
+            $('a.Paygray_pay_btn').qtip({
                 content: {
-                    title:'<b>Enzympay</b> - Choose your payment method below',
+                    title:'<b>Paygray</b> - Choose your payment method below',
                     text: function(event, api) {
                         api.elements.content.html('Loading...');
                         return $.ajax({
@@ -354,7 +371,7 @@
     <!-- FlexSlider -->
     <script type="text/javascript">
     $(function(){
-        SyntaxHighlighter.all();
+        //SyntaxHighlighter.all();
     });
     $(window).load(function(){
         $('.flexslider').flexslider({

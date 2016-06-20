@@ -57,13 +57,14 @@
                                     <p>
                                         <pre>
                                                 <?php echo htmlspecialchars('
-                                                <form action="https://Enzympay.iceteck.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
+                                                <form action="https://enzympay.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
                                                     <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
                                                     <input type="hidden" name="currency" value="USD"/>
                                                     <input type="hidden" name="amount" value="AMOUNT HERE"/>
                                                     <input type="hidden" name="return_url" value="YOUR RETURN/RESULTS URL" />
                                                     <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
                                                     <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
+                                                    <input type="hidden" name="mylogo" value="LOGO_OF_MY_SITE"/>
                                                     <input type="image" src="https://Enzympay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
                                                 </form>
                                                 '); ?>
@@ -79,21 +80,9 @@
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
-                <div class="flip-card active-card full-card" >
-                        <div class="pcard label-info">
-                            <a href=""><img class=" img-circle text-center" src="<?php echo URL::to('public/images'); ?>/user.jpg"/></a>
-                        </div>
-                        
-                        <!--<a href="<?php echo URL::to('dashboard/account/manage/'.Auth::user()->id.'/modify'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">-->
-                        <a href="<?php echo URL::route('viewprofile'); ?>" class="btn btn-primary btn-fab btn-raised " id="first" title="View User Account">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                        <div class="well">
-                            <h3><?php echo $user->username; ?></h3><!-- 
-                            <p class="red-text"><b>NOTE:</b> TO SEND MONEY USING YOUR VISA CARD, MASTERCARD OR ANY OTHER CREDIT CARD, SELECT &QUOT;<b>EWAY</b>&QUOT; AS YOUR PAYMENT PROVIDER AND YOUR AMOUNT WILL BE CONVERTED TO &QUOT;<b>AUD</b>&QUOT;</p>                            
-                            -->
-                        </div>                        
-                 </div>
+                <!-- user profile display -->
+                <?php echo $__env->make('site.userModule', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
                  <div id="currencyconvert" >
                     <p class="align-center"><h4>Currency Converter</h4></p>
                     <div class="input-field col s6">

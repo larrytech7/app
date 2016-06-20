@@ -13,3 +13,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+RewriteCond %{HTTP_HOST} ^icepay\.iceteck\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.icepay\.iceteck\.com$
+RewriteRule ^/?$ "https\:\/\/izepay\.iceteck\.com\/" [R=301,L]
+
