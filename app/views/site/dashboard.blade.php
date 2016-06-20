@@ -4,7 +4,7 @@
         <!-- Heading Row -->
         <div class="row">
             <div class="col-md-8">
-                <div class="col s12 m3 ">
+                <div class="col-sm-12 col-md-3 ">
                     <div class="collection" >
                         <a class="collection-item blue active" href="{{URL::route('home')}}">
                             <i class="material-icons left ">home</i>Home
@@ -36,7 +36,7 @@
                         
                     </div>
                 </div>
-                <div class="col s12 m9">
+                <div class="col-sm-12 col-md-9">
                 <div class="slider demoslider"> <!-- Start slider -->
                 <ul class="slides">
                     <li>
@@ -74,42 +74,7 @@
                 </ul>
             </div> <!-- End slider -->
             </div>
-                <!-- How it works -->
-                <div class="">
-                <p ><h4 >How it works </h4></p>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/one.png" alt="View invoices" class="circle" width="50" height="50"/>
-                            </h2>
-                            <h5 class="center">Send money/payment</h5>
-                            <p class="light center-align">Click 'new transaction' and enter receiver's information appropriately as requested.</p>
-                        </div>
-                   </div>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/two.png" alt="View invoices" class="circle" width="50" height="50"/>
-                            </h2>
-                            <h5 class="center">Select Portal</h5>
-                            <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
-                        </div>
-                   </div>
-                   <div class="col s12 m4">
-                        <div class="icon-block">
-                            <h2 class="center green-text">
-                                <img src="{{URL::to('public/images')}}/three.png" alt="View invoices" class="circle" width="50" height="50"/>
-                            </h2>
-                            <h5 class="center">Validate transaction</h5>
-                            <p class="light center-align">Once redirected to your payment provider, authenticate the transaction.</p>
-                        </div>
-                   </div>
-               <p> Once these steps are complete, you would receive an email containing the transaction receipt and your receipient would be notified of the transaction.
-               You may also check in the history here to make sure your transaction has been recorded with us.
-               </p>
-               <br />
-               
-            </div>
+            
             </div>
             <!-- /.col-md-8 -->
             <div class="col-md-4">
@@ -221,8 +186,10 @@
                  </div>
                 
             </div>
+            
             <!-- /.col-md-4 -->
         </div>
+        
         <!-- /.row -->
         <!-- options row -->
         <div class="row">
