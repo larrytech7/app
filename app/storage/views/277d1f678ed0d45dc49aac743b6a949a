@@ -71,6 +71,43 @@
                     </li>
                 </ul>
             </div> <!-- End slider -->
+            <!-- how it works -->
+            <div class="">
+                <p ><h4 >How it works </h4></p>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="<?php echo URL::to('public/images'); ?>/one.png" alt="View invoices" class="circle" width="50" height="50"/>
+                            </h2>
+                            <h5 class="center">Send money/payment</h5>
+                            <p class="light center-align">Click 'send payment' and enter receiver's information appropriately as requested.</p>
+                        </div>
+                   </div>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="<?php echo URL::to('public/images'); ?>/two.png" alt="View invoices" class="circle" width="50" height="50"/>
+                            </h2>
+                            <h5 class="center">Select Portal</h5>
+                            <p class="light center-align">Select you payment provider and your receipient's payment provider.</p>
+                        </div>
+                   </div>
+                   <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center green-text">
+                                <img src="<?php echo URL::to('public/images'); ?>/three.png" alt="View invoices" class="circle" width="50" height="50"/>
+                            </h2>
+                            <h5 class="center">Validate transaction</h5>
+                            <p class="light center-align">Once redirected to your payment provider, authenticate the transaction.</p>
+                        </div>
+                   </div>
+               <p> Once these steps are complete, you would receive an email of the transaction receipt and your receipient would be notified of the transaction.
+               You may also check in the history here to make sure your transaction has been recorded with us.
+               </p>
+               <br />
+               
+            </div>
+            <!-- end how it works -->
             </div>
             
             </div>
