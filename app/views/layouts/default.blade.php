@@ -10,8 +10,8 @@
     <meta name="author" content=""/>
 
     <title>{{ $title }}</title>
-    
-    <link rel="icon" type="image/png" href="{{URL::to('public/images')}}/favicon.ico" />    
+
+    <link rel="icon" type="image/png" href="{{URL::to('public/images')}}/favicon.ico" />
     <link rel="icon" type="image/gif" href="{{URL::to('public/images')}}/animated_favicon1.gif" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{URL::to('public/css')}}/jquery-ui.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="{{URL::to('public/css')}}/font-awesome.css" />
-    
+
     <!-- Custom CSS -->
     <link href="{{URL::to('public/css')}}/small-business.css" rel="stylesheet" />
     <link href="{{URL::to('public/css')}}/mystyle.css" rel="stylesheet" />
@@ -52,7 +52,7 @@
   main {
     flex: 1 0 auto;
   }
-    video#bgvid { 
+    video#bgvid {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -63,7 +63,7 @@
         z-index: -100;
         -webkit-transform: translateX(-50%) translateY(-50%);
         transform: translateX(-50%) translateY(-50%);
-        background-size: contain; 
+        background-size: contain;
     }
     @media screen and (max-device-width: 800px) {
         html   {
@@ -129,7 +129,7 @@
                         <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
                         <a href="#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     @endif
-                   
+
                     @if(Auth::check())
                     <a href="{{URL::route('dashboard.change-password')}}" class="sup waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
                     <a href="{{URL::route('logout')}}" class="sup waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
@@ -144,10 +144,10 @@
 
     <!-- Page Content -->
     <div class="container">
-        
+
         @yield('content')
         <div class="divider grey"></div>
-        
+
         <!-- Footer -->
        <footer class="page-footer grey lighten-3">
             <p class="pull-right"><a href="{{URL::to('privacy')}}">Privacy Policy </a>|<a href="{{URL::to('terms')}}"> Terms & Conditions </a>|<a href="{{URL::to('about')}}"> About</a></p>
@@ -161,8 +161,8 @@
           <div class="row">
                 <div class="input-field col s6">
                   <i class="material-icons prefix blue-text">account_circle</i>
-                  <input id="icon_prefix" type="text" name="username" class="validate" required/>
-                  <label for="icon_prefix">Username</label>
+                  <input id="icon_prefix" type="email" name="email" class="validate" required/>
+                  <label for="icon_prefix">Email</label>
                 </div>
                 <div class="input-field col s6">
                   <i class="material-icons prefix blue-text">lock</i>
@@ -181,13 +181,13 @@
         </div>
       </div>
       <!-- End login -->
-  
+
     </div>
     <!-- /.container -->
 
     <!-- jQuery -->
     <script type="text/javascript" src="{{URL::to('public/js')}}/jquery.js"></script>
-    
+
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <!-- Bootstrap/Materialize Core JavaScript -->
@@ -200,7 +200,7 @@
     <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.qtip.min.js"></script>
-        
+
     <script>
     $(document).ready(function(){
         $('#transaction_table').dataTable();
@@ -215,9 +215,9 @@
         $('.tooltiped').tooltip({delay: 50,
                                 position: 'right',
                                 tooltip: 'New tootlip'});
-                                
+
         Materialize.showStaggeredList('#menulist');
-    
+
     });
     </script>
      @if(Session::has('alertMessage'))
@@ -241,7 +241,7 @@
         }
     try{
         vid.addEventListener('ended', function() {
-            // only functional if "loop" is removed 
+            // only functional if "loop" is removed
             vid.pause();
             // to capture IE10
             vidFade();
@@ -274,7 +274,7 @@
             }
           });
         });
-        
+
         function ver_pass(){
             oripass = $('#password').val();
             verpass = $('#confirm_password').val();
@@ -311,7 +311,7 @@
                             // Upon failure... set the tooltip content to the status and error value
                             api.set('content.text', status + ': ' + error);
                         });
-            
+
                         return 'Loading ...'; // Set some initial text
                     }
                 },
@@ -329,7 +329,7 @@
                     },
                     adjust: {
                             scroll: true // Can be ommited (e.g. default behaviour)
-                        }  
+                        }
                 },
                 style:{
                     width:350,
