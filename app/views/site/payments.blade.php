@@ -47,7 +47,6 @@
                             <h5>Transaction Info</h5>
                             <input type="hidden" id="mynum" name="mynum" value="{{Auth::user()->number}}"/>
                               <div class=" input-field col s12">
-                                    <i class="material-icons prefix blue-text lighten-4">attach_money</i>
                                     <input type="number" id="amount" name="amount" min="1" required />
                                     <label for="number"> Amount to send</label>
                               </div>
