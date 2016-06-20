@@ -237,28 +237,12 @@ class PaymentController extends BaseController {
     }
 
     public function viewTransaction(){
-
-       // $user = User::find(Auth::user()->id);
+    
         $user = User::find(Auth::user()->id);
-       /* $transactions = IcePayTransaction::find(Auth::user()->id);
-        $t = &$transactions;
-
-       // return var_dump($transactions);
-
-        return $transactions != NULL? View::make('site.transaction')
-                    ->with('user', $user)
-                    ->with('transactions', $transactions->all())
-                    ->with('title', 'IcePay - Dashboard')
-                    :
-                    View::make('site.transaction')
-                    ->with('user', $user)
-                    ->with('transactions', $t)
-                    ->with('title', 'IcePay - Dashboard')
-                    ;
-                    */
+       
         $data['user'] = User::find(Auth::user()->id);
         $data['transactions'] = IcePayTransaction::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(5);
 
-        return View::make('site.transaction')->with($data)->with('title', 'IzePay - Transactions');
+        return View::make('site.transaction')->with($data)->with('title', 'Paygray- Transactions');
     }
 }

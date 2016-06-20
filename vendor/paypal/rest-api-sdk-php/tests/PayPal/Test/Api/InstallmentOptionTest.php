@@ -13,17 +13,15 @@ class InstallmentOptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Gets Json String of Object InstallmentOption
-     *
      * @return string
      */
     public static function getJson()
     {
-        return '{"term":123,"monthly_payment":' . CurrencyTest::getJson() . ',"discount_amount":' . CurrencyTest::getJson() . ',"discount_percentage":"TestSample"}';
+        return '{"term":123,"monthly_payment":' .CurrencyTest::getJson() . ',"discount_amount":' .CurrencyTest::getJson() . ',"discount_percentage":"12.34"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     *
      * @return InstallmentOption
      */
     public static function getObject()
@@ -34,7 +32,6 @@ class InstallmentOptionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
      * @return InstallmentOption
      */
     public function testSerializationDeserialization()
@@ -58,8 +55,6 @@ class InstallmentOptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj->getTerm(), 123);
         $this->assertEquals($obj->getMonthlyPayment(), CurrencyTest::getObject());
         $this->assertEquals($obj->getDiscountAmount(), CurrencyTest::getObject());
-        $this->assertEquals($obj->getDiscountPercentage(), "TestSample");
+        $this->assertEquals($obj->getDiscountPercentage(), "12.34");
     }
-
-
 }

@@ -134,7 +134,7 @@ function init_momo(){
                                 },
                         type: 'POST',
 
-                        url: 'http://localhost/app/dashboard/momo',
+                        url: 'https://izepay.iceteck.com/dashboard/momo',
 
                         data:{
                                 'from':'CashCollect',
@@ -158,14 +158,14 @@ function init_momo(){
                                    cashResult    = data1.paymentresult; 
                                    cashResult    = cashResult.split(',');
 
-                                   $('.notifications').html('<span class="green-text">Done. '+cashResult[2]+'</span>').trigger('refresh');
+                                   $('.notifications').html('<span class="green-text">Done. '+cashResult[1]+'</span>').trigger('refresh');
                                     console.log("response: "+data1.toString());
                                    /*
                                    if(cashResult[0] == 1){
                                                checkResult = cashResult[1];
                                                checkResult = checkResult.split('=');
                                                data = JSON.parse(data1);
-                                    $('.notifications').append('<span class="red-text">Werror_no '+data.error_no+' </span>');
+                                    $('.notifications').append('<span class="red-text">Error_no '+data.error_no+' </span>');
                                     //checkPayment(checkResult[1], receiver, receiver_client, receiver_sender, receiver_provider, receiver_amount); //check
                                    }
                                    else{
@@ -177,7 +177,7 @@ function init_momo(){
                         error: function(e){
                             console.log('Error requesting payment :'+e.responseText);
                             response = JSON.parse(e.responseText);
-                            $('.notifications').html('<span class="red-text">Error. '+response.error.message+' . Transaction aborted</span>');
+                            $('.notifications').html('<span class="red-text">Error. '+' Transaction failed</span>');
                         }
 
             }).always(function(){
@@ -194,7 +194,7 @@ function checkPayment(paymentID,receiver, clientreceiver, clientsender, clientpr
                         $.ajax({
                                    type: 'POST',
 
-                                   url: 'http://localhost/app/dashboard/momoc',
+                                   url: 'https://izepay.iceteck.com/dashboard/momoc',
 
                                    data:{'from':'checkpayment', paymentID:paymentID, receiver:receiver},
 
@@ -229,7 +229,7 @@ function checkPayment(paymentID,receiver, clientreceiver, clientsender, clientpr
                                                     //push confirmation
                                                     $.ajax({
                                                         type:'POST',
-                                                        url:'http://localhost/app/dashboard/confirmmomotransaction',
+                                                        url:'https://izepay.iceteck.com/dashboard/confirmmomotransaction',
                                                         async:true,
                                                         data:{
                                                             'amount':clientamount,

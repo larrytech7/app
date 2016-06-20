@@ -13,7 +13,6 @@ class CreditTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Gets Json String of Object Credit
-     *
      * @return string
      */
     public static function getJson()
@@ -23,7 +22,6 @@ class CreditTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Gets Object Instance with Json data filled in
-     *
      * @return Credit
      */
     public static function getObject()
@@ -34,7 +32,6 @@ class CreditTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
      * @return Credit
      */
     public function testSerializationDeserialization()
@@ -56,6 +53,5 @@ class CreditTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getType(), "TestSample");
     }
-
 
 }

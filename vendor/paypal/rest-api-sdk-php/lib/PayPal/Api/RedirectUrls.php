@@ -8,7 +8,7 @@ use PayPal\Validation\UrlValidator;
 /**
  * Class RedirectUrls
  *
- * Set of redirect URLs you provide only for PayPal-based payments.
+ * Redirect urls required only when using payment_method as PayPal - the only settings supported are return and cancel urls.
  *
  * @package PayPal\Api
  *
@@ -18,7 +18,7 @@ use PayPal\Validation\UrlValidator;
 class RedirectUrls extends PayPalModel
 {
     /**
-     * Url where the payer would be redirected to after approving the payment. **Required for PayPal account payments.**
+     * Url where the payer would be redirected to after approving the payment.
      *
      * @param string $return_url
      * @throws \InvalidArgumentException
@@ -32,7 +32,7 @@ class RedirectUrls extends PayPalModel
     }
 
     /**
-     * Url where the payer would be redirected to after approving the payment. **Required for PayPal account payments.**
+     * Url where the payer would be redirected to after approving the payment.
      *
      * @return string
      */
@@ -42,7 +42,7 @@ class RedirectUrls extends PayPalModel
     }
 
     /**
-     * Url where the payer would be redirected to after canceling the payment. **Required for PayPal account payments.**
+     * Url where the payer would be redirected to after canceling the payment.
      *
      * @param string $cancel_url
      * @throws \InvalidArgumentException
@@ -56,7 +56,7 @@ class RedirectUrls extends PayPalModel
     }
 
     /**
-     * Url where the payer would be redirected to after canceling the payment. **Required for PayPal account payments.**
+     * Url where the payer would be redirected to after canceling the payment.
      *
      * @return string
      */

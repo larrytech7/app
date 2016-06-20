@@ -32,7 +32,7 @@
     <link href="{{URL::to('public/css')}}/flipper.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/material-wfont.min.css" rel="stylesheet"/>
     <link href="{{URL::to('public/css')}}/jquery.qtip.min.css" rel="stylesheet"/>
-        <link href="{{URL::to('public/css')}}/flexslider.css" rel="stylesheet"/>
+    <link href="{{URL::to('public/css')}}/flexslider.css" rel="stylesheet"/>
 
     <style>
     body {
@@ -201,11 +201,12 @@
     <script src="{{URL::to('public/js')}}/jquery.dataTables.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
     <script src="{{URL::to('public/js')}}/jquery.qtip.min.js"></script>
-    <!-- FlexSlider -->
+    <script src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
+        <!-- FlexSlider -->
 				  <script defer src="{{URL::to('public/js')}}/jquery.flexslider.js"></script>
 				  <script type="text/javascript">
 					$(function(){
-					  //SyntaxHighlighter.all();
+					 // SyntaxHighlighter.all();
 					});
 					$(window).load(function(){
 					  $('.flexslider').flexslider({
@@ -217,7 +218,6 @@
 					});
 				  </script>
     <!-- FlexSlider -->
-        
     <script>
     $(document).ready(function(){
         $('#transaction_table').dataTable();
@@ -371,7 +371,7 @@
     <!-- FlexSlider -->
     <script type="text/javascript">
     $(function(){
-        SyntaxHighlighter.all();
+        //SyntaxHighlighter.all();
     });
     $(window).load(function(){
         $('.flexslider').flexslider({

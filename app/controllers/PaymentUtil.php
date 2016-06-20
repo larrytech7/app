@@ -56,7 +56,7 @@ class PlatformCharges{
         else if($originProvider == 'pp')
             return $this->amount + ((4/100) * $this->amount);//PayPal charges = 3.7% , our charges here is 0.3%
         else if($originProvider == 'mm')
-            return $this->amount + ((2.5/100) * $this->amount);//FM charges 2%, we charge 0.5%
+            return $this->amount + ((2/100) * $this->amount);//FM charges 1%, we charge 1%
         else if($originProvider == 'sk')
             return 0; //TODO:
         else if($originProvider == 'stp')

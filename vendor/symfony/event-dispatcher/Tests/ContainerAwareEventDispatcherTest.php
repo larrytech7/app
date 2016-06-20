@@ -59,18 +59,6 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
             ->with($event)
         ;
 
-        $service
-            ->expects($this->once())
-            ->method('onEventWithPriority')
-            ->with($event)
-        ;
-
-        $service
-            ->expects($this->once())
-            ->method('onEventNested')
-            ->with($event)
-        ;
-
         $container = new Container();
         $container->set('service.subscriber', $service);
 
@@ -78,8 +66,6 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $dispatcher->addSubscriberService('service.subscriber', 'Symfony\Component\EventDispatcher\Tests\SubscriberService');
 
         $dispatcher->dispatch('onEvent', $event);
-        $dispatcher->dispatch('onEventWithPriority', $event);
-        $dispatcher->dispatch('onEventNested', $event);
     }
 
     public function testPreventDuplicateListenerService()
@@ -106,7 +92,6 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
 
     /**
      * @expectedException \InvalidArgumentException
-     * @group legacy
      */
     public function testTriggerAListenerServiceOutOfScope()
     {
@@ -126,9 +111,6 @@ class ContainerAwareEventDispatcherTest extends AbstractEventDispatcherTest
         $dispatcher->dispatch('onEvent');
     }
 
-    /**
-     * @group legacy
-     */
     public function testReEnteringAScope()
     {
         $event = new Event();
@@ -257,21 +239,11 @@ class SubscriberService implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'onEvent' => 'onEvent',
-            'onEventWithPriority' => array('onEventWithPriority', 10),
-            'onEventNested' => array(array('onEventNested')),
+            'onEvent' => array('onEvent'),
         );
     }
 
     public function onEvent(Event $e)
-    {
-    }
-
-    public function onEventWithPriority(Event $e)
-    {
-    }
-
-    public function onEventNested(Event $e)
     {
     }
 }

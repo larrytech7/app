@@ -9,8 +9,11 @@
                         <a class="collection-item blue active" href="{{URL::route('home')}}">
                             <i class="material-icons left ">home</i>Home
                         </a>
-                        <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('send')}}" >
+                            <i class="material-icons left blue-text darken-5">payment</i>Send payment
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('request')}}" >
+                            <i class="material-icons left blue-text darken-5">play_for_work</i>Request payment
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
@@ -26,6 +29,9 @@
                         </a>
                         <a href="{{URL::route('apidocs')}}" class="collection-item blue-text">
                             <i class="material-icons left">library_books</i>API Docs
+                        </a>
+                        <a href="{{URL::route('messagecenter')}}" class="collection-item blue-text">
+                            <i class="material-icons left">comment</i>Message Center
                         </a>
                         
                     </div>
@@ -136,7 +142,7 @@
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF">FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option> 
+                                <option value="ZAR">ZAR - South African Rand</option> 
                                 <option value="AUD">AUD - Australlian </option> <!-- CAD  and JPY conversions coming soon! -->
                             </select>
                             <label for="from">FROM</label>
@@ -147,7 +153,7 @@
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF">FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option>
+                                <option value="ZAR">ZAR - South African Rand</option>
                                 <option value="AUD">AUD - Australlian </option>
                                 <option value="CAD">CAD - Canadian </option>
                                 <option value="JPY">Japanese Yen</option> 
@@ -185,31 +191,31 @@
                             <td></td>
                             <td>*</td>
                             <td>Mobile Money</td>
-                            <td>500000 FCFA</td>
+                            <td>FCFA 500000 </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>PayPal</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>Skrill</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>Solid Trust Pay</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>*</td>
                             <td>Eway/Credit Card</td>
-                            <td>$ 5000</td>
+                            <td>USD 5000</td>
                         </tr>
                     </table>
                  </div>
@@ -247,7 +253,7 @@
                                 <option value="EUR">EUR - Euros</option>
                                 <option value="GBP">GBP - Bristish Pounds</option>
                                 <option value="XAF"> FCFA - Franc CFA</option>
-                                <option value="ZAR">South African Rand</option>
+                                <option value="ZAR">ZAR - South African Rand</option>
                                 <option value="AUD">AUD - Australlian </option>
                                 <option value="CAD">CAD - Canadian </option>
                               <!--  <option value="JPY">Japanese Yen</option> -->

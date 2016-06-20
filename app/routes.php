@@ -104,6 +104,26 @@ Route::group(array('before' => 'auth'), function(){
 	));
 	/******************************************/
 
+	//send money to user
+    Route::get('dashboard/send', array(
+	'as' => 'send',
+	'uses' => 'DashboardController@sendpayment'
+
+	));
+    
+    //request a payment from a third party
+    Route::get('dashboard/request', array(
+	'as' => 'request',
+	'uses' => 'DashboardController@requestpayment'
+
+	));
+    
+    Route::get('dashboard/messagecenter', array(
+	'as' => 'messagecenter',
+	'uses' => 'DashboardController@messagecenter'
+
+	));
+	
     Route::get('dashboard/developer', array(
 	'as' => 'developer',
 	'uses' => 'DashboardController@devzone'

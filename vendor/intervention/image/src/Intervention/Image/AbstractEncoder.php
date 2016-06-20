@@ -152,8 +152,6 @@ abstract class AbstractEncoder
                 );
         }
 
-        $this->setImage(null);
-
         return $image->setEncoded($this->result);
     }
 

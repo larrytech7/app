@@ -4,6 +4,7 @@ namespace PayPal\Api;
 
 use PayPal\Common\PayPalResourceModel;
 use PayPal\Rest\ApiContext;
+use PayPal\Transport\PayPalRestCall;
 use PayPal\Validation\ArgumentValidator;
 
 /**
@@ -13,23 +14,23 @@ use PayPal\Validation\ArgumentValidator;
  *
  * @package PayPal\Api
  *
- * @property string               id
- * @property \PayPal\Api\Amount   amount
- * @property bool                 is_final_capture
- * @property string               state
- * @property string               parent_payment
+ * @property string id
+ * @property string create_time
+ * @property string update_time
+ * @property \PayPal\Api\Amount amount
+ * @property bool is_final_capture
+ * @property string state
+ * @property string parent_payment
  * @property \PayPal\Api\Currency transaction_fee
- * @property string               create_time
- * @property string               update_time
- * @property \PayPal\Api\Links[]  links
+ * @property \PayPal\Api\Links[] links
  */
 class Capture extends PayPalResourceModel
 {
     /**
-     * ID of the capture transaction.
+     * Identifier of the Capture transaction.
      *
      * @param string $id
-     *
+     * 
      * @return $this
      */
     public function setId($id)
@@ -39,7 +40,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * ID of the capture transaction.
+     * Identifier of the Capture transaction.
      *
      * @return string
      */
@@ -49,10 +50,10 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * Amount being captured. If the amount matches the orginally authorized amount, the state of the authorization changes to `captured`. If not, the state of the authorization changes to `partially_captured`.
+     * Amount being captured. If no amount is specified, amount is used from the authorization being captured. If amount is same as the amount that's authorized for, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. Alternatively, you could indicate a final capture by setting the is_final_capture flag to true.
      *
      * @param \PayPal\Api\Amount $amount
-     *
+     * 
      * @return $this
      */
     public function setAmount($amount)
@@ -62,7 +63,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * Amount being captured. If the amount matches the orginally authorized amount, the state of the authorization changes to `captured`. If not, the state of the authorization changes to `partially_captured`.
+     * Amount being captured. If no amount is specified, amount is used from the authorization being captured. If amount is same as the amount that's authorized for, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. Alternatively, you could indicate a final capture by setting the is_final_capture flag to true.
      *
      * @return \PayPal\Api\Amount
      */
@@ -72,10 +73,10 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * If set to `true`, all remaining funds held by the authorization will be released in the funding instrument.
+     * whether this is a final capture for the given authorization or not. If it's final, all the remaining funds held by the authorization, will be released in the funding instrument.
      *
      * @param bool $is_final_capture
-     *
+     * 
      * @return $this
      */
     public function setIsFinalCapture($is_final_capture)
@@ -85,7 +86,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * If set to `true`, all remaining funds held by the authorization will be released in the funding instrument.
+     * whether this is a final capture for the given authorization or not. If it's final, all the remaining funds held by the authorization, will be released in the funding instrument.
      *
      * @return bool
      */
@@ -95,11 +96,11 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * State of the capture.
+     * State of the capture transaction.
      * Valid Values: ["pending", "completed", "refunded", "partially_refunded"]
      *
      * @param string $state
-     *
+     * 
      * @return $this
      */
     public function setState($state)
@@ -109,7 +110,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * State of the capture.
+     * State of the capture transaction.
      *
      * @return string
      */
@@ -119,10 +120,10 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * ID of the payment resource on which this transaction is based.
+     * ID of the Payment resource that this transaction is based on.
      *
      * @param string $parent_payment
-     *
+     * 
      * @return $this
      */
     public function setParentPayment($parent_payment)
@@ -132,7 +133,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * ID of the payment resource on which this transaction is based.
+     * ID of the Payment resource that this transaction is based on.
      *
      * @return string
      */
@@ -145,7 +146,7 @@ class Capture extends PayPalResourceModel
      * Transaction fee applicable for this payment.
      *
      * @param \PayPal\Api\Currency $transaction_fee
-     *
+     * 
      * @return $this
      */
     public function setTransactionFee($transaction_fee)
@@ -165,10 +166,10 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * Time of capture as defined in [RFC 3339 Section 5.6](http://tools.ietf.org/html/rfc3339#section-5.6).
+     * Time the resource was created in UTC ISO8601 format.
      *
      * @param string $create_time
-     *
+     * 
      * @return $this
      */
     public function setCreateTime($create_time)
@@ -178,7 +179,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * Time of capture as defined in [RFC 3339 Section 5.6](http://tools.ietf.org/html/rfc3339#section-5.6).
+     * Time the resource was created in UTC ISO8601 format.
      *
      * @return string
      */
@@ -188,10 +189,10 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * Time that the resource was last updated.
+     * Time the resource was last updated in UTC ISO8601 format.
      *
      * @param string $update_time
-     *
+     * 
      * @return $this
      */
     public function setUpdateTime($update_time)
@@ -201,7 +202,7 @@ class Capture extends PayPalResourceModel
     }
 
     /**
-     * Time that the resource was last updated.
+     * Time the resource was last updated in UTC ISO8601 format.
      *
      * @return string
      */
@@ -213,9 +214,9 @@ class Capture extends PayPalResourceModel
     /**
      * Retrieve details about a captured payment by passing the capture_id in the request URI.
      *
-     * @param string         $captureId
-     * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
-     * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
+     * @param string $captureId
+     * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
+     * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
      * @return Capture
      */
     public static function get($captureId, $apiContext = null, $restCall = null)
@@ -238,9 +239,9 @@ class Capture extends PayPalResourceModel
     /**
      * Refund a captured payment by passing the capture_id in the request URI. In addition, include an amount object in the body of the request JSON.
      *
-     * @param Refund         $refund
-     * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
-     * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
+     * @param Refund $refund
+     * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
+     * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
      * @return Refund
      */
     public function refund($refund, $apiContext = null, $restCall = null)

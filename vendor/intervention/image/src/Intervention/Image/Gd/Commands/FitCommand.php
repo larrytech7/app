@@ -2,7 +2,8 @@
 
 namespace Intervention\Image\Gd\Commands;
 
-use Intervention\Image\Size;
+use \Intervention\Image\Point;
+use \Intervention\Image\Size;
 
 class FitCommand extends ResizeCommand
 {

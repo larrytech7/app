@@ -13,7 +13,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Gets Json String of Object Address
-     *
      * @return string
      */
     public static function getJson()
@@ -23,7 +22,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Gets Object Instance with Json data filled in
-     *
      * @return Address
      */
     public static function getObject()
@@ -34,7 +32,6 @@ class AddressTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
      * @return Address
      */
     public function testSerializationDeserialization()
@@ -70,6 +67,5 @@ class AddressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj->getNormalizationStatus(), "TestSample");
         $this->assertEquals($obj->getStatus(), "TestSample");
     }
-
 
 }

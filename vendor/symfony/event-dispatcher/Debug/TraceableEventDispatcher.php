@@ -102,14 +102,6 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function getListenerPriority($eventName, $listener)
-    {
-        return $this->dispatcher->getListenerPriority($eventName, $listener);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasListeners($eventName = null)
     {
         return $this->dispatcher->hasListeners($eventName);
@@ -194,8 +186,6 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
             }
         }
 
-        uasort($notCalled, array($this, 'sortListenersByPriority'));
-
         return $notCalled;
     }
 
@@ -235,12 +225,12 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     private function preProcess($eventName)
     {
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
+            $this->dispatcher->removeListener($eventName, $listener);
             $info = $this->getListenerInfo($listener, $eventName);
             $name = isset($info['class']) ? $info['class'] : $info['type'];
             $wrappedListener = new WrappedListener($listener, $name, $this->stopwatch, $this);
             $this->wrappedListeners[$eventName][] = $wrappedListener;
-            $this->dispatcher->removeListener($eventName, $listener);
-            $this->dispatcher->addListener($eventName, $wrappedListener, $info['priority']);
+            $this->dispatcher->addListener($eventName, $wrappedListener);
         }
     }
 
@@ -253,9 +243,8 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
                 continue;
             }
             // Unwrap listener
-            $priority = $this->getListenerPriority($eventName, $listener);
             $this->dispatcher->removeListener($eventName, $listener);
-            $this->dispatcher->addListener($eventName, $listener->getWrappedListener(), $priority);
+            $this->dispatcher->addListener($eventName, $listener->getWrappedListener());
 
             $info = $this->getListenerInfo($listener->getWrappedListener(), $eventName);
             if ($listener->wasCalled()) {
@@ -296,7 +285,6 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
     {
         $info = array(
             'event' => $eventName,
-            'priority' => $this->getListenerPriority($eventName, $listener),
         );
         if ($listener instanceof \Closure) {
             $info += array(
@@ -343,26 +331,5 @@ class TraceableEventDispatcher implements TraceableEventDispatcherInterface
         }
 
         return $info;
-    }
-
-    private function sortListenersByPriority($a, $b)
-    {
-        if (is_int($a['priority']) && !is_int($b['priority'])) {
-            return 1;
-        }
-
-        if (!is_int($a['priority']) && is_int($b['priority'])) {
-            return -1;
-        }
-
-        if ($a['priority'] === $b['priority']) {
-            return 0;
-        }
-
-        if ($a['priority'] > $b['priority']) {
-            return -1;
-        }
-
-        return 1;
     }
 }

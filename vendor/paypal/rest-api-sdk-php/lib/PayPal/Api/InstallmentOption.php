@@ -3,6 +3,8 @@
 namespace PayPal\Api;
 
 use PayPal\Common\PayPalModel;
+use PayPal\Converter\FormatConverter;
+use PayPal\Validation\NumericValidator;
 
 /**
  * Class InstallmentOption
@@ -11,9 +13,9 @@ use PayPal\Common\PayPalModel;
  *
  * @package PayPal\Api
  *
- * @property int                    term
- * @property \PayPal\Api\Currency   monthly_payment
- * @property \PayPal\Api\Currency   discount_amount
+ * @property int term
+ * @property \PayPal\Api\Currency monthly_payment
+ * @property \PayPal\Api\Currency discount_amount
  * @property string discount_percentage
  */
 class InstallmentOption extends PayPalModel
@@ -22,7 +24,7 @@ class InstallmentOption extends PayPalModel
      * Number of installments
      *
      * @param int $term
-     *
+     * 
      * @return $this
      */
     public function setTerm($term)
@@ -45,7 +47,7 @@ class InstallmentOption extends PayPalModel
      * Monthly payment
      *
      * @param \PayPal\Api\Currency $monthly_payment
-     *
+     * 
      * @return $this
      */
     public function setMonthlyPayment($monthly_payment)
@@ -68,7 +70,7 @@ class InstallmentOption extends PayPalModel
      * Discount amount applied to the payment, if any
      *
      * @param \PayPal\Api\Currency $discount_amount
-     *
+     * 
      * @return $this
      */
     public function setDiscountAmount($discount_amount)
@@ -91,11 +93,13 @@ class InstallmentOption extends PayPalModel
      * Discount percentage applied to the payment, if any
      *
      * @param string $discount_percentage
-     *
+     * 
      * @return $this
      */
     public function setDiscountPercentage($discount_percentage)
     {
+        NumericValidator::validate($discount_percentage, "Discount Percentage");
+        $discount_percentage = FormatConverter::formatToPrice($discount_percentage);
         $this->discount_percentage = $discount_percentage;
         return $this;
     }
@@ -109,5 +113,6 @@ class InstallmentOption extends PayPalModel
     {
         return $this->discount_percentage;
     }
+
 
 }

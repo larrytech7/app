@@ -3,6 +3,7 @@
 namespace Intervention\Image;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Response as IlluminateResponse;
 
 class ImageServiceProviderLaravel5 extends ServiceProvider
 {

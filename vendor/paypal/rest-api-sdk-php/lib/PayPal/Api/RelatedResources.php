@@ -11,16 +11,17 @@ use PayPal\Common\PayPalModel;
  *
  * @package PayPal\Api
  *
- * @property \PayPal\Api\Sale          sale
+ * @property \PayPal\Api\Sale sale
  * @property \PayPal\Api\Authorization authorization
- * @property \PayPal\Api\Order         order
- * @property \PayPal\Api\Capture       capture
- * @property \PayPal\Api\Refund        refund
+ * @property \PayPal\Api\Order order
+ * @property \PayPal\Api\Capture capture
+ * @property \PayPal\Api\Refund refund
  */
 class RelatedResources extends PayPalModel
 {
     /**
-     * Sale transaction
+     * A sale transaction
+     *
      *
      * @param \PayPal\Api\Sale $sale
      *
@@ -33,7 +34,7 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Sale transaction
+     * A sale transaction
      *
      * @return \PayPal\Api\Sale
      */
@@ -43,7 +44,8 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Authorization transaction
+     * An authorization transaction
+     *
      *
      * @param \PayPal\Api\Authorization $authorization
      *
@@ -56,7 +58,7 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Authorization transaction
+     * An authorization transaction
      *
      * @return \PayPal\Api\Authorization
      */
@@ -66,7 +68,8 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Order transaction
+     * An order transaction
+     *
      *
      * @param \PayPal\Api\Order $order
      *
@@ -79,7 +82,7 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Order transaction
+     * An order transaction
      *
      * @return \PayPal\Api\Order
      */
@@ -89,7 +92,8 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Capture transaction
+     * A capture transaction
+     *
      *
      * @param \PayPal\Api\Capture $capture
      *
@@ -102,7 +106,7 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Capture transaction
+     * A capture transaction
      *
      * @return \PayPal\Api\Capture
      */
@@ -112,7 +116,8 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Refund transaction
+     * A refund transaction
+     *
      *
      * @param \PayPal\Api\Refund $refund
      *
@@ -125,7 +130,7 @@ class RelatedResources extends PayPalModel
     }
 
     /**
-     * Refund transaction
+     * A refund transaction
      *
      * @return \PayPal\Api\Refund
      */

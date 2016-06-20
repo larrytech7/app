@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2016 Nicolas Grekas - p@tchwork.com
+ * Copyright (C) 2013 Nicolas Grekas - p@tchwork.com
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the (at your option):
@@ -66,7 +66,7 @@ class Bootup
             if (!in_array(strtolower(mb_language()), array('uni', 'neutral'))) {
                 mb_language('uni');
             }
-        } elseif (!function_exists('mb_strlen')) {
+        } elseif (!defined('MB_OVERLOAD_MAIL')) {
             extension_loaded('iconv') or static::initIconv();
 
             require __DIR__.'/Bootup/mbstring.php';
@@ -87,7 +87,7 @@ class Bootup
             if ('UTF-8' !== strtoupper(iconv_get_encoding('output_encoding'))) {
                 iconv_set_encoding('output_encoding', 'UTF-8');
             }
-        } elseif (!function_exists('iconv')) {
+        } elseif (!defined('ICONV_IMPL')) {
             require __DIR__.'/Bootup/iconv.php';
         }
     }
@@ -113,7 +113,7 @@ class Bootup
 
         define('GRAPHEME_CLUSTER_RX', PCRE_VERSION >= '8.32' ? '\X' : s\Intl::GRAPHEME_CLUSTER_RX);
 
-        if (!function_exists('grapheme_strlen')) {
+        if (!extension_loaded('intl')) {
             extension_loaded('iconv') or static::initIconv();
             extension_loaded('mbstring') or static::initMbstring();
 

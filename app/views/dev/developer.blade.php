@@ -8,25 +8,31 @@
                 <div class="col s12 m3 ">
                     <div class="collection">
                         <a class="collection-item blue-text" href="{{URL::route('home')}}">
-                            <i class="material-icons left blue-text">home</i>Home
+                            <i class="material-icons left ">home</i>Home
                         </a>
-                        <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('send')}}" >
+                            <i class="material-icons left blue-text darken-5">payment</i>Send payment
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('request')}}" >
+                            <i class="material-icons left blue-text darken-5">play_for_work</i>Request payment
                         </a>
                         <a href="{{URL::route('dashboard.transaction')}}" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
                         </a>
-                        <a href="#" class="collection-item blue-text" >
+                        <a href="#" class="opt collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
-                        <a class="active collection-item blue" href="{{URL::route('developer')}}">
+                        <a class="collection-item active blue" href="{{URL::route('developer')}}">
                             <i class="material-icons left">business</i> Merchant
                         </a>
                         <a href="{{URL::route('apidocs')}}" class="collection-item blue-text">
                             <i class="material-icons left">library_books</i>API Docs
+                        </a>
+                        <a href="{{URL::route('messagecenter')}}" class="collection-item blue-text">
+                            <i class="material-icons left">comment</i>Message Center
                         </a>
                     
                     </div>

@@ -13,7 +13,6 @@ class DetailsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Gets Json String of Object Details
-     *
      * @return string
      */
     public static function getJson()
@@ -23,7 +22,6 @@ class DetailsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Gets Object Instance with Json data filled in
-     *
      * @return Details
      */
     public static function getObject()
@@ -34,7 +32,6 @@ class DetailsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
      * @return Details
      */
     public function testSerializationDeserialization()
@@ -68,6 +65,4 @@ class DetailsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj->getGiftWrap(), "12.34");
         $this->assertEquals($obj->getFee(), "12.34");
     }
-
-
 }

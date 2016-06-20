@@ -1,41 +1,5 @@
 PayPal PHP SDK release notes
 ============================
-
-v1.7.1
-----
-* Fixes #559
-
-v1.7.0
-----
-* Enable custom logger injection.
-* Minor bug fixes.
-
-v1.6.4
-----
-* SSL Connect Error Fix
-* Fixes #474
-
-v1.6.3
-----
-* Fixes Continue 100 Header
-* Minor Bug Fixes #452
-
-v1.6.2
-----
-* TLS Check Sample Added
-* Updated README
-
-v1.6.1
-----
-* User Agent Changes
-* SDK Version Fix
-
-v1.6.0
-----
-* Updated Payments API to latest version
-* Removed ModelAccessValidator
-* Minor Bug Fixes #399
-
 v1.5.1
 ----
 * Fixed a bug #343 in Future Payment
@@ -70,7 +34,7 @@ v1.3.0
 
 v1.2.1
 ----
-* Ability to handle missing accessors for unknown objects in json
+* Ability to handle missing accesors for unknown objects in json
 
 v1.2.0
 ----

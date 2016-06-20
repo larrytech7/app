@@ -2,6 +2,8 @@
 
 namespace Intervention\Image\Gd;
 
+use \Intervention\Image\Size;
+
 class Driver extends \Intervention\Image\AbstractDriver
 {
     /**
@@ -34,7 +36,7 @@ class Driver extends \Intervention\Image\AbstractDriver
     {
         // create empty resource
         $core = imagecreatetruecolor($width, $height);
-        $image = new \Intervention\Image\Image(new static, $core);
+        $image = new \Intervention\Image\Image(new self, $core);
 
         // set background color
         $background = new Color($background);

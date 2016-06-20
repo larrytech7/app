@@ -13,17 +13,15 @@ class PayerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Gets Json String of Object Payer
-     *
      * @return string
      */
     public static function getJson()
     {
-        return '{"payment_method":"TestSample","status":"TestSample","account_type":"TestSample","account_age":"TestSample","funding_instruments":' . FundingInstrumentTest::getJson() . ',"funding_option_id":"TestSample","funding_option":' . FundingOptionTest::getJson() . ',"related_funding_option":' . FundingOptionTest::getJson() . ',"payer_info":' . PayerInfoTest::getJson() . '}';
+        return '{"payment_method":"TestSample","status":"TestSample","account_type":"TestSample","account_age":"TestSample","funding_instruments":' .FundingInstrumentTest::getJson() . ',"funding_option_id":"TestSample","funding_option":' .FundingOptionTest::getJson() . ',"related_funding_option":' .FundingOptionTest::getJson() . ',"payer_info":' .PayerInfoTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     *
      * @return Payer
      */
     public static function getObject()
@@ -34,7 +32,6 @@ class PayerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
      * @return Payer
      */
     public function testSerializationDeserialization()
@@ -70,6 +67,5 @@ class PayerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($obj->getRelatedFundingOption(), FundingOptionTest::getObject());
         $this->assertEquals($obj->getPayerInfo(), PayerInfoTest::getObject());
     }
-
 
 }

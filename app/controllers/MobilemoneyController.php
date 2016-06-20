@@ -16,7 +16,7 @@ class MobilemoneyController extends BaseController {
 	{
 	   //parameters fetched from ajax request
        
-	    $AccountID = 4420274;
+	$AccountID = 4420274;
         $Phonenumber = Input::get('to'); //number of the person who initiated the request
         $Amount = Input::get('amount'); //amount to charge the sender
         $destination = Input::get('receivercontact'); //other address of the receiver
@@ -72,23 +72,23 @@ class MobilemoneyController extends BaseController {
         //create amount to send to user provider in USD
         $montant = new PlatformCharges($initAmount, 'XAF', $dest_provider);
         
-        if($params[0] == 1 && isset($params[2])){ //verify for successful transaction and save to dba nd email receipt
+        if($params[0] == 1 && isset($params[2])){ //verify for successful transaction and save to db and email receipt
             
         $transaction = new IcePayTransaction();
         $transaction->user_id = Auth::user()->id;
         $transaction->tid = $params[1]; //transaction id or transaction bordereaux
-        $transaction->sender_email = Auth::user()->email;//$payer['email']; //sender's email
+        $transaction->sender_email = Auth::user()->email;//sender's email
         $transaction->receiver_email = $sendto; //receiver's email or number)
         $transaction->type = 'MOMO_TO_'.$dest_provider;
-        $transaction->status = 'pending';//$transaction_json['related_resources'][0]['sale']['state'];
-        $transaction->amount = $Amount; //total amount deducted and transferred
+        $transaction->status = 'pending';
+        $transaction->amount = $Amount; //total amount deducted and transferred. The amount to be transfered to the receiver is initial $amount without our charges(2%) applied.
         $transaction->currency = $currency;
         $transaction->save();
         
-        $email = Auth::user()->email;//$payer['email'];
+        $email = Auth::user()->email;//
         $username = Auth::user()->username;
         
-        //send transaction email to sender confirming transactions in a professional way. send copy to company
+        //send transaction email to sender confirming transactions in a professional way. send copy to company(Paygray)
         	Mail::send(['html'=>'emails.auth.transactions'], array('tdate' => date('Y-m-d H:i:s'),
                                                             'tid' => $result->getId(),
                                                                'sender_email'=>Auth::user()->email,
@@ -96,35 +96,29 @@ class MobilemoneyController extends BaseController {
                                                                'receiver_email'=>$sendto,
                                                                'receiver_number'=>$destination,
                                                                'status'=>'PENDING',
-                                                               'amount'=>$Amount,
-                                                               'charge'=>'2% of '.$Amount.' in '.$currency,
+                                                               'amount'=>$initAmount ,
+                                                               'charge'=>'2% of '.$initAmount.' in '.$currency,
                                                                'total'=> $montant->getDueAmount('mm', $dest_provider),
                                                                'mode'=>$result->getPayer()->getPayerInfo()->getLastName())
                                                                , function($message) use ($email, $username){
-		      			$message->to(array($email,'larryakah@gmail.com'), $username)->subject('Transaction Receipt');
+		      			$message->to(array($email,'larryakah@iceteck.com','larryakah@gmail.com'), $username)->subject('Transaction Receipt - Incoming');
 			     	});
          
         echo json_encode(
                     array('paymentresult' => $result,//nl2br($UssdResult),
+                    'message'=>'Transaction successful',
                     'error_no'=>$curl_errno)
             );
         }else{
             echo json_encode(
                     array('paymentresult' => $result,//nl2br($UssdResult),
-                    'error'=> 'Transaction failed',
+                    'message'=> 'Transaction failed',
                     'error_no'=>$curl_errno)
             );
         }
         
 	}
-    /**
-     * handle payment notifications from MM API server
-     * 
-     */ 
-     public function makePayment(){
-        
-        
-     }
+    
      /**
       * Check for payment status
       */ 

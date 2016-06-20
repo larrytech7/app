@@ -111,28 +111,6 @@ class ShippingInfo extends PayPalModel
     }
 
     /**
-     *
-     *
-     * @param string $email
-     * @return $this
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     *
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
      * Address of the invoice recipient.
      *
      * @param \PayPal\Api\InvoiceAddress $address
