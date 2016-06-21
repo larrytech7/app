@@ -5,7 +5,10 @@
                     <div class="media-body">
                               <h3 class="media-heading"><a href="<?php echo URL::route('dashboard'); ?>"><i class="material-icons small blue-text">home</i></a>Transaction History</h3>
                                
+                              <table class="table table-stripped table-hover" id="">
+
                               <table class="table table-stripped table-hover">
+
                                     <thead>
                                       <tr class="table-bordered">
                                         <th>Date</th>

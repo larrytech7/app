@@ -2,13 +2,43 @@
 
 @section('content')
         <!-- Heading Row -->
+        
         <div class="row">
-            <div class="col-md-8">
+                <div class="col s12 m3 ">
+                    <div class="collection">
+                        <a class="collection-item" href="{{URL::route('home')}}">
+                            <i class="material-icons left ">home</i>Home
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('send')}}" >
+                            <i class="material-icons left blue-text darken-5">payment</i>Send payment
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="{{URL::route('request')}}" >
+                            <i class="material-icons left blue-text darken-5">play_for_work</i>Request payment
+                        </a>
+                        <a href="{{URL::route('dashboard.transaction')}}" class="collection-item active blue">
+                            <i class="material-icons left">assignment</i>History
+                        </a>
+                        <a href="#" class="opt collection-item blue-text" >
+                            <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
+                        </a>
+                        <a href="#" class="collection-item blue-text" >
+                            <i class="material-icons left blue-text lighten-1">settings</i>Settings
+                        </a>
+                        <a class="collection-item blue-text" href="{{URL::route('developer')}}">
+                            <i class="material-icons left">business</i> Merchant
+                        </a>
+                        <a href="{{URL::route('apidocs')}}" class="collection-item blue-text">
+                            <i class="material-icons left">library_books</i>API Docs
+                        </a>
+                        <a href="{{URL::route('messagecenter')}}" class="collection-item blue-text">
+                            <i class="material-icons left">comment</i>Message Center
+                        </a>
+                    
+                    </div>
+                </div>
+                <div class="well col s12 m9">
+                    <h4>Transaction History</h4>
                     <div class="media-body">
-                              <h3 class="media-heading"><a href="{{URL::route('dashboard')}}"><i class="material-icons small blue-text">home</i></a>Transaction History</h3>
-                               
-                              <table class="table table-stripped table-hover" id="">
-
                               <table class="table table-stripped table-hover">
 
                                     <thead>
@@ -46,14 +76,9 @@
                               {{$transactions->links()}}
 
                     </div>
+                    
+                </div>
 
-            </div>
-            <!-- /.col-md-8 -->
-            <div class="col-md-4">
-                @include('site.userModule')
-            </div>
-            <!-- /.col-md-4 -->
         </div>
         <!-- /.row -->
-
 @stop

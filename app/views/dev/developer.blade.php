@@ -37,7 +37,7 @@
                     
                     </div>
                 </div>
-                <div class="col s12 m9">
+                <div class="well col s12 m9">
                     Accounts <span><a class="modal-trigger" href="#merchantaccount"><i class="material-icons">add_circle</i> New Account</a></span>
                     
                     <table class="table table-condensed table-hover">
