@@ -13,20 +13,12 @@
             <br />
             <br />
             <a href="#signup" class="sup center-align waves-effect waves-blue btn-flat btn-large  white-text"><i class="material-icons left">person_pin</i>&nbsp;Signup freely </a>
-            <form action="<?php echo URL::to('sandbox/api/merchantapi'); ?>" method="post" name="merchant_form">
-                        <input type="hidden" name="apikey" value="28ba9d34654575596871e94e99b4d511d6a8665a"/>
-                        <input type="hidden" name="currency" value="USD"/>
-                        <input type="hidden" name="amount" value="1"/>
-                        <input type="hidden" name="return_url" value="https://iceteck.com" />
-                        <input type="hidden" name="cdata1" value="xxxxx"/>
-                        <input type="hidden" name="cdata2" value="xxxxx"/>
-                        <input type="image" src="<?php echo URL::to('public/images/logo.png'); ?>" class="image-responsive"/>
-            </form>
+           
             
         </div>
+        <div class=""clearfix"><div/><br/><br/><br/>
         <div class="row">
             <div class="col s12 m8 l8"> 
-                <h5 class="center-align">Money transfer/payments made simple in Africa and the world at large.</h5>                   
                 <div class="row">
                     <div class="col s12 m4">
                       <div class="icon-block">
@@ -205,36 +197,25 @@
 
                     <div class="clearfix"></div>
                 </div>
-                
-                <!--
-                <div class="card col s12">
-                    <div>
-                        <img src="<?php echo URL::to('public/images'); ?>/ceo.jpg" class="img img-circle" width="80" height="80"/>
-                        <span class="">Larry Akah H</span>
-                        </div>
-                    <div class="card-content">
-                        <p>We achieve true accountability and more flexibility with a truely digitalized independent monetary system</p>
-                    </div>
-                </div>
-                -->
+              
                     <div class="client col s12">
                     						<div class="" style="max-height: 500px; overflow-y: scroll;">
                     							<ul>
                     								<li>
                     									<img src="<?php echo URL::to('public/images'); ?>/derick.jpg" alt="" class="img-circle" width="100" height="100"/>
-                    									<h5 class="pull-right">Alangi Derick</h5>
+                    									<h4 class="pull-right">Alangi Derick</h4>
                     									<h6 class="pull-right">I use my mobile money to do paypal and solid trust pay transactions. Just so simple and awesome.</h6>
                     								    
                                                     </li>
                     								<li>	
                     									<img src="<?php echo URL::to('public/images'); ?>/payet.jpg" alt="" class="img-circle" width="100" height="100" />
-                    									<h5 class="pull-right">Annie Payet</h5>
+                    									<h4 class="pull-right">Annie Payet</h4>
                     									<h6>There has never been a more flexible way to pay for my online shopping. Now i can use any wallet to pay.</h6>
                     								</li>
                     								<li>
                     									<img src="<?php echo URL::to('public/images'); ?>/jaolin.jpg" class="img-circle" alt="" width="100" height="100"/>
-                    									<h5 class="pull-right">Jao Lin</h5>
-                    									<h6>I received my freelance payment quite rapidly and conviniently without. Simple and works well.</h6>
+                    									<h4 class="pull-right">Jao Lin</h4>
+                    									<h6>I received my freelance payment quite rapidly and conviniently without any stress</h6>
                     								</li>	
                     								<div class="clearfix"> </div>
                     							</ul>
@@ -277,21 +258,21 @@
                 <h4><i class="small material-icons blue-text">verified_user</i>Certified</h4>
                     <div class="divider grey"></div>
                     <br />
-                    VISA.<br />
+                    <img src="<?php echo URL::to('public/images'); ?>/visa.png" class="img img-responsive" width="110" height="110"/>
                 </div>
             </div>
             <div class="col s4">
-                <h4><i class="small material-icons blue-text">group_work</i>Our Partners</h4>
+                <h4><i class="small material-icons blue-text">group_work</i> Our Partners</h4>
                 <div class="divider grey"></div>
                 <br />
-                PAypal | FurtherMarket | Solid Trust Pay | MyEway
+                <a href="https://paypal.com" target="_blank">Paypal</a> | <a href="https://furthermarket.com" target="_blank">FurtherMarket</a> | <a href="http://solidtrustpay.com" target="_blank">Solid Trust Pay</a>
             </div>
             <div class="col s4" id="contact">
-                <h4><i class="small material-icons blue-text">perm_phone_msg</i> Contact Us </h4>
+                <h4 ><i class="small material-icons blue-text">perm_phone_msg</i> Contact Us </h4>
                 <div class="divider grey"></div> <br />
-                <p><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b></span> @ &nbsp;ActivSpaces</p>
-                <p><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
-                <p><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@iceteck.com</a> </p>
+                <p class="white-text"><i class="material-icons prefix blue-text darken-3">location_on</i> &nbsp;Cameroon, Buea. FakoShip Plaza,<span> <b>Iceteck </b></span> @ &nbsp;ActivSpaces</p>
+                <p class="white-text"><i class="material-icons prefix blue-text darken-3">phone</i> (+237) 678656032 | (+237) 677247206 </p>
+                <p class="white-text"><i class="material-icons prefix blue-text darken-3">email</i> <a href="mailto:larryakah@gmail.com" >service@iceteck.com</a> </p>
             </div>
         </div>
         <!-- /.row -->
