@@ -3,7 +3,7 @@
 @section('content')
         <!-- Heading Row -->
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="col-sm-12 col-md-3 ">
                     <div class="collection" >
                         <a class="collection-item blue active" href="{{URL::route('home')}}">
@@ -114,7 +114,7 @@
             
             </div>
             <!-- /.col-md-8 -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="flip-card active-card full-card" >
                         <div class="pcard label-info">
                             <a class="modal-trigger" href="#upload">

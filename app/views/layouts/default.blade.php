@@ -6,8 +6,8 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
+    <meta name="description" content="online cross wallet money transfer and payment solution"/>
+    <meta name="author" content="paygray"/>
 
     <title>{{ $title }}</title>
 
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{URL::to('public/css')}}/font-awesome.css" />
 
     <!-- Custom CSS -->
-    <link href="{{URL::to('public/css')}}/small-business.css" rel="stylesheet" />
+        <link href="{{URL::to('public/css')}}/small-business.css" rel="stylesheet" />
     <link href="{{URL::to('public/css')}}/mystyle.css" rel="stylesheet" />
     <link href="{{URL::to('public/css')}}/buttons.css" rel="stylesheet" />
     <link href="{{URL::to('public/css')}}/flipper.css" rel="stylesheet"/>

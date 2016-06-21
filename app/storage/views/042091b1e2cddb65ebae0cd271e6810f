@@ -6,30 +6,36 @@
                 <div class="col s12 m3 ">
                     <div class="collection">
                         <a class="collection-item blue-text" href="<?php echo URL::route('home'); ?>">
-                            <i class="material-icons left blue-text">home</i>Home
+                            <i class="material-icons left ">home</i>Home
                         </a>
-                        <a class="collection-item blue-text modal-trigger" href="#modal1" >
-                            <i class="material-icons left blue-text darken-5">payment</i>Make payment
+                        <a class="collection-item blue-text modal-trigger" href="<?php echo URL::route('send'); ?>" >
+                            <i class="material-icons left blue-text darken-5">payment</i>Send payment
+                        </a>
+                        <a class="collection-item blue-text modal-trigger" href="<?php echo URL::route('request'); ?>" >
+                            <i class="material-icons left blue-text darken-5">play_for_work</i>Request payment
                         </a>
                         <a href="<?php echo URL::route('dashboard.transaction'); ?>" class="collection-item blue-text">
                             <i class="material-icons left blue-text lighten-1">assignment</i>History
                         </a>
-                        <a href="#" class="collection-item blue-text" >
+                        <a href="#" class="opt collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">flash_on</i>Invoices
                         </a>
                         <a href="#" class="collection-item blue-text" >
                             <i class="material-icons left blue-text lighten-1">settings</i>Settings
                         </a>
-                        <a class="active collection-item blue" href="<?php echo URL::route('developer'); ?>">
+                        <a class="collection-item active blue" href="<?php echo URL::route('developer'); ?>">
                             <i class="material-icons left">business</i> Merchant
                         </a>
                         <a href="<?php echo URL::route('apidocs'); ?>" class="collection-item blue-text">
                             <i class="material-icons left">library_books</i>API Docs
                         </a>
+                        <a href="<?php echo URL::route('messagecenter'); ?>" class="collection-item blue-text">
+                            <i class="material-icons left">comment</i>Message Center
+                        </a>
                     
                     </div>
                 </div>
-                <div class="col s12 m9">
+                <div class="well col s12 m9">
                     Accounts <span><a class="modal-trigger" href="#merchantaccount"><i class="material-icons">add_circle</i> New Account</a></span>
                     
                     <table class="table table-condensed table-hover">
@@ -57,7 +63,7 @@
                                     <p>
                                         <pre>
                                                 <?php echo htmlspecialchars('
-                                                <form action="https://enzympay.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
+                                                <form action="https://Paygray.com/app/sandbox/api/merchantapi" method="post" name="merchant_form">
                                                     <input type="hidden" name="apikey" value="YOUR_API_KEY"/>
                                                     <input type="hidden" name="currency" value="USD"/>
                                                     <input type="hidden" name="amount" value="AMOUNT HERE"/>
@@ -65,7 +71,7 @@
                                                     <input type="hidden" name="cdata1" value="EXTRA PARAMETER VALUE"/>
                                                     <input type="hidden" name="cdata2" value="EXTRA PARAMETER VALUE"/>
                                                     <input type="hidden" name="mylogo" value="LOGO_OF_MY_SITE"/>
-                                                    <input type="image" src="https://Enzympay.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
+                                                    <input type="image" src="https://Paygray.iceteck.com/public/images/hybopay_checkout.png)" width="150" height="80"/>
                                                 </form>
                                                 '); ?>
 
