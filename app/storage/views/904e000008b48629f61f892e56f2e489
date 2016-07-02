@@ -10,8 +10,8 @@
     <meta name="author" content=""/>
 
     <title><?php echo $title; ?></title>
-    
-    <link rel="icon" type="image/png" href="<?php echo URL::to('public/images'); ?>/favicon.ico" />    
+
+    <link rel="icon" type="image/png" href="<?php echo URL::to('public/images'); ?>/favicon.ico" />
     <link rel="icon" type="image/gif" href="<?php echo URL::to('public/images'); ?>/animated_favicon1.gif" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="<?php echo URL::to('public/css'); ?>/jquery-ui.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="<?php echo URL::to('public/css'); ?>/font-awesome.css" />
-    
+
     <!-- Custom CSS -->
     <link href="<?php echo URL::to('public/css'); ?>/small-business.css" rel="stylesheet" />
     <link href="<?php echo URL::to('public/css'); ?>/mystyle.css" rel="stylesheet" />
@@ -32,6 +32,7 @@
     <link href="<?php echo URL::to('public/css'); ?>/flipper.css" rel="stylesheet"/>
     <link href="<?php echo URL::to('public/css'); ?>/material-wfont.min.css" rel="stylesheet"/>
     <link href="<?php echo URL::to('public/css'); ?>/jquery.qtip.min.css" rel="stylesheet"/>
+    <link href="<?php echo URL::to('public/css'); ?>/flexslider.css" rel="stylesheet"/>
 
     <style>
     body {
@@ -52,7 +53,7 @@
   main {
     flex: 1 0 auto;
   }
-    video#bgvid { 
+    video#bgvid {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -63,7 +64,7 @@
         z-index: -100;
         -webkit-transform: translateX(-50%) translateY(-50%);
         transform: translateX(-50%) translateY(-50%);
-        background-size: contain; 
+        background-size: contain;
     }
     @media  screen and (max-device-width: 800px) {
         html   {
@@ -104,12 +105,12 @@
         <div class=" navbar-inner">
              <?php if(Auth::check()==NULL): ?>
                 <a class="brand-logo" href="<?php echo URL::route('home'); ?>">
-                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
+                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Paygray Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 <?php endif; ?>
                 <?php if(Auth::check()): ?>
                 <a class="brand-logo" href="<?php echo URL::route('dashboard'); ?>" title="Dashboard">
-                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Enzympay Logo" style="width: 210px;height: 58px;"/>
+                    <img src="<?php echo URL::to('public/images'); ?>/logo.png" alt="Paygray Logo" style="width: 210px;height: 58px;"/>
                 </a>
                 <?php endif; ?>
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -127,9 +128,9 @@
                 <div class="navbar-form navbar-right">
                     <?php if(Auth::check()==NULL): ?>
                         <a class="waves-effect waves-teal btn-flat modal-trigger" href="#login" style="z-index: 10;">Login</a>
-                        <a href="#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
+                        <a href="<?php echo URL::route('home'); ?>#signup" class="sup waves-effect waves-teal btn-flat blue white-text" style="z-index: 10;">Signup</a>
                     <?php endif; ?>
-                   
+
                     <?php if(Auth::check()): ?>
                     <a href="<?php echo URL::route('dashboard.change-password'); ?>" class="sup waves-effect waves-teal btn-flat blue" style="z-index: 10;"> <span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a>&nbsp;&nbsp;&nbsp;
                     <a href="<?php echo URL::route('logout'); ?>" class="sup waves-effect waves-red btn-flat black-text" style="z-index: 10;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
@@ -144,12 +145,12 @@
 
     <!-- Page Content -->
     <div class="container">
-        
+
         <?php echo $__env->yieldContent('content'); ?>
         <div class="divider grey"></div>
-        
+
         <!-- Footer -->
-       <footer class="page-footer grey lighten-3">
+       <footer class="page-footer grey lighten-3" style="background-color: black;">
             <p class="pull-right"><a href="<?php echo URL::to('privacy'); ?>">Privacy Policy </a>|<a href="<?php echo URL::to('terms'); ?>"> Terms & Conditions </a>|<a href="<?php echo URL::to('about'); ?>"> About</a></p>
             <p>&copy; <?php echo date('Y'); ?> IceTeck.</p>
       </footer>
@@ -162,8 +163,8 @@
           <div class="row">
                 <div class="input-field col s6">
                   <i class="material-icons prefix blue-text">account_circle</i>
-                  <input id="icon_prefix" type="text" name="username" class="validate" required/>
-                  <label for="icon_prefix">Username</label>
+                  <input id="icon_prefix" type="email" name="email" class="validate" required/>
+                  <label for="icon_prefix">Email</label>
                 </div>
                 <div class="input-field col s6">
                   <i class="material-icons prefix blue-text">lock</i>
@@ -184,13 +185,13 @@
         </div>
       </div>
       <!-- End login -->
-  
+
     </div>
     <!-- /.container -->
 
     <!-- jQuery -->
     <script type="text/javascript" src="<?php echo URL::to('public/js'); ?>/jquery.js"></script>
-    
+
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <!-- Bootstrap/Materialize Core JavaScript -->
@@ -203,7 +204,23 @@
     <script src="<?php echo URL::to('public/js'); ?>/jquery.dataTables.js"></script>
     <script src="<?php echo URL::to('public/js'); ?>/jquery.flexslider.js"></script>
     <script src="<?php echo URL::to('public/js'); ?>/jquery.qtip.min.js"></script>
-        
+    <script src="<?php echo URL::to('public/js'); ?>/jquery.flexslider.js"></script>
+        <!-- FlexSlider -->
+				  <script defer src="<?php echo URL::to('public/js'); ?>/jquery.flexslider.js"></script>
+				  <script type="text/javascript">
+					$(function(){
+					 // SyntaxHighlighter.all();
+					});
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+    <!-- FlexSlider -->
     <script>
     $(document).ready(function(){
         $('#transaction_table').dataTable();
@@ -218,9 +235,9 @@
         $('.tooltiped').tooltip({delay: 50,
                                 position: 'right',
                                 tooltip: 'New tootlip'});
-                                
+
         Materialize.showStaggeredList('#menulist');
-    
+
     });
     </script>
      <?php if(Session::has('alertMessage')): ?>
@@ -244,7 +261,7 @@
         }
     try{
         vid.addEventListener('ended', function() {
-            // only functional if "loop" is removed 
+            // only functional if "loop" is removed
             vid.pause();
             // to capture IE10
             vidFade();
@@ -277,7 +294,7 @@
             }
           });
         });
-        
+
         function ver_pass(){
             oripass = $('#password').val();
             verpass = $('#confirm_password').val();
@@ -288,9 +305,9 @@
         }
   </script>
   <script>
-            $('a.Enzympay_pay_btn').qtip({
+            $('a.Paygray_pay_btn').qtip({
                 content: {
-                    title:'<b>Enzympay</b> - Choose your payment method below',
+                    title:'<b>Paygray</b> - Choose your payment method below',
                     text: function(event, api) {
                         api.elements.content.html('Loading...');
                         return $.ajax({
@@ -314,7 +331,7 @@
                             // Upon failure... set the tooltip content to the status and error value
                             api.set('content.text', status + ': ' + error);
                         });
-            
+
                         return 'Loading ...'; // Set some initial text
                     }
                 },
@@ -332,7 +349,7 @@
                     },
                     adjust: {
                             scroll: true // Can be ommited (e.g. default behaviour)
-                        }  
+                        }
                 },
                 style:{
                     width:350,
@@ -357,7 +374,7 @@
     <!-- FlexSlider -->
     <script type="text/javascript">
     $(function(){
-        SyntaxHighlighter.all();
+        //SyntaxHighlighter.all();
     });
     $(window).load(function(){
         $('.flexslider').flexslider({

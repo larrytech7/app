@@ -10,7 +10,7 @@ class AccountController extends BaseController {
 	public function handleLogin(){ 
 		$validator = Validator::make(Input::all(),
 			array(
-				'username'	=> 'required|alpha_dash|min:4',
+				'email'	=> 'required|email',
 				'password'	=>'required|alpha_num|min:6'
 			)
 		);
@@ -21,7 +21,7 @@ class AccountController extends BaseController {
 					->withInput();
 		} else{
 			$auth = Auth::attempt(array(
-				'username' => Input::get('username'),
+				'email' => Input::get('email'),
 				'password' => Input::get('password'),
 				'active'   => 1
 			));
@@ -32,7 +32,7 @@ class AccountController extends BaseController {
 						->with('alertMessage', 'Your have successfully login to your account');
 			} else{
 				return Redirect::route('login')
-						->with('alertError', 'Username/Password wrong, or account not activated.');
+						->with('alertError', 'Email/Password wrong, or account not activated.');
 			}
 		}
 

@@ -40,6 +40,7 @@ class DashboardController extends BaseController {
     //send message to message center
     public function messagecenter(){
         
+        return Redirect::back();
     }
     
     public function uploadPhoto() {

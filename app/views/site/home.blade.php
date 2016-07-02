@@ -18,7 +18,7 @@
            
             
         </div>
-        <div class=""clearfix"><div/><br/><br/><br/>
+        <div class="clearfix"><div/><br/><br/><br/>
         <div class="row">
             <div class="col s12 m8 l8"> 
                 <div class="row">
@@ -162,10 +162,9 @@
                                 <option value="South Africa">South Africa</option>
                                 <option value="Ivory Coast" >Ivory Coast</option>
                                 <option value="Senegal" >Senegal</option>
-<!--                                <option value="Kenya" >Kenya</option>
+                                <option value="Kenya" >Kenya</option>
                                 <option value="Uganda" >Uganda</option>
-                                <option value="Ghana">Ghana</option>
--->                                
+                                <option value="Ghana">Ghana</option> 
                                 <option value="USA" >USA</option>
                                 <option value="UK" >UK</option>
                                 <option value="France" >France</option>
