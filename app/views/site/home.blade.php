@@ -205,6 +205,7 @@
                     									<h6 class="pull-right">I use my mobile money to do paypal and solid trust pay transactions. Just so simple and awesome.</h6>
                     								    
                                                     </li>
+                                                    <!--
                     								<li>	
                     									<img src="{{URL::to('public/images')}}/payet.jpg" alt="" class="img-circle" width="100" height="100" />
                     									<h4 class="pull-right">Annie Payet</h4>
@@ -214,7 +215,8 @@
                     									<img src="{{URL::to('public/images')}}/jaolin.jpg" class="img-circle" alt="" width="100" height="100"/>
                     									<h4 class="pull-right">Jao Lin</h4>
                     									<h6>I received my freelance payment quite rapidly and conviniently without any stress</h6>
-                    								</li>	
+                    								</li>
+                                                    -->	
                     								<div class="clearfix"> </div>
                     							</ul>
                     						</div>
